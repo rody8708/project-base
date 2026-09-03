@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Zendrhax LLC
 # SPDX-License-Identifier: MPL-2.0
 # Verified Linux/amd64 manifests; update deliberately and re-run verification.
-FROM composer:2@sha256:0baf37e7f495f1c42cee6bdd9cf3e00e9435f193b512529e7c484d66c623773f AS composer
+FROM composer:2@sha256:d8f6343d3fae98107426bc49163ccad46ef85aabd4a27d80a74401fab4aba332 AS composer
 FROM php:8.5-apache-bookworm@sha256:07d8e64f01b852604dbbaf16d5039004597a7321ca5504fcf2e6736770661693 AS dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev unzip \
     && docker-php-ext-install pdo_pgsql pdo_mysql \
