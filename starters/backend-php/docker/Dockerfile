@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 # Verified Linux/amd64 manifests; update deliberately and re-run verification.
 FROM composer:2@sha256:0baf37e7f495f1c42cee6bdd9cf3e00e9435f193b512529e7c484d66c623773f AS composer
-FROM php:8.5-apache-bookworm@sha256:07d8e64f01b852604dbbaf16d5039004597a7321ca5504fcf2e6736770661693 AS dependencies
+FROM php:8.5-apache-bookworm@sha256:824adc2ce556dd5e05e816b1597cad90948e44b0b36ac2642f7449b801fb8dbd AS dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev unzip \
     && docker-php-ext-install pdo_pgsql pdo_mysql \
     && rm -rf /var/lib/apt/lists/*
