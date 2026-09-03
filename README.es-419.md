@@ -11,6 +11,8 @@ Idioma: español latinoamericano (`es-419`)
 
 Licencia del código y la documentación original: [Mozilla Public License 2.0](LICENSE). Consulta el [alcance de licencia](LICENSE-SCOPE.es-419.md) y la [política de marcas](TRADEMARKS.es-419.md).
 
+El proyecto es mantenido por **Zendrhax LLC** bajo la marca **Zendrhax**. Para colaborar, consulta la [guía de contribución](.github/CONTRIBUTING.es-419.md); para informar una vulnerabilidad, sigue la [política de seguridad](.github/SECURITY.es-419.md).
+
 Publicación estable: [aprobación técnica 1.1.0](releases/approval-1.1.0.es-419.md), vinculada al paquete y SHA-256 exactos sin reescribir sus bytes.
 
 ## Qué contiene

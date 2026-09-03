@@ -12,7 +12,11 @@ const approvedTechnicalRecordDigests = Object.freeze({
   'candidate-1.1.0.en-US.md': '5e244387a73138a98855507967c7282a007eca715991bb8a2b45aa1287d00862',
   'project-foundation-1.1.0-candidate.verification.json': 'c54a6766a945ce4ce744337278fd842b3e25964eced653efa919df306c42c9a6',
 });
-const neutralMarkdown = new Set(['README.md']);
+const neutralMarkdown = new Set([
+  'README.md',
+  '.github/CONTRIBUTING.md',
+  '.github/SECURITY.md',
+]);
 const excluded = new Set(['.git', '.validation', 'output', 'artifacts', 'node_modules', 'vendor', 'dist', 'build', 'coverage', '.dart_tool', '.fvm', '.gradle', '.kotlin', '.cxx', '.phpunit.cache', 'ephemeral', '.idea', 'Pods', '.symlinks']);
 
 export function visibleMarkdown(text) {

@@ -1,7 +1,10 @@
-name: Technical bases (manual verification)
+name: Technical bases
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -22,13 +25,15 @@ jobs:
       - name: Pin npm (ephemeral runner only)
         run: npm install --global npm@11.17.0 --ignore-scripts --no-audit --no-fund
       - run: npm --version
-      - run: npm ci --ignore-scripts
+      - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
       - run: npm run check
-      - run: npm --prefix starters/web ci
+      - run: npm --prefix starters/web ci --ignore-scripts --no-audit --no-fund
       - run: npm --prefix starters/web run check
-      - run: npm --prefix starters/web-vanilla ci --ignore-scripts
+      - run: npm --prefix starters/web-vanilla ci --ignore-scripts --no-audit --no-fund
       - run: npm --prefix starters/web-vanilla run check
+      - run: npm --prefix starters/backend-node ci --ignore-scripts --no-audit --no-fund
+      - run: npm --prefix starters/backend-node run check
 
   kotlin-android:
     runs-on: ubuntu-24.04
@@ -74,7 +79,30 @@ jobs:
       - run: composer validate --strict --no-check-all
       - run: composer check
 
-  flutter:
+  flutter-core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: starters/flutter
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          flutter-version: '3.35.1'
+          channel: stable
+          cache: false
+      - run: flutter --version
+      - run: flutter pub get --enforce-lockfile
+      - run: dart run tool/check_toolchain.dart
+      - run: dart format --output=none --set-exit-if-changed lib test integration_test tool
+      - run: flutter analyze
+      - run: flutter test
+
+  flutter-platforms:
+    if: github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:

@@ -46,8 +46,8 @@ android {
     lint {
         abortOnError = true
         warningsAsErrors = true
-        // Exact versions are reviewed together; availability is not a correctness failure.
-        disable += "GradleDependency"
+        // Exact versions are reviewed together; availability and a newer runner SDK are not correctness failures.
+        disable += setOf("GradleDependency", "OldTargetApi")
     }
     bundle.language.enableSplit = false
     packaging {

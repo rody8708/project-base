@@ -11,6 +11,8 @@ Language: US English (`en-US`)
 
 License for original code and documentation: [Mozilla Public License 2.0](LICENSE). See the [license scope](LICENSE-SCOPE.en-US.md) and [trademark policy](TRADEMARKS.en-US.md).
 
+The project is maintained by **Zendrhax LLC** under the **Zendrhax** brand. To collaborate, read the [contribution guide](.github/CONTRIBUTING.en-US.md); to report a vulnerability, follow the [security policy](.github/SECURITY.en-US.md).
+
 Stable release: [technical approval 1.1.0](releases/approval-1.1.0.en-US.md), tied to the exact package and SHA-256 without rewriting its bytes.
 
 ## Contents
