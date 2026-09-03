@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { ErrorCode, snapshotTask, snapshotTasks } from '../domain/task.js';
 
 export function createTaskController({ service, onChange, language = 'es-419' }) {

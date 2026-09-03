@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import http from 'node:http';
 import path from 'node:path';
 import { constants } from 'node:fs';

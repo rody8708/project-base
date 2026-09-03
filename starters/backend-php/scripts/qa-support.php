@@ -1,4 +1,6 @@
 <?php
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 declare(strict_types=1);
 
 // Pure guards shared by the isolated runner and its unit tests; no I/O here.

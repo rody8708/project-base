@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { createHash } from 'node:crypto';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import path from 'node:path';

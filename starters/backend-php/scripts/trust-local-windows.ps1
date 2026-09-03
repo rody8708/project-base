@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Zendrhax LLC
+# SPDX-License-Identifier: MPL-2.0
 param([Parameter(Mandatory=$true)][ValidatePattern('^foundation-php85-[0-9a-f]{16}$')][string]$Container)
 $ErrorActionPreference = 'Stop'
 # Explicit opt-in only. This modifies CurrentUser certificate stores, never LocalMachine.

@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import '../application/task_repository.dart';
 import '../domain/task.dart';
 

@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { SqliteStore } from './sqlite.js';
 import { issueToken } from './application.js';
 import type { Permission } from './contracts.js';

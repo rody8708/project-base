@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import type { TaskService } from '../application/task-service';

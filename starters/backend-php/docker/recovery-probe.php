@@ -1,4 +1,6 @@
 <?php
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 declare(strict_types=1);
 
 // Runs only in a newly created disposable lab, against a separate restored DB.

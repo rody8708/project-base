@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 

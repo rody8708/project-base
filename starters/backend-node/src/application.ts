@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import type { Permission, Principal, Task, TaskRepository, TokenRepository } from './contracts.js';
 

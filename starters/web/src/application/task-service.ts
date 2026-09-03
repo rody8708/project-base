@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { createTask, failure, toggleTask, validateTitle } from '../domain/task';
 import type { Result, Task } from '../domain/task';
 

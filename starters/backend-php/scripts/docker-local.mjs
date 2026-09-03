@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 // Isolated Docker lab. Windows talks to the existing WSL engine; no Compose required.
 import { spawn } from 'node:child_process';
 import { randomBytes } from 'node:crypto';

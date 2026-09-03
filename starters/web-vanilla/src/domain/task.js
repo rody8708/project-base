@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 export const MAX_TITLE_CODE_POINTS = 80;
 export const MAX_CREATED_AT_MS = 8_640_000_000_000_000;
 export const ErrorCode = Object.freeze({
