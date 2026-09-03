@@ -25,14 +25,14 @@ jobs:
       - name: Pin npm (ephemeral runner only)
         run: npm install --global npm@11.17.0 --ignore-scripts --no-audit --no-fund
       - run: npm --version
-      - run: npm ci --ignore-scripts
+      - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
       - run: npm run check
-      - run: npm --prefix starters/web ci
+      - run: npm --prefix starters/web ci --ignore-scripts --no-audit --no-fund
       - run: npm --prefix starters/web run check
-      - run: npm --prefix starters/web-vanilla ci --ignore-scripts
+      - run: npm --prefix starters/web-vanilla ci --ignore-scripts --no-audit --no-fund
       - run: npm --prefix starters/web-vanilla run check
-      - run: npm --prefix starters/backend-node ci --ignore-scripts
+      - run: npm --prefix starters/backend-node ci --ignore-scripts --no-audit --no-fund
       - run: npm --prefix starters/backend-node run check
 
   kotlin-android:
