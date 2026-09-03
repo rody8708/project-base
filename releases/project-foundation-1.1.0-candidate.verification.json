@@ -1,0 +1,46 @@
+{
+  "formatVersion": 1,
+  "kind": "technical-foundation-candidate-verification",
+  "date": "2026-09-03",
+  "status": "candidate-awaiting-explicit-owner-approval",
+  "approved": false,
+  "sourceRevision": "1.1.0-draft.1",
+  "proposedReleaseVersion": "1.1.0",
+  "license": "MPL-2.0",
+  "candidate": {
+    "path": "releases/project-foundation-1.1.0-candidate.zip",
+    "sha256": "85fbb1ccaaad6a987b68e09c0767bf3d3ff25cc0ec6635d2f4fd1ea5c53ea848",
+    "archiveBytes": 1390677,
+    "sourceFiles": 494,
+    "sourceBytes": 3363402,
+    "createdAt": "2026-09-03T22:30:55.2749917Z",
+    "readOnlyGuard": true,
+    "approval": "NotGranted"
+  },
+  "prePackagingChecks": {
+    "repository": "PASS: 122 documents, 61 language pairs, 932 local links, approved documentary release intact; 49 maintenance tests",
+    "webReact": "PASS: 44 tests, type checking, and Vite build",
+    "webVanilla": "PASS: 85 tests and source checks",
+    "backendPhp": "PASS: Composer validation and platform requirements; 66 syntax files; 81 tests and 339 assertions",
+    "backendNode": "PASS: build and 5 network test groups; offline npm advisory data reported 0 vulnerabilities",
+    "apiIntegration": "PASS: React and native-web adapters against both PHP and Node backends",
+    "license": "PASS: official MPL-2.0 text matched and every exportable starter included an identical copy",
+    "httpsLab": "PASS: https://127.0.0.1:32774/api/health returned liveness ok"
+  },
+  "recovery": {
+    "result": "PASS",
+    "path": "C:/Users/rodyc/AppData/Local/Temp/foundation-1.1.0-recovery-fd0694f0aca74a5785dadc9519156217",
+    "sha256Matched": true,
+    "manifestFilesMatched": 494,
+    "npmCleanInstall": "PASS",
+    "repositoryCheck": "PASS",
+    "maintenanceTests": "PASS: 49"
+  },
+  "declaredExceptions": [
+    "macOS and iOS remain unverified because no Mac is available",
+    "Linux desktop and physical-device support are not inferred from Windows and emulator evidence",
+    "production deployment, cloud, KMS, remote backup, alerting, provider accounts, and product RPO/RTO remain consumer responsibilities",
+    "the live npm advisory endpoint did not respond during the final query; unchanged dependencies passed the cached offline advisory set"
+  ],
+  "approvalRequirement": "The owner must explicitly approve this exact SHA-256, release version, scope, license obligations, and declared exceptions. General authorization to continue is not approval."
+}

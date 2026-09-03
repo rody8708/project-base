@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Complete en-US fallback for unsupported system locales. -->
+    <string name="app_name">Project Base · Kotlin</string>
+    <string name="eyebrow">NATIVE ANDROID FOUNDATION</string>
+    <string name="page_title">A clear starting point.</string>
+    <string name="introduction">A replaceable task list built with Kotlin and Jetpack Compose.</string>
+    <string name="language">Language</string>
+    <string name="language_english">English (US)</string>
+    <string name="language_spanish">Español (Latinoamérica)</string>
+    <string name="new_task">New task</string>
+    <string name="title_hint">One line, up to 80 Unicode code points.</string>
+    <string name="add_task">Add task</string>
+    <string name="empty_title">Your list starts here</string>
+    <string name="empty_body">Add a task, complete it, and reopen it.</string>
+    <string name="summary">Total: %1$d · Completed: %2$d</string>
+    <string name="completed">Completed</string>
+    <string name="pending">Pending</string>
+    <string name="reload">Reload list</string>
+    <string name="memory_notice">In memory only. Data survives rotation, but closing this screen or ending the process discards it.</string>
+    <string name="candidate">Replaceable example · 1.1.0-draft.1 · Not approved for production</string>
+    <string name="error_invalid_title">Enter a nonempty, single-line title without control characters.</string>
+    <string name="error_title_long">The title exceeds 80 Unicode code points.</string>
+    <string name="error_invalid_id">The ID generator returned an invalid identifier.</string>
+    <string name="error_invalid_time">The clock returned an invalid creation time.</string>
+    <string name="error_not_found">The task is unavailable. Reload the list.</string>
+    <string name="error_duplicate">That identifier already exists. No additional task was added.</string>
+    <string name="error_storage">The operation could not be confirmed. Reload before repeating it.</string>
+    <string name="error_dependency">The task could not be prepared. Check the ID generator and clock.</string>
+    <string name="remote_notice">API mode. Data is stored by the backend. Reload before repeating an unconfirmed change.</string>
+</resources>

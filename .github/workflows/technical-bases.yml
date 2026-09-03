@@ -1,0 +1,140 @@
+name: Technical bases (manual verification)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web-and-maintenance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.16.0'
+          package-manager-cache: false
+      - run: node --version
+      - name: Pin npm (ephemeral runner only)
+        run: npm install --global npm@11.17.0 --ignore-scripts --no-audit --no-fund
+      - run: npm --version
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm run check
+      - run: npm --prefix starters/web ci
+      - run: npm --prefix starters/web run check
+      - run: npm --prefix starters/web-vanilla ci --ignore-scripts
+      - run: npm --prefix starters/web-vanilla run check
+
+  kotlin-android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: starters/kotlin-android
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Android prerequisites (ephemeral runner only)
+        shell: bash
+        run: '"${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;android-36" "build-tools;35.0.0"'
+      - run: chmod +x gradlew
+      - run: java -version
+      - run: ./gradlew --version
+      - run: ./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
+
+  backend-php-sqlite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: starters/backend-php
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        with:
+          php-version: '8.5.1'
+          extensions: mbstring, pdo_sqlite, dom, xml, xmlwriter, tokenizer, fileinfo
+          tools: composer:2.9.5
+          coverage: none
+      - run: php --version
+      - run: composer --version
+      - run: composer install --no-interaction --no-progress --prefer-dist --no-plugins --no-scripts
+      - run: composer validate --strict --no-check-all
+      - run: composer check
+
+  flutter:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            target: windows
+          - os: macos-15
+            target: macos
+          - os: macos-15
+            target: ios
+          - os: ubuntu-24.04
+            target: linux
+          - os: ubuntu-24.04
+            target: android
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: starters/flutter
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+        if: matrix.target == 'android'
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Android prerequisites (ephemeral runner only)
+        if: matrix.target == 'android'
+        working-directory: .
+        shell: bash
+        run: |
+          "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;android-36" "build-tools;35.0.0" "ndk;27.0.12077973" "cmake;3.22.1"
+          java -version
+      - name: Linux prerequisites (ephemeral runner only)
+        if: matrix.target == 'linux'
+        working-directory: .
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          flutter-version: '3.35.1'
+          channel: stable
+          cache: false
+      - run: flutter --version
+      - run: flutter doctor -v
+      - run: flutter pub get --enforce-lockfile
+      - run: dart run tool/check_toolchain.dart
+      - run: dart format --output=none --set-exit-if-changed lib test integration_test tool
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build windows --release
+        if: matrix.target == 'windows'
+      - run: flutter build macos --release
+        if: matrix.target == 'macos'
+      - run: flutter build ios --simulator --debug --no-codesign
+        if: matrix.target == 'ios'
+      - run: flutter build linux --release
+        if: matrix.target == 'linux'
+      - run: flutter build apk --debug
+        if: matrix.target == 'android'

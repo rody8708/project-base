@@ -1,0 +1,15 @@
+{
+  "name": "project-base-web-vanilla",
+  "version": "1.1.0-draft.1",
+  "private": true,
+  "license": "MPL-2.0",
+  "type": "module",
+  "description": "An unapproved, replaceable HTML/CSS/JavaScript foundation with no third-party npm dependencies.",
+  "engines": { "node": ">=24.16.0 <25" },
+  "packageManager": "npm@11.17.0",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.js",
+    "check": "node scripts/check.mjs"
+  }
+}

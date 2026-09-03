@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Project Base · Kotlin</string>
+    <string name="eyebrow">BASE ANDROID NATIVA</string>
+    <string name="page_title">Un punto de partida claro.</string>
+    <string name="introduction">Una lista reemplazable creada con Kotlin y Jetpack Compose.</string>
+    <string name="language">Idioma</string>
+    <string name="language_english">English (US)</string>
+    <string name="language_spanish">Español (Latinoamérica)</string>
+    <string name="new_task">Nueva tarea</string>
+    <string name="title_hint">Una línea, hasta 80 puntos de código Unicode.</string>
+    <string name="add_task">Agregar tarea</string>
+    <string name="empty_title">Tu lista comienza aquí</string>
+    <string name="empty_body">Agrega una tarea, complétala y vuelve a dejarla pendiente.</string>
+    <string name="summary">Total: %1$d · Completadas: %2$d</string>
+    <string name="completed">Completada</string>
+    <string name="pending">Pendiente</string>
+    <string name="reload">Volver a cargar</string>
+    <string name="memory_notice">Solo en memoria. Los datos sobreviven a la rotación, pero se descartan al cerrar esta pantalla o terminar el proceso.</string>
+    <string name="candidate">Ejemplo reemplazable · 1.1.0-draft.1 · No aprobado para producción</string>
+    <string name="error_invalid_title">Escribe un título no vacío, en una sola línea y sin caracteres de control.</string>
+    <string name="error_title_long">El título supera los 80 puntos de código Unicode.</string>
+    <string name="error_invalid_id">El generador devolvió un identificador inválido.</string>
+    <string name="error_invalid_time">El reloj devolvió un tiempo de creación inválido.</string>
+    <string name="error_not_found">La tarea no está disponible. Vuelve a cargar la lista.</string>
+    <string name="error_duplicate">El identificador ya existe. No se agregó otra tarea.</string>
+    <string name="error_storage">No fue posible confirmar la operación. Vuelve a cargar antes de repetirla.</string>
+    <string name="error_dependency">No fue posible preparar la tarea. Revisa el generador de identificadores y el reloj.</string>
+    <string name="remote_notice">Modo API. El backend guarda los datos. Recarga antes de repetir un cambio no confirmado.</string>
+</resources>

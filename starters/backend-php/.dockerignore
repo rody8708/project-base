@@ -1,0 +1,16 @@
+**
+!composer.json
+!composer.lock
+!artisan
+!app/**
+!bootstrap/app.php
+!bootstrap/providers.php
+!config/**
+!database/migrations/**
+!lang/**
+!public/index.php
+!routes/**
+!scripts/token.php
+!scripts/check-production.php
+!scripts/sqlite-recovery.php
+!docker/**

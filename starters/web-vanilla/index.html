@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es-419">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Base web nativa reemplazable, con contratos explícitos y sin dependencias de terceros.">
+    <title>Project Base · Web nativa</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace" data-text="skipLink">Saltar a la lista de tareas</a>
+    <header class="site-header page-width">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <div><p class="brand-name" data-text="brand">Project Base</p><p class="brand-detail" data-text="brandDetail">BASE WEB NATIVA</p></div>
+      </div>
+      <span class="revision" data-text="revision">Candidata 1.1.0-draft.1</span>
+    </header>
+    <main class="page-width">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow" data-text="eyebrow">HTML + CSS + JAVASCRIPT</p>
+          <h1 id="page-title" data-text="headline">Un punto de partida claro.</h1>
+          <p class="introduction" data-text="introduction">Una base pequeña, con decisiones visibles. Esta lista de tareas es un ejemplo que puedes reemplazar al construir tu proyecto.</p>
+          <ul class="feature-list" aria-label="HTML, CSS, JavaScript">
+            <li data-text="noDependencies">Sin dependencias de terceros</li>
+            <li data-text="nativeModules">Módulos nativos</li>
+          </ul>
+        </div>
+        <div class="language-control">
+          <label for="language" data-text="languageLabel">Idioma</label>
+          <select id="language" disabled>
+            <option value="es-419" data-text="languageSpanish">Español (Latinoamérica)</option>
+            <option value="en-US" data-text="languageEnglish">English (US)</option>
+          </select>
+        </div>
+      </section>
+      <noscript>
+        <section class="noscript-notice" aria-label="JavaScript desactivado">
+          <h2>Esta interfaz necesita JavaScript.</h2>
+          <p>El contenido y la estructura siguen visibles, pero agregar tareas y cambiar de idioma requieren habilitar JavaScript. Los controles permanecen desactivados; no se envían datos a un servidor.</p>
+        </section>
+      </noscript>
+      <section id="workspace" class="workspace" aria-labelledby="workspace-title" tabindex="-1">
+        <header class="workspace-header">
+          <p class="eyebrow" data-text="workspaceEyebrow">TU ESPACIO DE PRUEBA</p>
+          <h2 id="workspace-title" data-text="workspaceTitle">De una idea a una tarea.</h2>
+          <p data-text="workspaceDescription">Agrega, completa y vuelve a dejar pendiente. Explora la base desde algo sencillo.</p>
+        </header>
+        <form id="task-form" novalidate>
+          <fieldset id="task-controls" disabled>
+            <legend class="visually-hidden" data-text="newTask">Nueva tarea</legend>
+            <label for="task-title" data-text="newTask">Nueva tarea</label>
+            <div class="form-row">
+              <input id="task-title" type="text" required autocomplete="off" aria-describedby="task-hint task-error" placeholder="Por ejemplo: revisar los contratos">
+              <button id="add-task" class="button button-primary" type="submit" data-text="addTask">Agregar tarea</button>
+            </div>
+            <p id="task-hint" class="field-hint" data-text="titleHint">Una línea. Hasta 80 puntos de código Unicode.</p>
+          </fieldset>
+        </form>
+        <div id="error-panel" class="error-panel" role="alert" tabindex="-1" hidden><p id="task-error"></p></div>
+        <p id="live-status" class="live-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="list-heading">
+          <div><h3 data-text="tasksTitle">Lista de tareas</h3><p id="summary">Total: 0 · Completadas: 0</p></div>
+          <button id="reload-tasks" class="button button-secondary" type="button" disabled data-text="reload">Volver a cargar</button>
+        </div>
+        <ul id="task-list" class="task-list" aria-label="Lista de tareas"></ul>
+        <div id="empty-state" class="empty-state">
+          <span class="empty-mark" aria-hidden="true" data-text="emptyMark">01</span>
+          <h3 data-text="emptyTitle">Aquí comienza tu lista.</h3>
+          <p data-text="emptyBody">Tu primera tarea no necesita ser grande. Solo necesita un nombre.</p>
+        </div>
+      </section>
+      <aside class="notes-grid">
+        <section><h2 data-text="memoryTitle">Solo en esta página</h2><p data-text="memoryBody">La recarga de la lista conserva la memoria. Recargar o cerrar la página descarta todas las tareas.</p></section>
+        <section><h2 data-text="separationTitle">Cada parte tiene su lugar</h2><p data-text="separationBody">Dominio, aplicación, repositorio e interfaz separados. El ejemplo cambia; los límites siguen siendo explícitos.</p></section>
+      </aside>
+    </main>
+    <footer class="site-footer page-width"><span>HTML / CSS / JS</span><p data-text="footer">Ejemplo reemplazable. No aprobado para producción.</p></footer>
+  </body>
+</html>

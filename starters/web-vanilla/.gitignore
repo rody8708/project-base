@@ -1,0 +1,12 @@
+node_modules/
+.validation/
+artifacts/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+.DS_Store
