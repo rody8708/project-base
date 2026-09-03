@@ -4,6 +4,8 @@
 
 El código fuente y la documentación original de este árbol de trabajo se ofrecen bajo la Mozilla Public License 2.0 (`MPL-2.0`), salvo que un archivo o directorio identifique expresamente otros términos. Cada starter exportable contiene su propia copia íntegra de la licencia.
 
+Los archivos de código propio identifican de forma legible por máquinas a `Zendrhax LLC` mediante `SPDX-FileCopyrightText: 2026 Zendrhax LLC` y `SPDX-License-Identifier: MPL-2.0`. Las pruebas del repositorio exigen ambos avisos en el código mantenido. Los formatos que no admiten comentarios, los archivos generados y los materiales de terceros se identifican por su licencia adyacente, manifiesto o aviso original; no se les añade una atribución de propiedad incorrecta.
+
 MPL-2.0 permite usar, estudiar, modificar, distribuir y comercializar el software. Cuando se distribuyen archivos cubiertos que fueron modificados, sus fuentes deben permanecer disponibles bajo MPL-2.0 y se deben conservar los avisos exigidos. Archivos nuevos e independientes pueden combinarse en una obra mayor y usar otros términos, siempre que se respeten las obligaciones sobre los archivos cubiertos. Consulta el texto de `LICENSE` para las condiciones jurídicas completas.
 
 La licencia no prohíbe vender esta base por sí sola y no exige pagos al superar un nivel de ingresos: esas restricciones serían incompatibles con su carácter de código abierto. Es posible ofrecer voluntariamente soporte, patrocinio, servicios o una licencia comercial separada, pero eso no reduce los derechos ya concedidos por MPL-2.0.

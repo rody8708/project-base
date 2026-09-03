@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { messages as spanish } from '../i18n/es-419.js';
 import { messages as english } from '../i18n/en-US.js';
 

@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 export type Permission = 'tasks:read' | 'tasks:write';
 export type Principal = Readonly<{ tokenId: string; subject: string; permissions: readonly Permission[] }>;
 export type Task = Readonly<{ id: string; title: string; completed: boolean; version: number }>;

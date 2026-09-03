@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 // Framework-independent HTTP contract client. Keep both web copies identical.
 export class ApiFailure extends Error {
   constructor(code) { super(code); this.code = code; }

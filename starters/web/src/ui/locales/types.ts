@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import type { TaskErrorCode } from '../../domain/task';
 
 export type Locale = 'es-419' | 'en-US';

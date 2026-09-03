@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { failure } from '../domain/task';
 import type { Task } from '../domain/task';
 import type { TaskRepository } from '../application/task-service';

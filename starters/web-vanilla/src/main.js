@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { createMemoryTaskRepository } from './adapters/memory-task-repository.js';
 import { createHttpTaskRepository } from './adapters/http-task-repository.js';
 import { API_BASE_URL } from './config.js';

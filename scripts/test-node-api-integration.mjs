@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 // Cross-starter check using only a uniquely owned temporary SQLite database and loopback port.
 import { spawn } from 'node:child_process';
 import { mkdtemp, rm } from 'node:fs/promises';

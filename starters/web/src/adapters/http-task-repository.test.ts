@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import { expect, test, vi } from 'vitest';
 import { createHttpTaskRepository } from './http-task-repository';
 const row = { id: '11111111-1111-4111-8111-111111111111', title: 'Remote', completed: false, version: 1 };

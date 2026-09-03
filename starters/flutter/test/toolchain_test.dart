@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import 'package:flutter_test/flutter_test.dart';
 
 import '../tool/check_toolchain.dart';

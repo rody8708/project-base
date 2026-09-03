@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import 'package:flutter/foundation.dart';
 
 import '../domain/task.dart';

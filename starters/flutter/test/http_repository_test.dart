@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';

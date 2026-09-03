@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createProject, ExportError } from './lib/project-export.mjs';

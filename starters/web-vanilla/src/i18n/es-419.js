@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 export const messages = Object.freeze({
   documentTitle: 'Project Base · Web nativa',
   skipLink: 'Saltar a la lista de tareas',

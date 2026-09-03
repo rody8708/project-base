@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Zendrhax LLC
+// SPDX-License-Identifier: MPL-2.0
 enum TaskIssue { emptyTitle, invalidTitle, titleTooLong, notFound, unavailable }
 
 final class TaskException implements Exception {
