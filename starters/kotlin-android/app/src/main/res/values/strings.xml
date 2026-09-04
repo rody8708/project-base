@@ -18,7 +18,7 @@
     <string name="pending">Pending</string>
     <string name="reload">Reload list</string>
     <string name="memory_notice">In memory only. Data survives rotation, but closing this screen or ending the process discards it.</string>
-    <string name="candidate">Replaceable example · 1.1.0-draft.1 · Not approved for production</string>
+    <string name="candidate">Replaceable example · 1.1.0-draft.2 · Not approved for production</string>
     <string name="error_invalid_title">Enter a nonempty, single-line title without control characters.</string>
     <string name="error_title_long">The title exceeds 80 Unicode code points.</string>
     <string name="error_invalid_id">The ID generator returned an invalid identifier.</string>

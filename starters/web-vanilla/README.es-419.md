@@ -2,11 +2,11 @@
 
 **Actualización de seguridad:** HTTP ahora exige autenticación; una URL por sí sola no basta. Consulta [autenticación y producción](security-production.es-419.md) antes de seguir los ejemplos anteriores.
 
-Versión técnica: `1.1.0-draft.1`. Estado: propuesta técnica no aprobada, para evaluación; no es un producto terminado.
+Versión técnica: `1.1.0-draft.2`. Estado: propuesta técnica no aprobada, para evaluación; no es un producto terminado.
 
-[English (United States)](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Verificación](docs/verification.es-419.md)
+[English (United States)](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Cambios](CHANGELOG.es-419.md) · [Verificación](docs/verification.es-419.md)
 
-Una base independiente con HTML, CSS y módulos JavaScript nativos. No usa React, TypeScript, Vite, un empaquetador ni paquetes npm de terceros. La lista de tareas es un ejemplo reemplazable: permite agregar tareas, completarlas, dejarlas pendientes y volver a consultar la lista en memoria. No incluye un servidor backend ni persistencia local; el modo HTTP delega la persistencia al servidor. Autenticación, sincronización offline, despliegue y soporte certificado de navegadores no están incluidos.
+Una base independiente con HTML, CSS y módulos JavaScript nativos. No usa React, TypeScript, Vite, un empaquetador ni paquetes npm de terceros. La lista de tareas es un ejemplo reemplazable: permite agregar tareas, completarlas, dejarlas pendientes, volver a consultar la lista en memoria y seguir la apariencia clara/oscura del sistema. No incluye un servidor backend ni persistencia local; el modo HTTP delega la persistencia al servidor. Autenticación, sincronización offline, despliegue y soporte certificado de navegadores no están incluidos.
 
 El código original se distribuye bajo [MPL-2.0](LICENSE). Las dependencias o materiales externos conservan sus propias licencias.
 

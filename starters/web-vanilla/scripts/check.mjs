@@ -75,6 +75,11 @@ export function checkMessages(spanish, english) {
   return esKeys.length;
 }
 
+export function checkTheme(css) {
+  assert(/color-scheme\s*:\s*light\s+dark\s*;/i.test(css), 'CSS must advertise light and dark color schemes.');
+  assert(/@media\s*\(prefers-color-scheme\s*:\s*dark\)/i.test(css), 'CSS must follow the system dark appearance.');
+}
+
 export async function inspectProject(root = DEFAULT_ROOT) {
   const files = await collectJavaScript(root);
   const failures = [];
@@ -88,6 +93,7 @@ export async function inspectProject(root = DEFAULT_ROOT) {
     assert(stat.isFile() && !stat.isSymbolicLink() && stat.nlink === 1, `A required regular resource is missing: ${file}`);
   }
   checkHtml(await fs.readFile(path.join(root, 'index.html'), 'utf8'));
+  checkTheme(await fs.readFile(path.join(root, 'styles.css'), 'utf8'));
   // Like node:test, importing these local, reviewed modules executes project
   // code. This maintenance command is not a sandbox for untrusted projects.
   const nonce = `check=${Date.now()}`;

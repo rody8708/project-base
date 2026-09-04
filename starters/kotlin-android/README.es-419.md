@@ -2,9 +2,9 @@
 
 **Actualización de seguridad:** HTTP ahora exige autenticación; una URL por sí sola no basta. Consulta [autenticación y producción](security-production.es-419.md) antes de seguir los ejemplos anteriores.
 
-Revisión técnica: `1.1.0-draft.1`. Estado: candidata, no aprobada para producción.
+Revisión técnica: `1.1.0-draft.2`. Estado: candidata, no aprobada para producción.
 
-[English (US)](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Verificación y fuentes](docs/verification.es-419.md)
+[English (US)](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Cambios](CHANGELOG.es-419.md) · [Verificación y fuentes](docs/verification.es-419.md)
 
 Este directorio es una base ejecutable y copiable, no el producto final. Incluye una lista reemplazable en memoria, dominio Kotlin/JVM sin Android, servicio de aplicación, adaptador de memoria, interfaz nativa Jetpack Compose y pruebas. No importa archivos del repositorio que lo contiene. No requiere Flutter, Node, servidor, cuenta ni servicio externo para ejecutarse; la primera compilación sí descarga herramientas y dependencias.
 
@@ -57,7 +57,7 @@ Para instalar únicamente en el dispositivo que elegiste, consulta primero `adb 
 
 ## Usar y adaptar
 
-El ejemplo permite agregar títulos, completar y reabrir tareas y cambiar entre español de Latinoamérica e inglés de Estados Unidos. La validación distingue errores; el texto del usuario se muestra literalmente. Los datos y el idioma seleccionado sobreviven a una recreación de actividad mientras vive el ViewModel, pero no al cierre definitivo de la actividad ni a la muerte del proceso. No guardes datos que necesites recuperar en este adaptador.
+El ejemplo permite agregar títulos, completar y reabrir tareas, cambiar entre español de Latinoamérica e inglés de Estados Unidos y seguir la apariencia clara/oscura de Android. La validación distingue errores; el texto del usuario se muestra literalmente. Los datos y el idioma seleccionado sobreviven a una recreación de actividad mientras vive el ViewModel, pero no al cierre definitivo de la actividad ni a la muerte del proceso. No guardes datos que necesites recuperar en este adaptador.
 
 Los textos ingleses completos están en `app/src/main/res/values/strings.xml` como respaldo; los españoles, en `app/src/main/res/values-b+es+419/strings.xml`. Son archivos separados, con las mismas claves. No traduzcas ni normalices silenciosamente los títulos escritos por el usuario.
 

@@ -1,9 +1,13 @@
 # Flutter foundation evidence and limitations
 
-Technical revision: `1.1.0-draft.1`  
+Technical revision: `1.1.0-draft.2`  
 Status: local technical candidate; not a new approval of the documentation foundation.  
 Language: US English (`en-US`)  
 [Español latinoamericano](verification.es-419.md) · [Start](../README.en-US.md) · [Architecture](architecture.en-US.md)
+
+## Focused follow-up — 2026-09-04
+
+Revision 2 passed formatting, analysis, and 31 local tests; one opt-in real-backend test was skipped as designed. The added widget test proves that `ThemeMode.system` selects the dark Material theme when the platform reports dark appearance. Native visual runners were not repeated for this focused change; the broader revision 1 evidence below remains historical and is not relabeled.
 
 ## Observed environment
 

@@ -17,8 +17,8 @@ android {
         applicationId = "org.example.foundation.kotlin"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.1.0-draft.1"
+        versionCode = 2
+        versionName = "1.1.0-draft.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val apiUrl = providers.environmentVariable("API_BASE_URL").orElse("").get()
         require(!apiUrl.contains('"') && !apiUrl.contains('\\') && apiUrl.none { it.isISOControl() })

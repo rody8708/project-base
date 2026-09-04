@@ -2,12 +2,12 @@
 
 **Actualización de seguridad:** HTTP ahora exige autenticación; una URL por sí sola no basta. Consulta [autenticación y producción](security-production.es-419.md) antes de seguir los ejemplos anteriores.
 
-Revisión técnica: `1.1.0-draft.1`  
+Revisión técnica: `1.1.0-draft.2`  
 Estado: candidato técnico local; no es una nueva aprobación de la base documental.  
 Idioma: español latinoamericano (`es-419`)  
-[US English](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Fuentes y verificación](docs/verification.es-419.md)
+[US English](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Cambios](CHANGELOG.es-419.md) · [Fuentes y verificación](docs/verification.es-419.md)
 
-Esta carpeta es una plantilla Flutter independiente para crear otro proyecto fuera del repositorio original. La lista de tareas es un ejemplo reemplazable: muestra estado vacío, validación, creación, completado, errores y cambio de idioma. No es una aplicación final. No necesita archivos del repositorio de origen, cuentas, backend ni credenciales.
+Esta carpeta es una plantilla Flutter independiente para crear otro proyecto fuera del repositorio original. La lista de tareas es un ejemplo reemplazable: muestra estado vacío, validación, creación, completado, errores, cambio de idioma y apariencia clara/oscura automática. No es una aplicación final. No necesita archivos del repositorio de origen, cuentas, backend ni credenciales.
 
 El código original se distribuye bajo [MPL-2.0](LICENSE). Flutter, los SDK y las dependencias conservan sus propios términos y avisos.
 

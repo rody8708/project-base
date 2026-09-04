@@ -1,8 +1,12 @@
 # Verificación de la base web sin framework
 
-Versión técnica: `1.1.0-draft.1`. Estado: propuesta técnica no aprobada; un resultado de ejecución no equivale a aprobación del consumidor.
+Versión técnica: `1.1.0-draft.2`. Estado: propuesta técnica no aprobada; un resultado de ejecución no equivale a aprobación del consumidor.
 
 [English (United States)](verification.en-US.md) · [Inicio](../README.es-419.md) · [Arquitectura](architecture.es-419.md)
+
+## Seguimiento enfocado — 2026-09-04
+
+La revisión 2 pasó el comprobador de fuentes y las 86 pruebas. Se controló Microsoft Edge a 390×844 con una preferencia oscura explícita; los colores calculados de raíz/área de trabajo fueron `rgb(16, 23, 20)` y `rgb(23, 33, 29)`, sin errores de consola. La línea base más amplia que aparece debajo pertenece a la revisión 1 y continúa como evidencia histórica.
 
 ## Registro de ejecución
 

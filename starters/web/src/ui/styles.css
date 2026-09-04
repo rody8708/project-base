@@ -7,7 +7,7 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  color-scheme: light;
+  color-scheme: light dark;
 }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }
@@ -59,6 +59,31 @@ input[type="checkbox"] { width: 19px; height: 19px; margin: 0; flex-shrink: 0; a
 .architecture-note h2 { font-size: 12px; color: #475f50; }
 .architecture-note p { font-size: 11px; color: #69786e; line-height: 1.7; margin: 8px 0 0; }
 footer { border-top: 1px solid #dce3df; padding: 22px 0 30px; color: #65756c; font-size: 10px; }
+@media (prefers-color-scheme: dark) {
+  :root { color: #e4ece9; background: #101715; }
+  :focus-visible { outline-color: #f0b44d; }
+  .topbar, footer { border-color: #35443f; }
+  .brand-mark, button { background: #4f9e89; color: #07110e; }
+  button:hover:not(:disabled) { background: #6db39f; }
+  select { border-color: #53655e; background: #17211e; color: #e4ece9; }
+  .eyebrow { color: #77bea9; }
+  .lead, .summary, .hint, .empty-state, .memory-notice, .architecture-note p, footer { color: #adbbb6; }
+  .task-panel { background: #17211e; border-color: #3a4a44; box-shadow: 0 5px 20px #0006; }
+  .input-row > input { border-color: #53655e; color: #eef5f2; background: #111a17; }
+  input::placeholder { color: #9aaba5; }
+  input[aria-invalid="true"] { border-color: #ff9183; }
+  .empty-state h3 { color: #d6e4df; }
+  .empty-symbol { border-color: #41534b; background: #1e2c27; color: #8cc6a1; }
+  .task-list li, .memory-notice { border-color: #34433e; }
+  input[type="checkbox"] { accent-color: #63b59e; }
+  .is-complete .task-title { color: #a9b6b1; }
+  .task-state { background: #26352f; color: #c0d0c9; }
+  .error-box { background: #351d19; border-color: #854d43; color: #ffc0b6; }
+  .secondary { color: #ffc0b6; border-color: #9c6258; background: #241916; }
+  .secondary:hover:not(:disabled) { background: #40231e; }
+  .architecture-note { border-color: #527062; }
+  .architecture-note h2 { color: #c1d4cb; }
+}
 @media (max-width: 600px) {
   .shell { padding: 0 20px; }
   .topbar { flex-wrap: wrap; gap: 16px; padding: 20px 0; }

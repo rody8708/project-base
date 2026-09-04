@@ -18,6 +18,18 @@ final class FailingRepository implements TaskRepository {
 }
 
 void main() {
+  testWidgets('follows the platform dark appearance', (tester) async {
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+    addTearDown(
+      tester.platformDispatcher.clearPlatformBrightnessTestValue,
+    );
+    await tester.pumpWidget(const TaskApp());
+    await tester.pumpAndSettle();
+
+    final context = tester.element(find.byType(Scaffold));
+    expect(Theme.of(context).brightness, Brightness.dark);
+  });
+
   testWidgets('empty state and session-only warning are visible', (
     tester,
   ) async {

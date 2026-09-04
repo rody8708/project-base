@@ -1,9 +1,13 @@
 # Fuentes y verificación de la base web
 
-Revisión técnica: `1.1.0-draft.1`  
+Revisión técnica: `1.1.0-draft.2`  
 Estado: candidato técnico local.  
 Idioma: español latinoamericano (`es-419`)  
 [US English](verification.en-US.md) · [Inicio](../README.es-419.md)
+
+## Seguimiento enfocado — 2026-09-04
+
+El cambio de tema de la revisión 2 pasó la comprobación de tipos, 45 pruebas automatizadas y una compilación de producción. Se controló Microsoft Edge a 390×844 con preferencias clara y oscura explícitas: los colores calculados de raíz/panel cambiaron de `rgb(244, 246, 245)` / `rgb(255, 255, 255)` a `rgb(16, 23, 21)` / `rgb(23, 33, 30)`, sin errores de consola. La línea base más amplia que aparece debajo pertenece a la revisión 1 y no se reetiquetó como una auditoría completa nueva.
 
 ## Selección de herramientas
 
