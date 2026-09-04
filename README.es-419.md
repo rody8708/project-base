@@ -1,5 +1,32 @@
 # Base maestra para proyectos de software
 
+## Quiero crear una aplicación: ¿en qué me ayuda esto?
+
+Esta base te ayuda a comenzar una aplicación sobre una estructura técnica preparada, en lugar de hacerlo desde una carpeta vacía y decidir todo sin referencias. Sirve para proyectos web, móviles, Android nativo, escritorio y backend.
+
+**No es solo documentación.** Incluye código inicial ejecutable, ejemplos funcionales, pruebas automatizadas, un contrato API compartido, backends con persistencia y una herramienta que copia la base elegida a un proyecto nuevo.
+
+**No es una aplicación terminada ni un generador de un clic.** No conoce todavía tu negocio, pantallas o funciones. Proporciona los cimientos; después tú, un equipo o un asistente de programación desarrolla sobre ellos las características de tu producto.
+
+### Qué te aporta
+
+- Evita empezar completamente desde cero.
+- Permite escoger solo las piezas que necesitas, sin obligarte a usar un lenguaje o framework determinado.
+- Separa la interfaz, el backend y la base de datos para poder reemplazarlos con menos impacto.
+- Prepara validación, pruebas, comunicación mediante API, persistencia, tokens y permisos básicos.
+- Indica qué está comprobado y qué sigue pendiente, para no confundir un ejemplo con un producto listo para producción.
+
+### Cómo comenzar aunque no sepas programar
+
+1. Describe la idea de tu aplicación, quién la usará y qué problema resolverá.
+2. Decide dónde debe funcionar: web, móvil, Android, escritorio o varias plataformas.
+3. Usa la guía para seleccionar y exportar las bases necesarias.
+4. Construye una función pequeña a la vez y comprueba cada cambio.
+
+Puedes entregar este repositorio a un desarrollador o a un asistente de programación y pedirle: “Quiero crear una aplicación para `[objetivo]`, dirigida a `[usuarios]` y disponible en `[plataformas]`. Ayúdame a definirla y utiliza esta base para crear los proyectos necesarios sin acoplar los clientes al backend”.
+
+**Siguiente paso:** consulta la [guía para crear una aplicación](docs/getting-started.es-419.md), que explica el proceso completo y sus límites.
+
 [Laboratorio Docker aislado: PHP 8.5 y HTTPS](starters/backend-php/docker-local.es-419.md).
 
 **Estado actualizado:** se implementó el perfil de tokens, permisos y propiedad; consulta [seguridad y preparación para producción](docs/technical/security-production.es-419.md). Las pruebas y limitaciones anteriores a esta revisión son históricas: la API ya no admite acceso anónimo. El [estado para publicación estable](docs/technical/stability-status.es-419.md) registra macOS/iOS como pendiente no bloqueante y MPL-2.0 como licencia adoptada.
@@ -12,8 +39,6 @@ Idioma: español latinoamericano (`es-419`)
 Licencia del código y la documentación original: [Mozilla Public License 2.0](LICENSE). Consulta el [alcance de licencia](LICENSE-SCOPE.es-419.md) y la [política de marcas](TRADEMARKS.es-419.md).
 
 El proyecto es mantenido por **Zendrhax LLC** bajo la marca **Zendrhax**. Para colaborar, consulta la [guía de contribución](.github/CONTRIBUTING.es-419.md); para informar una vulnerabilidad, sigue la [política de seguridad](.github/SECURITY.es-419.md).
-
-**Empieza aquí:** [cómo utilizar esta base para crear una aplicación](docs/getting-started.es-419.md). Esa guía reúne la utilidad, la selección de componentes, la exportación, la integración por API y la validación final.
 
 Publicación estable: [aprobación técnica 1.1.0](releases/approval-1.1.0.es-419.md), vinculada al paquete y SHA-256 exactos sin reescribir sus bytes.
 

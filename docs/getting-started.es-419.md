@@ -19,6 +19,20 @@ backend ──puerto de persistencia + adaptador──> SQLite, PostgreSQL o MyS
 
 Los clientes no acceden a la base de datos ni importan código interno del backend. El contrato API es el único límite compartido. Un framework puede ayudar, pero no es obligatorio: lo obligatorio es conservar contratos, separación, pruebas y evidencia.
 
+## Si todavía no sabes programar
+
+La base puede orientarte y evitar decisiones improvisadas, pero no reemplaza el aprendizaje, el desarrollo ni la revisión humana. Necesitarás un desarrollador o un asistente de programación para ejecutar comandos, adaptar el código y construir las funciones particulares de tu producto.
+
+Antes de escoger tecnologías, escribe en lenguaje común:
+
+- Qué problema resuelve la aplicación.
+- Quién la utilizará.
+- Las tres funciones imprescindibles de la primera versión.
+- En qué dispositivos debe funcionar.
+- Qué información guardará y quién puede verla o modificarla.
+
+Con esas respuestas, un desarrollador o asistente puede usar las secciones siguientes para escoger los componentes. Si una decisión todavía no se entiende, se registra como pendiente; no se inventa una respuesta ni se declara lista.
+
 ## 1. Elegir los componentes
 
 Elegir solo lo que el producto necesita:
