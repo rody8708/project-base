@@ -116,6 +116,8 @@ HTTP flows use Uvicorn on ephemeral ports and verify responses and persisted sta
 
 ## Documentary Integrity and Limits
 
+Before integrating this expansion, GitHub alert `GHSA-6w46-j5rx-g56g` identified vulnerable temporary-directory handling in pytest. Its pin and lockfile were updated from `8.4.1` to fixed version `9.0.3`, and the 18 tests per engine, Ruff, and mypy were repeated. No vulnerability exploit was attempted or claimed to have been reproduced locally; the update follows the provider advisory. The final revision and CI results for this change are associated with PR #27.
+
 The historically approved ZIP retains SHA-256 `9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a`. Both receipts and its historical JSON were also checked against the exporter's four pins. None of those artifacts were rewritten.
 
 For the pre-HTTP-integration tree, `npm ci --ignore-scripts`, `npm test`, and `npm run check` completed: PASS; 44 tests and 76 documents in 38 pairs, with 656 local links checked. Before the API-boundary decision was added, the tree had 72 documents/36 pairs and 628 links; the initial record before the native web extension had 37 tests, 66 documents/33 pairs, and 582 links. The last check verifies Markdown pairs, local links, titles, and the ZIP hash; it does not interpret every Markdown construct or certify translation equivalence. Cross-language content review complements that check. On September 3, source/copy hashes across all five inventories and the four approved artifacts in each copy were compared: PASS; the four earlier templates remained unchanged.

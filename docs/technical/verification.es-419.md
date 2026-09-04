@@ -116,6 +116,8 @@ Los recorridos HTTP usan Uvicorn en puertos efímeros y verifican respuestas y e
 
 ## Integridad documental y límites
 
+Antes de integrar esta ampliación, la alerta `GHSA-6w46-j5rx-g56g` de GitHub identificó manejo vulnerable de temporales en pytest. Se actualizó el pin y lockfile de `8.4.1` a la versión corregida `9.0.3` y se repitieron las 18 pruebas en cada motor, Ruff y mypy. No se intentó explotar la vulnerabilidad ni se afirma haberla reproducido localmente; la actualización responde al aviso del proveedor. La revisión final de este cambio y sus resultados CI quedan asociados al PR #27.
+
 El ZIP histórico aprobado conserva SHA-256 `9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a`. También se verificaron sus dos recibos y su JSON histórico contra los cuatro pins del exportador. Ninguno de esos artefactos fue reescrito.
 
 Para el árbol anterior a la integración HTTP se ejecutaron `npm ci --ignore-scripts`, `npm test` y `npm run check`: PASS; 44 pruebas y 76 documentos en 38 pares, con 656 enlaces locales comprobados. Antes de agregar la decisión de límite API, el árbol tenía 72 documentos/36 pares y 628 enlaces; el registro inicial anterior a la ampliación web nativa tenía 37 pruebas, 66 documentos/33 pares y 582 enlaces. El último control revisa pares Markdown, enlaces locales, títulos y hash del ZIP; no interpreta toda la semántica de Markdown ni certifica equivalencia de traducciones. La revisión de contenido entre idiomas complementa ese control. El 3 de septiembre se compararon los hashes de fuente/copia de los cinco inventarios y los cuatro artefactos aprobados en cada copia: PASS; las cuatro plantillas anteriores no cambiaron.
