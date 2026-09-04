@@ -4,7 +4,7 @@
 
 ## Publicación y árbol de trabajo
 
-La publicación aprobada `1.1.0` conserva sus bytes y recibos originales. El árbol actual incorpora el asistente guiado, MCP local, Python y la ampliación SQL/operativa de Node. Estas mejoras no aparecen automáticamente en el ZIP histórico. La siguiente publicación propuesta es `1.2.0`; no se declara aprobada hasta vincular la decisión del propietario a su paquete exacto.
+La publicación aprobada `1.1.0` conserva sus bytes y recibos originales. El árbol actual incorpora el asistente guiado, MCP local, Python y la ampliación SQL/operativa de Node. Estas mejoras no aparecen automáticamente en el ZIP histórico. La publicación estable actual es `1.2.0`, aprobada por el propietario y vinculada al paquete exacto mediante su [recibo](../../releases/approval-1.2.0.es-419.md).
 
 ## Catálogo actual
 
@@ -20,7 +20,7 @@ PHP, Node y Python tienen implementaciones ejecutables. Node y Python disponen d
 | Linux de escritorio y dispositivos físicos | Sin verificación nativa completa. |
 | Licencia | MPL-2.0 adoptada; no pendiente. |
 | GitHub | Repositorio publicado y rama principal protegida; las PR ejecutan CI. |
-| Nueva publicación | Preparación de 1.2.0; requiere identidad, recuperación, evidencia y aprobación explícita. |
+| Nueva publicación | 1.2.0 aprobada; identidad, recuperación y aprobación conservadas fuera del ZIP. |
 | Cuentas humanas | Tokens provisionados; no incluye login con contraseña, recuperación ni MFA. |
 | Operación de cada aplicación | Dominio/TLS real, secretos, monitoreo, capacidad, respaldo externo y aprobación corresponden al consumidor. |
 

@@ -4,6 +4,12 @@
 
 Este archivo registra cambios posteriores a la publicación técnica congelada `1.1.0`. No reescribe ni amplía la aprobación de esa publicación.
 
+## 1.2.0 — 2026-09-04
+
+- Publicación estable aprobada explícitamente por el propietario; [recibo e identidad exacta](releases/approval-1.2.0.es-419.md).
+- Paquete candidato conservado sin cambios; su estado interno previo a aprobación se interpreta junto con el recibo externo.
+- Verificación automática del SHA-256 aprobado con prueba de rechazo de alteraciones. No cambia el código de las aplicaciones ni sus contratos.
+
 ## 1.2.0-rc.1 — 2026-09-04
 
 ### Agregado
