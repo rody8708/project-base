@@ -24,7 +24,12 @@ export function parseArguments(args) {
 
 export async function main(args) {
   const options = parseArguments(args);
-  if (options.help) return { usage: USAGE, doesNotInstallOrBuild: true, adoptionRequiresConsumerConfirmation: true };
+  if (options.help) return {
+    usage: USAGE,
+    doesNotInstallOrBuild: true,
+    adoptionRequiresConsumerConfirmation: true,
+    capabilityProfileIncluded: true,
+  };
   return createProject(options);
 }
 

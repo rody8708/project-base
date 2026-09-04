@@ -7,7 +7,19 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 export const DEFAULT_REPOSITORY_ROOT = fileURLToPath(new URL('../../', import.meta.url));
-export const TEMPLATE_REVISION = '1.1.0-draft.1';
+export const TEMPLATE_REVISIONS = Object.freeze({
+  web: '1.1.0-draft.2',
+  'web-vanilla': '1.1.0-draft.2',
+  flutter: '1.1.0-draft.2',
+  'kotlin-android': '1.1.0-draft.2',
+  'backend-php': '1.1.0-draft.1',
+  'backend-node': '1.1.0-draft.1',
+});
+export const TEMPLATE_REVISION = TEMPLATE_REVISIONS.web;
+export const CAPABILITY_PROFILE_FILES = Object.freeze([
+  'capability-profile.en-US.md',
+  'capability-profile.es-419.md',
+]);
 export const TEMPLATE_FILES = Object.freeze({
   web: Object.freeze(['package.json', 'package-lock.json']),
   'web-vanilla': Object.freeze(['package.json', 'package-lock.json', 'index.html', 'styles.css', 'favicon.svg', 'src/main.js', 'scripts/serve.mjs', 'scripts/server.mjs', 'scripts/check.mjs']),
@@ -325,7 +337,28 @@ async function collectRelease(repositoryRoot, release) {
   return files;
 }
 
-function makeAdoptionRecord({ template, name, sourceFiles, releaseFiles, release, createdAt }) {
+async function collectCapabilityProfiles(repositoryRoot) {
+  const files = [];
+  for (const name of CAPABILITY_PROFILE_FILES) {
+    validateSegment(name);
+    let item;
+    try {
+      item = await readPlainFile(path.join(repositoryRoot, 'templates', name));
+    } catch (error) {
+      if (error.code === 'ENOENT') fail('INCOMPLETE_CAPABILITY_PROFILE', `Capability profile is missing: ${name}`);
+      throw error;
+    }
+    files.push({
+      ...item,
+      mode: 0o644,
+      relativePath: `foundation/${name}`,
+      sha256: sha256(item.bytes),
+    });
+  }
+  return files;
+}
+
+function makeAdoptionRecord({ template, name, sourceFiles, releaseFiles, profileFiles, release, createdAt }) {
   const sourceInventory = sourceFiles.map((file) => ({ path: file.relativePath, sha256: file.sourceSha256 }));
   return {
     formatVersion: 1,
@@ -342,9 +375,14 @@ function makeAdoptionRecord({ template, name, sourceFiles, releaseFiles, release
       integrityCheck: 'matched-pinned-sha256-before-copy-and-after-copy',
       approvalAuthentication: 'trusted-local-receipts-and-tool-pins; not-a-digital-signature',
     },
+    capabilityProfiles: {
+      selectionStatus: 'pending-consumer-selection',
+      files: profileFiles.map((file) => ({ path: file.relativePath, sha256: file.sha256 })),
+      enabledProfilesRequireConsumerImplementationAndEvidence: true,
+    },
     technicalTemplate: {
       id: template,
-      revision: TEMPLATE_REVISION,
+      revision: TEMPLATE_REVISIONS[template],
       stage: 'draft',
       status: 'not-approved',
       generationStatus: 'generated-for-evaluation',
@@ -368,6 +406,7 @@ function makeAdoptionRecord({ template, name, sourceFiles, releaseFiles, release
     },
     nextDecisions: [
       'Confirm or reject documentary adoption for this consumer.',
+      'Complete both capability-profile files and select only profiles the product actually needs.',
       'Review and verify the draft technical template in the intended environments.',
       'Choose distribution identifiers, credentials, permissions, and product support before distribution.',
     ],
@@ -401,12 +440,13 @@ export async function createProject({ template, name, destination, repositoryRoo
   const resolvedDestination = path.join(parent, path.basename(requestedDestination));
   if (isWithin(repository, resolvedDestination)) fail('DESTINATION_INSIDE_REPOSITORY', 'Resolved destination is inside the foundation repository.');
   const releaseFiles = await collectRelease(repository, release);
+  const profileFiles = await collectCapabilityProfiles(repository);
   const sourcePlan = prepareTemplate(await collectTemplate(path.join(repository, 'starters', template), template), template, name);
   const date = now();
   if (!(date instanceof Date) || !Number.isFinite(date.getTime())) fail('INVALID_CLOCK', 'The creation timestamp is invalid.');
-  const adoption = makeAdoptionRecord({ template, name, sourceFiles: sourcePlan.files, releaseFiles, release, createdAt: date.toISOString() });
+  const adoption = makeAdoptionRecord({ template, name, sourceFiles: sourcePlan.files, releaseFiles, profileFiles, release, createdAt: date.toISOString() });
   const directories = [...sourcePlan.directories, 'foundation'].sort((a, b) => a.split('/').length - b.split('/').length || (a < b ? -1 : a > b ? 1 : 0));
-  const files = [...sourcePlan.files, ...releaseFiles, {
+  const files = [...sourcePlan.files, ...releaseFiles, ...profileFiles, {
     relativePath: 'foundation/adoption.json', mode: 0o644, bytes: Buffer.from(`${JSON.stringify(adoption, null, 2)}\n`),
   }];
   assertNoPortableCollisions([...directories, ...files.map((file) => file.relativePath)]);
@@ -435,6 +475,7 @@ export async function createProject({ template, name, destination, repositoryRoo
     foundationReleaseApproved: true,
     consumerAdoptionStatus: adoption.consumerAdoptionStatus,
     technicalTemplateStatus: adoption.technicalTemplate.status,
+    capabilityProfileStatus: adoption.capabilityProfiles.selectionStatus,
     adoptionRecord: 'foundation/adoption.json',
   };
 }

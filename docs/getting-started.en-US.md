@@ -1,6 +1,6 @@
 # How to Create an Application With This Foundation
 
-Working revision: `1.1.0-draft.1`  
+Working revision: `1.1.0-draft.2`  
 Language: US English (`en-US`)  
 [Español (Latinoamérica)](getting-started.es-419.md) · [Home](../README.en-US.md)
 
@@ -70,9 +70,10 @@ You can replace `backend-php` with `backend-node`, or the client with `web-vanil
 After each export:
 
 1. Review `foundation/adoption.json`, the receipt, and hashes; do not change their meaning to imply approval.
-2. Initialize version control for the consumer project.
-3. Replace visible names, domains, package names, bundle/application IDs, namespaces, and example configuration. Retain notices required by the license.
-4. Install dependencies and run the tests specified by the exported README before adding features.
+2. Complete both `foundation/capability-profile` language files. Mark each profile not applicable, planned, or enabled; never call it enabled without implementation and evidence.
+3. Initialize version control for the consumer project.
+4. Replace visible names, domains, package names, bundle/application IDs, namespaces, and example configuration. Retain notices required by the license.
+5. Install dependencies and run the tests specified by the exported README before adding features.
 
 ## 4. Fix the Contract Before Connecting Clients
 

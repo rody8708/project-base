@@ -1,6 +1,6 @@
 # Technical foundation exporter
 
-Working revision: `1.1.0-draft.1`, after stable technical release `1.1.0`.
+Working revision: `1.1.0-draft.2`, after stable technical release `1.1.0`.
 Status: the exporter prepares the current checkout for evaluation. Release `1.1.0` is approved for its frozen scope, but `main` may contain later changes; adoption and validation of the consumer product always remain pending.
 
 [Español (Latinoamérica)](README.es-419.md) · [Home](../README.en-US.md)
@@ -9,7 +9,7 @@ To select components and follow the complete process, read [how to create an app
 
 ## Purpose and requirements
 
-The tool prepares a new project outside this repository from six templates: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, or `starters/backend-node`. It does not install dependencies, execute package scripts, build, use the network, or publish. It copies the four approved documentary artifacts unchanged; it does not extract the ZIP, copy `docs/technical`, or modify source projects.
+The tool prepares a new project outside this repository from six templates: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, or `starters/backend-node`. It does not install dependencies, execute package scripts, build, use the network, or publish. It copies the four approved documentary artifacts unchanged and adds a bilingual capability-selection profile; it does not extract the ZIP, copy `docs/technical`, or modify source projects.
 
 `web` is the React/TypeScript/Vite option. `web-vanilla` is the HTML/CSS/JavaScript alternative without those frameworks or tools: its candidate has no npm dependencies and uses built-in Node.js modules for checks and local file serving. The exporter does not add packages or execute those scripts.
 
@@ -50,6 +50,8 @@ In addition to the allowed template files, the `foundation/` directory contains:
 | `approval-1.0.0.es-419.md` | Latin American Spanish approval receipt. |
 | `approval-1.0.0.en-US.md` | United States English approval receipt. |
 | `foundation-0.1.0-draft.4.verification.json` | Historical record linked by the receipts; its preapproval status is not rewritten. |
+| `capability-profile.es-419.md` | Consumer selection and acceptance record in Latin American Spanish. |
+| `capability-profile.en-US.md` | Equivalent US English capability record. |
 | `adoption.json` | Inventory and result of this preparation, not consumer approval. |
 
 The four historical artifacts are compared against SHA-256 values pinned in the code before creating the destination. Each written file is read back and compared byte-for-byte with its prepared content. The historical receipts retain their links between these files. These hashes detect a difference from the pinned values; they are not a digital signature and cannot independently authenticate a compromised repository or tool.
@@ -60,14 +62,19 @@ The `adoption.json` record distinguishes:
 {
   "foundationReleaseApproved": true,
   "consumerAdoptionStatus": "pending-consumer-confirmation",
+  "capabilityProfiles": {
+    "selectionStatus": "pending-consumer-selection"
+  },
   "technicalTemplate": {
-    "revision": "1.1.0-draft.1",
+    "revision": "1.1.0-draft.2",
     "stage": "draft",
     "status": "not-approved",
     "generationStatus": "generated-for-evaluation"
   }
 }
 ```
+
+The example revision is used by current visual starters. Backend PHP and Node remain at `1.1.0-draft.1`; the receipt records the exact revision of the selected template instead of assigning one revision to every platform. The two capability files are copied byte-for-byte and their SHA-256 values are recorded in `adoption.json`. They require the consumer to select `not applicable`, `planned`, or `enabled` for identity, multitenancy/privacy, payments/licensing, secure mobile, offline/sync, and distribution. Selection is not implementation or approval.
 
 It also includes a UTC timestamp, source and copy hashes, name changes, and checks that were not performed. The inventory hash identifies the source files included in that preparation; it is not a Git identifier, signature, or evidence of binary reproducibility. It includes no absolute machine paths. Available documentary approval does not confer technical approval, consumer adoption, or platform support.
 
@@ -108,6 +115,6 @@ If a failure occurs after destination creation, the tool returns `partialDestina
 node --test tools/create-project.test.mjs
 ```
 
-Recorded local result: `38` tests passed, `0` failed, and `0` skipped on Windows with Node.js `24.16.0`, on 2026-09-03. The previous 31 tests remain, with seven additions for `web-vanilla`: dependency-free source preservation, npm renaming/receipt, exclusions, `.npmrc`, required files, manifests/locks, and destination/link protections. The suite also covers synthetic web/Flutter/Kotlin/PHP copies, bytes/hashes, data and cache exclusions, scaffold file types, pending adoption, portable names, and two creators competing for one destination.
+Recorded local result: `40` tests passed, `0` failed, and `0` skipped on Windows with Node.js `24.16.0`, on 2026-09-04. The suite covers capability-profile presence, byte/hash receipts, exact per-template revisions, synthetic web/Flutter/Kotlin/PHP copies, data and cache exclusions, scaffold file types, pending adoption, portable names, and two creators competing for one destination. Earlier framework-free web coverage remains: dependency-free source preservation, npm renaming/receipt, exclusions, `.npmrc`, required files, manifests/locks, and destination/link protections.
 
 Tests create isolated synthetic fixtures in their own temporary directories and remove only those directories after verifying their location. Their supposed approval artifacts are test data, not new receipts; pin replacement exists only in the importable test interface, not the CLI. The suite uses [Node.js's built-in test runner](https://nodejs.org/docs/latest-v24.x/api/test.html). POSIX lexical cases run as string functions on Windows: they do not test a POSIX filesystem. This suite does not install or test React, Flutter, browsers, devices, native builds, or real consumer projects.

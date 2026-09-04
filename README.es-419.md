@@ -14,6 +14,7 @@ Esta base te ayuda a comenzar una aplicación sobre una estructura técnica prep
 - Permite escoger solo las piezas que necesitas, sin obligarte a usar un lenguaje o framework determinado.
 - Separa la interfaz, el backend y la base de datos para poder reemplazarlos con menos impacto.
 - Prepara validación, pruebas, comunicación mediante API, persistencia, tokens y permisos básicos.
+- Exporta un perfil bilingüe de capacidades para seleccionar identidad, privacidad SaaS, pagos, móvil seguro, sincronización offline y entrega solo cuando el producto los necesita.
 - Indica qué está comprobado y qué sigue pendiente, para no confundir un ejemplo con un producto listo para producción.
 
 ### Cómo comenzar aunque no sepas programar
@@ -31,10 +32,10 @@ Puedes entregar este repositorio a un desarrollador o a un asistente de programa
 
 **Estado actualizado:** se implementó el perfil de tokens, permisos y propiedad; consulta [seguridad y preparación para producción](docs/technical/security-production.es-419.md). Las pruebas y limitaciones anteriores a esta revisión son históricas: la API ya no admite acceso anónimo. El [estado para publicación estable](docs/technical/stability-status.es-419.md) registra macOS/iOS como pendiente no bloqueante y MPL-2.0 como licencia adoptada.
 
-Revisión de trabajo posterior a la congelación: `1.1.0-draft.1`  
+Revisión de trabajo posterior a la congelación: `1.1.0-draft.2`  
 Estado: publicación técnica `1.1.0` aprobada para su alcance declarado; el árbol de trabajo puede contener registros externos posteriores.  
 Idioma: español latinoamericano (`es-419`)  
-[Versión en inglés de Estados Unidos](README.en-US.md)
+[Versión en inglés de Estados Unidos](README.en-US.md) · [Cambios](CHANGELOG.es-419.md)
 
 Licencia del código y la documentación original: [Mozilla Public License 2.0](LICENSE). Consulta el [alcance de licencia](LICENSE-SCOPE.es-419.md) y la [política de marcas](TRADEMARKS.es-419.md).
 
@@ -83,13 +84,13 @@ Para crear una copia de evaluación, proporcionar un destino absoluto nuevo cuyo
 node tools/create-project.mjs --template web --name mi-web --destination "D:\proyectos\mi-web"
 ```
 
-Usar `--template web-vanilla` para HTML/CSS/JavaScript sin framework, `--template flutter` para escritorio/móvil, `--template kotlin-android` para Android nativo, `--template backend-php` para Laravel o `--template backend-node` para una API TypeScript sin framework de aplicación. El exportador copia las instrucciones y bloqueos del starter y la publicación documental aprobada; no instala herramientas, no configura cuentas y no confirma la adopción por el consumidor. Continuar dentro de la nueva carpeta con su README. Los identificadores de distribución nativos siguen siendo ejemplos hasta que el consumidor los configure.
+Usar `--template web-vanilla` para HTML/CSS/JavaScript sin framework, `--template flutter` para escritorio/móvil, `--template kotlin-android` para Android nativo, `--template backend-php` para Laravel o `--template backend-node` para una API TypeScript sin framework de aplicación. El exportador copia las instrucciones y bloqueos del starter, la publicación documental aprobada y un [perfil bilingüe de capacidades](templates/capability-profile.es-419.md); no instala herramientas, no configura cuentas y no confirma la adopción por el consumidor. Continuar dentro de la nueva carpeta con su README y el perfil. Los identificadores de distribución nativos siguen siendo ejemplos hasta que el consumidor los configure.
 
 ## Núcleo documental aprobado
 
 La [aprobación 1.0.0](releases/approval-1.0.0.es-419.md) vincula la publicación al [paquete conservado](releases/foundation-0.1.0-draft.4.zip) y su SHA-256. El nombre del ZIP mantiene su revisión editorial; el recibo externo establece la aprobación. No se modificó ese paquete para agregar las bases ejecutables.
 
-Lectura del núcleo: [gobernanza](docs/foundation-governance.es-419.md), [reglas](docs/immutable-rules.es-419.md), [estándares aplicables](docs/engineering-standards.es-419.md), [fundamentos](docs/programming-fundamentals.es-419.md), [datos y tiempo](docs/data-and-time.es-419.md), [fallos y recursos](docs/failures-and-resources.es-419.md), [aplicabilidad](docs/applicability.es-419.md), [trazabilidad](docs/traceability.es-419.md), [flujo](docs/development-workflow.es-419.md) y [definición de proyecto](templates/project-brief.es-419.md).
+Lectura del núcleo: [gobernanza](docs/foundation-governance.es-419.md), [reglas](docs/immutable-rules.es-419.md), [estándares aplicables](docs/engineering-standards.es-419.md), [fundamentos](docs/programming-fundamentals.es-419.md), [datos y tiempo](docs/data-and-time.es-419.md), [fallos y recursos](docs/failures-and-resources.es-419.md), [aplicabilidad](docs/applicability.es-419.md), [trazabilidad](docs/traceability.es-419.md), [flujo](docs/development-workflow.es-419.md), [definición de proyecto](templates/project-brief.es-419.md) y [perfil de capacidades](templates/capability-profile.es-419.md).
 
 Sus encabezados de borrador son la instantánea previa a aprobación. Los controles históricos con inventario fijo se ejecutan sobre una recuperación de aquel ZIP. Para el árbol de trabajo ampliado se usa `npm run check`. Una corrección o nueva publicación requiere una identidad nueva; ningún starter se vuelve estable por heredar la aprobación documental.
 

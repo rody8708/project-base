@@ -49,6 +49,7 @@ Copiar la plantilla de la revisión elegida y su contraparte al proyecto consumi
 
 ## BRIEF-005 — Datos, seguridad y recuperación
 
+- Perfiles de capacidad seleccionados: [completar `capability-profile.es-419.md` y su contraparte en inglés; registrar no aplica, planificado o habilitado para cada perfil].
 - Datos utilizados y sensibilidad: [qué datos se necesitan y por qué].
 - Almacenamiento, conservación y eliminación: [ubicación, duración y tratamiento].
 - Límites de confianza y validación: [fuentes no confiables y controles].
