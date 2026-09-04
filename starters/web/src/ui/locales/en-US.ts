@@ -24,7 +24,7 @@ export const enUS: Messages = {
   remoteNotice: 'API mode: data is stored by the backend.',
   architecture: 'One structure, clear responsibilities',
   architectureBody: 'Pure domain rules · Use cases · Memory and interface adapters',
-  candidate: 'Replaceable example · 1.1.0-draft.2 · Technical candidate',
+  candidate: 'Replaceable example',
   summary: (total, completed) => `${total} total · ${completed} completed`,
   errors: {
     INVALID_TITLE: 'Enter a valid task without line breaks or control characters.',

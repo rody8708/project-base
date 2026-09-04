@@ -8,8 +8,8 @@ import { fileURLToPath } from 'node:url';
 
 export const DEFAULT_REPOSITORY_ROOT = fileURLToPath(new URL('../../', import.meta.url));
 export const TEMPLATE_REVISIONS = Object.freeze({
-  web: '1.1.0-draft.2',
-  'web-vanilla': '1.1.0-draft.2',
+  web: '1.1.0-draft.3',
+  'web-vanilla': '1.1.0-draft.3',
   flutter: '1.1.0-draft.2',
   'kotlin-android': '1.1.0-draft.2',
   'backend-php': '1.1.0-draft.2',
