@@ -21,6 +21,7 @@ TOKEN = "a" * 64
 def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption("--recovery-repeat", type=int, default=1)
     parser.addoption("--recovery-diagnostics", action="store_true")
+    parser.addoption("--recovery-fragment-body", action="store_true")
     parser.addoption(
         "--database-engine", choices=("sqlite", "postgresql", "mysql"), default="sqlite"
     )

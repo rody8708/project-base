@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Zendrhax LLC
 # SPDX-License-Identifier: MPL-2.0
 import hashlib
+import json
 import sqlite3
 import time
 from collections.abc import Callable, Iterator
@@ -81,8 +82,8 @@ def test_native_backup_restores_api_and_revokes_recovered_tokens(
         recovery_pair(kind, distribution, tmp_path) as (source, target, backup, restore),
     ):
         trace.mark(f"iteration.{recovery_iteration}")
-        trace.attach(source)
-        trace.attach(target)
+        trace.attach(source, "source")
+        trace.attach(target, "target")
         migrate_up(source)
         token = "d" * 64
         with uow_factory(source)() as uow:
@@ -134,11 +135,26 @@ def test_native_backup_restores_api_and_revokes_recovered_tokens(
                 fresh_headers = {"Authorization": f"Bearer {fresh}"}
                 assert client.get(location, headers=fresh_headers).json()["data"] == saved
                 assert client.get("/api/v1/tasks", headers=fresh_headers).json()["data"] == [saved]
-                changed = client.put(
-                    location,
-                    headers=fresh_headers,
-                    json={"title": "Recovered", "completed": True, "version": 1},
-                )
+                payload = {"title": "Recovered", "completed": True, "version": 1}
+                if request.config.getoption("--recovery-fragment-body"):
+                    encoded = json.dumps(payload).encode()
+
+                    def fragments() -> Iterator[bytes]:
+                        for byte in encoded:
+                            yield bytes([byte])
+                            time.sleep(0.001)
+
+                    changed = client.put(
+                        location,
+                        headers={
+                            **fresh_headers,
+                            "Content-Type": "application/json",
+                            "Content-Length": str(len(encoded)),
+                        },
+                        content=fragments(),
+                    )
+                else:
+                    changed = client.put(location, headers=fresh_headers, json=payload)
                 assert changed.status_code == 200
                 assert changed.json()["data"]["version"] == 2
         with uow_factory(source)() as uow:

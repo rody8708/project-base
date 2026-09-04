@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { planFor } from './solution-runner.mjs';
+import { diagnose, planFor } from './solution-runner.mjs';
 
 function manifest(...components) {
   return { kind: 'project-base-solution', language: 'en-US', components };
@@ -39,6 +39,18 @@ test('Python setup is locked, migrates explicitly, and checks every quality gate
   assert.deepEqual(planFor('start', value, 'linux')[0], {
     directory: 'api', tool: 'uv', args: ['run', 'uvicorn', 'project_base_api.main:app', '--host', '127.0.0.1', '--port', '8080'], role: 'api',
   });
+});
+
+test('Python diagnosis checks the isolated pinned runtime without downloading', () => {
+  const calls = [];
+  const results = diagnose(manifest({ directory: 'api', template: 'backend-python' }), 'linux', (tool, args) => {
+    calls.push([tool, args]);
+    return { ok: true, output: args[0] === 'python' ? '/isolated/python' : 'uv 0.12.4' };
+  });
+  assert.deepEqual(calls[0], ['uv', ['python', 'find', '--managed-python', '--no-python-downloads', '3.13.15']]);
+  assert.equal(results.every(item => item.ok), true);
+  const missing = diagnose(manifest({ directory: 'api', template: 'backend-python' }), 'linux', () => ({ ok: false, output: '' }));
+  assert.equal(missing[1].ok, false);
 });
 
 test('Android start builds safely instead of choosing a device', () => {

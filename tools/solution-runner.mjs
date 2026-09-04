@@ -118,7 +118,7 @@ export function diagnose(manifest, platform = process.platform, inspect = versio
   if ([...templates].some((item) => ['web', 'web-vanilla', 'backend-node'].includes(item))) checks.push({ name: 'npm', result: inspect(executable('npm', platform)) });
   if (templates.has('backend-php')) checks.push({ name: 'PHP 8.5', result: inspect(executable('php', platform), ['--version']), accepts: /^PHP 8\.5\./u }, { name: 'Composer 2', result: inspect(executable('composer', platform)), accepts: /^Composer version 2\./u });
   if (templates.has('backend-python')) checks.push(
-    { name: 'Python 3.13 or 3.14', result: inspect(executable('python', platform), ['--version']), accepts: /^Python 3\.1[34]\./u },
+    { name: 'Managed Python 3.13.15 (uv python install 3.13.15)', result: inspect(executable('uv', platform), ['python', 'find', '--managed-python', '--no-python-downloads', '3.13.15']) },
     { name: 'uv', result: inspect(executable('uv', platform), ['--version']), accepts: /^uv \d+\./u },
   );
   if (templates.has('flutter')) checks.push({ name: 'Flutter 3.35.1', result: inspect(executable('flutter', platform)), accepts: /Flutter 3\.35\.1/u }, { name: 'Dart 3.9.0', result: inspect(executable('dart', platform)), accepts: /Dart SDK version: 3\.9\.0/u });

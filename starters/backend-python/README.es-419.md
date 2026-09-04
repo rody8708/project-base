@@ -17,9 +17,10 @@ Es una base técnica, no genera las reglas particulares de tu negocio, login con
 
 ## Inicio rápido
 
-Instala Python 3.13 y [uv](https://docs.astral.sh/uv/), luego:
+Instala [uv](https://docs.astral.sh/uv/), luego usa el runtime aislado fijado por la plantilla:
 
 ```powershell
+uv python install 3.13.15
 uv sync --locked --all-extras
 uv run python -m project_base_api.migrate_cli up
 uv run python -m project_base_api.token_cli local-user

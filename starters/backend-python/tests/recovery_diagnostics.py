@@ -25,6 +25,7 @@ class RecoveryTrace:
         self.events: deque[tuple[float, str]] = deque(maxlen=80)
         self.lock = Lock()
         self.max_sql_ms = 0.0
+        self.slowest_sql = "none"
         self.failure_stacks: list[list[str]] = []
 
     def mark(self, name: str) -> None:
@@ -32,17 +33,23 @@ class RecoveryTrace:
             with self.lock:
                 self.events.append((round(time.perf_counter() - self.started, 6), name))
 
-    def attach(self, engine: Engine) -> None:
+    def attach(self, engine: Engine, role: str = "test") -> None:
         if not self.enabled:
             return
 
         def before(connection: Any, *_args: Any) -> None:
+            verb = str(_args[1]).lstrip().split(maxsplit=1)[0].upper()
+            if verb not in {"SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "PRAGMA"}:
+                verb = "OTHER"
+            connection.info["lab_sql_operation"] = f"{role}.{verb}"
             connection.info["lab_sql_start"] = time.perf_counter()
             self.mark("sql.begin")
 
         def after(connection: Any, *_args: Any) -> None:
             elapsed = (time.perf_counter() - connection.info.pop("lab_sql_start")) * 1000
-            self.max_sql_ms = max(self.max_sql_ms, elapsed)
+            if elapsed > self.max_sql_ms:
+                self.max_sql_ms = elapsed
+                self.slowest_sql = connection.info["lab_sql_operation"]
             self.mark("sql.end")
 
         event.listen(engine, "before_cursor_execute", before)
@@ -95,6 +102,7 @@ class RecoveryTrace:
             "passed": kind is None,
             "elapsed_s": round(time.perf_counter() - self.started, 3),
             "max_sql_ms": round(self.max_sql_ms, 3),
+            "slowest_sql": self.slowest_sql,
         }
         if kind is not None:
             result["events"] = list(self.events)

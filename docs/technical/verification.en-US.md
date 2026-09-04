@@ -118,6 +118,8 @@ HTTP flows use Uvicorn on ephemeral ports and verify responses and persisted sta
 
 ### Python Operations Trials After PR #27
 
+Update after `bf225bf`: the lab reproduced a timeout inside `commit` and two controlled blocking cases. WAL with `FULL`, a fixed SQLite minimum, and persistence execution outside the HTTP event loop were implemented. Managed Python 3.13.15/SQLite 3.53.1, 31 tests per engine, and 100 fragmented recoveries passed. Evidence and the distinction between corrected blocking and the untraced historical episode are in the lab's “Correction of Reproduced Blocking” section; the following paragraphs retain the earlier historical status.
+
 The [Python operations lab](../../starters/backend-python/operations-lab.en-US.md) records commands, environment, cleanup, and limits for HTTPS, concurrency, and native backup/restore. Based on `60176b3`, branch `test/python-operational-lab` passed 25 tests per engine (SQLite/PostgreSQL/MySQL), Ruff, and mypy. The counter regression reproduced 12 admissions with a maximum of five; atomic conditional updating corrected it. Intermittent finding `PY-LAB-001` remains open and documented without changing the timeout. No production approval is claimed and earlier historical evidence is unchanged.
 
 Before integrating this expansion, GitHub alert `GHSA-6w46-j5rx-g56g` identified vulnerable temporary-directory handling in pytest. Its pin and lockfile were updated from `8.4.1` to fixed version `9.0.3`, and the 18 tests per engine, Ruff, and mypy were repeated. No vulnerability exploit was attempted or claimed to have been reproduced locally; the update follows the provider advisory. The final revision and CI results for this change are associated with PR #27.

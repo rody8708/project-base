@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Zendrhax LLC
 # SPDX-License-Identifier: MPL-2.0
 import json
+import sqlite3
 import time
 import uuid
 from typing import Literal
@@ -15,6 +16,7 @@ from sqlalchemy import (
     and_,
     create_engine,
     delete,
+    event,
     insert,
     select,
     update,
@@ -58,7 +60,24 @@ rate_limits = Table(
 
 
 def make_engine(database_url: str) -> Engine:
-    return create_engine(database_url, pool_pre_ping=True)
+    engine = create_engine(database_url, pool_pre_ping=True)
+    if engine.dialect.name == "sqlite" and engine.url.database not in {None, "", ":memory:"}:
+        if sqlite3.sqlite_version_info < (3, 51, 3):
+            engine.dispose()
+            raise RuntimeError("SQLite 3.51.3+ is required for safe WAL; use the pinned uv runtime")
+
+        def configure_sqlite(connection: sqlite3.Connection, _record: object) -> None:
+            cursor = connection.cursor()
+            try:
+                mode = cursor.execute("PRAGMA journal_mode=WAL").fetchone()
+                if mode != ("wal",):
+                    raise RuntimeError("SQLite WAL requires a writable local filesystem")
+                cursor.execute("PRAGMA synchronous=FULL")
+            finally:
+                cursor.close()
+
+        event.listen(engine, "connect", configure_sqlite)
+    return engine
 
 
 class SqlAlchemyRepository:

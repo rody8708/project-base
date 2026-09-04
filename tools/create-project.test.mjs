@@ -88,6 +88,7 @@ async function fixture(t) {
   await put('starters/backend-node/tsconfig.json', '{}\n');
   await put('starters/backend-node/src/server.ts', 'export const server = true;\n');
   await put('starters/backend-python/pyproject.toml', '[project]\nname = "foundation-backend-python"\n');
+  await put('starters/backend-python/.python-version', '3.13.15\n');
   await put('starters/backend-python/uv.lock', 'version = 1\n');
   await put('starters/backend-python/src/project_base_api/main.py', 'app = object()\n');
   const release = {

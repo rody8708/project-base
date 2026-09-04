@@ -7,6 +7,7 @@
 From this starter, with Python 3.13, uv, and Docker:
 
 ```powershell
+uv python install 3.13.15
 uv sync --locked --all-extras
 uv run ruff check .
 uv run mypy
@@ -31,7 +32,23 @@ Certificates and keys are temporary; the CA key stays in memory. Server certific
 
 ## Evidence and Limits
 
-### Repeatable PY-LAB-001 Diagnosis
+### Correction of Reproduced Blocking
+
+Post-change verification: Ruff and mypy passed; 31 tests per engine with `--live-https --recovery-diagnostics --recovery-repeat=3`; 100 additional SQLite recoveries with `--recovery-repeat=100 --recovery-diagnostics --recovery-fragment-body`, without increasing the timeout. Fragmentation sends the PUT JSON as individual bytes separated by one millisecond to exercise partial reception. All 72 root tests and documentation/architecture checks passed. The new environment is Python 3.13.15 and SQLite 3.53.1; global Python 3.13.6 remains installed. Test resources were removed; user databases were untouched.
+
+Further investigation reproduced a `ReadTimeout` after 30 successful recoveries. The trace placed the server inside `do_commit`, with HTTPS established and the body received: the response arrived beyond the five-second budget. It occurred on initial creation, not the historical PUT; this demonstrates the same class of wait, not retrospective proof of that untraced episode.
+
+Two controlled regressions failed before the change: a retained SQLite reader prevented a writer from committing within two seconds; a stalled application operation prevented another HTTPS connection to health from completing. The SQLite adapter now configures `journal_mode=WAL` and `synchronous=FULL` for local files, and the transport runs synchronous rate limiting and write operations in the worker pool. Transactions remain complete within the worker. Both regressions pass after the change; the original timeout was not increased.
+
+The starter pins uv-managed Python `3.13.15` (SQLite `3.53.1` verified on Windows) without replacing global Python. The adapter rejects SQLite older than `3.51.3` for files, avoiding WAL activation on a version affected by SQLite's documented WAL-reset bug. CI installs the same runtime through uv; startup diagnosis locates that runtime without downloading it.
+
+WAL needs local storage and `-wal`/`-shm` sidecars; do not use network folders or copy only the main file of an open database. The native backup API remains the tested procedure. The mode persists in existing files: stop clients and back up before adoption. To revert, close connections, complete checkpointing, and deliberately switch to `journal_mode=DELETE`; never manually delete sidecars. `FULL` retains synchronization at each commit; neither `NORMAL` nor `OFF` was adopted. See [SQLite WAL](https://www.sqlite.org/wal.html) and [synchronous](https://www.sqlite.org/pragma.html#pragma_synchronous).
+
+`PY-LAB-001` status: reproduced blocking mechanisms corrected; the specific historical episode cannot be attributed with retrospective certainty. A stalled disk, retained external writer, or saturated pool is not guaranteed to respond within five seconds. Diagnostics remain available to distinguish these operational limits from a regression.
+
+### Initial Diagnostic Phase Record
+
+The following records describe the earlier investigation, before the correction above; their open status and test counts are historical, not the current result.
 
 ```powershell
 uv run pytest tests/integration/test_recovery.py --recovery-repeat=40 --recovery-diagnostics -s --tb=short
