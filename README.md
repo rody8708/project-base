@@ -107,6 +107,7 @@ La base reduce decisiones improvisadas, pero no sustituye el desarrollo, el apre
 
 - Publicación técnica estable / Stable technical release: [`v1.1.0`](releases/approval-1.1.0.en-US.md).
 - Licencia de código abierto / Open-source license: [MPL-2.0](LICENSE).
+- Política operativa / Operational policy: [estándares en español](docs/engineering-standards.es-419.md) · [standards in English](docs/engineering-standards.en-US.md).
 - CI automática para pull requests / Automatic pull-request CI: web, mantenimiento, Flutter core, Kotlin Android y PHP/SQLite.
 - Probado localmente / Locally tested: integración API y SQLite, PostgreSQL y MySQL en entornos aislados.
 - Pendiente / Pending: compilación y ejecución verificadas en macOS/iOS hasta disponer de una Mac adecuada.

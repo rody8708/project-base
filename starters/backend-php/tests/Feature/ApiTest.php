@@ -132,8 +132,8 @@ final class ApiTest extends TestCase
 
     public function test_persistence_error_is_reported_without_a_successful_response(): void
     {
-        $this->app->bind(TaskRepository::class, fn () => throw new \Illuminate\Database\QueryException(
-            'synthetic', 'SYNTHETIC_PRIVATE_SQL', [], new \PDOException('SYNTHETIC_PRIVATE_DRIVER_DETAIL'),
+        $this->app->bind(TaskRepository::class, fn () => throw new \App\Application\PersistenceUnavailable(
+            new \RuntimeException('SYNTHETIC_PRIVATE_DRIVER_DETAIL'),
         ));
         $response = $this->getJson('/api/v1/tasks')->assertStatus(503)->assertJsonPath('error.code', 'PERSISTENCE_UNAVAILABLE');
         self::assertStringNotContainsString('SYNTHETIC_PRIVATE', $response->getContent());

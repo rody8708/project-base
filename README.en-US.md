@@ -89,7 +89,7 @@ Use `--template web-vanilla` for framework-free HTML/CSS/JavaScript, `--template
 
 The [1.0.0 approval](releases/approval-1.0.0.en-US.md) ties the release to the [preserved package](releases/foundation-0.1.0-draft.4.zip) and its SHA-256. The ZIP filename retains its editorial revision; the external receipt establishes approval. That package was not modified to add executable bases.
 
-Core reading: [governance](docs/foundation-governance.en-US.md), [rules](docs/immutable-rules.en-US.md), [fundamentals](docs/programming-fundamentals.en-US.md), [data and time](docs/data-and-time.en-US.md), [failures and resources](docs/failures-and-resources.en-US.md), [applicability](docs/applicability.en-US.md), [traceability](docs/traceability.en-US.md), [workflow](docs/development-workflow.en-US.md), and [project brief](templates/project-brief.en-US.md).
+Core reading: [governance](docs/foundation-governance.en-US.md), [rules](docs/immutable-rules.en-US.md), [applicable standards](docs/engineering-standards.en-US.md), [fundamentals](docs/programming-fundamentals.en-US.md), [data and time](docs/data-and-time.en-US.md), [failures and resources](docs/failures-and-resources.en-US.md), [applicability](docs/applicability.en-US.md), [traceability](docs/traceability.en-US.md), [workflow](docs/development-workflow.en-US.md), and [project brief](templates/project-brief.en-US.md).
 
 Their draft headers are the preapproval snapshot. Historical fixed-inventory checks run against a recovery of that ZIP. Use `npm run check` for the extended working tree. A correction or new release requires a new identity; a starter does not become stable by inheriting documentary approval.
 

@@ -15,7 +15,7 @@ HTTP (JSON, idioma, validación, códigos de estado)
 Task (valor inmutable y reglas del ejemplo) no depende de Laravel.
 ```
 
-El servicio recibe su repositorio y generador de IDs; no crea conexiones o configura HTTP. El adaptador SQL convierte filas a valores del dominio. Las actualizaciones usan una condición por `id` y `version`: una escritura con versión antigua no pisa el resultado anterior. Este mecanismo protege el recurso individual del ejemplo; no implementa transacciones distribuidas, idempotencia general o resolución automática de conflictos.
+El servicio recibe su repositorio y generador de IDs; no crea conexiones o configura HTTP. El adaptador SQL convierte filas a valores del dominio y traduce fallos `QueryException` a `PersistenceUnavailable`. El límite HTTP solo conoce esa categoría estable y responde 503 sin importar clases del proveedor ni exponer detalles SQL. Las actualizaciones usan una condición por `id` y `version`: una escritura con versión antigua no pisa el resultado anterior. Este mecanismo protege el recurso individual del ejemplo; no implementa transacciones distribuidas, idempotencia general o resolución automática de conflictos.
 
 Las migraciones separan la creación inicial de `tasks` de la incorporación de `completed`/`version`. Se comprueba la actualización de una fila existente y un rollback de esquema solamente en bases de prueba desechables. Los límites de título y de versión se aplican en el dominio; no se presume que SQLite imponga longitudes `VARCHAR` como otros motores. Ninguna migración debe ejecutarse sobre datos de un consumidor sin revisar respaldos, permisos y transición.
 

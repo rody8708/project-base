@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Application\TaskRepository;
+use App\Application\PersistenceUnavailable;
 use App\Domain\Task;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,7 @@ final class PersistenceTest extends TestCase
         try {
             $repository->insert(new Task(self::ID, 'Duplicate'));
             self::fail('Duplicate identifier was accepted.');
-        } catch (QueryException) {
+        } catch (PersistenceUnavailable) {
             self::assertSame('First', $repository->find(self::ID)->title);
             $this->assertDatabaseCount('tasks', 1);
         }
