@@ -15,7 +15,7 @@
     "token": "node dist/src/token-cli.js"
   },
   "devDependencies": {
-    "@types/node": "24.13.3",
+    "@types/node": "26.4.1",
     "@types/pg": "8.23.1",
     "typescript": "7.0.2"
   },
