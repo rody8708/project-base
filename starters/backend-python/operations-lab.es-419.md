@@ -31,6 +31,18 @@ Certificados y claves son temporales; la clave CA permanece en memoria. Certific
 
 ## Evidencia y límites
 
+### Diagnóstico reproducible de PY-LAB-001
+
+```powershell
+uv run pytest tests/integration/test_recovery.py --recovery-repeat=40 --recovery-diagnostics -s --tb=short
+```
+
+`--recovery-repeat` acepta de 1 a 100 y crea recursos aislados en cada iteración. Para comparar sin instrumentación, omite `--recovery-diagnostics`. El timeout HTTP permanece en cinco segundos. La instrumentación opcional registra duraciones SQL, etapas de conexión/envío/recepción del cliente y progreso HTTP del servidor; conserva como máximo 80 eventos. Ante un fallo de red captura nombres de funciones/archivos y líneas de las pilas antes de cerrar el servidor, nunca variables locales. No registra SQL, parámetros, encabezados, cuerpos ni texto de excepciones. `-s` muestra resúmenes también cuando las pruebas pasan; CI conserva el diagnóstico de fallos y repite tres recuperaciones por motor.
+
+Investigación del 4 de septiembre de 2026 sobre `bf225bf`, rama `diagnose/python-recovery-timeout`, mismo entorno Windows/Python 3.13.6: **340 recorridos SQLite aprobados** en la campaña (40 aislados instrumentados; cuatro procesos simultáneos de 40 con bases independientes; 100 sin instrumentación; 40 dentro de la suite completa). Esta última ejecución aprobó 66 pruebas. No se reprodujo el timeout. Las primeras 200 mediciones situaron el recorrido completo aproximadamente entre 0,54 y 0,81 segundos y la mayor consulta observada en unos 28,5 ms; no son garantías de rendimiento. Se agregaron pruebas del límite de eventos, ausencia de datos sensibles y desactivación del diagnóstico.
+
+**PY-LAB-001 permanece abierta: causa no determinada.** No hay evidencia para atribuir el episodio histórico a SQLite, TLS, el servidor o el host. No se modificó código de producción ni se inventó una corrección. Si vuelve a fallar, comparar la última etapa del cliente con `body.wait`, `sql.begin`/`sql.end` y las etapas de respuesta antes de seleccionar una corrección.
+
 Resultado final local: **25 pruebas aprobadas por motor**, Ruff y mypy aprobados. Se comprobó la retirada de contenedores propios, archivos SQLite y material TLS temporal; permanecen las imágenes en caché. Los controles de raíz aprobaron 71 pruebas y la verificación documental/arquitectónica.
 
 Incidencia abierta `PY-LAB-001`: una ejecución SQLite produjo un `ReadTimeout` de cinco segundos al actualizar por HTTPS después de restaurar. No se reprodujo en la siguiente suite completa ni en cuatro ensayos aislados con el mismo timeout; no se amplió el límite ni se omitió la comprobación. Causa no determinada: no declarar resuelta ni prometer latencia con esta evidencia. Si reaparece, conservar trazas sanitizadas del servidor y del cliente antes de intentar corregirla.

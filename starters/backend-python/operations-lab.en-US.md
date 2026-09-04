@@ -31,6 +31,18 @@ Certificates and keys are temporary; the CA key stays in memory. Server certific
 
 ## Evidence and Limits
 
+### Repeatable PY-LAB-001 Diagnosis
+
+```powershell
+uv run pytest tests/integration/test_recovery.py --recovery-repeat=40 --recovery-diagnostics -s --tb=short
+```
+
+`--recovery-repeat` accepts 1 through 100 and creates isolated resources per iteration. Omit `--recovery-diagnostics` to compare without instrumentation. The HTTP timeout remains five seconds. Optional instrumentation records SQL durations, client connect/send/receive stages, and server HTTP progress; it retains at most 80 events. Network failures capture stack function/file names and line numbers before server shutdown, never local variables. SQL text, parameters, headers, bodies, and exception text are not recorded. `-s` also displays successful summaries; CI retains failure diagnostics and repeats three recoveries per engine.
+
+September 4, 2026 investigation based on `bf225bf`, branch `diagnose/python-recovery-timeout`, same Windows/Python 3.13.6 environment: **340 SQLite recovery flows passed** in the campaign (40 isolated instrumented runs; four simultaneous processes of 40 with independent databases; 100 without instrumentation; 40 within the full suite). The last execution passed 66 tests. The timeout did not recur. The first 200 measurements placed the entire flow at approximately 0.54–0.81 seconds and the largest observed query at about 28.5 ms; these are not performance guarantees. Tests were added for bounded events, omission of sensitive values, and disabled diagnostics.
+
+**PY-LAB-001 remains open: cause undetermined.** There is no evidence attributing the historical episode to SQLite, TLS, the server, or the host. No production code was changed and no correction is claimed. On recurrence, compare the last client stage with `body.wait`, `sql.begin`/`sql.end`, and response stages before selecting a correction.
+
 Final local result: **25 tests passed per engine**, with Ruff and mypy passing. Removal of owned containers, SQLite files, and temporary TLS material was checked; cached images remain. Root checks passed 71 tests and documentation/architecture validation.
 
 Open finding `PY-LAB-001`: one SQLite run raised a five-second `ReadTimeout` when updating over HTTPS after restore. It did not recur in the next full suite or four isolated trials with the same timeout; the limit was not increased and the check was not skipped. Cause undetermined: do not label it resolved or promise latency based on this evidence. If it recurs, retain sanitized server/client traces before attempting a correction.

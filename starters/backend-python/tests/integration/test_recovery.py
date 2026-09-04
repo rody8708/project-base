@@ -7,7 +7,6 @@ from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
 
-import httpx
 import pytest
 from sqlalchemy import Engine, select, update
 
@@ -16,6 +15,7 @@ from project_base_api.infrastructure.migrations import migrate_up, schema_migrat
 from project_base_api.presentation.http import create_app
 from tests.database_lab import native_database
 from tests.http_lab import live_server
+from tests.recovery_diagnostics import RecoveryTrace
 
 
 @contextmanager
@@ -72,11 +72,17 @@ def recovery_pair(
 
 
 def test_native_backup_restores_api_and_revokes_recovered_tokens(
-    request: pytest.FixtureRequest, tmp_path: Path
+    request: pytest.FixtureRequest, tmp_path: Path, recovery_iteration: int
 ) -> None:
     kind = request.config.getoption("--database-engine")
     distribution = request.config.getoption("--docker-wsl")
-    with recovery_pair(kind, distribution, tmp_path) as (source, target, backup, restore):
+    with (
+        RecoveryTrace(request.config.getoption("--recovery-diagnostics")) as trace,
+        recovery_pair(kind, distribution, tmp_path) as (source, target, backup, restore),
+    ):
+        trace.mark(f"iteration.{recovery_iteration}")
+        trace.attach(source)
+        trace.attach(target)
         migrate_up(source)
         token = "d" * 64
         with uow_factory(source)() as uow:
@@ -87,8 +93,8 @@ def test_native_backup_restores_api_and_revokes_recovered_tokens(
                 int(time.time()) + 3600,
             )
         headers = {"Authorization": f"Bearer {token}"}
-        with live_server(create_app(uow_factory(source)), tls=True) as (url, context):
-            with httpx.Client(base_url=url, verify=context, trust_env=False) as client:
+        with live_server(trace.app(create_app(uow_factory(source))), tls=True) as (url, context):
+            with trace.client(url, context) as client:
                 response = client.post(
                     "/api/v1/tasks", headers=headers, json={"title": "Respaldo ñ 🚀"}
                 )
@@ -122,8 +128,8 @@ def test_native_backup_restores_api_and_revokes_recovered_tokens(
                 hashlib.sha256(fresh.encode()).hexdigest(),
                 int(time.time()) + 3600,
             )
-        with live_server(create_app(uow_factory(target)), tls=True) as (url, context):
-            with httpx.Client(base_url=url, verify=context, trust_env=False) as client:
+        with live_server(trace.app(create_app(uow_factory(target))), tls=True) as (url, context):
+            with trace.client(url, context) as client:
                 assert client.get(location, headers=headers).status_code == 401
                 fresh_headers = {"Authorization": f"Bearer {fresh}"}
                 assert client.get(location, headers=fresh_headers).json()["data"] == saved
