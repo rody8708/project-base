@@ -20,9 +20,7 @@ final class FailingRepository implements TaskRepository {
 void main() {
   testWidgets('follows the platform dark appearance', (tester) async {
     tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
-    addTearDown(
-      tester.platformDispatcher.clearPlatformBrightnessTestValue,
-    );
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
     await tester.pumpWidget(const TaskApp());
     await tester.pumpAndSettle();
 
