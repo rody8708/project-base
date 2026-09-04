@@ -36,6 +36,22 @@ uv run mypy
 uv run pytest
 ```
 
+### SQL Matrix and Real HTTP
+
+From this directory, with Docker available, run:
+
+```powershell
+uv run pytest -W error --tb=short --live-http
+uv run pytest -W error --tb=short --database-engine=postgresql --live-http
+uv run pytest -W error --tb=short --database-engine=mysql --live-http
+```
+
+If Docker runs in WSL, append `--docker-wsl=Ubuntu-24.04` to the PostgreSQL/MySQL commands (use your distribution name). Tests create owned PostgreSQL `18.6` or MySQL `8.4.11` containers, in-memory data, synthetic credentials, and ephemeral loopback-only ports. They do not accept existing database URLs or load `.env`. Containers and data are removed afterward; downloaded images are retained. Do not run this suite with parallel workers sharing one database.
+
+`--live-http` repeats API flows through Uvicorn and real HTTP connections. Coverage includes CRUD, version conflicts, reader permissions, expiry/revocation, and owner isolation, including identifiers differing only in case. MySQL's binary owner comparison stays inside the adapter; domain and application remain unchanged. The `pymysql[rsa]` extra enables authentication with MySQL 8.4's default mechanism.
+
+This matrix does not certify TLS, concurrent load, backup/restore, or a production deployment. Those validations remain pending for this starter and must be repeated for each product.
+
 ## Changing the SQL engine
 
 Copy `.env.example` to `.env` without adding it to Git and configure `DATABASE_URL`:

@@ -62,8 +62,9 @@ async def test_task_lifecycle_and_optimistic_lock(
     assert deleted.status_code == 204
 
 
+@pytest.mark.parametrize("other_subject", ["user-2", "USER-1"])
 async def test_owner_isolation(
-    engine: Engine, client: AsyncClient, authorization: dict[str, str]
+    engine: Engine, client: AsyncClient, authorization: dict[str, str], other_subject: str
 ) -> None:
     created = await client.post("/api/v1/tasks", headers=authorization, json={"title": "Private"})
     assert created.status_code == 201
@@ -72,7 +73,7 @@ async def test_owner_isolation(
     other_token = "b" * 64
     with uow_factory(engine)() as uow:
         uow.tokens.provision(
-            "user-2",
+            other_subject,
             ("tasks:read", "tasks:write"),
             hashlib.sha256(other_token.encode()).hexdigest(),
             int(time.time()) + 3600,
@@ -80,6 +81,41 @@ async def test_owner_isolation(
     other = await client.get("/api/v1/tasks", headers={"Authorization": f"Bearer {other_token}"})
     assert other.status_code == 200
     assert other.json()["data"] == []
+    headers = {"Authorization": f"Bearer {other_token}"}
+    location = created.headers["location"]
+    assert (await client.get(location, headers=headers)).status_code == 404
+    assert (
+        await client.put(
+            location, headers=headers, json={"title": "Intrusion", "completed": True, "version": 1}
+        )
+    ).status_code == 404
+    assert (
+        await client.request("DELETE", location, headers=headers, json={"version": 1})
+    ).status_code == 404
+    unchanged = await client.get(location, headers=authorization)
+    assert unchanged.json()["data"] == created.json()["data"]
+
+
+@pytest.mark.parametrize("expired", [False, True])
+async def test_reader_permissions_and_expiry(
+    engine: Engine, client: AsyncClient, expired: bool
+) -> None:
+    token = "c" * 64
+    with uow_factory(engine)() as uow:
+        uow.tokens.provision(
+            "reader",
+            ("tasks:read",),
+            hashlib.sha256(token.encode()).hexdigest(),
+            int(time.time()) + (-60 if expired else 3600),
+        )
+    headers = {"Authorization": f"Bearer {token}"}
+    assert (await client.get("/api/v1/tasks", headers=headers)).status_code == (
+        401 if expired else 200
+    )
+    denied = await client.post("/api/v1/tasks", headers=headers, json={"title": "Denied"})
+    assert denied.status_code == (401 if expired else 403)
+    with uow_factory(engine)() as uow:
+        assert uow.tasks.list("reader", 20, None)[0] == []
 
 
 async def test_token_can_be_revoked(client: AsyncClient, authorization: dict[str, str]) -> None:

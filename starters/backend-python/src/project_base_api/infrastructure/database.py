@@ -20,6 +20,7 @@ from sqlalchemy import (
     update,
 )
 from sqlalchemy.engine import Connection, Engine, Transaction
+from sqlalchemy.sql.elements import ColumnElement
 
 from project_base_api.domain.models import Principal, Task
 from project_base_api.domain.repositories import UnitOfWork
@@ -61,6 +62,13 @@ class SqlAlchemyRepository:
     def __init__(self, connection: Connection) -> None:
         self.connection = connection
 
+    def _owner_matches(self, owner: str) -> ColumnElement[bool]:
+        # MySQL's default collation ignores case. Identity must not.
+        column = tasks.c.owner
+        if self.connection.dialect.name == "mysql":
+            return column.collate("utf8mb4_bin") == owner
+        return column == owner
+
     @staticmethod
     def _task(row: object) -> Task:
         values = row._mapping  # type: ignore[attr-defined]
@@ -69,7 +77,7 @@ class SqlAlchemyRepository:
         )
 
     def list(self, owner: str, limit: int, after: str | None) -> tuple[list[Task], str | None]:
-        condition = tasks.c.owner == owner
+        condition = self._owner_matches(owner)
         if after:
             condition = and_(condition, tasks.c.id > after)
         rows = self.connection.execute(
@@ -80,7 +88,7 @@ class SqlAlchemyRepository:
 
     def find(self, owner: str, task_id: str) -> Task | None:
         row = self.connection.execute(
-            select(tasks).where(and_(tasks.c.owner == owner, tasks.c.id == task_id))
+            select(tasks).where(and_(self._owner_matches(owner), tasks.c.id == task_id))
         ).first()
         return self._task(row) if row else None
 
@@ -102,7 +110,9 @@ class SqlAlchemyRepository:
     ) -> tuple[Literal["updated", "missing", "conflict"], Task | None]:
         changed = self.connection.execute(
             update(tasks)
-            .where(and_(tasks.c.owner == owner, tasks.c.id == task_id, tasks.c.version == version))
+            .where(
+                and_(self._owner_matches(owner), tasks.c.id == task_id, tasks.c.version == version)
+            )
             .values(title=title, completed=completed, version=version + 1)
         ).rowcount
         if changed:
@@ -115,7 +125,7 @@ class SqlAlchemyRepository:
     ) -> Literal["deleted", "missing", "conflict"]:
         changed = self.connection.execute(
             delete(tasks).where(
-                and_(tasks.c.owner == owner, tasks.c.id == task_id, tasks.c.version == version)
+                and_(self._owner_matches(owner), tasks.c.id == task_id, tasks.c.version == version)
             )
         ).rowcount
         if changed:

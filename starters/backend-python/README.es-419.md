@@ -36,6 +36,22 @@ uv run mypy
 uv run pytest
 ```
 
+### Matriz SQL y HTTP real
+
+Desde esta carpeta, con Docker disponible, ejecuta:
+
+```powershell
+uv run pytest -W error --tb=short --live-http
+uv run pytest -W error --tb=short --database-engine=postgresql --live-http
+uv run pytest -W error --tb=short --database-engine=mysql --live-http
+```
+
+Si Docker está en WSL, agrega `--docker-wsl=Ubuntu-24.04` a los comandos de PostgreSQL/MySQL (usa el nombre de tu distribución). Las pruebas crean contenedores propios de PostgreSQL `18.6` o MySQL `8.4.11`, datos en memoria, credenciales sintéticas y puertos efímeros solo en loopback. No aceptan una URL de base existente ni cargan `.env`. Retiran sus contenedores y datos al terminar; conservan las imágenes descargadas. No ejecutes esta suite con workers paralelos sobre una misma base.
+
+`--live-http` repite los recorridos API mediante Uvicorn y conexiones HTTP reales. Incluye CRUD, conflictos de versión, permisos de lectura, expiración/revocación y aislamiento entre propietarios, incluso si sus identificadores difieren solo en mayúsculas. La comparación binaria de propietario para MySQL permanece dentro del adaptador; dominio y aplicación no cambian. El extra `pymysql[rsa]` permite autenticar con el mecanismo predeterminado de MySQL 8.4.
+
+Esta matriz no certifica TLS, carga concurrente, respaldos/restauración ni un despliegue de producción. Esas validaciones siguen pendientes para este starter y deben repetirse en cada producto.
+
 ## Cambiar el motor SQL
 
 Copia `.env.example` como `.env` sin agregarlo a Git y configura `DATABASE_URL`:
