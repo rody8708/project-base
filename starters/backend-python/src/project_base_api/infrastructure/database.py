@@ -19,6 +19,9 @@ from sqlalchemy import (
     select,
     update,
 )
+from sqlalchemy.dialects.mysql import insert as mysql_insert
+from sqlalchemy.dialects.postgresql import insert as postgresql_insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.engine import Connection, Engine, Transaction
 from sqlalchemy.sql.elements import ColumnElement
 
@@ -165,22 +168,33 @@ class SqlAlchemyRepository:
         self.connection.execute(update(tokens).where(tokens.c.id == token_id).values(revoked=True))
 
     def consume(self, key: str, window: int, maximum: int) -> bool:
-        row = self.connection.execute(
-            select(rate_limits.c.count).where(
-                and_(rate_limits.c.key == key, rate_limits.c.window == window)
+        values = {"key": key, "window": window, "count": 0}
+        dialect = self.connection.dialect.name
+        if dialect == "mysql":
+            statement = mysql_insert(rate_limits).values(**values)
+            self.connection.execute(statement.on_duplicate_key_update(count=rate_limits.c.count))
+        elif dialect == "postgresql":
+            self.connection.execute(
+                postgresql_insert(rate_limits).values(**values).on_conflict_do_nothing()
             )
-        ).scalar_one_or_none()
-        if row is None:
-            self.connection.execute(insert(rate_limits).values(key=key, window=window, count=1))
-            return True
-        if row >= maximum:
-            return False
-        self.connection.execute(
+        elif dialect == "sqlite":
+            self.connection.execute(
+                sqlite_insert(rate_limits).values(**values).on_conflict_do_nothing()
+            )
+        else:
+            raise ValueError("Unsupported rate-limit database dialect")
+        changed = self.connection.execute(
             update(rate_limits)
-            .where(and_(rate_limits.c.key == key, rate_limits.c.window == window))
-            .values(count=row + 1)
-        )
-        return True
+            .where(
+                and_(
+                    rate_limits.c.key == key,
+                    rate_limits.c.window == window,
+                    rate_limits.c.count < maximum,
+                )
+            )
+            .values(count=rate_limits.c.count + 1)
+        ).rowcount
+        return changed == 1
 
 
 class SqlAlchemyUnitOfWork(UnitOfWork):

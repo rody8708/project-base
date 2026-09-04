@@ -196,6 +196,7 @@ postgresql = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "cryptography" },
     { name = "httpx" },
     { name = "mypy" },
     { name = "pytest" },
@@ -215,6 +216,7 @@ provides-extras = ["postgresql", "mysql"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "cryptography", specifier = "==50.0.1" },
     { name = "httpx", specifier = "==0.28.1" },
     { name = "mypy", specifier = "==1.17.1" },
     { name = "pytest", specifier = "==9.0.3" },

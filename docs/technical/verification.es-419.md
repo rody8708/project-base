@@ -116,6 +116,10 @@ Los recorridos HTTP usan Uvicorn en puertos efímeros y verifican respuestas y e
 
 ## Integridad documental y límites
 
+### Ensayos operativos Python posteriores a PR #27
+
+El [laboratorio operativo Python](../../starters/backend-python/operations-lab.es-419.md) registra comandos, entorno, limpieza y límites de HTTPS, concurrencia y respaldo/restauración nativos. Sobre `60176b3`, la rama `test/python-operational-lab` aprobó 25 pruebas por motor (SQLite/PostgreSQL/MySQL), Ruff y mypy. La regresión del contador reprodujo 12 admisiones con máximo cinco; la actualización condicional atómica la corrigió. La incidencia intermitente `PY-LAB-001` permanece abierta y documentada, sin alterar el timeout. No se declara aprobación de producción ni se cambia la evidencia histórica anterior.
+
 Antes de integrar esta ampliación, la alerta `GHSA-6w46-j5rx-g56g` de GitHub identificó manejo vulnerable de temporales en pytest. Se actualizó el pin y lockfile de `8.4.1` a la versión corregida `9.0.3` y se repitieron las 18 pruebas en cada motor, Ruff y mypy. No se intentó explotar la vulnerabilidad ni se afirma haberla reproducido localmente; la actualización responde al aviso del proveedor. La revisión final de este cambio y sus resultados CI quedan asociados al PR #27.
 
 El ZIP histórico aprobado conserva SHA-256 `9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a`. También se verificaron sus dos recibos y su JSON histórico contra los cuatro pins del exportador. Ninguno de esos artefactos fue reescrito.

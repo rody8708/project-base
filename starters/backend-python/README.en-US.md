@@ -50,7 +50,7 @@ If Docker runs in WSL, append `--docker-wsl=Ubuntu-24.04` to the PostgreSQL/MySQ
 
 `--live-http` repeats API flows through Uvicorn and real HTTP connections. Coverage includes CRUD, version conflicts, reader permissions, expiry/revocation, and owner isolation, including identifiers differing only in case. MySQL's binary owner comparison stays inside the adapter; domain and application remain unchanged. The `pymysql[rsa]` extra enables authentication with MySQL 8.4's default mechanism.
 
-This matrix does not certify TLS, concurrent load, backup/restore, or a production deployment. Those validations remain pending for this starter and must be repeated for each product.
+The [operations lab](operations-lab.en-US.md) extends this matrix with verified HTTPS, bounded concurrency, and native backup/restore. Run the `--live-https` profile to repeat it. It does not certify capacity or a production deployment; each product retains its operational validation.
 
 ## Changing the SQL engine
 

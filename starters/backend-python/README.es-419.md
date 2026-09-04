@@ -50,7 +50,7 @@ Si Docker está en WSL, agrega `--docker-wsl=Ubuntu-24.04` a los comandos de Pos
 
 `--live-http` repite los recorridos API mediante Uvicorn y conexiones HTTP reales. Incluye CRUD, conflictos de versión, permisos de lectura, expiración/revocación y aislamiento entre propietarios, incluso si sus identificadores difieren solo en mayúsculas. La comparación binaria de propietario para MySQL permanece dentro del adaptador; dominio y aplicación no cambian. El extra `pymysql[rsa]` permite autenticar con el mecanismo predeterminado de MySQL 8.4.
 
-Esta matriz no certifica TLS, carga concurrente, respaldos/restauración ni un despliegue de producción. Esas validaciones siguen pendientes para este starter y deben repetirse en cada producto.
+El [laboratorio operativo](operations-lab.es-419.md) amplía esta matriz con HTTPS verificado, concurrencia acotada y respaldo/restauración nativos. Ejecuta el perfil `--live-https` para repetirlo. No certifica capacidad ni un despliegue de producción; cada producto conserva su validación operativa.
 
 ## Cambiar el motor SQL
 
