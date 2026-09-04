@@ -1,9 +1,11 @@
 # Exportador de bases técnicas
 
-Versión técnica: `1.1.0-draft.1`.
-Estado: propuesta técnica no aprobada; preparada para evaluación. La aprobación documental `1.0.0` conserva su alcance independiente.
+Revisión de trabajo: `1.1.0-draft.1`, posterior a la publicación técnica estable `1.1.0`.
+Estado: el exportador prepara para evaluación el contenido del checkout actual. La publicación `1.1.0` está aprobada para su alcance congelado, pero `main` puede contener cambios posteriores; la adopción y validación del producto consumidor siempre quedan pendientes.
 
 [English (United States)](README.en-US.md) · [Inicio](../README.es-419.md)
+
+Para elegir componentes y recorrer el proceso completo, consulta [cómo crear una aplicación con esta base](../docs/getting-started.es-419.md).
 
 ## Propósito y requisitos
 

@@ -13,6 +13,8 @@ Licencia del código y la documentación original: [Mozilla Public License 2.0](
 
 El proyecto es mantenido por **Zendrhax LLC** bajo la marca **Zendrhax**. Para colaborar, consulta la [guía de contribución](.github/CONTRIBUTING.es-419.md); para informar una vulnerabilidad, sigue la [política de seguridad](.github/SECURITY.es-419.md).
 
+**Empieza aquí:** [cómo utilizar esta base para crear una aplicación](docs/getting-started.es-419.md). Esa guía reúne la utilidad, la selección de componentes, la exportación, la integración por API y la validación final.
+
 Publicación estable: [aprobación técnica 1.1.0](releases/approval-1.1.0.es-419.md), vinculada al paquete y SHA-256 exactos sin reescribir sus bytes.
 
 ## Qué contiene
@@ -28,7 +30,7 @@ Este proyecto conserva las bases reutilizables. Las aplicaciones finales se crea
 | Base Android nativa | Kotlin y Jetpack Compose, independiente de Flutter. | [Starter Kotlin](starters/kotlin-android/README.es-419.md); su alcance es Android. |
 | Base backend | API PHP/Laravel con migraciones y perfiles SQLite, PostgreSQL y MySQL. | [Starter PHP](starters/backend-php/README.es-419.md); resultados por motor en su registro. |
 | Base backend propia | API TypeScript/Node sin framework de aplicación, con puertos y SQLite local. | [Starter Node](starters/backend-node/README.es-419.md); candidato exportable con límites explícitos. |
-| Herramientas | Exportación a destinos nuevos, comprobaciones y configuración manual de CI. | [Instrucciones de mantenimiento](tools/README.es-419.md); no crea servicios ni publica aplicaciones. |
+| Herramientas | Exportación a destinos nuevos, comprobaciones, CI automática para pull requests y matrices ampliadas bajo ejecución manual. | [Instrucciones de mantenimiento](tools/README.es-419.md); no crea servicios ni publica aplicaciones. |
 
 Las bases ejecutables son puntos de partida reemplazables, no una aplicación comercial ni una arquitectura obligatoria para todos los proyectos. Usar un framework existente es opcional: un proyecto puede adoptar uno, combinar componentes o implementar una arquitectura propia desde cero. En todos los casos debe demostrar sus contratos, límites y funcionamiento con la misma disciplina antes de considerarse una base consolidada. El ejemplo de tareas permite recorrer contratos, validación, estados y pruebas. Los clientes pierden sus datos al terminar su instancia; en web, también con una recarga completa de la página. Las API incorporan persistencia, tokens provisionados y autorización por propietario. Los clientes se conectan mediante sus adaptadores HTTP y el contrato compartido. No incluyen credenciales reales, cuentas humanas completas ni un producto desplegado.
 

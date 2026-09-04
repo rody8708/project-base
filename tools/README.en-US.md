@@ -1,9 +1,11 @@
 # Technical foundation exporter
 
-Technical version: `1.1.0-draft.1`.
-Status: unapproved technical proposal; prepared for evaluation. Documentary approval `1.0.0` retains its independent scope.
+Working revision: `1.1.0-draft.1`, after stable technical release `1.1.0`.
+Status: the exporter prepares the current checkout for evaluation. Release `1.1.0` is approved for its frozen scope, but `main` may contain later changes; adoption and validation of the consumer product always remain pending.
 
 [Español (Latinoamérica)](README.es-419.md) · [Home](../README.en-US.md)
+
+To select components and follow the complete process, read [how to create an application with this foundation](../docs/getting-started.en-US.md).
 
 ## Purpose and requirements
 

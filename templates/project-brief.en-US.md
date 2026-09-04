@@ -1,15 +1,15 @@
 # Project Brief Template
 
-Draft revision: `0.1.0-draft.4`  
-Status: proposal; not approved for stable adoption.  
+Template revision: `0.1.0-draft.4`  
+Status: operational template; completing it does not automatically approve a consumer project.  
 Language: US English (`en-US`)  
 [Latin American Spanish version](project-brief.es-419.md) · [Home](../README.en-US.md)
 
 ## Instructions for Use
 
-This template is proposed for consuming projects created in a location separate from this foundation. No approved stable release exists yet: do not adopt this draft as though it were one or invent its identity. Its structure and fields remain pending approval according to [foundation governance](../docs/foundation-governance.en-US.md); supporting basis and limits are recorded in [traceability](../docs/traceability.en-US.md).
+This template defines consumer projects created in a location separate from this foundation. Stable technical release `1.1.0` exists for its frozen scope; later content on `main` does not automatically receive that status. A concrete adoption must identify and verify the selected revision. Interpret the structure and fields according to [foundation governance](../docs/foundation-governance.en-US.md); supporting basis and limits are recorded in [traceability](../docs/traceability.en-US.md).
 
-When an approved stable release exists, copy that release's template and its counterpart into the consuming project, retaining the language suffixes. Adjust links to the destination and chosen names, and explicitly copy or reference the adopted normative set through an immutable reference and its verification, not just a version name. Replace the bracketed fields in both files; they may remain pending during planning, but must not be declared approved or verified without evidence. An incomplete template is not an approved brief. Record decisions that are still unknown with an owner and a resolution deadline; details must be resolved before the stage that depends on them.
+Copy the selected revision's template and its counterpart into the consumer project, retaining the language suffixes. Adjust links to the destination and chosen names, and explicitly copy or reference the adopted normative set through an immutable reference and its verification, not just a version name. Replace the bracketed fields in both files; they may remain pending during planning, but must not be declared approved or verified without evidence. An incomplete template is not an approved brief. Record decisions that are still unknown with an owner and a resolution deadline; details must be resolved before the stage that depends on them.
 
 ## BRIEF-001 — Identity and Purpose
 
