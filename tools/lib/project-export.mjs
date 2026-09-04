@@ -16,6 +16,14 @@ export const TEMPLATE_REVISIONS = Object.freeze({
   'backend-node': '1.1.0-draft.2',
 });
 export const TEMPLATE_REVISION = TEMPLATE_REVISIONS.web;
+export const SOLUTION_PRESETS = Object.freeze({
+  'simple-website': Object.freeze({ client: 'web-vanilla', backend: false }),
+  'web-app': Object.freeze({ client: 'web', backend: true }),
+  'mobile-app': Object.freeze({ client: 'flutter', backend: true }),
+  'desktop-app': Object.freeze({ client: 'flutter', backend: true }),
+  'android-app': Object.freeze({ client: 'kotlin-android', backend: true }),
+  'api-only': Object.freeze({ client: null, backend: true }),
+});
 export const CAPABILITY_PROFILE_FILES = Object.freeze([
   'capability-profile.en-US.md',
   'capability-profile.es-419.md',
@@ -478,4 +486,72 @@ export async function createProject({ template, name, destination, repositoryRoo
     capabilityProfileStatus: adoption.capabilityProfiles.selectionStatus,
     adoptionRecord: 'foundation/adoption.json',
   };
+}
+
+function solutionComponents(preset, backend) {
+  const selection = SOLUTION_PRESETS[preset];
+  if (!selection) fail('INVALID_PRESET', 'Unknown application type.');
+  if (!['backend-node', 'backend-php'].includes(backend)) fail('INVALID_BACKEND', 'Backend must be backend-node or backend-php.');
+  return [
+    ...(selection.client ? [{ directory: 'app', template: selection.client, suffix: 'app' }] : []),
+    ...(selection.backend ? [{ directory: 'api', template: backend, suffix: 'api' }] : []),
+  ];
+}
+
+function commandsFor(template, directory, language) {
+  const prefix = `cd ${directory}`;
+  const commands = {
+    web: [prefix, 'npm ci', 'npm run check', 'npm run dev'],
+    'web-vanilla': [prefix, 'npm run check', 'npm start'],
+    'backend-node': [prefix, 'npm ci --ignore-scripts', 'npm run check', 'npm start'],
+    'backend-php': [prefix, 'composer install --no-interaction --prefer-dist', 'composer check', 'php scripts/setup-local.php', 'php artisan migrate', 'php artisan serve'],
+    flutter: [prefix, 'flutter pub get --enforce-lockfile', 'dart tool/check_toolchain.dart', 'flutter analyze', 'flutter test', 'flutter run'],
+    'kotlin-android': [prefix, '.\\gradlew.bat --no-daemon :core:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug'],
+  };
+  const title = language === 'es-419' ? `Preparar ${directory}` : `Prepare ${directory}`;
+  return `### ${title}\n\n\`\`\`powershell\n${commands[template].join('\n')}\n\`\`\``;
+}
+
+function startDocument(language, name, preset, components) {
+  const sections = components.map((item) => commandsFor(item.template, item.directory, language)).join('\n\n');
+  const connected = components.length > 1;
+  const connectionEs = connected ? '\n\n## Conexión entre app y API\n\nLa interfaz comienza deliberadamente en modo memoria para que pueda abrirse sin credenciales. No está conectada automáticamente porque esta base no debe inventar el sistema de usuarios de tu producto ni guardar un token inseguro. Cuando decidas la identidad, sigue la [guía de integración](app/api-integration.es-419.md) y la [guía de seguridad](app/security-production.es-419.md); el adaptador HTTP ya existe.\n' : '';
+  const connectionEn = connected ? '\n\n## Connection between app and API\n\nThe interface deliberately starts in memory mode so it can open without credentials. It is not connected automatically because this foundation must not invent your product identity system or store an unsafe token. After choosing identity, follow the [integration guide](app/api-integration.en-US.md) and [security guide](app/security-production.en-US.md); the HTTP adapter already exists.\n' : '';
+  if (language === 'es-419') return `# Empieza aquí: ${name}\n\n[English (United States)](START-HERE.en-US.md)\n\nProject Base preparó esta solución como **${preset}**. No necesitas volver al repositorio original para desarrollar el producto.\n\n## Qué hay en esta carpeta\n\n${components.map((item) => `- \`${item.directory}/\`: base ${item.template}.`).join('\n')}\n\n## Primer paso\n\nEjecuta cada bloque correspondiente. Si hay \`app/\` y \`api/\`, usa una terminal separada para cada bloque porque el último comando mantiene ese componente en ejecución. Si un comando indica que falta una herramienta, instala únicamente esa herramienta y repite el bloque.\n\n${sections}${connectionEs}\n## Después\n\n1. Abre el README en español dentro de cada componente.\n2. Describe las funciones reales de tu aplicación y reemplaza el ejemplo de tareas una función a la vez.\n3. Completa \`foundation/capability-profile.es-419.md\` dentro de cada componente; deja como planificado lo que todavía no exista.\n4. Mantén el cliente conectado al backend mediante la API; nunca conectes la interfaz directamente a la base de datos.\n5. Ejecuta las pruebas antes de cada cambio importante.\n\nLos comandos preparan y comprueban la base; no publican la aplicación ni la aprueban para producción.\n`;
+  return `# Start here: ${name}\n\n[Español (Latinoamérica)](START-HERE.es-419.md)\n\nProject Base prepared this solution as **${preset}**. You do not need to return to the original repository to develop the product.\n\n## What is in this folder\n\n${components.map((item) => `- \`${item.directory}/\`: ${item.template} foundation.`).join('\n')}\n\n## First step\n\nRun each applicable block. If both \`app/\` and \`api/\` exist, use a separate terminal for each block because its last command keeps that component running. If a command reports a missing tool, install only that tool and repeat the block.\n\n${sections}${connectionEn}\n## Then\n\n1. Open the English README inside each component.\n2. Describe the real product features and replace the task example one feature at a time.\n3. Complete \`foundation/capability-profile.en-US.md\` inside each component; keep anything not implemented as planned.\n4. Keep the client connected to the backend through the API; never connect the interface directly to the database.\n5. Run the tests before every important change.\n\nThe commands prepare and verify the foundation; they neither publish the application nor approve it for production.\n`;
+}
+
+export async function createSolution({ preset, backend = 'backend-node', name, destination, repositoryRoot = DEFAULT_REPOSITORY_ROOT, release = APPROVED_DOCUMENTARY_RELEASE, now = () => new Date() }) {
+  validateProjectName(name);
+  const components = solutionComponents(preset, backend).map((item) => ({ ...item, name: validateProjectName(`${name}-${item.suffix}`) }));
+  const requestedDestination = validateDestinationPath(destination);
+  const repository = await requirePlainDirectoryChain(repositoryRoot);
+  if (isWithin(repository, requestedDestination)) fail('DESTINATION_INSIDE_REPOSITORY', 'Applications must be created outside the foundation repository.');
+  if (await lstatIfPresent(requestedDestination)) fail('DESTINATION_EXISTS', 'Destination already exists; nothing will be overwritten.');
+  const parent = await requirePlainDirectoryChain(path.dirname(requestedDestination));
+  const resolvedDestination = path.join(parent, path.basename(requestedDestination));
+  if (isWithin(repository, resolvedDestination)) fail('DESTINATION_INSIDE_REPOSITORY', 'Resolved destination is inside the foundation repository.');
+  const createdAt = now();
+  if (!(createdAt instanceof Date) || !Number.isFinite(createdAt.getTime())) fail('INVALID_CLOCK', 'The creation timestamp is invalid.');
+  await fs.mkdir(resolvedDestination, { mode: 0o755 });
+  const results = [];
+  try {
+    for (const component of components) {
+      results.push(await createProject({ template: component.template, name: component.name,
+        destination: path.join(resolvedDestination, component.directory), repositoryRoot: repository, release, now: () => createdAt }));
+    }
+    const manifest = { formatVersion: 1, kind: 'project-base-solution', createdAt: createdAt.toISOString(), name, preset,
+      components: components.map((item) => ({ directory: item.directory, template: item.template, revision: TEMPLATE_REVISIONS[item.template] })) };
+    for (const file of [
+      { relativePath: 'START-HERE.es-419.md', bytes: Buffer.from(startDocument('es-419', name, preset, components)) },
+      { relativePath: 'START-HERE.en-US.md', bytes: Buffer.from(startDocument('en-US', name, preset, components)) },
+      { relativePath: 'project-base.json', bytes: Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`) },
+    ]) await writeNewFile(resolvedDestination, { ...file, mode: 0o644 });
+  } catch (error) {
+    error.partialDestination = resolvedDestination;
+    throw error;
+  }
+  return { result: 'SOLUTION_CREATED_FOR_EVALUATION', destination: resolvedDestination, name, preset,
+    components: results.map((item) => ({ directory: path.basename(item.destination), template: item.template, revision: TEMPLATE_REVISIONS[item.template] })),
+    startHere: 'START-HERE.es-419.md' };
 }

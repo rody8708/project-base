@@ -17,6 +17,18 @@ Use Node.js `24.x`; the tests recorded here ran with `24.16.0` on Windows. No np
 
 ## Usage
 
+### Easily create a complete solution
+
+From the repository root:
+
+```powershell
+npm run create-app
+```
+
+The bilingual assistant offers a simple website, web application, mobile, desktop, native Android, or API-only project without requiring template names. When a solution needs a client and backend, it creates both inside one common folder and generates a bilingual `START-HERE` with the next commands. It does not install, build, publish, or overwrite.
+
+### Export one template: advanced mode
+
 From the repository root, choose a new absolute path and a lowercase ASCII name of 1–63 characters: it must start with a letter and may contain digits and single hyphens between groups. Spaces, underscores, repeated hyphens, and trailing hyphens are not allowed.
 
 ```powershell
@@ -74,7 +86,7 @@ The `adoption.json` record distinguishes:
 }
 ```
 
-The example revision is used by current visual starters. Backend PHP and Node remain at `1.1.0-draft.1`; the receipt records the exact revision of the selected template instead of assigning one revision to every platform. The two capability files are copied byte-for-byte and their SHA-256 values are recorded in `adoption.json`. They require the consumer to select `not applicable`, `planned`, or `enabled` for identity, multitenancy/privacy, payments/licensing, secure mobile, offline/sync, and distribution. Selection is not implementation or approval.
+All current starters are at `1.1.0-draft.2`; the receipt always records the exact revision of the selected template instead of assigning one global revision. The two capability files are copied byte-for-byte and their SHA-256 values are recorded in `adoption.json`. They require the consumer to select `not applicable`, `planned`, or `enabled` for identity, multitenancy/privacy, payments/licensing, secure mobile, offline/sync, and distribution. Selection is not implementation or approval.
 
 It also includes a UTC timestamp, source and copy hashes, name changes, and checks that were not performed. The inventory hash identifies the source files included in that preparation; it is not a Git identifier, signature, or evidence of binary reproducibility. It includes no absolute machine paths. Available documentary approval does not confer technical approval, consumer adoption, or platform support.
 

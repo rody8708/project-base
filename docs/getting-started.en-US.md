@@ -58,6 +58,20 @@ First define the product with the [project brief template](../templates/project-
 
 ## 3. Export to New Locations
 
+### Recommended simple path
+
+From the Project Base root, run:
+
+```powershell
+npm run create-app
+```
+
+The assistant asks in ordinary language what to create, the preferred backend when needed, a name, and an existing folder in which to save it. It generates one solution with `app/` and/or `api/`, a `project-base.json` manifest, and `START-HERE.es-419.md` and `START-HERE.en-US.md` files. Open the indicated `START-HERE` file and run its blocks; manual template selection is unnecessary.
+
+The assistant does not install dependencies, use credentials, publish, or overwrite folders. If preparation remains incomplete, it retains the identified folder for inspection and does not present it as completed.
+
+### Advanced path
+
 The tool creates a destination that does not yet exist. Each command produces an independent project, so a solution with an API and web client can use sibling folders or separate repositories:
 
 ```powershell

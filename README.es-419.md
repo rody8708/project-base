@@ -6,7 +6,7 @@ Esta base te ayuda a comenzar una aplicación sobre una estructura técnica prep
 
 **No es solo documentación.** Incluye código inicial ejecutable, ejemplos funcionales, pruebas automatizadas, un contrato API compartido, backends con persistencia y una herramienta que copia la base elegida a un proyecto nuevo.
 
-**No es una aplicación terminada ni un generador de un clic.** No conoce todavía tu negocio, pantallas o funciones. Proporciona los cimientos; después tú, un equipo o un asistente de programación desarrolla sobre ellos las características de tu producto.
+**No es una aplicación terminada.** El asistente de creación puede preparar una solución completa en pocos pasos, pero todavía no conoce tu negocio, pantallas o funciones. Proporciona los cimientos; después tú, un equipo o un asistente de programación desarrolla sobre ellos las características de tu producto.
 
 ### Qué te aporta
 
@@ -21,12 +21,18 @@ Esta base te ayuda a comenzar una aplicación sobre una estructura técnica prep
 
 1. Describe la idea de tu aplicación, quién la usará y qué problema resolverá.
 2. Decide dónde debe funcionar: web, móvil, Android, escritorio o varias plataformas.
-3. Usa la guía para seleccionar y exportar las bases necesarias.
+3. Ejecuta `npm run create-app` y responde las preguntas sencillas del asistente.
 4. Construye una función pequeña a la vez y comprueba cada cambio.
 
 Puedes entregar este repositorio a un desarrollador o a un asistente de programación y pedirle: “Quiero crear una aplicación para `[objetivo]`, dirigida a `[usuarios]` y disponible en `[plataformas]`. Ayúdame a definirla y utiliza esta base para crear los proyectos necesarios sin acoplar los clientes al backend”.
 
-**Siguiente paso:** consulta la [guía para crear una aplicación](docs/getting-started.es-419.md), que explica el proceso completo y sus límites.
+**Siguiente paso:** con Node.js 24 instalado, abre una terminal en esta carpeta y ejecuta:
+
+```powershell
+npm run create-app
+```
+
+El asistente pregunta idioma, tipo de aplicación, backend, nombre y ubicación. Se puede presionar Enter para aceptar las opciones recomendadas y una carpeta predeterminada dentro del perfil del usuario. Al terminar indica un solo archivo `START-HERE` que contiene los comandos exactos para la solución creada. La [guía para crear una aplicación](docs/getting-started.es-419.md) explica después el proceso completo y sus límites.
 
 [Laboratorio Docker aislado: PHP 8.5 y HTTPS](starters/backend-php/docker-local.es-419.md).
 
@@ -62,6 +68,8 @@ Las bases ejecutables son puntos de partida reemplazables, no una aplicación co
 
 ## Empezar por una base
 
+El camino recomendado para la mayoría de las personas es `npm run create-app`. Permite elegir sitio web sencillo, aplicación web completa, móvil, escritorio, Android nativo o solo API. Cuando corresponde, crea una sola carpeta con `app/` y `api/`; no hace falta ejecutar manualmente dos exportaciones.
+
 En web se distinguen los fundamentos de las herramientas: HTML para estructura y semántica, CSS para presentación y adaptabilidad, y JavaScript para comportamiento cuando haga falta. `web` usa React, TypeScript y Vite; `web-vanilla` implementa su propia interfaz con HTML/CSS/JavaScript y no necesita esas herramientas. Son plantillas independientes, no dos modos de la misma aplicación. Node sirve para las pruebas y el servidor local de la variante nativa, no como dependencia del código que ejecuta el navegador.
 
 Consultar primero el [alcance técnico](docs/technical/implementation.es-419.md), el [límite API entre clientes y backend](docs/technical/api-boundary.es-419.md) y la [selección de tecnologías y bases de datos](docs/technical/technology-choices.es-419.md), después las instrucciones del starter elegido y su [registro de verificación](docs/technical/verification.es-419.md). La dirección adoptada exige que cualquier cliente con backend remoto use la API como único límite de comunicación y nunca acceda directamente a la base de datos o implementación del servidor. La [integración ejecutable](docs/technical/api-integration.es-419.md) tiene evidencia local acotada; tener archivos de una plataforma no significa que se haya ejecutado allí.
@@ -78,7 +86,7 @@ npm run check
 node tools/create-project.mjs --help
 ```
 
-Para crear una copia de evaluación, proporcionar un destino absoluto nuevo cuyo padre exista y esté fuera de este repositorio. Ejemplo en Windows:
+Para crear una plantilla individual en modo avanzado, proporcionar un destino absoluto nuevo cuyo padre exista y esté fuera de este repositorio. Ejemplo en Windows:
 
 ```text
 node tools/create-project.mjs --template web --name mi-web --destination "D:\proyectos\mi-web"

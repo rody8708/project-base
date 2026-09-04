@@ -58,6 +58,20 @@ Definir primero el producto con la [plantilla de definición](../templates/proje
 
 ## 3. Exportar a ubicaciones nuevas
 
+### Camino sencillo recomendado
+
+Desde la raíz de Project Base ejecutar:
+
+```powershell
+npm run create-app
+```
+
+El asistente pregunta en lenguaje común qué se quiere crear, el backend preferido cuando haga falta, un nombre y una carpeta existente donde guardarlo. Genera una sola solución con `app/` y/o `api/`, un manifiesto `project-base.json` y archivos `START-HERE.es-419.md` y `START-HERE.en-US.md`. Abrir el `START-HERE` indicado y ejecutar sus bloques; no es necesario escoger plantillas manualmente.
+
+El asistente no instala dependencias, no usa credenciales, no publica y no sobrescribe carpetas. Si la preparación queda incompleta, conserva la carpeta identificada para inspección y no la presenta como terminada.
+
+### Camino avanzado
+
 La herramienta crea un destino que todavía no existe. Cada comando produce un proyecto independiente; por eso una solución con API y web puede usar carpetas hermanas o repositorios separados:
 
 ```powershell

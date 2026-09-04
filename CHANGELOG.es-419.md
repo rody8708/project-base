@@ -13,6 +13,7 @@ Este archivo registra cambios posteriores a la publicación técnica congelada `
 - Un perfil bilingüe de capacidades del consumidor para identidad, SaaS/privacidad, pagos/licencias, móvil seguro, offline/sincronización, operación y distribución.
 - Exportación automática del perfil de capacidades con inventario SHA-256 en el recibo de adopción.
 - Correlación segura de solicitudes y registros estructurados de fallos operacionales en ambos starters backend ejecutables.
+- Un asistente bilingüe `npm run create-app` que genera soluciones completas con `app/`, `api/` y una guía `START-HERE` específica.
 
 ### Cambiado
 
