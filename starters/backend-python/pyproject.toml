@@ -17,6 +17,7 @@ mysql = ["pymysql[rsa]==1.1.2"]
 
 [dependency-groups]
 dev = [
+  "cryptography==50.0.1",
   "httpx==0.28.1",
   "mypy==1.17.1",
   "pytest==9.0.3",

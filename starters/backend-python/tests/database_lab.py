@@ -6,8 +6,9 @@ import secrets
 import shutil
 import subprocess
 import time
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
+from dataclasses import dataclass
 
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
@@ -20,19 +21,37 @@ def database_url(engine: str, distribution: str | None) -> Iterator[str | None]:
     if engine == "sqlite":
         yield None
         return
+    with native_database(engine, distribution) as lab:
+        yield lab.url
+
+
+@dataclass
+class DatabaseLab:
+    url: str
+    backup: Callable[[], bytes]
+    restore: Callable[[bytes], None]
+
+
+@contextmanager
+def native_database(engine: str, distribution: str | None) -> Iterator[DatabaseLab]:
+    if engine not in {"postgresql", "mysql"}:
+        raise ValueError("Native backup engine must be PostgreSQL or MySQL")
     executable = shutil.which("wsl" if distribution else "docker")
     if executable is None:
         raise RuntimeError("Docker launcher is not installed")
     prefix = [executable, "-d", distribution, "--", "docker"] if distribution else [executable]
 
-    def docker(*args: str) -> str:
+    def docker_bytes(*args: str, payload: bytes | None = None) -> bytes:
         result = subprocess.run(  # noqa: S603 -- fixed Docker operations, no shell
-            [*prefix, *args], capture_output=True, text=True, timeout=180, check=False
+            [*prefix, *args], input=payload, capture_output=True, timeout=180, check=False
         )
         if result.returncode:
             # Do not expose command/environment credentials in test failures.
             raise RuntimeError(f"Isolated Docker operation failed: {args[0]}")
-        return result.stdout.strip()
+        return result.stdout
+
+    def docker(*args: str) -> str:
+        return docker_bytes(*args).decode("utf-8").strip()
 
     name = f"project-base-python-test-{secrets.token_hex(8)}"
     password = secrets.token_hex(24)
@@ -95,7 +114,68 @@ def database_url(engine: str, distribution: str | None) -> Iterator[str | None]:
                     if time.monotonic() >= deadline:
                         raise RuntimeError("Isolated database did not become ready") from None
                     time.sleep(1)
-            yield url
+
+            def backup() -> bytes:
+                if engine == "postgresql":
+                    return docker_bytes(
+                        "exec",
+                        "-e",
+                        f"PGPASSWORD={password}",
+                        name,
+                        "pg_dump",
+                        "-U",
+                        "lab",
+                        "-d",
+                        "lab",
+                        "--no-owner",
+                        "--no-acl",
+                    )
+                return docker_bytes(
+                    "exec",
+                    "-e",
+                    f"MYSQL_PWD={password}",
+                    name,
+                    "mysqldump",
+                    "-u",
+                    "lab",
+                    "--single-transaction",
+                    "--no-tablespaces",
+                    "--set-gtid-purged=OFF",
+                    "lab",
+                )
+
+            def restore(payload: bytes) -> None:
+                if engine == "postgresql":
+                    docker_bytes(
+                        "exec",
+                        "-i",
+                        "-e",
+                        f"PGPASSWORD={password}",
+                        name,
+                        "psql",
+                        "-U",
+                        "lab",
+                        "-d",
+                        "lab",
+                        "-v",
+                        "ON_ERROR_STOP=1",
+                        payload=payload,
+                    )
+                else:
+                    docker_bytes(
+                        "exec",
+                        "-i",
+                        "-e",
+                        f"MYSQL_PWD={password}",
+                        name,
+                        "mysql",
+                        "-u",
+                        "lab",
+                        "lab",
+                        payload=payload,
+                    )
+
+            yield DatabaseLab(url, backup, restore)
         finally:
             probe.dispose()
     finally:

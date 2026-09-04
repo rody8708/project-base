@@ -1,14 +1,11 @@
 # SPDX-FileCopyrightText: 2026 Zendrhax LLC
 # SPDX-License-Identifier: MPL-2.0
 import hashlib
-import socket
 import time
 from collections.abc import AsyncIterator, Iterator
 from pathlib import Path
-from threading import Thread
 
 import pytest
-import uvicorn
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import Engine
 
@@ -16,6 +13,7 @@ from project_base_api.infrastructure.database import make_engine, uow_factory
 from project_base_api.infrastructure.migrations import migrate_up
 from project_base_api.presentation.http import create_app
 from tests.database_lab import database_url
+from tests.http_lab import live_server
 
 TOKEN = "a" * 64
 
@@ -26,6 +24,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     )
     parser.addoption("--docker-wsl", default=None, help="WSL distribution running Docker")
     parser.addoption("--live-http", action="store_true", help="Test through a real loopback server")
+    parser.addoption("--live-https", action="store_true", help="Use disposable verified TLS")
 
 
 @pytest.fixture(scope="session")
@@ -68,31 +67,16 @@ async def client(engine: Engine, request: pytest.FixtureRequest) -> AsyncIterato
             int(time.time()) + 3600,
         )
     app = create_app(factory)
-    if not request.config.getoption("--live-http"):
+    tls = request.config.getoption("--live-https")
+    if not request.config.getoption("--live-http") and not tls:
         async with AsyncClient(
             transport=ASGITransport(app=app, raise_app_exceptions=False), base_url="http://test"
         ) as value:
             yield value
         return
-    with socket.socket() as listener:
-        listener.bind(("127.0.0.1", 0))
-        port = listener.getsockname()[1]
-        server = uvicorn.Server(uvicorn.Config(app, log_level="critical", ws="none"))
-        thread = Thread(target=server.run, kwargs={"sockets": [listener]}, daemon=True)
-        thread.start()
-        try:
-            deadline = time.monotonic() + 15
-            while not server.started:
-                if not thread.is_alive() or time.monotonic() > deadline:
-                    raise RuntimeError("Isolated HTTP server did not start")
-                time.sleep(0.01)
-            async with AsyncClient(base_url=f"http://127.0.0.1:{port}", trust_env=False) as value:
-                yield value
-        finally:
-            server.should_exit = True
-            thread.join(timeout=15)
-            if thread.is_alive():
-                raise RuntimeError("Isolated HTTP server did not stop")
+    with live_server(app, tls=tls) as (url, context):
+        async with AsyncClient(base_url=url, verify=context, trust_env=False, timeout=30) as value:
+            yield value
 
 
 @pytest.fixture
