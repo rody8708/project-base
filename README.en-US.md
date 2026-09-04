@@ -92,7 +92,7 @@ To create one individual template in advanced mode, provide a new absolute desti
 node tools/create-project.mjs --template web --name mi-web --destination "D:\proyectos\mi-web"
 ```
 
-Use `--template web-vanilla` for framework-free HTML/CSS/JavaScript, `--template flutter` for desktop/mobile, `--template kotlin-android` for native Android, `--template backend-php` for Laravel, or `--template backend-node` for an application-framework-free TypeScript API. The exporter copies the starter's instructions and lockfiles, the approved documentary release, and a bilingual [capability profile](templates/capability-profile.en-US.md); it does not install tools, configure accounts, or confirm consumer adoption. Continue inside the new folder using its README and the profile. Native distribution identifiers remain examples until the consumer configures them.
+Use `--template web-vanilla` for framework-free HTML/CSS/JavaScript, `--template flutter` for desktop/mobile, `--template kotlin-android` for native Android, `--template backend-php` for Laravel, `--template backend-node` for an application-framework-free TypeScript API, or `--template backend-python` for FastAPI with SQL adapters. The exporter copies the starter's instructions and lockfiles, the approved documentary release, and a bilingual [capability profile](templates/capability-profile.en-US.md); it does not install tools, configure accounts, or confirm consumer adoption. Continue inside the new folder using its README and the profile. Native distribution identifiers remain examples until the consumer configures them.
 
 ## Approved Documentary Core
 

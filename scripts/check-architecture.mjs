@@ -6,7 +6,8 @@ import { fileURLToPath } from 'node:url';
 
 const ignoredDirectories = new Set([
   '.git', '.validation', '.dart_tool', '.gradle', '.kotlin', 'build', 'coverage',
-  'dist', 'node_modules', 'vendor', 'bootstrap/cache',
+  'dist', 'node_modules', 'vendor', 'bootstrap/cache', '.venv', '__pycache__',
+  '.pytest_cache', '.mypy_cache', '.ruff_cache',
 ]);
 
 async function sourceFiles(root, relative, extensions) {
@@ -72,6 +73,24 @@ export async function checkArchitecture(root) {
   ]);
 
   for (const [directory, rule, patterns] of [
+    ['starters/backend-python/src/project_base_api/domain', 'PYTHON_DOMAIN_DEPENDENCY', [
+      /(?:from|import) project_base_api\.(?:application|infrastructure|presentation)/u,
+      /(?:from|import) (?:fastapi|sqlalchemy)/u,
+    ]],
+    ['starters/backend-python/src/project_base_api/application', 'PYTHON_APPLICATION_BOUNDARY', [
+      /(?:from|import) project_base_api\.(?:infrastructure|presentation)/u,
+      /(?:from|import) (?:fastapi|sqlalchemy)/u,
+    ]],
+    ['starters/backend-python/src/project_base_api/presentation', 'PYTHON_PRESENTATION_PERSISTENCE', [
+      /(?:from|import) (?:sqlalchemy|project_base_api\.infrastructure)/u,
+    ]],
+  ]) {
+    for (const file of await sourceFiles(root, directory, ['.py'])) {
+      reject(violations, file, await load(file), rule, patterns);
+    }
+  }
+
+  for (const [directory, rule, patterns] of [
     ['starters/web/src/domain', 'WEB_DOMAIN_DEPENDENCY', [/from ['"].*(?:adapters|application|ui)\//u]],
     ['starters/web/src/application', 'WEB_APPLICATION_DEPENDENCY', [/from ['"].*ui\//u]],
     ['starters/web-vanilla/src/domain', 'VANILLA_DOMAIN_DEPENDENCY', [/from ['"].*(?:adapters|application|ui)\//u]],
@@ -107,7 +126,7 @@ export async function checkArchitecture(root) {
   }
 
   if (violations.length) throw new Error(`Architecture guard failed:\n${violations.join('\n')}`);
-  return { result: 'PASS', rules: 12 };
+  return { result: 'PASS', rules: 15 };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

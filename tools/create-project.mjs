@@ -5,7 +5,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createProject, ExportError } from './lib/project-export.mjs';
 
-const USAGE = 'node tools/create-project.mjs --template web|web-vanilla|flutter|kotlin-android|backend-php|backend-node --name lowercase-slug --destination ABSOLUTE_LOCAL_PATH';
+const USAGE = 'node tools/create-project.mjs --template web|web-vanilla|flutter|kotlin-android|backend-php|backend-node|backend-python --name lowercase-slug --destination ABSOLUTE_LOCAL_PATH';
 
 export function parseArguments(args) {
   if (args.length === 1 && args[0] === '--help') return { help: true };

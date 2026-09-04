@@ -21,6 +21,12 @@ output/
 **/*.sqlite3-journal
 **/*.db-journal
 **/.phpunit.cache/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/*.py[cod]
 **/dist/
 **/coverage/
 **/.dart_tool/

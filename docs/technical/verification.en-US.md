@@ -98,6 +98,14 @@ The [language- and framework-independent persistence decision](persistence-bound
 
 Removal of both owned containers and their ephemeral data was confirmed; user databases were not touched. Reports and cached images were retained. Cross-engine data transfer, concurrent load, and actual outage recovery were not exercised; the new run retains those limitations.
 
+## Python/FastAPI Backend Candidate
+
+On September 4, 2026, template `1.2.0-draft.1` was run on Windows with Python `3.13.6` and uv `0.12.4`. `uv sync --locked --all-extras`, Ruff, strict mypy, and 15 pytest tests completed successfully. Tests use temporary SQLite files and cover migration/rollback, authentication, revocation, permissions, owner isolation, CRUD, version conflicts, pagination, and safe HTTP errors.
+
+A fresh `api-only` solution was also exported through the assistant. Its root `doctor`, `setup`, and `check` commands completed successfully, Uvicorn returned `200` with `{"status":"ok","scope":"liveness"}` on loopback, and its temporary directory was removed afterward. This evidence does not cover PostgreSQL, MySQL, TLS, load, backup/restore, or a real deployment; those points remain pending for the product adopting this candidate.
+
+The first CI run found an unsupported `cache: false` option on `setup-python`; it was removed instead of suppressing the failure. The same run warned that the historical Composer `2.9.5` pin was vulnerable to GitHub Actions token disclosure in logs; the CI profile was raised to fixed version `2.9.8`. This update does not rewrite historical evidence previously produced with `2.9.5`.
+
 ## Documentary Integrity and Limits
 
 The historically approved ZIP retains SHA-256 `9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a`. Both receipts and its historical JSON were also checked against the exporter's four pins. None of those artifacts were rewritten.
@@ -106,4 +114,4 @@ For the pre-HTTP-integration tree, `npm ci --ignore-scripts`, `npm test`, and `n
 
 macOS, iOS, and Linux have generated Flutter host projects but still lack verified native builds/execution. WSL checks found no Flutter, clang, CMake, Ninja, or GTK development setup; a global toolchain was not installed to imply coverage. iOS/macOS require a suitable Apple environment. Physical-device testing, production signing, publication, exhaustive security, and production operation of clients connected to the API are also not claimed.
 
-This paragraph records inspection before the repository was published: CI was manual-only, no remote existed, and no jobs had run. Since publication, the YAML retains four job families and automatically runs web/maintenance, portable Flutter, Kotlin Android, and PHP/SQLite on pull requests; the expanded Flutter matrix remains manual. Current results belong to each GitHub run and do not rewrite this section's historical evidence.
+This paragraph records inspection before the repository was published: CI was manual-only, no remote existed, and no jobs had run. Since publication, the YAML automatically runs web/maintenance, portable Flutter, Kotlin Android, PHP/SQLite, and Python/SQLite on pull requests; the expanded Flutter matrix remains manual. Current results belong to each GitHub run and do not rewrite this section's historical evidence.

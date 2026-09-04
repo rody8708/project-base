@@ -87,6 +87,9 @@ async function fixture(t) {
   await put('starters/backend-node/package-lock.json', JSON.stringify({ name: 'foundation-backend-node', version: TEMPLATE_REVISION, lockfileVersion: 3, packages: { '': { name: 'foundation-backend-node', version: TEMPLATE_REVISION } } }));
   await put('starters/backend-node/tsconfig.json', '{}\n');
   await put('starters/backend-node/src/server.ts', 'export const server = true;\n');
+  await put('starters/backend-python/pyproject.toml', '[project]\nname = "foundation-backend-python"\n');
+  await put('starters/backend-python/uv.lock', 'version = 1\n');
+  await put('starters/backend-python/src/project_base_api/main.py', 'app = object()\n');
   const release = {
     version: '1.0.0', editorialRevision: '0.1.0-draft.4', files: [],
   };
@@ -393,6 +396,21 @@ test('Node backend export preserves sources and lock while changing only npm roo
   assert.equal(record.verification.dependenciesInstalled, false);
 });
 
+test('Python backend export preserves its lock, package identity, and source', async (t) => {
+  const f = await fixture(t);
+  const result = await f.run({ template: 'backend-python', name: 'python-api-example' });
+  for (const relative of TEMPLATE_FILES['backend-python']) {
+    assert.deepEqual(
+      await fs.readFile(path.join(f.destination(), relative)),
+      await fs.readFile(f.source(`starters/backend-python/${relative}`)),
+    );
+  }
+  const record = JSON.parse(await fs.readFile(path.join(f.destination(), result.adoptionRecord), 'utf8'));
+  assert.equal(record.customization.packageNameChanged, false);
+  assert.equal(record.technicalTemplate.id, 'backend-python');
+  assert.equal(record.technicalTemplate.revision, TEMPLATE_REVISIONS['backend-python']);
+});
+
 test('runtime filters retain scaffold directories but reject unrecognized storage files', () => {
   for (const relative of ['storage', 'storage/framework', 'storage/framework/cache', 'storage/framework/cache/data', 'bootstrap/cache', 'storage/app/private/.gitignore']) {
     assert.equal(shouldExclude(relative, 'backend-php'), false, relative);
@@ -670,7 +688,7 @@ test('CLI accepts only the documented arguments and offers a non-mutating help c
   assert.equal(help.stderr, '');
   assert.equal(JSON.parse(help.stdout).adoptionRequiresConsumerConfirmation, true);
   assert.equal(JSON.parse(help.stdout).capabilityProfileIncluded, true);
-  assert.equal(JSON.parse(help.stdout).usage.includes('web|web-vanilla|flutter|kotlin-android|backend-php|backend-node'), true);
+  assert.equal(JSON.parse(help.stdout).usage.includes('web|web-vanilla|flutter|kotlin-android|backend-php|backend-node|backend-python'), true);
   const invalid = spawnSync(process.execPath, [executable, '--force'], { encoding: 'utf8' });
   assert.equal(invalid.status, 1);
   assert.equal(JSON.parse(invalid.stderr).error, 'INVALID_ARGUMENTS');

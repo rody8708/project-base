@@ -51,7 +51,8 @@ test('the stdio MCP server exposes bounded resources, diagnosis, and creation', 
   const catalog = await client.callTool({ name: 'project_base_list_templates', arguments: { language: 'en-US' } });
   assert.equal(catalog.isError, undefined);
   assert.equal(catalog.structuredContent.presets.length, 6);
-  assert.equal(catalog.structuredContent.backends.length, 2);
+  assert.equal(catalog.structuredContent.backends.length, 3);
+  assert.equal(catalog.structuredContent.backends[2].id, 'backend-python');
 
   const diagnosis = await client.callTool({ name: 'project_base_doctor', arguments: { preset: 'simple-website', language: 'es-419' } });
   assert.equal(diagnosis.isError, undefined);

@@ -19,6 +19,9 @@ async function fixture(t) {
   const directories = [
     'starters/backend-php/app/Domain', 'starters/backend-php/app/Application', 'starters/backend-php/app/Http',
     'starters/backend-node/src', 'starters/web/src/domain', 'starters/web/src/application',
+    'starters/backend-python/src/project_base_api/domain',
+    'starters/backend-python/src/project_base_api/application',
+    'starters/backend-python/src/project_base_api/presentation',
     'starters/web-vanilla/src/domain', 'starters/web-vanilla/src/application',
     'starters/flutter/lib/domain', 'starters/flutter/lib/application',
     'starters/kotlin-android/core/src/main/kotlin/org/example/foundation/core/domain',
@@ -33,6 +36,9 @@ async function fixture(t) {
     put('starters/backend-php/app/Http/TaskController.php', '<?php declare(strict_types=1); namespace App\\Http; final class TaskController {}\n'),
     put('starters/backend-node/src/contracts.ts', 'export interface Repository {}\n'),
     put('starters/backend-node/src/application.ts', "import type { Repository } from './contracts.js';\nexport const useCase = (_repository: Repository) => true;\n"),
+    put('starters/backend-python/src/project_base_api/domain/models.py', 'from dataclasses import dataclass\n'),
+    put('starters/backend-python/src/project_base_api/application/tasks.py', 'from project_base_api.domain.models import Task\n'),
+    put('starters/backend-python/src/project_base_api/presentation/http.py', 'from project_base_api.application.tasks import TaskService\n'),
     put('starters/kotlin-android/app/src/main/java/org/example/foundation/kotlin/TaskScreen.kt', 'package org.example.foundation.kotlin\nclass TaskScreen\n'),
     put('starters/kotlin-android/app/src/main/java/org/example/foundation/kotlin/TaskViewModel.kt', 'package org.example.foundation.kotlin\nclass TaskViewModel\n'),
   ]);
@@ -69,4 +75,11 @@ test('maintained PHP without strict types is rejected', async (t) => {
   const file = path.join(root, 'starters/backend-php/app/Domain/Task.php');
   await writeFile(file, (await readFile(file, 'utf8')).replace('declare(strict_types=1);', ''));
   await assert.rejects(checkArchitecture(root), /PHP_STRICT_TYPES/u);
+});
+
+test('Python application code cannot import persistence or HTTP frameworks', async (t) => {
+  const root = await fixture(t);
+  const file = path.join(root, 'starters/backend-python/src/project_base_api/application/tasks.py');
+  await writeFile(file, `${await readFile(file, 'utf8')}\nfrom sqlalchemy import select\n`);
+  await assert.rejects(checkArchitecture(root), /PYTHON_APPLICATION_BOUNDARY/u);
 });

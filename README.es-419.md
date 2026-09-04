@@ -92,7 +92,7 @@ Para crear una plantilla individual en modo avanzado, proporcionar un destino ab
 node tools/create-project.mjs --template web --name mi-web --destination "D:\proyectos\mi-web"
 ```
 
-Usar `--template web-vanilla` para HTML/CSS/JavaScript sin framework, `--template flutter` para escritorio/móvil, `--template kotlin-android` para Android nativo, `--template backend-php` para Laravel o `--template backend-node` para una API TypeScript sin framework de aplicación. El exportador copia las instrucciones y bloqueos del starter, la publicación documental aprobada y un [perfil bilingüe de capacidades](templates/capability-profile.es-419.md); no instala herramientas, no configura cuentas y no confirma la adopción por el consumidor. Continuar dentro de la nueva carpeta con su README y el perfil. Los identificadores de distribución nativos siguen siendo ejemplos hasta que el consumidor los configure.
+Usar `--template web-vanilla` para HTML/CSS/JavaScript sin framework, `--template flutter` para escritorio/móvil, `--template kotlin-android` para Android nativo, `--template backend-php` para Laravel, `--template backend-node` para una API TypeScript sin framework de aplicación o `--template backend-python` para FastAPI con adaptadores SQL. El exportador copia las instrucciones y bloqueos del starter, la publicación documental aprobada y un [perfil bilingüe de capacidades](templates/capability-profile.es-419.md); no instala herramientas, no configura cuentas y no confirma la adopción por el consumidor. Continuar dentro de la nueva carpeta con su README y el perfil. Los identificadores de distribución nativos siguen siendo ejemplos hasta que el consumidor los configure.
 
 ## Núcleo documental aprobado
 

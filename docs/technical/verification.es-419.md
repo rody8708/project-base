@@ -98,6 +98,14 @@ Se repitió `php -d extension=pdo_pgsql scripts/qa-databases.php --wsl-docker` d
 
 Se verificó la retirada de los dos contenedores propios y sus datos efímeros; no se tocaron bases del usuario. Los reportes y las imágenes en caché se conservaron. No se ensayó transferencia de datos entre motores, carga concurrente ni recuperación ante caída real; la nueva ejecución conserva esos límites.
 
+## Backend Python/FastAPI candidato
+
+El 4 de septiembre de 2026 se ejecutó la plantilla `1.2.0-draft.1` en Windows con Python `3.13.6` y uv `0.12.4`. `uv sync --locked --all-extras`, Ruff, mypy estricto y 15 pruebas pytest finalizaron correctamente. Las pruebas usan archivos SQLite temporales y cubren migración/reversión, autenticación, revocación, permisos, aislamiento por propietario, CRUD, conflicto de versión, paginación y errores HTTP seguros.
+
+También se exportó una solución `api-only` nueva mediante el asistente. Sus comandos de raíz `doctor`, `setup` y `check` finalizaron correctamente, Uvicorn respondió `200` con `{"status":"ok","scope":"liveness"}` en loopback y el directorio temporal se eliminó al terminar. Esta evidencia no incluye PostgreSQL, MySQL, TLS, carga, respaldo/restauración ni despliegue real; esos puntos permanecen pendientes para el producto que adopte esta candidata.
+
+La primera ejecución de CI detectó una opción `cache: false` no admitida por `setup-python`; se eliminó en vez de omitir el fallo. La misma ejecución advirtió que el pin histórico Composer `2.9.5` era vulnerable a divulgación de tokens en registros de GitHub Actions; el perfil CI se elevó a la versión corregida `2.9.8`. Esta actualización no reescribe la evidencia histórica generada anteriormente con `2.9.5`.
+
 ## Integridad documental y límites
 
 El ZIP histórico aprobado conserva SHA-256 `9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a`. También se verificaron sus dos recibos y su JSON histórico contra los cuatro pins del exportador. Ninguno de esos artefactos fue reescrito.
@@ -106,4 +114,4 @@ Para el árbol anterior a la integración HTTP se ejecutaron `npm ci --ignore-sc
 
 macOS, iOS y Linux tienen runners Flutter generados, pero siguen sin compilación/ejecución nativa verificada. En WSL se confirmó que faltan Flutter, clang, CMake, Ninja y GTK de desarrollo; no se instaló una toolchain global para aparentar esa cobertura. iOS/macOS requieren un entorno Apple adecuado. Tampoco se afirman pruebas en dispositivos físicos, firma de producción, publicación, seguridad exhaustiva ni operación de producción de clientes conectados a la API.
 
-Este párrafo registra la inspección anterior a publicar el repositorio: la CI era exclusivamente manual, no existía remoto y todavía no se habían disparado trabajos. Desde la publicación, el YAML conserva cuatro familias de trabajos y ejecuta automáticamente en pull requests web/mantenimiento, Flutter portátil, Kotlin Android y PHP/SQLite; la matriz Flutter ampliada sigue siendo manual. Los resultados actuales pertenecen a cada ejecución de GitHub y no reescriben la evidencia histórica de esta sección.
+Este párrafo registra la inspección anterior a publicar el repositorio: la CI era exclusivamente manual, no existía remoto y todavía no se habían disparado trabajos. Desde la publicación, el YAML ejecuta automáticamente en pull requests web/mantenimiento, Flutter portátil, Kotlin Android, PHP/SQLite y Python/SQLite; la matriz Flutter ampliada sigue siendo manual. Los resultados actuales pertenecen a cada ejecución de GitHub y no reescriben la evidencia histórica de esta sección.

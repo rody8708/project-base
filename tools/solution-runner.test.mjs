@@ -27,6 +27,20 @@ test('PHP setup is explicit, locked, and avoids package plugins and scripts', ()
   assert.deepEqual(plan[2], { directory: 'api', tool: 'php', args: ['artisan', 'migrate', '--force', '--no-interaction'] });
 });
 
+test('Python setup is locked, migrates explicitly, and checks every quality gate', () => {
+  const value = manifest({ directory: 'api', template: 'backend-python' });
+  assert.deepEqual(planFor('setup', value, 'linux'), [
+    { directory: 'api', tool: 'uv', args: ['sync', '--locked', '--all-extras'] },
+    { directory: 'api', tool: 'uv', args: ['run', 'python', '-m', 'project_base_api.migrate_cli', 'up'] },
+  ]);
+  assert.deepEqual(planFor('check', value, 'linux').map(item => item.args), [
+    ['run', 'ruff', 'check', '.'], ['run', 'mypy'], ['run', 'pytest', '-W', 'error'],
+  ]);
+  assert.deepEqual(planFor('start', value, 'linux')[0], {
+    directory: 'api', tool: 'uv', args: ['run', 'uvicorn', 'project_base_api.main:app', '--host', '127.0.0.1', '--port', '8080'], role: 'api',
+  });
+});
+
 test('Android start builds safely instead of choosing a device', () => {
   const plan = planFor('start', manifest({ directory: 'app', template: 'kotlin-android' }), 'win32');
   assert.deepEqual(plan, [{ directory: 'app', tool: '.\\gradlew.bat', args: [':app:assembleDebug'], role: 'android-build' }]);
