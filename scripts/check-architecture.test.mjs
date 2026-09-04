@@ -77,6 +77,19 @@ test('maintained PHP without strict types is rejected', async (t) => {
   await assert.rejects(checkArchitecture(root), /PHP_STRICT_TYPES/u);
 });
 
+test('Node domain and application cannot import new SQL adapters or drivers', async (t) => {
+  const root = await fixture(t);
+  for (const name of ['contracts.ts', 'application.ts']) {
+    const file = path.join(root, 'starters/backend-node/src', name);
+    const original = await readFile(file, 'utf8');
+    for (const dependency of ['pg', 'mysql2/promise', './sql-store.js', './store.js']) {
+      await writeFile(file, `${original}\nimport driver from '${dependency}';\n`);
+      await assert.rejects(checkArchitecture(root), /NODE_(?:DOMAIN_DEPENDENCY|APPLICATION_BOUNDARY)/u);
+    }
+    await writeFile(file, original);
+  }
+});
+
 test('Python application code cannot import persistence or HTTP frameworks', async (t) => {
   const root = await fixture(t);
   const file = path.join(root, 'starters/backend-python/src/project_base_api/application/tasks.py');

@@ -1,23 +1,27 @@
-# Estado de la publicación estable
+# Estado actual de Project Base
 
-[US English](stability-status.en-US.md) · [Inicio](../../README.es-419.md) · [Arquitectura backend](backend-architecture.es-419.md)
+[US English](stability-status.en-US.md) · [Inicio](../../README.es-419.md)
 
-Revisión evaluada: `1.1.0-draft.1`. Publicación efectiva: [`1.1.0`](../../releases/approval-1.1.0.es-419.md). Una versión estable describe el alcance comprobado; no significa que cada combinación posible de sistema, proveedor o lenguaje haya sido ejecutada.
+## Publicación y árbol de trabajo
 
-| Condición | Clasificación | Efecto sobre estabilidad |
-| --- | --- | --- |
-| macOS/iOS sin una Mac disponible | Pendiente conocido y explícito | No bloquea una publicación estable para los destinos comprobados. Esos dos destinos conservan estado `no verificado`; no se promete soporte ejecutado. |
-| Revisión integral y pruebas | Completada con excepciones declaradas | [Revisión técnica](stability-review.es-419.md) satisfactoria; identidad exacta congelada, recuperada y aprobada. |
-| Licencia del código original | MPL-2.0 adoptada | Ya no bloquea la publicación. El texto oficial, el alcance bilingüe y una copia en cada starter exportable están incorporados. |
-| Repositorio GitHub y protección de ramas | Publicación posterior | No cambia la calidad del contenido; debe configurarse antes de colaboración pública. La rama protegida controla el repositorio oficial, no las copias de terceros. |
-| Cloud, KMS, respaldo remoto, alertas y cuentas de cada producto | Responsabilidad del consumidor | No bloquea la base. La base define contratos y controles; cada producto selecciona y verifica proveedores y credenciales. |
+La publicación aprobada `1.1.0` conserva sus bytes y recibos originales. El árbol actual incorpora el asistente guiado, MCP local, Python y la ampliación SQL/operativa de Node. Estas mejoras no aparecen automáticamente en el ZIP histórico. La siguiente publicación propuesta es `1.2.0`; no se declara aprobada hasta vincular la decisión del propietario a su paquete exacto.
 
-## Niveles de backend
+## Catálogo actual
 
-PHP/Laravel es la referencia ejecutable de cobertura amplia y no es obligatorio. TypeScript/Node es una segunda base ejecutable, exportable y sin framework de aplicación; actualmente es candidata porque no tiene toda la matriz de PHP. Python, .NET, Go y JVM son opciones documentadas, no implementaciones falsamente declaradas.
+Siete plantillas exportables: web React/TypeScript, web HTML/CSS/JavaScript, Flutter, Android Kotlin, PHP/Laravel, TypeScript/Node y Python/FastAPI. Ninguna obliga a usar un lenguaje o framework; las aplicaciones consumidoras se crean fuera de este repositorio.
 
-Una publicación estable puede contener perfiles opcionales marcados `candidate` siempre que el camino estable no dependa de ellos y sus límites sean visibles. No puede llamarlos equivalentes ni trasladar su evidencia. Para promover Node se deben cerrar sus pendientes o aprobar explícitamente un alcance menor.
+PHP, Node y Python tienen implementaciones ejecutables. Node y Python disponen de ensayos propios con SQLite, PostgreSQL y MySQL, HTTPS, concurrencia acotada y respaldo/restauración nativos. Consultar sus laboratorios: [Node](../../starters/backend-node/operations-lab.es-419.md) y [Python](../../starters/backend-python/operations-lab.es-419.md). No se afirma equivalencia exhaustiva entre implementaciones ni aprobación de producción.
 
-## Decisión actual
+## Pendientes y límites
 
-La licencia está resuelta con MPL-2.0. macOS/iOS queda aceptado como pendiente no bloqueante por falta de hardware. La revisión, congelación, recuperación y aprobación explícita de la identidad `1.1.0` se completaron. El siguiente paso independiente es publicar esos bytes y sus recibos en GitHub y configurar la protección de la rama oficial.
+| Elemento | Estado |
+| --- | --- |
+| macOS/iOS | No verificados; aplazados por falta de Mac, no bloquean los destinos comprobados. |
+| Linux de escritorio y dispositivos físicos | Sin verificación nativa completa. |
+| Licencia | MPL-2.0 adoptada; no pendiente. |
+| GitHub | Repositorio publicado y rama principal protegida; las PR ejecutan CI. |
+| Nueva publicación | Preparación de 1.2.0; requiere identidad, recuperación, evidencia y aprobación explícita. |
+| Cuentas humanas | Tokens provisionados; no incluye login con contraseña, recuperación ni MFA. |
+| Operación de cada aplicación | Dominio/TLS real, secretos, monitoreo, capacidad, respaldo externo y aprobación corresponden al consumidor. |
+
+Los registros de 1.1.0 y de las investigaciones anteriores son históricos. Sus frases de trabajo pendiente no sustituyen este estado actual. .NET, Go y backend JVM continúan como alternativas documentadas, no starters ejecutables.

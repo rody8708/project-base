@@ -38,7 +38,7 @@ El asistente pregunta idioma, tipo de aplicación, backend, nombre y ubicación.
 
 **Estado actualizado:** se implementó el perfil de tokens, permisos y propiedad; consulta [seguridad y preparación para producción](docs/technical/security-production.es-419.md). Las pruebas y limitaciones anteriores a esta revisión son históricas: la API ya no admite acceso anónimo. El [estado para publicación estable](docs/technical/stability-status.es-419.md) registra macOS/iOS como pendiente no bloqueante y MPL-2.0 como licencia adoptada.
 
-Revisión de trabajo posterior a la congelación: `1.1.0-draft.2`  
+Revisión de trabajo posterior a la congelación: `1.2.0-rc.1`  
 Estado: publicación técnica `1.1.0` aprobada para su alcance declarado; el árbol de trabajo puede contener registros externos posteriores.  
 Idioma: español latinoamericano (`es-419`)  
 [Versión en inglés de Estados Unidos](README.en-US.md) · [Cambios](CHANGELOG.es-419.md)
@@ -61,7 +61,8 @@ Este proyecto conserva las bases reutilizables. Las aplicaciones finales se crea
 | Base escritorio/móvil | Flutter con código común y proyectos Windows, macOS, Linux, Android e iOS. | Código de referencia en [starter Flutter](starters/flutter/README.es-419.md); cada destino conserva su estado de verificación. |
 | Base Android nativa | Kotlin y Jetpack Compose, independiente de Flutter. | [Starter Kotlin](starters/kotlin-android/README.es-419.md); su alcance es Android. |
 | Base backend | API PHP/Laravel con migraciones y perfiles SQLite, PostgreSQL y MySQL. | [Starter PHP](starters/backend-php/README.es-419.md); resultados por motor en su registro. |
-| Base backend propia | API TypeScript/Node sin framework de aplicación, con puertos y SQLite local. | [Starter Node](starters/backend-node/README.es-419.md); candidato exportable con límites explícitos. |
+| Base backend propia | API TypeScript/Node sin framework de aplicación, con puertos y SQLite/PostgreSQL/MySQL. | [Starter Node](starters/backend-node/README.es-419.md); exportable con laboratorio HTTPS y recuperación propios. |
+| Base backend Python | API FastAPI con puertos y SQLite/PostgreSQL/MySQL. | [Starter Python](starters/backend-python/README.es-419.md); laboratorio HTTPS y recuperación propios. |
 | Herramientas | Exportación a destinos nuevos, interfaz MCP local, comprobaciones, CI automática para pull requests y matrices ampliadas bajo ejecución manual. | [Instrucciones de mantenimiento](tools/README.es-419.md); no ofrece un servicio remoto ni publica aplicaciones. |
 
 Las bases ejecutables son puntos de partida reemplazables, no una aplicación comercial ni una arquitectura obligatoria para todos los proyectos. Usar un framework existente es opcional: un proyecto puede adoptar uno, combinar componentes o implementar una arquitectura propia desde cero. En todos los casos debe demostrar sus contratos, límites y funcionamiento con la misma disciplina antes de considerarse una base consolidada. El ejemplo de tareas permite recorrer contratos, validación, estados y pruebas. Los clientes pierden sus datos al terminar su instancia; en web, también con una recarga completa de la página. Las API incorporan persistencia, tokens provisionados y autorización por propietario. Los clientes se conectan mediante sus adaptadores HTTP y el contrato compartido. No incluyen credenciales reales, cuentas humanas completas ni un producto desplegado.
@@ -74,7 +75,7 @@ En web se distinguen los fundamentos de las herramientas: HTML para estructura y
 
 Consultar primero el [alcance técnico](docs/technical/implementation.es-419.md), el [límite API entre clientes y backend](docs/technical/api-boundary.es-419.md) y la [selección de tecnologías y bases de datos](docs/technical/technology-choices.es-419.md), después las instrucciones del starter elegido y su [registro de verificación](docs/technical/verification.es-419.md). La dirección adoptada exige que cualquier cliente con backend remoto use la API como único límite de comunicación y nunca acceda directamente a la base de datos o implementación del servidor. La [integración ejecutable](docs/technical/api-integration.es-419.md) tiene evidencia local acotada; tener archivos de una plataforma no significa que se haya ejecutado allí.
 
-Las seis opciones de `--template` describen el catálogo actual del exportador, no las únicas arquitecturas permitidas. Para otra base propia desde cero se puede partir del núcleo documental y definir una implementación independiente; no es obligatorio seleccionar una plantilla ni usar esta CLI. Esa nueva base requiere sus propias pruebas y registro de verificación.
+Las siete opciones de `--template` describen el catálogo actual del exportador, no las únicas arquitecturas permitidas. Para otra base propia desde cero se puede partir del núcleo documental y definir una implementación independiente; no es obligatorio seleccionar una plantilla ni usar esta CLI. Esa nueva base requiere sus propias pruebas y registro de verificación.
 
 Para inspeccionar las herramientas sin instalar dependencias de aplicación:
 

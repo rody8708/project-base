@@ -116,6 +116,12 @@ HTTP flows use Uvicorn on ephemeral ports and verify responses and persisted sta
 
 ## Documentary Integrity and Limits
 
+### Node Expansion for 1.2.0
+
+The Node lab exercises HTTPS trust/hostname verification, expired/untrusted certificate rejection, negative API cases, concurrent writes, and limits shared by two servers. On Windows with Node 24.16.0, SQLite 3.53.0, and Docker/WSL, SQLite, PostgreSQL 18.6, and MySQL 8.4.11 passed native backup/restore and HTTPS use of the target; schema, Unicode, versions, and revocation of every restored token were verified. The [Node lab](../../starters/backend-node/operations-lab.en-US.md) retains commands, isolation, and limits.
+
+Nine fast Node tests, 73 maintenance tests, documentation/architecture checks, and React/native-web cross-integration passed. An api-only solution exported outside the repository passed doctor/setup/check and server startup. Its temporary files are synthetic; no user configuration or databases were used. Lab containers were removed; downloaded images and dependencies remain cached. Proposed release 1.2.0 still requires preservation, recovery, and exact approval; this evidence approves neither production nor Apple platforms.
+
 ### Python Operations Trials After PR #27
 
 Update after `bf225bf`: the lab reproduced a timeout inside `commit` and two controlled blocking cases. WAL with `FULL`, a fixed SQLite minimum, and persistence execution outside the HTTP event loop were implemented. Managed Python 3.13.15/SQLite 3.53.1, 31 tests per engine, and 100 fragmented recoveries passed. Evidence and the distinction between corrected blocking and the untraced historical episode are in the lab's “Correction of Reproduced Blocking” section; the following paragraphs retain the earlier historical status.

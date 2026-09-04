@@ -38,7 +38,7 @@ The assistant asks for language, application type, backend, name, and location. 
 
 **Updated status:** token, permission, and ownership boundaries are implemented; see [security and production readiness](docs/technical/security-production.en-US.md). Earlier tests and limitations are historical: the API no longer accepts anonymous access. The [stable release status](docs/technical/stability-status.en-US.md) records macOS/iOS as nonblocking pending work and MPL-2.0 as the adopted license.
 
-Post-freeze working revision: `1.1.0-draft.2`  
+Post-freeze working revision: `1.2.0-rc.1`  
 Status: technical release `1.1.0` approved for its declared scope; the working tree may contain later external records.  
 Language: US English (`en-US`)  
 [Latin American Spanish version](README.es-419.md) · [Changes](CHANGELOG.en-US.md)
@@ -61,7 +61,8 @@ This project maintains reusable bases. Final applications are created in separat
 | Desktop/mobile base | Flutter with shared code and Windows, macOS, Linux, Android, and iOS host projects. | Reference code in the [Flutter starter](starters/flutter/README.en-US.md); each target retains its verification status. |
 | Native Android base | Kotlin and Jetpack Compose, independent of Flutter. | [Kotlin starter](starters/kotlin-android/README.en-US.md); its scope is Android. |
 | Backend base | PHP/Laravel API with migrations and SQLite, PostgreSQL, and MySQL profiles. | [PHP starter](starters/backend-php/README.en-US.md); engine-specific results in its record. |
-| Custom backend base | Application-framework-free TypeScript/Node API with ports and local SQLite. | [Node starter](starters/backend-node/README.en-US.md); exportable candidate with explicit limits. |
+| Custom backend base | Application-framework-free TypeScript/Node API with ports and SQLite/PostgreSQL/MySQL. | [Node starter](starters/backend-node/README.en-US.md); exportable with its own HTTPS and recovery lab. |
+| Python backend base | FastAPI API with ports and SQLite/PostgreSQL/MySQL. | [Python starter](starters/backend-python/README.en-US.md); dedicated HTTPS and recovery lab. |
 | Tools | Export to new destinations, a local MCP interface, checks, automatic pull-request CI, and expanded manually triggered matrices. | [Maintenance instructions](tools/README.en-US.md); no remote service or application publication. |
 
 Executable bases are replaceable starting points, not a commercial application or a mandatory architecture for every project. Using an existing framework is optional: a project may adopt one, combine components, or implement its own architecture from scratch. In every case, it must demonstrate its contracts, limits, and operation with the same discipline before it is considered a consolidated base. The task example exercises contracts, validation, state, and tests. Clients lose their data when their instance ends; on the web, a full page reload also discards it. The APIs provide persistence, provisioned tokens, and owner authorization. Clients connect through their HTTP adapters and the shared contract. Real credentials, complete human accounts, and a deployed product are not included.
@@ -74,7 +75,7 @@ Web fundamentals are distinguished from tools: HTML for structure and semantics,
 
 Read the [technical scope](docs/technical/implementation.en-US.md), the [API boundary between clients and backend](docs/technical/api-boundary.en-US.md), and [technology and database selection](docs/technical/technology-choices.en-US.md), then the chosen starter's instructions and its [verification record](docs/technical/verification.en-US.md). The adopted direction requires every client with a remote backend to use the API as its sole communication boundary and never access the database or server implementation directly. The [executable integration](docs/technical/api-integration.en-US.md) has bounded local evidence; having a platform's files does not mean it has run there.
 
-The six `--template` options describe the exporter's current catalog, not the only permitted architectures. Another custom base built from scratch can start with the documentary core and define an independent implementation; selecting a template or using this CLI is not required. That new base needs its own tests and verification record.
+The seven `--template` options describe the exporter's current catalog, not the only permitted architectures. Another custom base built from scratch can start with the documentary core and define an independent implementation; selecting a template or using this CLI is not required. That new base needs its own tests and verification record.
 
 To inspect the tools without installing application dependencies:
 

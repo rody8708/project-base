@@ -1,23 +1,27 @@
-# Status of the Stable Release
+# Current Project Base Status
 
-[Español (Latinoamérica)](stability-status.es-419.md) · [Home](../../README.en-US.md) · [Backend architecture](backend-architecture.en-US.md)
+[Español latinoamericano](stability-status.es-419.md) · [Home](../../README.en-US.md)
 
-Evaluated revision: `1.1.0-draft.1`. Effective release: [`1.1.0`](../../releases/approval-1.1.0.en-US.md). A stable version describes verified scope; it does not mean every possible operating system, provider, or language combination has been executed.
+## Release and Working Tree
 
-| Condition | Classification | Effect on Stability |
-| --- | --- | --- |
-| macOS/iOS without an available Mac | Known explicit pending item | Does not block a stable release for verified targets. Those two targets retain `unverified` status; executed support is not promised. |
-| Integral review and testing | Completed with declared exceptions | [Technical review](stability-review.en-US.md) passed; the exact identity was frozen, recovered, and approved. |
-| Original-code license | MPL-2.0 adopted | No longer blocks publication. The official text, bilingual scope, and a copy in each exportable starter are included. |
-| GitHub repository and branch protection | Later publication step | Does not change content quality; it must be configured before public collaboration. A protected branch controls the official repository, not third-party copies. |
-| Per-product cloud, KMS, remote backup, alerts, and accounts | Consumer responsibility | Does not block the foundation. The foundation defines contracts and controls; each product selects and verifies providers and credentials. |
+Approved release `1.1.0` retains its original bytes and receipts. The current tree includes the guided assistant, local MCP, Python, and Node SQL/operations expansion. These improvements do not automatically appear in the historical ZIP. The next proposed release is `1.2.0`; it is not approved until the owner's decision is tied to its exact package.
 
-## Backend Levels
+## Current Catalog
 
-PHP/Laravel is the broad-coverage executable reference and is not mandatory. TypeScript/Node is a second executable, exportable, application-framework-free base; it is currently a candidate because it lacks PHP's complete matrix. Python, .NET, Go, and JVM are documented options, not falsely claimed implementations.
+Seven exportable templates: React/TypeScript web, HTML/CSS/JavaScript web, Flutter, Kotlin Android, PHP/Laravel, TypeScript/Node, and Python/FastAPI. None mandates a language or framework; consumer applications are created outside this repository.
 
-A stable release may contain optional profiles marked `candidate` when the stable path does not depend on them and their limits are visible. It cannot call them equivalent or transfer evidence. Promoting Node requires closing its pending items or explicitly approving a narrower scope.
+PHP, Node, and Python have executable implementations. Node and Python have their own SQLite, PostgreSQL, MySQL, HTTPS, bounded concurrency, and native backup/restore trials. See their labs: [Node](../../starters/backend-node/operations-lab.en-US.md) and [Python](../../starters/backend-python/operations-lab.en-US.md). Exhaustive equivalence or production approval is not claimed.
 
-## Current Decision
+## Outstanding Items and Limits
 
-Licensing is resolved under MPL-2.0. macOS/iOS is accepted as a nonblocking pending item because hardware is unavailable. Review, freeze, recovery, and explicit approval of the `1.1.0` identity are complete. The next independent step is publishing those bytes and receipts on GitHub and configuring protection for the official branch.
+| Item | Status |
+| --- | --- |
+| macOS/iOS | Unverified; deferred without a Mac, not blocking verified targets. |
+| Desktop Linux and physical devices | No complete native verification. |
+| License | MPL-2.0 adopted; not pending. |
+| GitHub | Published repository and protected main branch; PRs execute CI. |
+| New release | Preparing 1.2.0; requires identity, recovery, evidence, and explicit approval. |
+| Human accounts | Provisioned tokens; no password login, recovery, or MFA. |
+| Each application's operations | Real domain/TLS, secrets, monitoring, capacity, external backup, and approval belong to the consumer. |
+
+The 1.1.0 records and earlier investigations are historical. Their outstanding-work statements do not replace this current status. .NET, Go, and JVM backends remain documented alternatives, not executable starters.

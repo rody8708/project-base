@@ -2,7 +2,7 @@
 
 [US English](README.en-US.md) · [Contrato OpenAPI](contracts/task-api-v1.openapi.json) · [Arquitectura backend neutral](architecture.es-419.md)
 
-Revisión técnica: `1.1.0-draft.2`. Candidata ejecutable sin framework de aplicación; no aprobada para producción.
+Perfil ejecutable con matriz SQLite/PostgreSQL/MySQL y laboratorio operativo propio; no aprobado automáticamente para producción.
 
 Esta segunda implementación demuestra que la arquitectura no depende de PHP ni Laravel. Usa Node.js 24 LTS, TypeScript y módulos estándar de Node. Conserva puertos para tareas y tokens, composición explícita y un adaptador SQLite reemplazable. `node:sqlite` sigue en estado release candidate: este perfil es evaluación local, no selección automática de base productiva.
 
@@ -24,6 +24,8 @@ El token impreso es un secreto y solo se muestra una vez. El servidor local escu
 
 Las pruebas de red verifican salud, autenticación, token opaco de 256 bits almacenado por hash SHA-256, CRUD, concurrencia optimista, revocación, permisos, aislamiento por propietario, localización `es-419`/`en-US`, límite persistente local, límites del cuerpo y validación. La API usa JSON, `no-store`, errores estables y no devuelve trazas. Cada respuesta incluye un `X-Request-Id` validado; los fallos del servidor emiten un registro operacional estructurado e inyectable sin cuerpos, tokens, mensajes de excepción ni trazas. Los productos consumidores aún deben definir retención y acceso. Los registros operacionales no son una bitácora de auditoría de negocio.
 
-Todavía no alcanza la cobertura de la referencia PHP: faltan un limitador distribuido para múltiples instancias, PostgreSQL/MySQL ejecutados, recuperación nativa, HTTPS aislado y la matriz negativa completa. Hasta cerrar esos puntos ambas implementaciones no son equivalentes. Python, .NET, Go y JVM siguen siendo perfiles posibles, no starters ejecutables.
+La matriz SQL, HTTPS, concurrencia compartida y recuperación nativa se ejecutan en el [laboratorio operativo](operations-lab.es-419.md). Python/FastAPI también es un starter ejecutable; .NET, Go y JVM siguen como alternativas documentadas.
 
 Fuente de plataforma: [ciclo de versiones Node.js](https://nodejs.org/en/about/previous-releases) y [estado de node:sqlite](https://nodejs.org/api/sqlite.html).
+
+Para PostgreSQL/MySQL configura `DATABASE_URL` mediante variables de entorno (ejemplos sintéticos en `.env.example`); no se carga `.env` automáticamente. Sin esa variable se conserva SQLite. Las dependencias `pg` y `mysql2` quedan confinadas al adaptador; el dominio no importa drivers. Consulta el laboratorio antes de adoptar las migraciones o respaldar datos.

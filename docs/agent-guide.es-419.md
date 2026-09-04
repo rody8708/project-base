@@ -1,6 +1,6 @@
 # Uso de Project Base mediante agentes y MCP
 
-Revisión de trabajo: `1.1.0-draft.2`  
+Revisión de trabajo: `1.2.0-rc.1`  
 Idioma: español latinoamericano (`es-419`)  
 [English (United States)](agent-guide.en-US.md) · [Inicio](../README.es-419.md)
 
