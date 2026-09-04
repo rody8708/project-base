@@ -45,7 +45,7 @@ Language: US English (`en-US`)
 
 License for original code and documentation: [Mozilla Public License 2.0](LICENSE). See the [license scope](LICENSE-SCOPE.en-US.md) and [trademark policy](TRADEMARKS.en-US.md).
 
-The project is maintained by **Zendrhax LLC** under the **Zendrhax** brand. To collaborate, read the [contribution guide](.github/CONTRIBUTING.en-US.md); to report a vulnerability, follow the [security policy](.github/SECURITY.en-US.md).
+The project is maintained by **Zendrhax LLC** under the **Zendrhax** brand. To collaborate, read the [contribution guide](.github/CONTRIBUTING.en-US.md); to report a vulnerability, follow the [security policy](.github/SECURITY.en-US.md). Coding assistants can follow [`AGENTS.md`](AGENTS.md) or use the [local MCP interface](docs/agent-guide.en-US.md).
 
 Stable release: [technical approval 1.1.0](releases/approval-1.1.0.en-US.md), tied to the exact package and SHA-256 without rewriting its bytes.
 
@@ -62,7 +62,7 @@ This project maintains reusable bases. Final applications are created in separat
 | Native Android base | Kotlin and Jetpack Compose, independent of Flutter. | [Kotlin starter](starters/kotlin-android/README.en-US.md); its scope is Android. |
 | Backend base | PHP/Laravel API with migrations and SQLite, PostgreSQL, and MySQL profiles. | [PHP starter](starters/backend-php/README.en-US.md); engine-specific results in its record. |
 | Custom backend base | Application-framework-free TypeScript/Node API with ports and local SQLite. | [Node starter](starters/backend-node/README.en-US.md); exportable candidate with explicit limits. |
-| Tools | Export to new destinations, checks, automatic pull-request CI, and expanded manually triggered matrices. | [Maintenance instructions](tools/README.en-US.md); no services or application publication. |
+| Tools | Export to new destinations, a local MCP interface, checks, automatic pull-request CI, and expanded manually triggered matrices. | [Maintenance instructions](tools/README.en-US.md); no remote service or application publication. |
 
 Executable bases are replaceable starting points, not a commercial application or a mandatory architecture for every project. Using an existing framework is optional: a project may adopt one, combine components, or implement its own architecture from scratch. In every case, it must demonstrate its contracts, limits, and operation with the same discipline before it is considered a consolidated base. The task example exercises contracts, validation, state, and tests. Clients lose their data when their instance ends; on the web, a full page reload also discards it. The APIs provide persistence, provisioned tokens, and owner authorization. Clients connect through their HTTP adapters and the shared contract. Real credentials, complete human accounts, and a deployed product are not included.
 

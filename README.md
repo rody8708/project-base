@@ -91,6 +91,12 @@ Cada comando crea un proyecto independiente. El exportador no sobrescribe destin
 
 > [Procedimiento completo en español](docs/getting-started.es-419.md) · [Complete procedure in English](docs/getting-started.en-US.md)
 
+## Agentes y MCP / Agents and MCP
+
+Un asistente con terminal puede seguir [`AGENTS.md`](AGENTS.md). Un host compatible con MCP también puede iniciar el servidor local `tools/mcp-server.mjs` para leer las reglas, consultar las plantillas, diagnosticar requisitos y crear una solución nueva mediante herramientas estructuradas. / An assistant with terminal access can follow [`AGENTS.md`](AGENTS.md). An MCP-compatible host can also start the local `tools/mcp-server.mjs` server to read rules, list templates, diagnose requirements, and create a new solution through structured tools.
+
+> [Guía MCP en español](docs/agent-guide.es-419.md) · [MCP guide in English](docs/agent-guide.en-US.md)
+
 ## Si no sé programar / If I Do Not Know How to Program
 
 Puedes usar esta base con un desarrollador o un asistente de programación. Empieza describiendo tu idea sin términos técnicos:

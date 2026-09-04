@@ -4,7 +4,9 @@
   "version": "1.1.0-draft.2",
   "license": "MPL-2.0",
   "type": "module",
-  "engines": { "node": "24.x" },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "check": "node scripts/check-repository.mjs && node scripts/check-architecture.mjs",
     "architecture:check": "node scripts/check-architecture.mjs",
@@ -18,5 +20,12 @@
     "integration:node": "node scripts/test-node-api-integration.mjs",
     "create-app": "node tools/create-app.mjs",
     "create-project": "node tools/create-project.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.0.0"
   }
 }

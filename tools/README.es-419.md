@@ -13,7 +13,7 @@ La herramienta prepara un proyecto nuevo fuera de este repositorio a partir de s
 
 `web` es la opción React/TypeScript/Vite. `web-vanilla` es la alternativa HTML/CSS/JavaScript sin esos frameworks o herramientas: su candidata no incluye dependencias npm y utiliza módulos integrados de Node.js para comprobar y servir archivos localmente. El exportador no agrega paquetes ni ejecuta esos scripts.
 
-Usar Node.js `24.x`; las pruebas aquí se ejecutaron con `24.16.0` en Windows. No se requieren paquetes npm para el exportador ni sus pruebas. La carpeta padre inmediata del destino debe existir; el destino completo no debe existir, ni siquiera vacío. Usar una jerarquía local confiable y sin cambios concurrentes de archivos, permisos o enlaces.
+Usar Node.js `24.x`; las pruebas aquí se ejecutaron con `24.16.0` en Windows. Ejecutar `npm ci --ignore-scripts` en la raíz para instalar el SDK MCP oficial y el cliente usado por las pruebas; el motor de exportación no incorpora esas dependencias en las soluciones generadas. La carpeta padre inmediata del destino debe existir; el destino completo no debe existir, ni siquiera vacío. Usar una jerarquía local confiable y sin cambios concurrentes de archivos, permisos o enlaces.
 
 ## Uso
 
@@ -26,6 +26,10 @@ npm run create-app
 ```
 
 El asistente bilingüe permite escoger sitio web sencillo, aplicación web, móvil, escritorio, Android nativo o solo API sin conocer los nombres de las plantillas. Cuando una solución necesita cliente y backend, crea ambos dentro de una carpeta común y genera un `START-HERE` bilingüe. La creación no instala, compila, publica ni sobrescribe. La solución entrega cuatro comandos coordinadores: `npm run doctor`, `npm run setup`, `npm run check` y `npm start`; sólo `setup`, cuando la persona lo ejecuta explícitamente, instala las dependencias fijadas de sus componentes.
+
+### Utilizar la base desde un agente
+
+Un agente con acceso a archivos y terminal sigue [`AGENTS.md`](../AGENTS.md). Un host MCP puede iniciar directamente `tools/mcp-server.mjs` mediante Node.js y descubrir recursos bilingües y tres herramientas limitadas para catálogo, diagnóstico y creación. No se debe iniciar mediante un wrapper que escriba mensajes en `stdout`, porque ese canal pertenece exclusivamente al protocolo. Consulta la [guía de agentes y MCP](../docs/agent-guide.es-419.md).
 
 ### Exportar una plantilla individual: modo avanzado
 
@@ -130,3 +134,5 @@ node --test tools/create-project.test.mjs
 Resultado local registrado: `40` pruebas aprobadas, `0` fallidas y `0` omitidas en Windows con Node.js `24.16.0`, el 2026-09-04. La suite cubre presencia de perfiles de capacidad, recibos de bytes/hashes, revisiones exactas por plantilla, copias sintéticas web/Flutter/Kotlin/PHP, exclusiones de datos y cachés, tipos de archivos estructurales, adopción pendiente, nombres portables y competencia de dos creadores por un destino. Se conserva la cobertura anterior de web sin framework: fuente sin dependencias, renombrado npm/recibo, exclusiones, `.npmrc`, archivos requeridos, manifiestos/locks y protecciones de destino/enlaces.
 
 Las pruebas crean fixtures sintéticos aislados en directorios temporales propios y retiran únicamente esos directorios tras verificar su ubicación. Sus supuestos artefactos de aprobación son datos de prueba, no nuevos recibos; el reemplazo de pins solo existe en la interfaz importable para pruebas, no en la CLI. La suite usa [el ejecutor integrado de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.html). Los casos léxicos POSIX se ejecutan como funciones de cadenas en Windows: no prueban un filesystem POSIX. Esta suite no instala ni prueba React, Flutter, navegadores, dispositivos, compilaciones nativas o proyectos consumidores reales.
+
+La prueba `node --test tools/mcp-server.test.mjs` inicia el servidor por `stdio` usando el cliente SDK oficial. Comprueba descubrimiento, lectura de recursos, catálogo, diagnóstico, creación aislada, rechazo de rutas relativas y negociación tanto con el protocolo heredado de 2025 como con la revisión fijada `2026-07-28`.
