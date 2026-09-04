@@ -16,6 +16,7 @@ const approvedTechnicalRecordDigests = Object.freeze({
 });
 const neutralMarkdown = new Set([
   'README.md',
+  'AGENTS.md',
   '.github/CONTRIBUTING.md',
   '.github/PULL_REQUEST_TEMPLATE.md',
   '.github/SECURITY.md',

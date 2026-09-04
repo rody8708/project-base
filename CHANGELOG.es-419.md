@@ -15,6 +15,7 @@ Este archivo registra cambios posteriores a la publicación técnica congelada `
 - Correlación segura de solicitudes y registros estructurados de fallos operacionales en ambos starters backend ejecutables.
 - Un asistente bilingüe `npm run create-app` que genera soluciones completas con `app/`, `api/` y una guía `START-HERE` específica.
 - Comandos de raíz `doctor`, `setup`, `check` y `start` en cada solución generada para coordinar sus componentes sin memorizar instrucciones por tecnología.
+- Instrucciones `AGENTS.md` y un servidor MCP local basado en el SDK oficial 2.0, con recursos bilingües y herramientas limitadas para catálogo, diagnóstico y creación.
 
 ### Cambiado
 

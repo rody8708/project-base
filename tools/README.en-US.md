@@ -13,7 +13,7 @@ The tool prepares a new project outside this repository from six templates: `sta
 
 `web` is the React/TypeScript/Vite option. `web-vanilla` is the HTML/CSS/JavaScript alternative without those frameworks or tools: its candidate has no npm dependencies and uses built-in Node.js modules for checks and local file serving. The exporter does not add packages or execute those scripts.
 
-Use Node.js `24.x`; the tests recorded here ran with `24.16.0` on Windows. No npm packages are required for the exporter or its tests. The destination's immediate parent directory must exist; the complete destination must not exist, even as an empty directory. Use a trusted local hierarchy with no concurrent changes to files, permissions, or links.
+Use Node.js `24.x`; the tests recorded here ran with `24.16.0` on Windows. Run `npm ci --ignore-scripts` at the repository root to install the official MCP SDK and the client used by tests; the export engine does not include those dependencies in generated solutions. The destination's immediate parent directory must exist; the complete destination must not exist, even as an empty directory. Use a trusted local hierarchy with no concurrent changes to files, permissions, or links.
 
 ## Usage
 
@@ -26,6 +26,10 @@ npm run create-app
 ```
 
 The bilingual assistant offers a simple website, web application, mobile, desktop, native Android, or API-only project without requiring template names. When a solution needs a client and backend, it creates both inside one common folder and generates a bilingual `START-HERE`. Creation does not install, build, publish, or overwrite. The solution provides four coordinating commands: `npm run doctor`, `npm run setup`, `npm run check`, and `npm start`; only `setup`, when explicitly run by the user, installs its components' locked dependencies.
+
+### Use the Foundation From an Agent
+
+An agent with filesystem and terminal access follows [`AGENTS.md`](../AGENTS.md). An MCP host can start `tools/mcp-server.mjs` directly through Node.js and discover bilingual resources plus three bounded tools for catalog, diagnosis, and creation. Do not start it through a wrapper that writes messages to `stdout`, because that channel belongs exclusively to the protocol. See the [agent and MCP guide](../docs/agent-guide.en-US.md).
 
 ### Export one template: advanced mode
 
@@ -130,3 +134,5 @@ node --test tools/create-project.test.mjs
 Recorded local result: `40` tests passed, `0` failed, and `0` skipped on Windows with Node.js `24.16.0`, on 2026-09-04. The suite covers capability-profile presence, byte/hash receipts, exact per-template revisions, synthetic web/Flutter/Kotlin/PHP copies, data and cache exclusions, scaffold file types, pending adoption, portable names, and two creators competing for one destination. Earlier framework-free web coverage remains: dependency-free source preservation, npm renaming/receipt, exclusions, `.npmrc`, required files, manifests/locks, and destination/link protections.
 
 Tests create isolated synthetic fixtures in their own temporary directories and remove only those directories after verifying their location. Their supposed approval artifacts are test data, not new receipts; pin replacement exists only in the importable test interface, not the CLI. The suite uses [Node.js's built-in test runner](https://nodejs.org/docs/latest-v24.x/api/test.html). POSIX lexical cases run as string functions on Windows: they do not test a POSIX filesystem. This suite does not install or test React, Flutter, browsers, devices, native builds, or real consumer projects.
+
+The `node --test tools/mcp-server.test.mjs` test launches the server over `stdio` through the official SDK client. It covers discovery, resource reading, catalog, diagnosis, isolated creation, relative-path rejection, and negotiation with both the legacy 2025 protocol and the pinned `2026-07-28` revision.
