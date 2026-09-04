@@ -14,6 +14,7 @@ export const TEMPLATE_REVISIONS = Object.freeze({
   'kotlin-android': '1.1.0-draft.2',
   'backend-php': '1.1.0-draft.2',
   'backend-node': '1.1.0-draft.2',
+  'backend-python': '1.2.0-draft.1',
 });
 export const TEMPLATE_REVISION = TEMPLATE_REVISIONS.web;
 export const SOLUTION_PRESETS = Object.freeze({
@@ -35,6 +36,7 @@ export const TEMPLATE_FILES = Object.freeze({
   'kotlin-android': Object.freeze(['settings.gradle.kts', 'build.gradle.kts', 'app/build.gradle.kts', 'core/build.gradle.kts', 'app/gradle.lockfile', 'core/gradle.lockfile', 'gradle/verification-metadata.xml', 'gradle/wrapper/gradle-wrapper.properties', 'gradle/wrapper/gradle-wrapper.jar', 'gradlew', 'gradlew.bat']),
   'backend-php': Object.freeze(['composer.json', 'composer.lock', 'artisan', 'bootstrap/app.php']),
   'backend-node': Object.freeze(['package.json', 'package-lock.json', 'tsconfig.json', 'src/server.ts']),
+  'backend-python': Object.freeze(['pyproject.toml', 'uv.lock', 'src/project_base_api/main.py']),
 });
 export const APPROVED_DOCUMENTARY_RELEASE = Object.freeze({
   version: '1.0.0',
@@ -53,6 +55,7 @@ const MAX_SOURCE_FILES = 10000;
 const EXCLUDED_COMPONENTS = new Set([
   'node_modules', 'vendor', 'build', 'dist', '.dart_tool', '.fvm', '.git', '.gradle', '.kotlin', '.cxx', '.phpunit.cache', 'outputs', 'output', 'artifacts',
   'coverage', '.cache', '.next', '.turbo', '.idea', '.validation', 'releases',
+  '.venv', '__pycache__', '.pytest_cache', '.mypy_cache', '.ruff_cache',
   'secrets', '.secrets', 'credentials', '.credentials', 'pods', '.symlinks',
   'ephemeral', 'deriveddata', 'xcuserdata',
 ]);
@@ -438,7 +441,7 @@ async function writeNewFile(destination, file) {
 
 // The root/release/clock parameters are explicit test seams; the CLI never accepts pin overrides.
 export async function createProject({ template, name, destination, repositoryRoot = DEFAULT_REPOSITORY_ROOT, release = APPROVED_DOCUMENTARY_RELEASE, now = () => new Date() }) {
-  if (typeof template !== 'string' || !Object.hasOwn(TEMPLATE_FILES, template)) fail('INVALID_TEMPLATE', 'Template must be web, web-vanilla, flutter, kotlin-android, backend-php, or backend-node.');
+  if (typeof template !== 'string' || !Object.hasOwn(TEMPLATE_FILES, template)) fail('INVALID_TEMPLATE', 'Template must be web, web-vanilla, flutter, kotlin-android, backend-php, backend-node, or backend-python.');
   validateProjectName(name);
   const requestedDestination = validateDestinationPath(destination);
   const repository = await requirePlainDirectoryChain(repositoryRoot);
@@ -491,7 +494,7 @@ export async function createProject({ template, name, destination, repositoryRoo
 function solutionComponents(preset, backend) {
   const selection = SOLUTION_PRESETS[preset];
   if (!selection) fail('INVALID_PRESET', 'Unknown application type.');
-  if (!['backend-node', 'backend-php'].includes(backend)) fail('INVALID_BACKEND', 'Backend must be backend-node or backend-php.');
+  if (!['backend-node', 'backend-php', 'backend-python'].includes(backend)) fail('INVALID_BACKEND', 'Backend must be backend-node, backend-php, or backend-python.');
   return [
     ...(selection.client ? [{ directory: 'app', template: selection.client, suffix: 'app' }] : []),
     ...(selection.backend ? [{ directory: 'api', template: backend, suffix: 'api' }] : []),

@@ -13,7 +13,7 @@ import { diagnose } from './solution-runner.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const LANGUAGES = ['es-419', 'en-US'];
-const BACKENDS = ['backend-node', 'backend-php'];
+const BACKENDS = ['backend-node', 'backend-php', 'backend-python'];
 const PRESET_COPY = {
   'es-419': {
     'simple-website': 'Sitio web HTML, CSS y JavaScript sin backend.',
@@ -33,8 +33,8 @@ const PRESET_COPY = {
   },
 };
 const BACKEND_COPY = {
-  'es-419': { 'backend-node': 'TypeScript y Node.js sin framework de aplicación.', 'backend-php': 'PHP y Laravel.' },
-  'en-US': { 'backend-node': 'TypeScript and Node.js without an application framework.', 'backend-php': 'PHP and Laravel.' },
+  'es-419': { 'backend-node': 'TypeScript y Node.js sin framework de aplicación.', 'backend-php': 'PHP y Laravel.', 'backend-python': 'Python, FastAPI y adaptadores SQLAlchemy.' },
+  'en-US': { 'backend-node': 'TypeScript and Node.js without an application framework.', 'backend-php': 'PHP and Laravel.', 'backend-python': 'Python, FastAPI, and SQLAlchemy adapters.' },
 };
 const RESOURCES = [
   ['getting-started-es-419', 'project-base://getting-started/es-419', 'Cómo comenzar', 'docs/getting-started.es-419.md'],

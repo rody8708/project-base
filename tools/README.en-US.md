@@ -9,7 +9,7 @@ To select components and follow the complete process, read [how to create an app
 
 ## Purpose and requirements
 
-The tool prepares a new project outside this repository from six templates: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, or `starters/backend-node`. It does not install dependencies, execute package scripts, build, use the network, or publish. It copies the four approved documentary artifacts unchanged and adds a bilingual capability-selection profile; it does not extract the ZIP, copy `docs/technical`, or modify source projects.
+The tool prepares a new project outside this repository from seven templates: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, `starters/backend-node`, or `starters/backend-python`. It does not install dependencies, execute package scripts, build, use the network, or publish. It copies the four approved documentary artifacts unchanged and adds a bilingual capability-selection profile; it does not extract the ZIP, copy `docs/technical`, or modify source projects.
 
 `web` is the React/TypeScript/Vite option. `web-vanilla` is the HTML/CSS/JavaScript alternative without those frameworks or tools: its candidate has no npm dependencies and uses built-in Node.js modules for checks and local file serving. The exporter does not add packages or execute those scripts.
 
@@ -42,6 +42,7 @@ node tools/create-project.mjs --template flutter --name my-flutter-project --des
 node tools/create-project.mjs --template kotlin-android --name my-native-project --destination "D:\projects\my-native-project"
 node tools/create-project.mjs --template backend-php --name my-api-project --destination "D:\projects\my-api-project"
 node tools/create-project.mjs --template backend-node --name my-node-api --destination "D:\projects\my-node-api"
+node tools/create-project.mjs --template backend-python --name my-python-api --destination "D:\projects\my-python-api"
 ```
 
 These paths are examples; choose your own directories whose parent already exists. On a POSIX system use its local absolute path, such as `/projects/my-web-project`; this does not represent an execution test on that system.
@@ -54,7 +55,7 @@ The CLI accepts only `--template`, `--name`, and `--destination`, or `--help` al
 
 For `web`, `web-vanilla`, and `backend-node`, `--name` changes only the name in `package.json`, the npm lockfile's top-level name, and its root package when present; the receipt records `packageNameChanged: true`. It preserves other fields and dependency records; this does not verify that they can be installed. HTML titles and visible text remain unchanged. For `flutter`, the name only identifies the preparation in the JSON receipt: it does not change `pubspec.yaml`, packages, display names, or bundle/application IDs. Distribution identifiers remain subject to the consumer's decision and verification.
 
-For `kotlin-android`, packages and application IDs also remain unchanged; for `backend-php`, the Composer identity remains unchanged. Gradle wrappers and locks, or the Composer manifest and lock, are preserved as applicable. The tool checks for essential files; it does not resolve dependencies or certify lockfile content.
+For `kotlin-android`, packages and application IDs also remain unchanged; for `backend-php`, the Composer identity remains unchanged; for `backend-python`, the Python package and import namespace remain unchanged. Wrappers, manifests, and lockfiles are preserved. The tool checks for essential files; it does not resolve dependencies or certify lockfile content.
 
 ## Delivered content
 

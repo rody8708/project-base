@@ -45,6 +45,7 @@ Elegir solo lo que el producto necesita:
 | Android nativo o funciones que Flutter no cubra adecuadamente | [Kotlin Android](../starters/kotlin-android/README.es-419.md) |
 | Backend PHP con Laravel y tres motores SQL | [Backend PHP](../starters/backend-php/README.es-419.md) |
 | Backend propio TypeScript/Node sin framework de aplicación | [Backend Node](../starters/backend-node/README.es-419.md) |
+| Backend Python con FastAPI y adaptadores SQLAlchemy | [Backend Python](../starters/backend-python/README.es-419.md) |
 
 Es válido usar más de un cliente, escoger uno de los backends, crear otro backend desde cero o reemplazar cualquier adaptador. No se deben copiar todos los starters por defecto.
 
@@ -88,7 +89,7 @@ node tools/create-project.mjs --template backend-php --name ejemplo-api --destin
 node tools/create-project.mjs --template web --name ejemplo-web --destination "D:\products\ejemplo-web"
 ```
 
-También se puede sustituir `backend-php` por `backend-node`, o el cliente por `web-vanilla`, `flutter` o `kotlin-android`. La referencia completa de opciones, restricciones y archivos excluidos está en las [instrucciones del exportador](../tools/README.es-419.md).
+También se puede sustituir `backend-php` por `backend-node` o `backend-python`, o el cliente por `web-vanilla`, `flutter` o `kotlin-android`. La referencia completa de opciones, restricciones y archivos excluidos está en las [instrucciones del exportador](../tools/README.es-419.md).
 
 Después de cada exportación:
 

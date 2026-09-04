@@ -1,7 +1,7 @@
 # Elegir plataforma, backend y base de datos
 
-Revisión técnica: `1.1.0-draft.1`  
-Consulta de fuentes: `2026-09-02`; fundamentos web: `2026-09-03`  
+Revisión técnica: `1.2.0-draft.1`  
+Consulta de fuentes: `2026-09-04`; fundamentos web: `2026-09-03`  
 Idioma: español latinoamericano (`es-419`)  
 [US English](technology-choices.en-US.md) · [Inicio](../../README.es-419.md)
 
@@ -9,7 +9,7 @@ Idioma: español latinoamericano (`es-419`)
 
 No existe un lenguaje, framework o motor universalmente superior. Aquí se eligen combinaciones concretas por ajuste al problema, mantenimiento, herramientas disponibles y evidencia reproducible. La preferencia del consumidor y sus requisitos pueden cambiar la decisión.
 
-Se mantienen seis puntos de partida independientes: [web React/TypeScript](../../starters/web/README.es-419.md), [web HTML/CSS/JavaScript sin framework](../../starters/web-vanilla/README.es-419.md), [Flutter](../../starters/flutter/README.es-419.md), [Android nativo Kotlin](../../starters/kotlin-android/README.es-419.md), [API PHP/Laravel](../../starters/backend-php/README.es-419.md) y [API TypeScript/Node sin framework de aplicación](../../starters/backend-node/README.es-419.md). Mantienen composición independiente y no constituyen un producto completo. El [límite API](api-boundary.es-419.md) y la [arquitectura backend neutral](backend-architecture.es-419.md) evitan atar el diseño a una implementación.
+Se mantienen siete puntos de partida independientes: [web React/TypeScript](../../starters/web/README.es-419.md), [web HTML/CSS/JavaScript sin framework](../../starters/web-vanilla/README.es-419.md), [Flutter](../../starters/flutter/README.es-419.md), [Android nativo Kotlin](../../starters/kotlin-android/README.es-419.md), [API PHP/Laravel](../../starters/backend-php/README.es-419.md), [API TypeScript/Node sin framework de aplicación](../../starters/backend-node/README.es-419.md) y [API Python/FastAPI](../../starters/backend-python/README.es-419.md). Mantienen composición independiente y no constituyen un producto completo. El [límite API](api-boundary.es-419.md) y la [arquitectura backend neutral](backend-architecture.es-419.md) evitan atar el diseño a una implementación.
 
 ## Framework y arquitectura propia
 
@@ -49,10 +49,13 @@ La base Kotlin usa [Jetpack Compose para Android](https://developer.android.com/
 | Arquitectura propia sin framework de aplicación | Requisitos particulares, control directo de dependencias o una base mínima que el equipo pueda mantener y probar. | Starter TypeScript/Node ejecutable; candidato con cobertura pendiente. |
 | TypeScript + Fastify | Un lenguaje común con el cliente web y una API modular pequeña. | Alternativa compatible con la arquitectura neutral; no adoptada por el starter actual. |
 | TypeScript + Nest | Equipos que quieren módulos e inyección de dependencias más prescriptivos. | Alternativa evaluada; no ejecutada. |
-| Python + Django / FastAPI | Administración/modelos de negocio integrados, o API dentro de un ecosistema Python. | Alternativas evaluadas; no ejecutadas. |
+| Python + FastAPI | API tipada dentro de un ecosistema Python, con OpenAPI y adaptadores SQL explícitos. | Starter ejecutable verificado con SQLite; PostgreSQL y MySQL son configurables pero requieren verificación propia. |
+| Python + Django | Administración y modelos de negocio integrados. | Alternativa evaluada; no ejecutada. |
 | Kotlin/JVM + Ktor / Spring Boot | Equipo o producto que requiera JVM/Kotlin e integraciones de ese ecosistema. | Alternativas evaluadas; distintas del starter Android. |
 
 Laravel se selecciona por sus convenciones integradas y porque PHP `8.5.1`, Composer y drivers locales permiten comprobarlo en este entorno. Su documentación describe [soporte y versiones](https://laravel.com/framework/docs/13.x/releases#support-policy) y [conexiones de base de datos](https://laravel.com/framework/docs/13.x/database#introduction). Eso no certifica nuestra implementación: las ejecuciones concretas se registran por separado.
+
+FastAPI `0.141.1` se selecciona para la opción Python por su integración de tipado y OpenAPI; SQLAlchemy `2.0.52` queda confinado al adaptador de infraestructura. El [registro de FastAPI en PyPI](https://pypi.org/project/fastapi/) y los [dialectos oficiales de SQLAlchemy](https://docs.sqlalchemy.org/en/20/dialects/index.html) sustentan las versiones y motores admitidos por las dependencias, no certifican esta plantilla. La ejecución local verifica Python `3.13.6` con SQLite y CI repite ese perfil; PostgreSQL y MySQL siguen pendientes de ensayos propios.
 
 Fastify permite [inyección HTTP para pruebas](https://fastify.dev/docs/latest/Guides/Testing/), pero su [integración de persistencia](https://fastify.dev/docs/latest/Guides/Database/) sigue siendo una decisión del proyecto. Nest proporciona [estructura modular](https://docs.nestjs.com/). Django ofrece [modelos y administración integrados](https://docs.djangoproject.com/en/6.0/intro/overview/); FastAPI describe [tipado y OpenAPI](https://fastapi.tiangolo.com/features/). Ktor documenta [persistencia con Exposed](https://ktor.io/docs/server-integrate-database.html), y Spring publica [sus requisitos propios](https://docs.spring.io/spring-boot/system-requirements.html). Estas fuentes sustentan diferencias funcionales, no comparaciones de costo o velocidad medidas aquí.
 

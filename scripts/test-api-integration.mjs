@@ -44,7 +44,7 @@ async function close() {
   await rm(temporary, { recursive: true });
 }
 try {
-  const specs = await Promise.all(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node']
+  const specs = await Promise.all(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node', 'backend-python']
     .map(name => readFile(path.join(root, 'starters', name, 'contracts/task-api-v1.openapi.json'), 'utf8')));
   for (const spec of specs) assert.equal(spec, specs[0]);
   await command(['artisan', 'migrate', '--force', '--no-interaction']);

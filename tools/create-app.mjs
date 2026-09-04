@@ -13,14 +13,14 @@ const COPY = {
   'es-419': {
     title: '\nProject Base — crear una aplicación\nResponde unas preguntas sencillas. No necesitas elegir una arquitectura manualmente.\n',
     type: '¿Qué quieres crear?', types: ['Sitio web sencillo (sin backend)', 'Aplicación web completa', 'Aplicación móvil Flutter', 'Aplicación de escritorio Flutter', 'Aplicación Android nativa Kotlin', 'Solo una API/backend'],
-    backend: 'Backend: presiona Enter para la opción recomendada; elige PHP solo si ya sabes que lo necesitas.', backends: ['Node.js sin framework de aplicación', 'PHP con Laravel'], recommended: 'recomendado', select: 'Selecciona', invalidChoice: 'Escribe el número de una opción.',
+    backend: 'Backend: presiona Enter para la opción recomendada; elige otra tecnología si tu equipo ya la conoce.', backends: ['Node.js sin framework de aplicación', 'PHP con Laravel', 'Python con FastAPI'], recommended: 'recomendado', select: 'Selecciona', invalidChoice: 'Escribe el número de una opción.',
     name: '\nNombre corto (ejemplo: mi-inventario): ', invalidName: 'Usa hasta 59 letras minúsculas, números y guiones; debe comenzar con una letra.',
     parent: '\nCarpeta donde guardarlo', create: '\nSe creará:', confirm: '¿Continuar? [S/n]: ', ready: '\nListo. Abre:',
   },
   'en-US': {
     title: '\nProject Base — create an application\nAnswer a few simple questions. You do not need to choose an architecture manually.\n',
     type: 'What do you want to create?', types: ['Simple website (no backend)', 'Complete web application', 'Flutter mobile application', 'Flutter desktop application', 'Native Kotlin Android application', 'API/backend only'],
-    backend: 'Backend: press Enter for the recommended option; select PHP only if you already know you need it.', backends: ['Node.js without an application framework', 'PHP with Laravel'], recommended: 'recommended', select: 'Select', invalidChoice: 'Enter an option number.',
+    backend: 'Backend: press Enter for the recommended option; choose another technology when your team already knows it.', backends: ['Node.js without an application framework', 'PHP with Laravel', 'Python with FastAPI'], recommended: 'recommended', select: 'Select', invalidChoice: 'Enter an option number.',
     name: '\nShort name (example: my-inventory): ', invalidName: 'Use up to 59 lowercase letters, numbers, and hyphens; it must start with a letter.',
     parent: '\nFolder where it should be saved', create: '\nThis will be created:', confirm: 'Continue? [Y/n]: ', ready: '\nReady. Open:',
   },
@@ -58,7 +58,7 @@ export async function interactiveCreate(reader = createInterface({ input, output
     const preset = await choose(reader, writer, copy, copy.type, PRESETS.map((value, index) => [value, copy.types[index]]), 1);
     const needsBackend = preset !== 'simple-website';
     const backend = needsBackend ? await choose(reader, writer, copy, copy.backend, [
-      ['backend-node', copy.backends[0]], ['backend-php', copy.backends[1]],
+      ['backend-node', copy.backends[0]], ['backend-php', copy.backends[1]], ['backend-python', copy.backends[2]],
     ]) : 'backend-node';
     const name = await askName(reader, writer, copy);
     const defaultParent = settings.defaultParent ?? path.join(os.homedir(), 'Project Base Apps');

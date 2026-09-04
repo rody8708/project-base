@@ -41,6 +41,7 @@ Project Base prepara los cimientos; tú, tu equipo o un asistente de programaci�
 | Android nativo / Native Android | Kotlin + Jetpack Compose ([ES](starters/kotlin-android/README.es-419.md) · [EN](starters/kotlin-android/README.en-US.md)) | Android nativo y capacidades fuera del alcance de Flutter. / Native Android and capabilities beyond Flutter's scope. |
 | Backend con framework / Framework backend | PHP + Laravel ([ES](starters/backend-php/README.es-419.md) · [EN](starters/backend-php/README.en-US.md)) | API probada con SQLite, PostgreSQL y MySQL. / Tested API with SQLite, PostgreSQL, and MySQL. |
 | Backend propio / Custom backend | TypeScript + Node ([ES](starters/backend-node/README.es-419.md) · [EN](starters/backend-node/README.en-US.md)) | API sin framework de aplicación, organizada mediante puertos y adaptadores. / Application-framework-free API organized through ports and adapters. |
+| Backend Python | Python + FastAPI ([ES](starters/backend-python/README.es-419.md) · [EN](starters/backend-python/README.en-US.md)) | API tipada con puertos, adaptadores SQL y migraciones versionadas. / Typed API with ports, SQL adapters, and versioned migrations. |
 
 También incluye documentación bilingüe, reglas de programación, plantilla de definición de producto, integración HTTP, tokens provisionados, autorización por propietario, pruebas automatizadas y CI protegida. / It also includes bilingual documentation, programming rules, a product brief template, HTTP integration, provisioned tokens, owner authorization, automated tests, and protected CI.
 
@@ -114,8 +115,8 @@ La base reduce decisiones improvisadas, pero no sustituye el desarrollo, el apre
 - Publicación técnica estable / Stable technical release: [`v1.1.0`](releases/approval-1.1.0.en-US.md).
 - Licencia de código abierto / Open-source license: [MPL-2.0](LICENSE).
 - Política operativa / Operational policy: [estándares en español](docs/engineering-standards.es-419.md) · [standards in English](docs/engineering-standards.en-US.md).
-- CI automática para pull requests / Automatic pull-request CI: web, mantenimiento, Flutter core, Kotlin Android y PHP/SQLite.
-- Probado localmente / Locally tested: integración API y SQLite, PostgreSQL y MySQL en entornos aislados.
+- CI automática para pull requests / Automatic pull-request CI: web, mantenimiento, Flutter core, Kotlin Android, PHP/SQLite y Python/SQLite.
+- Probado localmente / Locally tested: integración API; PHP con SQLite, PostgreSQL y MySQL aislados; Python con SQLite temporal. / API integration; PHP with isolated SQLite, PostgreSQL, and MySQL; Python with temporary SQLite.
 - Pendiente / Pending: compilación y ejecución verificadas en macOS/iOS hasta disponer de una Mac adecuada.
 - No incluido / Not included: cuentas humanas completas, credenciales reales, firma de distribución y un producto desplegado.
 

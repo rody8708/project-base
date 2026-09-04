@@ -9,7 +9,7 @@ Para elegir componentes y recorrer el proceso completo, consulta [cómo crear un
 
 ## Propósito y requisitos
 
-La herramienta prepara un proyecto nuevo fuera de este repositorio a partir de seis plantillas: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php` o `starters/backend-node`. No instala dependencias, ejecuta scripts de paquetes, compila, usa la red ni publica. Copia los cuatro artefactos documentales aprobados sin modificarlos y agrega un perfil bilingüe de selección de capacidades; no extrae el ZIP, no copia `docs/technical` y no modifica los proyectos fuente.
+La herramienta prepara un proyecto nuevo fuera de este repositorio a partir de siete plantillas: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, `starters/backend-node` o `starters/backend-python`. No instala dependencias, ejecuta scripts de paquetes, compila, usa la red ni publica. Copia los cuatro artefactos documentales aprobados sin modificarlos y agrega un perfil bilingüe de selección de capacidades; no extrae el ZIP, no copia `docs/technical` y no modifica los proyectos fuente.
 
 `web` es la opción React/TypeScript/Vite. `web-vanilla` es la alternativa HTML/CSS/JavaScript sin esos frameworks o herramientas: su candidata no incluye dependencias npm y utiliza módulos integrados de Node.js para comprobar y servir archivos localmente. El exportador no agrega paquetes ni ejecuta esos scripts.
 
@@ -42,6 +42,7 @@ node tools/create-project.mjs --template flutter --name my-flutter-project --des
 node tools/create-project.mjs --template kotlin-android --name my-native-project --destination "D:\projects\my-native-project"
 node tools/create-project.mjs --template backend-php --name my-api-project --destination "D:\projects\my-api-project"
 node tools/create-project.mjs --template backend-node --name my-node-api --destination "D:\projects\my-node-api"
+node tools/create-project.mjs --template backend-python --name my-python-api --destination "D:\projects\my-python-api"
 ```
 
 Estas rutas son ejemplos; elegir carpetas propias cuyo padre ya exista. En un sistema POSIX usar su ruta absoluta local, por ejemplo `/projects/my-web-project`; esto no representa una prueba de ejecución en ese sistema.
@@ -54,7 +55,7 @@ La CLI solo admite `--template`, `--name` y `--destination`, o `--help` por sepa
 
 En `web`, `web-vanilla` y `backend-node`, `--name` modifica únicamente el nombre de `package.json`, el nombre superior del lock npm y su paquete raíz cuando existe; el recibo indica `packageNameChanged: true`. Conserva los demás campos y registros de dependencias; esto no verifica que puedan instalarse. No cambia títulos HTML ni textos visibles. En `flutter`, el nombre solo identifica la preparación en el recibo JSON: no cambia `pubspec.yaml`, paquetes, nombres visibles ni bundle/application IDs. Los identificadores de distribución quedan pendientes de decisión y verificación del consumidor.
 
-En `kotlin-android` tampoco se cambian paquetes ni application IDs; en `backend-php` no se cambia la identidad de Composer. Se conservan wrapper y bloqueos de Gradle, o manifiesto y bloqueo de Composer, según corresponda. La herramienta comprueba la presencia de archivos esenciales, no resuelve dependencias ni certifica el contenido de esos bloqueos.
+En `kotlin-android` tampoco se cambian paquetes ni application IDs; en `backend-php` no se cambia la identidad de Composer y en `backend-python` no se cambia el paquete Python ni el namespace importable. Se conservan wrappers, manifiestos y bloqueos. La herramienta comprueba la presencia de archivos esenciales, no resuelve dependencias ni certifica el contenido de esos bloqueos.
 
 ## Qué se entrega
 

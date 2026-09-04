@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const ACTIONS = new Set(['doctor', 'setup', 'check', 'start']);
-const TEMPLATES = new Set(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node']);
+const TEMPLATES = new Set(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node', 'backend-python']);
 const COPY = {
   'es-419': {
     doctor: 'Diagnóstico de herramientas', ready: 'La solución está preparada para este paso.',
@@ -46,7 +46,7 @@ function validateManifest(value) {
   const directories = new Set();
   for (const item of value.components) {
     if (!item || !['app', 'api'].includes(item.directory) || directories.has(item.directory) || !TEMPLATES.has(item.template)) throw new Error('INVALID_SOLUTION_MANIFEST');
-    if ((item.directory === 'api') !== ['backend-php', 'backend-node'].includes(item.template)) throw new Error('INVALID_SOLUTION_MANIFEST');
+    if ((item.directory === 'api') !== ['backend-php', 'backend-node', 'backend-python'].includes(item.template)) throw new Error('INVALID_SOLUTION_MANIFEST');
     directories.add(item.directory);
   }
   return value;
@@ -70,12 +70,21 @@ export function planFor(action, manifest, platform = process.platform) {
         command(directory, executable('php', platform), ['scripts/setup-local.php'], { unlessExists: '.env' }),
         command(directory, executable('php', platform), ['artisan', 'migrate', '--force', '--no-interaction']),
       );
+      if (template === 'backend-python') plan.push(
+        command(directory, executable('uv', platform), ['sync', '--locked', '--all-extras']),
+        command(directory, executable('uv', platform), ['run', 'python', '-m', 'project_base_api.migrate_cli', 'up']),
+      );
       if (template === 'flutter') plan.push(command(directory, executable('flutter', platform), ['pub', 'get', '--enforce-lockfile']));
       if (template === 'kotlin-android') plan.push(command(directory, platform === 'win32' ? '.\\gradlew.bat' : './gradlew', ['--version']));
     }
     if (action === 'check') {
       if (['web', 'web-vanilla', 'backend-node'].includes(template)) plan.push(command(directory, executable('npm', platform), ['run', 'check']));
       if (template === 'backend-php') plan.push(command(directory, executable('composer', platform), ['check']));
+      if (template === 'backend-python') plan.push(
+        command(directory, executable('uv', platform), ['run', 'ruff', 'check', '.']),
+        command(directory, executable('uv', platform), ['run', 'mypy']),
+        command(directory, executable('uv', platform), ['run', 'pytest', '-W', 'error']),
+      );
       if (template === 'flutter') plan.push(
         command(directory, executable('dart', platform), ['run', 'tool/check_toolchain.dart']),
         command(directory, executable('dart', platform), ['format', '--output=none', '--set-exit-if-changed', 'lib', 'test', 'integration_test', 'tool']),
@@ -89,6 +98,7 @@ export function planFor(action, manifest, platform = process.platform) {
       if (template === 'web-vanilla') plan.push(command(directory, executable('npm', platform), ['start'], { role: 'app' }));
       if (template === 'backend-node') plan.push(command(directory, executable('npm', platform), ['start'], { role: 'api' }));
       if (template === 'backend-php') plan.push(command(directory, executable('php', platform), ['artisan', 'serve', '--host=127.0.0.1', '--port=8080', '--no-reload'], { role: 'api' }));
+      if (template === 'backend-python') plan.push(command(directory, executable('uv', platform), ['run', 'uvicorn', 'project_base_api.main:app', '--host', '127.0.0.1', '--port', '8080'], { role: 'api' }));
       if (template === 'flutter') plan.push(command(directory, executable('flutter', platform), ['run'], { role: 'app' }));
       if (template === 'kotlin-android') plan.push(command(directory, platform === 'win32' ? '.\\gradlew.bat' : './gradlew', [':app:assembleDebug'], { role: 'android-build' }));
     }
@@ -107,6 +117,10 @@ export function diagnose(manifest, platform = process.platform, inspect = versio
   const checks = [{ name: 'Node.js 24', result: { ok: /^v24\./u.test(process.version), output: process.version } }];
   if ([...templates].some((item) => ['web', 'web-vanilla', 'backend-node'].includes(item))) checks.push({ name: 'npm', result: inspect(executable('npm', platform)) });
   if (templates.has('backend-php')) checks.push({ name: 'PHP 8.5', result: inspect(executable('php', platform), ['--version']), accepts: /^PHP 8\.5\./u }, { name: 'Composer 2', result: inspect(executable('composer', platform)), accepts: /^Composer version 2\./u });
+  if (templates.has('backend-python')) checks.push(
+    { name: 'Python 3.13 or 3.14', result: inspect(executable('python', platform), ['--version']), accepts: /^Python 3\.1[34]\./u },
+    { name: 'uv', result: inspect(executable('uv', platform), ['--version']), accepts: /^uv \d+\./u },
+  );
   if (templates.has('flutter')) checks.push({ name: 'Flutter 3.35.1', result: inspect(executable('flutter', platform)), accepts: /Flutter 3\.35\.1/u }, { name: 'Dart 3.9.0', result: inspect(executable('dart', platform)), accepts: /Dart SDK version: 3\.9\.0/u });
   if (templates.has('kotlin-android')) {
     checks.push({ name: 'JDK 21', result: inspect(executable('java', platform)), accepts: /(?:version "21\.|openjdk 21\.)/iu });

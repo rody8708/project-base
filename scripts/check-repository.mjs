@@ -21,7 +21,7 @@ const neutralMarkdown = new Set([
   '.github/PULL_REQUEST_TEMPLATE.md',
   '.github/SECURITY.md',
 ]);
-const excluded = new Set(['.git', '.validation', 'output', 'artifacts', 'node_modules', 'vendor', 'dist', 'build', 'coverage', '.dart_tool', '.fvm', '.gradle', '.kotlin', '.cxx', '.phpunit.cache', 'ephemeral', '.idea', 'Pods', '.symlinks']);
+const excluded = new Set(['.git', '.validation', 'output', 'artifacts', 'node_modules', 'vendor', 'dist', 'build', 'coverage', '.dart_tool', '.fvm', '.gradle', '.kotlin', '.cxx', '.phpunit.cache', '.venv', '__pycache__', '.pytest_cache', '.mypy_cache', '.ruff_cache', 'ephemeral', '.idea', 'Pods', '.symlinks']);
 
 export function visibleMarkdown(text) {
   return text.replace(/^```[^\r\n]*\r?\n[\s\S]*?^```[ \t]*$/gm, '');
