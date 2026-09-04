@@ -25,7 +25,7 @@ Desde la raíz del repositorio:
 npm run create-app
 ```
 
-El asistente bilingüe permite escoger sitio web sencillo, aplicación web, móvil, escritorio, Android nativo o solo API sin conocer los nombres de las plantillas. Cuando una solución necesita cliente y backend, crea ambos dentro de una carpeta común y genera un `START-HERE` bilingüe con los comandos siguientes. No instala, compila, publica ni sobrescribe.
+El asistente bilingüe permite escoger sitio web sencillo, aplicación web, móvil, escritorio, Android nativo o solo API sin conocer los nombres de las plantillas. Cuando una solución necesita cliente y backend, crea ambos dentro de una carpeta común y genera un `START-HERE` bilingüe. La creación no instala, compila, publica ni sobrescribe. La solución entrega cuatro comandos coordinadores: `npm run doctor`, `npm run setup`, `npm run check` y `npm start`; sólo `setup`, cuando la persona lo ejecuta explícitamente, instala las dependencias fijadas de sus componentes.
 
 ### Exportar una plantilla individual: modo avanzado
 

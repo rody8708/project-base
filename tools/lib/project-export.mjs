@@ -498,31 +498,17 @@ function solutionComponents(preset, backend) {
   ];
 }
 
-function commandsFor(template, directory, language) {
-  const prefix = `cd ${directory}`;
-  const commands = {
-    web: [prefix, 'npm ci', 'npm run check', 'npm run dev'],
-    'web-vanilla': [prefix, 'npm run check', 'npm start'],
-    'backend-node': [prefix, 'npm ci --ignore-scripts', 'npm run check', 'npm start'],
-    'backend-php': [prefix, 'composer install --no-interaction --prefer-dist', 'composer check', 'php scripts/setup-local.php', 'php artisan migrate', 'php artisan serve'],
-    flutter: [prefix, 'flutter pub get --enforce-lockfile', 'dart tool/check_toolchain.dart', 'flutter analyze', 'flutter test', 'flutter run'],
-    'kotlin-android': [prefix, '.\\gradlew.bat --no-daemon :core:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug'],
-  };
-  const title = language === 'es-419' ? `Preparar ${directory}` : `Prepare ${directory}`;
-  return `### ${title}\n\n\`\`\`powershell\n${commands[template].join('\n')}\n\`\`\``;
-}
-
 function startDocument(language, name, preset, components) {
-  const sections = components.map((item) => commandsFor(item.template, item.directory, language)).join('\n\n');
   const connected = components.length > 1;
   const connectionEs = connected ? '\n\n## Conexión entre app y API\n\nLa interfaz comienza deliberadamente en modo memoria para que pueda abrirse sin credenciales. No está conectada automáticamente porque esta base no debe inventar el sistema de usuarios de tu producto ni guardar un token inseguro. Cuando decidas la identidad, sigue la [guía de integración](app/api-integration.es-419.md) y la [guía de seguridad](app/security-production.es-419.md); el adaptador HTTP ya existe.\n' : '';
   const connectionEn = connected ? '\n\n## Connection between app and API\n\nThe interface deliberately starts in memory mode so it can open without credentials. It is not connected automatically because this foundation must not invent your product identity system or store an unsafe token. After choosing identity, follow the [integration guide](app/api-integration.en-US.md) and [security guide](app/security-production.en-US.md); the HTTP adapter already exists.\n' : '';
-  if (language === 'es-419') return `# Empieza aquí: ${name}\n\n[English (United States)](START-HERE.en-US.md)\n\nProject Base preparó esta solución como **${preset}**. No necesitas volver al repositorio original para desarrollar el producto.\n\n## Qué hay en esta carpeta\n\n${components.map((item) => `- \`${item.directory}/\`: base ${item.template}.`).join('\n')}\n\n## Primer paso\n\nEjecuta cada bloque correspondiente. Si hay \`app/\` y \`api/\`, usa una terminal separada para cada bloque porque el último comando mantiene ese componente en ejecución. Si un comando indica que falta una herramienta, instala únicamente esa herramienta y repite el bloque.\n\n${sections}${connectionEs}\n## Después\n\n1. Abre el README en español dentro de cada componente.\n2. Describe las funciones reales de tu aplicación y reemplaza el ejemplo de tareas una función a la vez.\n3. Completa \`foundation/capability-profile.es-419.md\` dentro de cada componente; deja como planificado lo que todavía no exista.\n4. Mantén el cliente conectado al backend mediante la API; nunca conectes la interfaz directamente a la base de datos.\n5. Ejecuta las pruebas antes de cada cambio importante.\n\nLos comandos preparan y comprueban la base; no publican la aplicación ni la aprueban para producción.\n`;
-  return `# Start here: ${name}\n\n[Español (Latinoamérica)](START-HERE.es-419.md)\n\nProject Base prepared this solution as **${preset}**. You do not need to return to the original repository to develop the product.\n\n## What is in this folder\n\n${components.map((item) => `- \`${item.directory}/\`: ${item.template} foundation.`).join('\n')}\n\n## First step\n\nRun each applicable block. If both \`app/\` and \`api/\` exist, use a separate terminal for each block because its last command keeps that component running. If a command reports a missing tool, install only that tool and repeat the block.\n\n${sections}${connectionEn}\n## Then\n\n1. Open the English README inside each component.\n2. Describe the real product features and replace the task example one feature at a time.\n3. Complete \`foundation/capability-profile.en-US.md\` inside each component; keep anything not implemented as planned.\n4. Keep the client connected to the backend through the API; never connect the interface directly to the database.\n5. Run the tests before every important change.\n\nThe commands prepare and verify the foundation; they neither publish the application nor approve it for production.\n`;
+  if (language === 'es-419') return `# Empieza aquí: ${name}\n\n[English (United States)](START-HERE.en-US.md)\n\nProject Base preparó esta solución como **${preset}**. Todo se controla desde esta carpeta; no necesitas memorizar los comandos de cada tecnología ni volver al repositorio original.\n\n## Qué hay en esta carpeta\n\n${components.map((item) => `- \`${item.directory}/\`: base ${item.template}.`).join('\n')}\n\n## Los cuatro comandos\n\n\`\`\`powershell\nnpm run doctor\nnpm run setup\nnpm run check\nnpm start\n\`\`\`\n\n1. \`doctor\` te dice qué herramienta falta o tiene una versión incompatible.\n2. \`setup\` instala las dependencias bloqueadas y prepara almacenamiento local cuando corresponde. Nunca instala herramientas del sistema ni inventa credenciales.\n3. \`check\` ejecuta las verificaciones y pruebas disponibles de todos los componentes.\n4. \`start\` abre la solución para desarrollo. En Android compila el APK y te pide seleccionar el dispositivo en Android Studio.\n\nSi un comando falla, corrige únicamente el problema indicado y ejecútalo de nuevo.${connectionEs}\n## Después\n\n1. Abre el README en español dentro de cada componente.\n2. Describe las funciones reales de tu aplicación y reemplaza el ejemplo de tareas una función a la vez.\n3. Completa \`foundation/capability-profile.es-419.md\` dentro de cada componente; deja como planificado lo que todavía no exista.\n4. Mantén el cliente conectado al backend mediante la API; nunca conectes la interfaz directamente a la base de datos.\n5. Ejecuta \`npm run check\` antes de cada cambio importante.\n\nEstos comandos preparan y comprueban la base; no publican la aplicación ni la aprueban para producción.\n`;
+  return `# Start here: ${name}\n\n[Español (Latinoamérica)](START-HERE.es-419.md)\n\nProject Base prepared this solution as **${preset}**. Everything is controlled from this folder; you do not need to memorize technology-specific commands or return to the original repository.\n\n## What is in this folder\n\n${components.map((item) => `- \`${item.directory}/\`: ${item.template} foundation.`).join('\n')}\n\n## The four commands\n\n\`\`\`powershell\nnpm run doctor\nnpm run setup\nnpm run check\nnpm start\n\`\`\`\n\n1. \`doctor\` reports a missing tool or incompatible version.\n2. \`setup\` installs locked dependencies and prepares local storage where applicable. It never installs system tools or invents credentials.\n3. \`check\` runs the available verification and tests for every component.\n4. \`start\` opens the solution for development. For Android it builds the APK and asks you to select the device in Android Studio.\n\nIf a command fails, correct only the reported problem and run it again.${connectionEn}\n## Then\n\n1. Open the English README inside each component.\n2. Describe the real product features and replace the task example one feature at a time.\n3. Complete \`foundation/capability-profile.en-US.md\` inside each component; keep anything not implemented as planned.\n4. Keep the client connected to the backend through the API; never connect the interface directly to the database.\n5. Run \`npm run check\` before every important change.\n\nThese commands prepare and verify the foundation; they neither publish the application nor approve it for production.\n`;
 }
 
-export async function createSolution({ preset, backend = 'backend-node', name, destination, repositoryRoot = DEFAULT_REPOSITORY_ROOT, release = APPROVED_DOCUMENTARY_RELEASE, now = () => new Date() }) {
+export async function createSolution({ preset, backend = 'backend-node', language = 'es-419', name, destination, repositoryRoot = DEFAULT_REPOSITORY_ROOT, release = APPROVED_DOCUMENTARY_RELEASE, now = () => new Date() }) {
   validateProjectName(name);
+  if (!['es-419', 'en-US'].includes(language)) fail('INVALID_LANGUAGE', 'Language must be es-419 or en-US.');
   const components = solutionComponents(preset, backend).map((item) => ({ ...item, name: validateProjectName(`${name}-${item.suffix}`) }));
   const requestedDestination = validateDestinationPath(destination);
   const repository = await requirePlainDirectoryChain(repositoryRoot);
@@ -533,6 +519,11 @@ export async function createSolution({ preset, backend = 'backend-node', name, d
   if (isWithin(repository, resolvedDestination)) fail('DESTINATION_INSIDE_REPOSITORY', 'Resolved destination is inside the foundation repository.');
   const createdAt = now();
   if (!(createdAt instanceof Date) || !Number.isFinite(createdAt.getTime())) fail('INVALID_CLOCK', 'The creation timestamp is invalid.');
+  const runner = await readPlainFile(path.join(repository, 'tools', 'solution-runner.mjs'));
+  const packageManifest = {
+    name: `${name}-workspace`, version: '0.1.0', private: true, license: 'MPL-2.0', type: 'module',
+    engines: { node: '24.x' }, scripts: { doctor: 'node project-base.mjs doctor', setup: 'node project-base.mjs setup', check: 'node project-base.mjs check', start: 'node project-base.mjs start' },
+  };
   await fs.mkdir(resolvedDestination, { mode: 0o755 });
   const results = [];
   try {
@@ -540,12 +531,14 @@ export async function createSolution({ preset, backend = 'backend-node', name, d
       results.push(await createProject({ template: component.template, name: component.name,
         destination: path.join(resolvedDestination, component.directory), repositoryRoot: repository, release, now: () => createdAt }));
     }
-    const manifest = { formatVersion: 1, kind: 'project-base-solution', createdAt: createdAt.toISOString(), name, preset,
+    const manifest = { formatVersion: 1, kind: 'project-base-solution', createdAt: createdAt.toISOString(), name, preset, language,
       components: components.map((item) => ({ directory: item.directory, template: item.template, revision: TEMPLATE_REVISIONS[item.template] })) };
     for (const file of [
       { relativePath: 'START-HERE.es-419.md', bytes: Buffer.from(startDocument('es-419', name, preset, components)) },
       { relativePath: 'START-HERE.en-US.md', bytes: Buffer.from(startDocument('en-US', name, preset, components)) },
       { relativePath: 'project-base.json', bytes: Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`) },
+      { relativePath: 'project-base.mjs', bytes: runner.bytes },
+      { relativePath: 'package.json', bytes: Buffer.from(`${JSON.stringify(packageManifest, null, 2)}\n`) },
     ]) await writeNewFile(resolvedDestination, { ...file, mode: 0o644 });
   } catch (error) {
     error.partialDestination = resolvedDestination;

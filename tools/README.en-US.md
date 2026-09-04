@@ -25,7 +25,7 @@ From the repository root:
 npm run create-app
 ```
 
-The bilingual assistant offers a simple website, web application, mobile, desktop, native Android, or API-only project without requiring template names. When a solution needs a client and backend, it creates both inside one common folder and generates a bilingual `START-HERE` with the next commands. It does not install, build, publish, or overwrite.
+The bilingual assistant offers a simple website, web application, mobile, desktop, native Android, or API-only project without requiring template names. When a solution needs a client and backend, it creates both inside one common folder and generates a bilingual `START-HERE`. Creation does not install, build, publish, or overwrite. The solution provides four coordinating commands: `npm run doctor`, `npm run setup`, `npm run check`, and `npm start`; only `setup`, when explicitly run by the user, installs its components' locked dependencies.
 
 ### Export one template: advanced mode
 
