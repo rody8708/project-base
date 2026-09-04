@@ -1,15 +1,15 @@
 # Plantilla de definición de proyecto
 
-Versión del borrador: `0.1.0-draft.4`  
-Estado: propuesta; no aprobada para adopción estable.  
+Revisión de la plantilla: `0.1.0-draft.4`  
+Estado: plantilla operativa; completarla no aprueba automáticamente un proyecto consumidor.  
 Idioma: español latinoamericano (`es-419`)  
 [Versión en inglés de Estados Unidos](project-brief.en-US.md) · [Inicio](../README.es-419.md)
 
 ## Instrucciones de uso
 
-Esta plantilla se propone para proyectos consumidores creados en una ubicación separada de esta base. No existe todavía una publicación estable aprobada: no adoptar este borrador como si lo fuera ni inventar su identidad. Su estructura y campos siguen pendientes de aprobación según la [gobernanza de la base](../docs/foundation-governance.es-419.md); el respaldo y los límites se registran en la [trazabilidad](../docs/traceability.es-419.md).
+Esta plantilla define proyectos consumidores creados en una ubicación separada de esta base. Existe una publicación técnica estable `1.1.0` para su alcance congelado; el contenido posterior de `main` no adquiere automáticamente ese estado. La adopción concreta debe identificar y verificar la revisión elegida. Interpretar la estructura y los campos según la [gobernanza de la base](../docs/foundation-governance.es-419.md); el respaldo y los límites se registran en la [trazabilidad](../docs/traceability.es-419.md).
 
-Cuando exista una publicación estable aprobada, copiar la plantilla de esa publicación y su contraparte al proyecto consumidor, conservando los sufijos de idioma. Ajustar los enlaces al destino y a los nombres elegidos, y copiar o referenciar explícitamente el conjunto normativo adoptado mediante una referencia inmutable y su verificación, no solo mediante un nombre de versión. Reemplazar los campos entre corchetes en ambos archivos; durante la planificación pueden quedar pendientes, pero no declararse aprobados o verificados sin evidencia. La plantilla incompleta no es una definición aprobada. Registrar las decisiones aún desconocidas con responsable y momento de resolución; los detalles deben estar resueltos antes de la etapa que dependa de ellos.
+Copiar la plantilla de la revisión elegida y su contraparte al proyecto consumidor, conservando los sufijos de idioma. Ajustar los enlaces al destino y a los nombres elegidos, y copiar o referenciar explícitamente el conjunto normativo adoptado mediante una referencia inmutable y su verificación, no solo mediante un nombre de versión. Reemplazar los campos entre corchetes en ambos archivos; durante la planificación pueden quedar pendientes, pero no declararse aprobados o verificados sin evidencia. La plantilla incompleta no es una definición aprobada. Registrar las decisiones aún desconocidas con responsable y momento de resolución; los detalles deben estar resueltos antes de la etapa que dependa de ellos.
 
 ## BRIEF-001 — Identidad y propósito
 

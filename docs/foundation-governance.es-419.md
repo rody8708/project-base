@@ -5,6 +5,8 @@ Estado: propuesta; no aprobada para adopción estable.
 Idioma: español latinoamericano (`es-419`)  
 [Versión en inglés de Estados Unidos](foundation-governance.en-US.md) · [Inicio](../README.es-419.md) · [Respaldo y trazabilidad](traceability.es-419.md)
 
+> **Registro histórico:** el cuerpo conserva el estado de la propuesta documental anterior a las publicaciones aprobadas. Para el estado y procedimiento vigentes, consulta [cómo crear una aplicación con esta base](getting-started.es-419.md).
+
 ## Propósito, alcance y origen
 
 Este documento propone cómo revisar, validar, aprobar y conservar la base maestra. Es una propuesta local de organización: desarrolla la intención del usuario y los hallazgos de la auditoría, no declara conformidad con una norma externa. También debe revisarse y aprobarse antes de regir una publicación estable.

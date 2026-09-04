@@ -5,6 +5,8 @@ Status: proposal; not approved for stable adoption.
 Language: US English (`en-US`)  
 [Latin American Spanish version](foundation-governance.es-419.md) · [Home](../README.en-US.md) · [Support and traceability](traceability.en-US.md)
 
+> **Historical record:** the body preserves the documentary proposal state before the approved releases. For the current status and procedure, read [how to create an application with this foundation](getting-started.en-US.md).
+
 ## Purpose, Scope, and Origin
 
 This document proposes how to review, validate, approve, and preserve the master foundation. It is a local governance proposal that develops the user's intent and the audit findings; it does not claim compliance with an external standard. It must also be reviewed and approved before governing a stable release.
