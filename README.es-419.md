@@ -89,7 +89,7 @@ Usar `--template web-vanilla` para HTML/CSS/JavaScript sin framework, `--templat
 
 La [aprobación 1.0.0](releases/approval-1.0.0.es-419.md) vincula la publicación al [paquete conservado](releases/foundation-0.1.0-draft.4.zip) y su SHA-256. El nombre del ZIP mantiene su revisión editorial; el recibo externo establece la aprobación. No se modificó ese paquete para agregar las bases ejecutables.
 
-Lectura del núcleo: [gobernanza](docs/foundation-governance.es-419.md), [reglas](docs/immutable-rules.es-419.md), [fundamentos](docs/programming-fundamentals.es-419.md), [datos y tiempo](docs/data-and-time.es-419.md), [fallos y recursos](docs/failures-and-resources.es-419.md), [aplicabilidad](docs/applicability.es-419.md), [trazabilidad](docs/traceability.es-419.md), [flujo](docs/development-workflow.es-419.md) y [definición de proyecto](templates/project-brief.es-419.md).
+Lectura del núcleo: [gobernanza](docs/foundation-governance.es-419.md), [reglas](docs/immutable-rules.es-419.md), [estándares aplicables](docs/engineering-standards.es-419.md), [fundamentos](docs/programming-fundamentals.es-419.md), [datos y tiempo](docs/data-and-time.es-419.md), [fallos y recursos](docs/failures-and-resources.es-419.md), [aplicabilidad](docs/applicability.es-419.md), [trazabilidad](docs/traceability.es-419.md), [flujo](docs/development-workflow.es-419.md) y [definición de proyecto](templates/project-brief.es-419.md).
 
 Sus encabezados de borrador son la instantánea previa a aprobación. Los controles históricos con inventario fijo se ejecutan sobre una recuperación de aquel ZIP. Para el árbol de trabajo ampliado se usa `npm run check`. Una corrección o nueva publicación requiere una identidad nueva; ningún starter se vuelve estable por heredar la aprobación documental.
 

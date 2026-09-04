@@ -15,7 +15,7 @@ HTTP (JSON, language, validation, status codes)
 Task (immutable value and example rules) does not depend on Laravel.
 ```
 
-The service receives its repository and ID generator; it does not create connections or configure HTTP. The SQL adapter converts rows to domain values. Updates use an `id` and `version` condition: an outdated write cannot overwrite the preceding result. This mechanism protects the example's individual resource; it does not implement distributed transactions, general idempotency, or automatic conflict resolution.
+The service receives its repository and ID generator; it does not create connections or configure HTTP. The SQL adapter converts rows to domain values and translates `QueryException` failures into `PersistenceUnavailable`. The HTTP boundary knows only that stable category and returns 503 without importing provider classes or exposing SQL details. Updates use an `id` and `version` condition: an outdated write cannot overwrite the preceding result. This mechanism protects the example's individual resource; it does not implement distributed transactions, general idempotency, or automatic conflict resolution.
 
 Migrations separate initial `tasks` creation from adding `completed`/`version`. Updating an existing row and rolling back the schema are tested only in disposable test databases. Title and version limits are enforced in the domain; SQLite is not assumed to enforce `VARCHAR` lengths like other engines. No migration should run against consumer data without reviewing backups, permissions, and the transition.
 

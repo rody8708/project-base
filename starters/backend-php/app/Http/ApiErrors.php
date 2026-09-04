@@ -8,7 +8,7 @@ namespace App\Http;
 use App\Domain\TaskConflict;
 use App\Domain\TaskNotFound;
 use App\Domain\TaskValidationFailed;
-use Illuminate\Database\QueryException;
+use App\Application\PersistenceUnavailable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -23,7 +23,7 @@ final class ApiErrors
             $error instanceof TaskNotFound => [404, 'NOT_FOUND'],
             $error instanceof TaskConflict => [409, 'VERSION_CONFLICT'],
             $error instanceof ValidationException, $error instanceof TaskValidationFailed => [422, 'VALIDATION_FAILED'],
-            $error instanceof QueryException => [503, 'PERSISTENCE_UNAVAILABLE'],
+            $error instanceof PersistenceUnavailable => [503, 'PERSISTENCE_UNAVAILABLE'],
             $error instanceof HttpExceptionInterface => [$error->getStatusCode(), match ($error->getStatusCode()) {
                 400 => 'BAD_REQUEST', 404 => 'NOT_FOUND', 405 => 'METHOD_NOT_ALLOWED',
                 413 => 'PAYLOAD_TOO_LARGE', 415 => 'UNSUPPORTED_MEDIA_TYPE', 429 => 'RATE_LIMITED', default => 'HTTP_ERROR',

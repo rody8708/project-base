@@ -17,6 +17,7 @@ const approvedTechnicalRecordDigests = Object.freeze({
 const neutralMarkdown = new Set([
   'README.md',
   '.github/CONTRIBUTING.md',
+  '.github/PULL_REQUEST_TEMPLATE.md',
   '.github/SECURITY.md',
 ]);
 const excluded = new Set(['.git', '.validation', 'output', 'artifacts', 'node_modules', 'vendor', 'dist', 'build', 'coverage', '.dart_tool', '.fvm', '.gradle', '.kotlin', '.cxx', '.phpunit.cache', 'ephemeral', '.idea', 'Pods', '.symlinks']);
