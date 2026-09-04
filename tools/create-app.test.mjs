@@ -5,8 +5,11 @@ import assert from 'node:assert/strict';
 import * as fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createSolution } from './lib/project-export.mjs';
 import { interactiveCreate } from './create-app.mjs';
+
+const repositoryRoot = fileURLToPath(new URL('../', import.meta.url));
 
 async function temporaryParent(t) {
   const systemTemporary = await fs.realpath(os.tmpdir());
@@ -69,4 +72,9 @@ test('invalid presets fail before creating a destination', async (t) => {
   const destination = path.join(parent, 'invalid-app');
   await assert.rejects(createSolution({ preset: 'unknown', name: 'invalid-app', destination }), { code: 'INVALID_PRESET' });
   await assert.rejects(fs.lstat(destination), { code: 'ENOENT' });
+});
+
+test('the approved JSON receipt has a cross-platform byte-preservation rule', async () => {
+  const attributes = await fs.readFile(path.join(repositoryRoot, '.gitattributes'), 'utf8');
+  assert.match(attributes, /^releases\/foundation-0\.1\.0-draft\.4\.verification\.json text eol=crlf$/mu);
 });
