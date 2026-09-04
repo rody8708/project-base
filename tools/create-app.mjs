@@ -69,7 +69,7 @@ export async function interactiveCreate(reader = createInterface({ input, output
     const confirmed = (await reader.question(copy.confirm)).trim().toLowerCase();
     if (confirmed === 'n' || confirmed === 'no') return { result: 'CANCELLED' };
     if (selectedParent === '') await mkdir(parent, { recursive: true });
-    const result = await createSolution({ preset, backend, name, destination });
+    const result = await createSolution({ preset, backend, language, name, destination });
     writer.write(`${copy.ready}\n${path.join(result.destination, language === 'es-419' ? result.startHere : 'START-HERE.en-US.md')}\n`);
     return result;
   } finally { reader.close(); }

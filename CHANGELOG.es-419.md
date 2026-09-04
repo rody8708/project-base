@@ -14,6 +14,7 @@ Este archivo registra cambios posteriores a la publicación técnica congelada `
 - Exportación automática del perfil de capacidades con inventario SHA-256 en el recibo de adopción.
 - Correlación segura de solicitudes y registros estructurados de fallos operacionales en ambos starters backend ejecutables.
 - Un asistente bilingüe `npm run create-app` que genera soluciones completas con `app/`, `api/` y una guía `START-HERE` específica.
+- Comandos de raíz `doctor`, `setup`, `check` y `start` en cada solución generada para coordinar sus componentes sin memorizar instrucciones por tecnología.
 
 ### Cambiado
 

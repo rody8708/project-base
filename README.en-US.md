@@ -32,7 +32,7 @@ You can give this repository to a developer or coding assistant and ask: “I wa
 npm run create-app
 ```
 
-The assistant asks for language, application type, backend, name, and location. Press Enter to accept recommended choices and a default folder inside the user profile. It finishes by pointing to one `START-HERE` file containing the exact commands for the generated solution. The [application creation guide](docs/getting-started.en-US.md) then explains the complete process and its limits.
+The assistant asks for language, application type, backend, name, and location. Press Enter to accept recommended choices and a default folder inside the user profile. It finishes by pointing to one `START-HERE` file; inside the new folder, `npm run doctor`, `npm run setup`, `npm run check`, and `npm start` diagnose, prepare, verify, and start all of its components. The [application creation guide](docs/getting-started.en-US.md) then explains the complete process and its limits.
 
 [Isolated Docker lab: PHP 8.5 and HTTPS](starters/backend-php/docker-local.en-US.md).
 
@@ -68,7 +68,7 @@ Executable bases are replaceable starting points, not a commercial application o
 
 ## Start From a Base
 
-The recommended path for most people is `npm run create-app`. It offers a simple website, complete web application, mobile, desktop, native Android, or API-only project. When applicable, it creates one folder containing `app/` and `api/`; two manual exports are unnecessary.
+The recommended path for most people is `npm run create-app`. It offers a simple website, complete web application, mobile, desktop, native Android, or API-only project. When applicable, it creates one folder containing `app/` and `api/`; its four root commands coordinate both components without requiring the user to memorize technology-specific commands.
 
 Web fundamentals are distinguished from tools: HTML for structure and semantics, CSS for presentation and responsive layout, and JavaScript for behavior when needed. `web` uses React, TypeScript, and Vite; `web-vanilla` implements its own interface with HTML/CSS/JavaScript and does not need those tools. They are independent templates, not two modes of the same application. Node supports tests and the native variant's local server, not the code running in the browser.
 

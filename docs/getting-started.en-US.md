@@ -66,9 +66,18 @@ From the Project Base root, run:
 npm run create-app
 ```
 
-The assistant asks in ordinary language what to create, the preferred backend when needed, a name, and an existing folder in which to save it. It generates one solution with `app/` and/or `api/`, a `project-base.json` manifest, and `START-HERE.es-419.md` and `START-HERE.en-US.md` files. Open the indicated `START-HERE` file and run its blocks; manual template selection is unnecessary.
+The assistant asks in ordinary language what to create, the preferred backend when needed, a name, and a folder in which to save it. It generates one solution with `app/` and/or `api/`, a `project-base.json` manifest, and `START-HERE.es-419.md` and `START-HERE.en-US.md` files. Only four root commands need to be remembered inside the solution:
 
-The assistant does not install dependencies, use credentials, publish, or overwrite folders. If preparation remains incomplete, it retains the identified folder for inspection and does not present it as completed.
+```powershell
+npm run doctor
+npm run setup
+npm run check
+npm start
+```
+
+`doctor` inspects versions and tools; `setup` installs locked dependencies and prepares applicable local storage; `check` coordinates tests and verification; `start` launches the development components. None installs system tools, invents credentials, publishes, or approves the product for production.
+
+Initial creation does not install dependencies, use credentials, publish, or overwrite folders. Installation happens only after the user explicitly runs `npm run setup`. If creation remains incomplete, it retains the identified folder for inspection and does not present it as completed.
 
 ### Advanced path
 

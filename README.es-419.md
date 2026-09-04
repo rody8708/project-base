@@ -32,7 +32,7 @@ Puedes entregar este repositorio a un desarrollador o a un asistente de programa
 npm run create-app
 ```
 
-El asistente pregunta idioma, tipo de aplicación, backend, nombre y ubicación. Se puede presionar Enter para aceptar las opciones recomendadas y una carpeta predeterminada dentro del perfil del usuario. Al terminar indica un solo archivo `START-HERE` que contiene los comandos exactos para la solución creada. La [guía para crear una aplicación](docs/getting-started.es-419.md) explica después el proceso completo y sus límites.
+El asistente pregunta idioma, tipo de aplicación, backend, nombre y ubicación. Se puede presionar Enter para aceptar las opciones recomendadas y una carpeta predeterminada dentro del perfil del usuario. Al terminar indica un solo archivo `START-HERE`; dentro de la nueva carpeta, `npm run doctor`, `npm run setup`, `npm run check` y `npm start` diagnostican, preparan, comprueban e inician todos sus componentes. La [guía para crear una aplicación](docs/getting-started.es-419.md) explica después el proceso completo y sus límites.
 
 [Laboratorio Docker aislado: PHP 8.5 y HTTPS](starters/backend-php/docker-local.es-419.md).
 
@@ -68,7 +68,7 @@ Las bases ejecutables son puntos de partida reemplazables, no una aplicación co
 
 ## Empezar por una base
 
-El camino recomendado para la mayoría de las personas es `npm run create-app`. Permite elegir sitio web sencillo, aplicación web completa, móvil, escritorio, Android nativo o solo API. Cuando corresponde, crea una sola carpeta con `app/` y `api/`; no hace falta ejecutar manualmente dos exportaciones.
+El camino recomendado para la mayoría de las personas es `npm run create-app`. Permite elegir sitio web sencillo, aplicación web completa, móvil, escritorio, Android nativo o solo API. Cuando corresponde, crea una sola carpeta con `app/` y `api/`; sus cuatro comandos de raíz coordinan ambos componentes sin exigir que la persona memorice comandos por tecnología.
 
 En web se distinguen los fundamentos de las herramientas: HTML para estructura y semántica, CSS para presentación y adaptabilidad, y JavaScript para comportamiento cuando haga falta. `web` usa React, TypeScript y Vite; `web-vanilla` implementa su propia interfaz con HTML/CSS/JavaScript y no necesita esas herramientas. Son plantillas independientes, no dos modos de la misma aplicación. Node sirve para las pruebas y el servidor local de la variante nativa, no como dependencia del código que ejecuta el navegador.
 

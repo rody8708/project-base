@@ -66,9 +66,18 @@ Desde la raíz de Project Base ejecutar:
 npm run create-app
 ```
 
-El asistente pregunta en lenguaje común qué se quiere crear, el backend preferido cuando haga falta, un nombre y una carpeta existente donde guardarlo. Genera una sola solución con `app/` y/o `api/`, un manifiesto `project-base.json` y archivos `START-HERE.es-419.md` y `START-HERE.en-US.md`. Abrir el `START-HERE` indicado y ejecutar sus bloques; no es necesario escoger plantillas manualmente.
+El asistente pregunta en lenguaje común qué se quiere crear, el backend preferido cuando haga falta, un nombre y una carpeta donde guardarlo. Genera una sola solución con `app/` y/o `api/`, un manifiesto `project-base.json` y archivos `START-HERE.es-419.md` y `START-HERE.en-US.md`. Dentro de la solución sólo hay que recordar cuatro comandos de raíz:
 
-El asistente no instala dependencias, no usa credenciales, no publica y no sobrescribe carpetas. Si la preparación queda incompleta, conserva la carpeta identificada para inspección y no la presenta como terminada.
+```powershell
+npm run doctor
+npm run setup
+npm run check
+npm start
+```
+
+`doctor` revisa versiones y herramientas; `setup` instala dependencias bloqueadas y prepara el almacenamiento local aplicable; `check` coordina pruebas y verificaciones; `start` inicia los componentes de desarrollo. Ninguno instala herramientas del sistema, inventa credenciales, publica o aprueba el producto para producción.
+
+La creación inicial no instala dependencias, no usa credenciales, no publica y no sobrescribe carpetas. La instalación sólo ocurre después si la persona ejecuta explícitamente `npm run setup`. Si la creación queda incompleta, conserva la carpeta identificada para inspección y no la presenta como terminada.
 
 ### Camino avanzado
 
