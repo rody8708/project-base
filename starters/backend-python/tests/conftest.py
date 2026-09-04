@@ -19,12 +19,23 @@ TOKEN = "a" * 64
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
+    parser.addoption("--recovery-repeat", type=int, default=1)
+    parser.addoption("--recovery-diagnostics", action="store_true")
+    parser.addoption("--recovery-fragment-body", action="store_true")
     parser.addoption(
         "--database-engine", choices=("sqlite", "postgresql", "mysql"), default="sqlite"
     )
     parser.addoption("--docker-wsl", default=None, help="WSL distribution running Docker")
     parser.addoption("--live-http", action="store_true", help="Test through a real loopback server")
     parser.addoption("--live-https", action="store_true", help="Use disposable verified TLS")
+
+
+def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
+    if "recovery_iteration" in metafunc.fixturenames:
+        count = metafunc.config.getoption("--recovery-repeat")
+        if not 1 <= count <= 100:
+            raise pytest.UsageError("--recovery-repeat must be between 1 and 100")
+        metafunc.parametrize("recovery_iteration", range(count))
 
 
 @pytest.fixture(scope="session")

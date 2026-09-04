@@ -9,6 +9,7 @@ from collections.abc import Awaitable, Callable
 from fastapi import Depends, FastAPI, Header, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from starlette.concurrency import run_in_threadpool
 from starlette.exceptions import HTTPException as StarletteHttpException
 from starlette.middleware.cors import CORSMiddleware
 
@@ -46,6 +47,12 @@ def create_app(
         title="Foundation Tasks API", version="1.0.0-draft.2", docs_url=None, redoc_url=None
     )
     service = TaskService(uow_factory)
+
+    def consume_rate(key: str, window: int) -> None:
+        with uow_factory() as uow:
+            if not uow.rates.consume(key, window, 120):
+                raise ApiError(429, "RATE_LIMITED", "Too many requests.")
+
     if allowed_origins:
         app.add_middleware(
             CORSMiddleware,
@@ -75,9 +82,7 @@ def create_app(
                 key = hashlib.sha256(
                     (request.client.host if request.client else "unknown").encode()
                 ).hexdigest()
-                with uow_factory() as uow:
-                    if not uow.rates.consume(key, int(time.time() // 60), 120):
-                        raise ApiError(429, "RATE_LIMITED", "Too many requests.")
+                await run_in_threadpool(consume_rate, key, int(time.time() // 60))
             response = await call_next(request)
         except ApiError as error:
             response = error_response(request, error)
@@ -159,7 +164,7 @@ def create_app(
     async def create_task(
         request: Request, current: Principal = Depends(principal)
     ) -> JSONResponse:
-        task = service.create(current, await json_object(request))
+        task = await run_in_threadpool(service.create, current, await json_object(request))
         return JSONResponse(
             {"data": task_dict(task)},
             status_code=201,
@@ -174,13 +179,16 @@ def create_app(
     async def replace_task(
         task_id: str, request: Request, current: Principal = Depends(principal)
     ) -> dict[str, object]:
-        return {"data": task_dict(service.replace(current, task_id, await json_object(request)))}
+        task = await run_in_threadpool(
+            service.replace, current, task_id, await json_object(request)
+        )
+        return {"data": task_dict(task)}
 
     @app.delete("/api/v1/tasks/{task_id}", status_code=204)
     async def delete_task(
         task_id: str, request: Request, current: Principal = Depends(principal)
     ) -> Response:
-        service.delete(current, task_id, await json_object(request))
+        await run_in_threadpool(service.delete, current, task_id, await json_object(request))
         return Response(status_code=204)
 
     return app

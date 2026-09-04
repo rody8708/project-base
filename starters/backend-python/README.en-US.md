@@ -17,9 +17,10 @@ It is a technical foundation. It does not generate your particular business rule
 
 ## Quick start
 
-Install Python 3.13 and [uv](https://docs.astral.sh/uv/), then:
+Install [uv](https://docs.astral.sh/uv/), then use the starter's pinned isolated runtime:
 
 ```powershell
+uv python install 3.13.15
 uv sync --locked --all-extras
 uv run python -m project_base_api.migrate_cli up
 uv run python -m project_base_api.token_cli local-user

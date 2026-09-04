@@ -7,6 +7,7 @@
 From this starter, with Python 3.13, uv, and Docker:
 
 ```powershell
+uv python install 3.13.15
 uv sync --locked --all-extras
 uv run ruff check .
 uv run mypy
@@ -30,6 +31,34 @@ The concurrency correction lives exclusively in infrastructure: dialect-specific
 Certificates and keys are temporary; the CA key stays in memory. Server certificates, keys, and SQLite databases are removed afterward. Containers have owned random names, loopback ports, and temporary in-memory storage without user mounts. PostgreSQL/MySQL dumps remain in process memory and are never printed. Downloaded images and tool caches are retained. Tests do not read `.env` or use real databases or credentials. These are not production backup commands.
 
 ## Evidence and Limits
+
+### Correction of Reproduced Blocking
+
+Post-change verification: Ruff and mypy passed; 31 tests per engine with `--live-https --recovery-diagnostics --recovery-repeat=3`; 100 additional SQLite recoveries with `--recovery-repeat=100 --recovery-diagnostics --recovery-fragment-body`, without increasing the timeout. Fragmentation sends the PUT JSON as individual bytes separated by one millisecond to exercise partial reception. All 72 root tests and documentation/architecture checks passed. The new environment is Python 3.13.15 and SQLite 3.53.1; global Python 3.13.6 remains installed. Test resources were removed; user databases were untouched.
+
+Further investigation reproduced a `ReadTimeout` after 30 successful recoveries. The trace placed the server inside `do_commit`, with HTTPS established and the body received: the response arrived beyond the five-second budget. It occurred on initial creation, not the historical PUT; this demonstrates the same class of wait, not retrospective proof of that untraced episode.
+
+Two controlled regressions failed before the change: a retained SQLite reader prevented a writer from committing within two seconds; a stalled application operation prevented another HTTPS connection to health from completing. The SQLite adapter now configures `journal_mode=WAL` and `synchronous=FULL` for local files, and the transport runs synchronous rate limiting and write operations in the worker pool. Transactions remain complete within the worker. Both regressions pass after the change; the original timeout was not increased.
+
+The starter pins uv-managed Python `3.13.15` (SQLite `3.53.1` verified on Windows) without replacing global Python. The adapter rejects SQLite older than `3.51.3` for files, avoiding WAL activation on a version affected by SQLite's documented WAL-reset bug. CI installs the same runtime through uv; startup diagnosis locates that runtime without downloading it.
+
+WAL needs local storage and `-wal`/`-shm` sidecars; do not use network folders or copy only the main file of an open database. The native backup API remains the tested procedure. The mode persists in existing files: stop clients and back up before adoption. To revert, close connections, complete checkpointing, and deliberately switch to `journal_mode=DELETE`; never manually delete sidecars. `FULL` retains synchronization at each commit; neither `NORMAL` nor `OFF` was adopted. See [SQLite WAL](https://www.sqlite.org/wal.html) and [synchronous](https://www.sqlite.org/pragma.html#pragma_synchronous).
+
+`PY-LAB-001` status: reproduced blocking mechanisms corrected; the specific historical episode cannot be attributed with retrospective certainty. A stalled disk, retained external writer, or saturated pool is not guaranteed to respond within five seconds. Diagnostics remain available to distinguish these operational limits from a regression.
+
+### Initial Diagnostic Phase Record
+
+The following records describe the earlier investigation, before the correction above; their open status and test counts are historical, not the current result.
+
+```powershell
+uv run pytest tests/integration/test_recovery.py --recovery-repeat=40 --recovery-diagnostics -s --tb=short
+```
+
+`--recovery-repeat` accepts 1 through 100 and creates isolated resources per iteration. Omit `--recovery-diagnostics` to compare without instrumentation. The HTTP timeout remains five seconds. Optional instrumentation records SQL durations, client connect/send/receive stages, and server HTTP progress; it retains at most 80 events. Network failures capture stack function/file names and line numbers before server shutdown, never local variables. SQL text, parameters, headers, bodies, and exception text are not recorded. `-s` also displays successful summaries; CI retains failure diagnostics and repeats three recoveries per engine.
+
+September 4, 2026 investigation based on `bf225bf`, branch `diagnose/python-recovery-timeout`, same Windows/Python 3.13.6 environment: **340 SQLite recovery flows passed** in the campaign (40 isolated instrumented runs; four simultaneous processes of 40 with independent databases; 100 without instrumentation; 40 within the full suite). The last execution passed 66 tests. The timeout did not recur. The first 200 measurements placed the entire flow at approximately 0.54–0.81 seconds and the largest observed query at about 28.5 ms; these are not performance guarantees. Tests were added for bounded events, omission of sensitive values, and disabled diagnostics.
+
+**PY-LAB-001 remains open: cause undetermined.** There is no evidence attributing the historical episode to SQLite, TLS, the server, or the host. No production code was changed and no correction is claimed. On recurrence, compare the last client stage with `body.wait`, `sql.begin`/`sql.end`, and response stages before selecting a correction.
 
 Final local result: **25 tests passed per engine**, with Ruff and mypy passing. Removal of owned containers, SQLite files, and temporary TLS material was checked; cached images remain. Root checks passed 71 tests and documentation/architecture validation.
 

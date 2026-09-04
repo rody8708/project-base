@@ -36,7 +36,7 @@ export const TEMPLATE_FILES = Object.freeze({
   'kotlin-android': Object.freeze(['settings.gradle.kts', 'build.gradle.kts', 'app/build.gradle.kts', 'core/build.gradle.kts', 'app/gradle.lockfile', 'core/gradle.lockfile', 'gradle/verification-metadata.xml', 'gradle/wrapper/gradle-wrapper.properties', 'gradle/wrapper/gradle-wrapper.jar', 'gradlew', 'gradlew.bat']),
   'backend-php': Object.freeze(['composer.json', 'composer.lock', 'artisan', 'bootstrap/app.php']),
   'backend-node': Object.freeze(['package.json', 'package-lock.json', 'tsconfig.json', 'src/server.ts']),
-  'backend-python': Object.freeze(['pyproject.toml', 'uv.lock', 'src/project_base_api/main.py']),
+  'backend-python': Object.freeze(['.python-version', 'pyproject.toml', 'uv.lock', 'src/project_base_api/main.py']),
 });
 export const APPROVED_DOCUMENTARY_RELEASE = Object.freeze({
   version: '1.0.0',
