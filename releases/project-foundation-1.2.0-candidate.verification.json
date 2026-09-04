@@ -1,0 +1,2891 @@
+{
+  "formatVersion": 1,
+  "proposedVersion": "1.2.0",
+  "sourceCommit": "9007083275cb083bc39479288d5adbc60496cc1a",
+  "archive": "project-foundation-1.2.0-candidate.zip",
+  "sha256": "fa353b14d2c7101d21074778513c7a15fbb13e0c81dbab29d582cd9c6c8fb5a6",
+  "bytes": 2844053,
+  "result": "IDENTITY_AND_RECOVERY_PASS",
+  "approval": "NOT_GRANTED",
+  "checksFromRecovery": "PASS",
+  "recoveryChecks": {
+    "environment": "Windows; Node 24.16.0; Python 3.13.15; Docker in Ubuntu-24.04 WSL",
+    "maintenanceTests": 73,
+    "documentationAndArchitecture": "PASS",
+    "nodeFastTests": 9,
+    "nodeOperations": ["sqlite:PASS", "postgresql:PASS", "mysql:PASS"],
+    "nodeWebIntegration": "PASS",
+    "pythonRuffAndMypy": "PASS",
+    "pythonSqliteHttpsTests": 31,
+    "sourcePullRequest": "https://github.com/rody8708/project-base/pull/30",
+    "sourceCi": "https://github.com/rody8708/project-base/actions/runs/33927228907",
+    "limits": "No Apple native validation, physical-device acceptance, production approval, or owner release approval. Recovery workspace retained as local validation evidence."
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "length": 374,
+      "sha256": "8169829b80c97a545ae79af9c26854b403b9bcf3941d3923fbc18b08872d23c5"
+    },
+    {
+      "path": ".github/CONTRIBUTING.en-US.md",
+      "length": 2139,
+      "sha256": "53256a001dd2e0261ca2c1544ba675bd7807275a4d2284cea4b3bc66496d8248"
+    },
+    {
+      "path": ".github/CONTRIBUTING.es-419.md",
+      "length": 2242,
+      "sha256": "d5836ee00bf1640e245f0bcfdbd78d746cb5d5e7b407b8e1699985e954c6fc4f"
+    },
+    {
+      "path": ".github/CONTRIBUTING.md",
+      "length": 120,
+      "sha256": "1435e40f4b7ce0dcc43c81301beffcaf6679ff6354edcc4100f502650713167b"
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "length": 910,
+      "sha256": "fe92ec553e13e63773699c22acd298cf9ddeedfd38351b94f0e3ff7c0c133a99"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "length": 3484,
+      "sha256": "0655b08b084dcf01b272f1ccc39bfbaf30a065f6a33ac11ba0ff5172146afb95"
+    },
+    {
+      "path": ".github/SECURITY.en-US.md",
+      "length": 1755,
+      "sha256": "358bc48d94da1ba8cd64e2ea274669ae754fb5718693e3bba4d2e9abfcdb3d9c"
+    },
+    {
+      "path": ".github/SECURITY.es-419.md",
+      "length": 1908,
+      "sha256": "ccd434974f5e7279f75ed6907717381075f58c6f2af7d67944d4e3e812361334"
+    },
+    {
+      "path": ".github/SECURITY.md",
+      "length": 107,
+      "sha256": "409baa0871b3d7492e56a73812c557c86c723ed2b0a20cef8d596982099f7614"
+    },
+    {
+      "path": ".github/workflows/technical-bases.yml",
+      "length": 7715,
+      "sha256": "373f4adcdbb93b5d2d437642a80a178cf62ff5a6efadf20a705cce1dfe345701"
+    },
+    {
+      "path": ".gitignore",
+      "length": 802,
+      "sha256": "11b5d75fb96107e71d5fdd53e01083d2edf2d10ce95f6b827fd3758013ef173c"
+    },
+    {
+      "path": ".nvmrc",
+      "length": 8,
+      "sha256": "2722b61f414f07f08be7f1f1316012813818f26f1c40d6a24a748686cec7d2ff"
+    },
+    {
+      "path": "AGENTS.md",
+      "length": 2569,
+      "sha256": "5b574bb9c550e8c730c34463750044540929af30ed1c27cdbed0e21d6a37275f"
+    },
+    {
+      "path": "CHANGELOG.en-US.md",
+      "length": 2357,
+      "sha256": "0b009bca0890cf625cfc7bd29c832ca5e01eb2f6296d41cd6e4786b5cff847f2"
+    },
+    {
+      "path": "CHANGELOG.es-419.md",
+      "length": 2617,
+      "sha256": "7db2720c78109eed2b200f35e2e78540adb8ee2627c8c536e538a48809c3ba88"
+    },
+    {
+      "path": "docs/agent-guide.en-US.md",
+      "length": 4251,
+      "sha256": "ab1596a2d2be51c63787a8da410b687b6ff1a8e1adef343ba39c633436f22749"
+    },
+    {
+      "path": "docs/agent-guide.es-419.md",
+      "length": 4625,
+      "sha256": "6a083653d1b3b2d2c9bb659cbfaec937654fe88f7a3415e9e98a13e6f3cf3e44"
+    },
+    {
+      "path": "docs/applicability.en-US.md",
+      "length": 22707,
+      "sha256": "e380421a6d59b4552f67402936e04f0f7ae70eeb9c8f5d497b749febe34cfa8e"
+    },
+    {
+      "path": "docs/applicability.es-419.md",
+      "length": 23963,
+      "sha256": "268baa99899e2ec32473601652ef29f2371094472475ecd24d92ecf9e45c40b4"
+    },
+    {
+      "path": "docs/core-verification.en-US.md",
+      "length": 25673,
+      "sha256": "65f26ad72e287a8c08bbfd1d311de2768214052616dbee7af6dc9904ea5404ee"
+    },
+    {
+      "path": "docs/core-verification.es-419.md",
+      "length": 26322,
+      "sha256": "004519288846d156a7fda2f776fab0cde76a27c978143a935c2eb581cd401353"
+    },
+    {
+      "path": "docs/data-and-time.en-US.md",
+      "length": 9612,
+      "sha256": "20ba21487f40dd2f312b953e0ab2f1b0689df0809131fb570057b66313f5febd"
+    },
+    {
+      "path": "docs/data-and-time.es-419.md",
+      "length": 10096,
+      "sha256": "1fdf7b6b977e7f6a5a8cacea4bace4b189038a4fb98cf478065140fe9c1dc784"
+    },
+    {
+      "path": "docs/development-workflow.en-US.md",
+      "length": 6296,
+      "sha256": "df8cd87ea0e9246e5ad666ea7397b9195c7589c77d3ed73ea98736efd3cb3d73"
+    },
+    {
+      "path": "docs/development-workflow.es-419.md",
+      "length": 6820,
+      "sha256": "cb12f7603fe2285545f1c7dfeb77da88ae560a75e9407e10736bc664fc4ed856"
+    },
+    {
+      "path": "docs/document-checks.en-US.md",
+      "length": 11229,
+      "sha256": "cdc829943efc941fe48267d56e25faa224f5d470d00dcc7c87e221c19b3df459"
+    },
+    {
+      "path": "docs/document-checks.es-419.md",
+      "length": 11506,
+      "sha256": "da46f585d0b24127e8363ce6145cbf45f9058188b3f45453e227c9a7e7a4e868"
+    },
+    {
+      "path": "docs/engineering-standards.en-US.md",
+      "length": 9286,
+      "sha256": "3bbf3dab99464f83b29e9b843708a50e3b870bb3e0b6a7713badf56e6063386e"
+    },
+    {
+      "path": "docs/engineering-standards.es-419.md",
+      "length": 9943,
+      "sha256": "afb6c59d9f00b5d4878c1cdf532aa06256d816e532d47a3008d173dd307cfbd6"
+    },
+    {
+      "path": "docs/failures-and-resources.en-US.md",
+      "length": 8948,
+      "sha256": "8268ca182e0117ff6ce07d18e17f828774dbd79ab283578f09a17b31761f252a"
+    },
+    {
+      "path": "docs/failures-and-resources.es-419.md",
+      "length": 9475,
+      "sha256": "60a5665164615735f44f68fc224c7b6cbbb90e3757171c85fc7e107d8b09233c"
+    },
+    {
+      "path": "docs/foundation-governance.en-US.md",
+      "length": 20147,
+      "sha256": "13064e755c93fdc302f66952d04f85e4b901569525f8666660ed4f1a172fc4f6"
+    },
+    {
+      "path": "docs/foundation-governance.es-419.md",
+      "length": 22115,
+      "sha256": "9ce3217e5ecc3a8b26f979d53eb45c597380e9ebce9ed4a7f2b9e793a410dea5"
+    },
+    {
+      "path": "docs/fundamentals-verification.en-US.md",
+      "length": 8738,
+      "sha256": "88b07ecea3a04fc469613506d90a81d9610acdf574d53d7844a856bf5e43f843"
+    },
+    {
+      "path": "docs/fundamentals-verification.es-419.md",
+      "length": 9138,
+      "sha256": "bf765108fab72c0f9f56418240ca3a80d8f71ea7f2693dad04e91702f9715e8e"
+    },
+    {
+      "path": "docs/getting-started.en-US.md",
+      "length": 10091,
+      "sha256": "33631a35147c38f8b7c71e834b42322b29ae9cf9af7ac6eea36f8fc126f69db1"
+    },
+    {
+      "path": "docs/getting-started.es-419.md",
+      "length": 10905,
+      "sha256": "c27f1433a293989e571975fb1078fd4f1bd56f4e621f406941ed3c89ca40944b"
+    },
+    {
+      "path": "docs/immutable-rules.en-US.md",
+      "length": 13705,
+      "sha256": "e2cff33c26eb78df46beb5d6b0685063a682951be44832882b30b005e7141293"
+    },
+    {
+      "path": "docs/immutable-rules.es-419.md",
+      "length": 14875,
+      "sha256": "857ed921ae4b4304021eadf6368a7235ae686a3e9879bde4b4c2a4e578cc7348"
+    },
+    {
+      "path": "docs/platform-guidelines.en-US.md",
+      "length": 4447,
+      "sha256": "6af83360fb83818cad91cb9a021b57b8fc90bfa348b853aef197eecb45c3f273"
+    },
+    {
+      "path": "docs/platform-guidelines.es-419.md",
+      "length": 4827,
+      "sha256": "65a557a9def6466415bb6864c53b2c12dace60467b9590fa07220340c9519ddd"
+    },
+    {
+      "path": "docs/programming-fundamentals.en-US.md",
+      "length": 20493,
+      "sha256": "0da6514547864f1d7f38f323f84a20710fc86c0faa4df001eebb7b815b45856d"
+    },
+    {
+      "path": "docs/programming-fundamentals.es-419.md",
+      "length": 21164,
+      "sha256": "dc1889b0f5f5f5672ebb84fbf022978c3937c041f2b272bb957b1264063f2448"
+    },
+    {
+      "path": "docs/release-readiness.en-US.md",
+      "length": 7728,
+      "sha256": "b584f2721f14ab58ec57d8e98dcf6c2cfc5ef6048e3ecd98a6f044335732c349"
+    },
+    {
+      "path": "docs/release-readiness.es-419.md",
+      "length": 8471,
+      "sha256": "d42940808c67edf6c37bf6278659fadfe8878bf0b4bf7cd377e4d802c69dede2"
+    },
+    {
+      "path": "docs/release-tools.en-US.md",
+      "length": 26682,
+      "sha256": "953c6a1001612ef6b596c511dc00df802e1d974bf631072b715108398536af67"
+    },
+    {
+      "path": "docs/release-tools.es-419.md",
+      "length": 26973,
+      "sha256": "6417f08728d1278875687e7a405ef4ba009e86ef986819b4cb011cc97804b3c9"
+    },
+    {
+      "path": "docs/technical/api-boundary.en-US.md",
+      "length": 5939,
+      "sha256": "ce3f77f217f6a2958c23b573d37ef63a3f9235c577d9d56413876171939fc32a"
+    },
+    {
+      "path": "docs/technical/api-boundary.es-419.md",
+      "length": 6330,
+      "sha256": "4b49cdcc32d760bc6a5ac9e242870e65cb06f97e946b3e3ac0a4223689e652d6"
+    },
+    {
+      "path": "docs/technical/api-integration.en-US.md",
+      "length": 6626,
+      "sha256": "b6d3b4d2e2f665b8bd46c61623a165ecb33fc4f07aebb08811b9976bbef547b3"
+    },
+    {
+      "path": "docs/technical/api-integration.es-419.md",
+      "length": 7264,
+      "sha256": "515edbbdf71489e393ebfd6701a1f1099c1daa178b2094fbe4ff0ffcac95d809"
+    },
+    {
+      "path": "docs/technical/backend-architecture.en-US.md",
+      "length": 2170,
+      "sha256": "52942f0c563dd1f38deef3ca55c542737c6de308b943ef82c89b0e1088caabfc"
+    },
+    {
+      "path": "docs/technical/backend-architecture.es-419.md",
+      "length": 2305,
+      "sha256": "859205c5059388c025e42158f22a43173424be84f54826ba9af6e40d0621c28f"
+    },
+    {
+      "path": "docs/technical/implementation.en-US.md",
+      "length": 8965,
+      "sha256": "1f1b24d37c20e64fcbbd5352e6d2a956052deee3e5582c4252f135ab45759398"
+    },
+    {
+      "path": "docs/technical/implementation.es-419.md",
+      "length": 9554,
+      "sha256": "a9294f89f8b5906f3954ead81d0740cf5ce5cb0d0f60f357ed9576e5ff6859c1"
+    },
+    {
+      "path": "docs/technical/persistence-boundary.en-US.md",
+      "length": 5334,
+      "sha256": "256c62cffa0788bcdf682d7d0d789b5da74507cc1034eb0013960f557e21b41b"
+    },
+    {
+      "path": "docs/technical/persistence-boundary.es-419.md",
+      "length": 5690,
+      "sha256": "43c83d4cdc72ed4bf10522b62af80cad1364e4749279049ea13c3c63c7e127cf"
+    },
+    {
+      "path": "docs/technical/security-production.en-US.md",
+      "length": 7535,
+      "sha256": "c5ba7f8c6fa5dc7c94e4653ce053fca885e60b0caffd9d58129b6464cc209d50"
+    },
+    {
+      "path": "docs/technical/security-production.es-419.md",
+      "length": 8322,
+      "sha256": "6e7235df1337d176aa6d5756aa06f9f6386953a76b42bed4813832038b0efdad"
+    },
+    {
+      "path": "docs/technical/stability-review.en-US.md",
+      "length": 4581,
+      "sha256": "7013974763ca28e3a80506cfb2dc731e7cb09f50865597684a29a809511f69a4"
+    },
+    {
+      "path": "docs/technical/stability-review.es-419.md",
+      "length": 4902,
+      "sha256": "57ad30255605978a13ae98e0c47ea50b8605aee4ebd9e8f751c5e82f116658bd"
+    },
+    {
+      "path": "docs/technical/stability-status.en-US.md",
+      "length": 2026,
+      "sha256": "79d8798bd71ca22b505c9ffc9eb87751e4f501dd99f2171a31f6b30209d31c83"
+    },
+    {
+      "path": "docs/technical/stability-status.es-419.md",
+      "length": 2228,
+      "sha256": "b3864cd70493a4204f7616ef41aae7e13b816d4af7ee81937d2de82c30e08b4a"
+    },
+    {
+      "path": "docs/technical/technology-choices.en-US.md",
+      "length": 10803,
+      "sha256": "e216d655dbda40d307f506bcfbf6aa7d22cc583531ce38d86c1587b38c37c787"
+    },
+    {
+      "path": "docs/technical/technology-choices.es-419.md",
+      "length": 11390,
+      "sha256": "f2156bb974ff43df31ca803f42a3048ee0de632830dde0ba78a18040e8e91148"
+    },
+    {
+      "path": "docs/technical/verification.en-US.md",
+      "length": 21012,
+      "sha256": "8f70d1cfd8b18677261f10629c3302c22490ba4c499a899c0bf7befedf75f405"
+    },
+    {
+      "path": "docs/technical/verification.es-419.md",
+      "length": 22646,
+      "sha256": "7e73bf01b1eb69fbc2b568ec4288481520b621fcf0b0e52c5803431ec9c1c6a8"
+    },
+    {
+      "path": "docs/traceability.en-US.md",
+      "length": 41125,
+      "sha256": "0ee03909b48021f2a634a4d96da29b6f6556bafb3a54922b0a478e8300e425c3"
+    },
+    {
+      "path": "docs/traceability.es-419.md",
+      "length": 43057,
+      "sha256": "4708fcad888d2ec87002be69d1d7ce48aa708337ea9714af4c65d069289c85af"
+    },
+    {
+      "path": "LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "LICENSE-SCOPE.en-US.md",
+      "length": 2341,
+      "sha256": "a8e384fb37124667292cb64d5be656b48d356242f37f3665b87f6cbc06a69ac2"
+    },
+    {
+      "path": "LICENSE-SCOPE.es-419.md",
+      "length": 2546,
+      "sha256": "e43b487719ec4a2faadd302e52812215109fcd20025b0c76bd764230359c2a5b"
+    },
+    {
+      "path": "package-lock.json",
+      "length": 6393,
+      "sha256": "2c6cb7b3e90c467c1ecaf06ff8e33e7db0c5b4eaf9603e8fe7f0c00353518bc6"
+    },
+    {
+      "path": "package.json",
+      "length": 1133,
+      "sha256": "ee52eac6f0b372c5ee6b60089ce546a2ffa2433df2c3694268001be1f7118bd4"
+    },
+    {
+      "path": "README.en-US.md",
+      "length": 11960,
+      "sha256": "ee0bc09471e6dabb704df32b158c6f3997094ac4dc2c47fe967fcd45ab658127"
+    },
+    {
+      "path": "README.es-419.md",
+      "length": 12931,
+      "sha256": "5dba6e74ccb35d981825a2d6ca46b10286397d6ca551a069783aaca53b2209ef"
+    },
+    {
+      "path": "README.md",
+      "length": 12915,
+      "sha256": "e79025ddfbae43eff0f0f73cbb58d85edf264db212d1f0d4d33ad480bc2caf58"
+    },
+    {
+      "path": "releases/approval-1.0.0.en-US.md",
+      "length": 3002,
+      "sha256": "dd4400c4779141a65bdd51c296712655865fe85fb2ce56a1024e762de05ea6cb"
+    },
+    {
+      "path": "releases/approval-1.0.0.es-419.md",
+      "length": 3173,
+      "sha256": "4d268b48ad6c1cf0d6c4b0667ae92ee46e2a4fdca8e1fd669e43dfa18a8ac350"
+    },
+    {
+      "path": "releases/approval-1.1.0.en-US.md",
+      "length": 3320,
+      "sha256": "cb804779e1d4e87d94af6142d440957971b861aa44d15878f5770b530dd8c1e9"
+    },
+    {
+      "path": "releases/approval-1.1.0.es-419.md",
+      "length": 3460,
+      "sha256": "cb5c8a830fa599dd0128b1e290ac58a7125f0acc17ce635a97b79e54dea3e1a1"
+    },
+    {
+      "path": "releases/candidate-1.1.0.en-US.md",
+      "length": 1993,
+      "sha256": "5e244387a73138a98855507967c7282a007eca715991bb8a2b45aa1287d00862"
+    },
+    {
+      "path": "releases/candidate-1.1.0.es-419.md",
+      "length": 2158,
+      "sha256": "fc16beb3213aab4f496ebdf8f29e2d13802772d350ca6e48aab467ddb31f2ff4"
+    },
+    {
+      "path": "releases/foundation-0.1.0-draft.4.verification.json",
+      "length": 17275,
+      "sha256": "c0ea514c22b4eca33aca4cae308e2e78704733f56df66edd73c9f8337ad5449b"
+    },
+    {
+      "path": "releases/foundation-0.1.0-draft.4.zip",
+      "length": 182291,
+      "sha256": "9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a"
+    },
+    {
+      "path": "releases/project-foundation-1.1.0-candidate.verification.json",
+      "length": 2429,
+      "sha256": "c54a6766a945ce4ce744337278fd842b3e25964eced653efa919df306c42c9a6"
+    },
+    {
+      "path": "releases/project-foundation-1.1.0-candidate.zip",
+      "length": 1390677,
+      "sha256": "85fbb1ccaaad6a987b68e09c0767bf3d3ff25cc0ec6635d2f4fd1ea5c53ea848"
+    },
+    {
+      "path": "scripts/api-contract.test.mjs",
+      "length": 1412,
+      "sha256": "6e39f874120a0263582a3e19ec369c1026563094816b13cb75dfd00c3897cc52"
+    },
+    {
+      "path": "scripts/check-architecture.mjs",
+      "length": 6315,
+      "sha256": "d2fb4595a61f1e00286082d74c33ea8fd72a4292872fd30548ad2d9d96d53c17"
+    },
+    {
+      "path": "scripts/check-architecture.test.mjs",
+      "length": 5827,
+      "sha256": "9be5a623da2d87caf5b441ae01480ec7d6748122ca164a6619d211aed0579f32"
+    },
+    {
+      "path": "scripts/check-repository.mjs",
+      "length": 6604,
+      "sha256": "21db240c5d68b146f0abfac1e5490a47261026959bc9d11b56bc9668a750a98c"
+    },
+    {
+      "path": "scripts/check-repository.test.mjs",
+      "length": 2767,
+      "sha256": "5a4835ece72611e4ae56522e14f140dfc1f124ec0ff0f0e5bdf2a30c67bb2ff3"
+    },
+    {
+      "path": "scripts/license.test.mjs",
+      "length": 3790,
+      "sha256": "bd22c5c09598406cfb4cb21a0f67afd73a424f6a4340b23572d0d8522ae7f913"
+    },
+    {
+      "path": "scripts/test-api-integration.mjs",
+      "length": 8743,
+      "sha256": "96f20243715da4ae5a49782b0ed73043766f0f2ec74d7a9236933d73f53b7f2e"
+    },
+    {
+      "path": "scripts/test-node-api-integration.mjs",
+      "length": 3569,
+      "sha256": "b7052792370e8efd09e59f8a3f96a1d64a9527ffa6b1487f37a262e404445952"
+    },
+    {
+      "path": "starters/backend-node/.env.example",
+      "length": 339,
+      "sha256": "d341fe630a3d0789d4b394eb5fd5e5be91e28956a1c205cac93660fe3167f9f8"
+    },
+    {
+      "path": "starters/backend-node/.gitignore",
+      "length": 117,
+      "sha256": "d53681f380435f1b8bd5e93a488d38d4c1a332d92c19b29353e2cfbed2fbde09"
+    },
+    {
+      "path": "starters/backend-node/.npmrc",
+      "length": 35,
+      "sha256": "3b88d1057add6f92ec23dc22dd017e312ded13a042deb0ba6f08bad85d936456"
+    },
+    {
+      "path": "starters/backend-node/architecture.en-US.md",
+      "length": 1004,
+      "sha256": "eb73917a8ca04666cfbe5b44cecaff7a177815bd45334d55273edd794abab839"
+    },
+    {
+      "path": "starters/backend-node/architecture.es-419.md",
+      "length": 1024,
+      "sha256": "751bd812a0ea709ca4b5cdc78e09f3ad29c35bf08b7a4150cf3b9c8ca704597c"
+    },
+    {
+      "path": "starters/backend-node/CHANGELOG.en-US.md",
+      "length": 433,
+      "sha256": "b5c69388dfe1af6d1581379a64d83a859aac68b30f07bfb587e311bd015828d6"
+    },
+    {
+      "path": "starters/backend-node/CHANGELOG.es-419.md",
+      "length": 471,
+      "sha256": "4d827dc66729ccb02f73ff3f9a1870780ef9602128895baf38d688e030dbc3e7"
+    },
+    {
+      "path": "starters/backend-node/contracts/task-api-v1.openapi.json",
+      "length": 32886,
+      "sha256": "a17914b5fc029610b12a71a89296859811533d1f628eca9e1ad96a506ddc8fc7"
+    },
+    {
+      "path": "starters/backend-node/LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "starters/backend-node/operations-lab.en-US.md",
+      "length": 4222,
+      "sha256": "ece2c66791651e14b960beff03e78eafe91c962a6a595cbd857b13e76684a8c0"
+    },
+    {
+      "path": "starters/backend-node/operations-lab.es-419.md",
+      "length": 4450,
+      "sha256": "f93202ffba752bdc795a594ec25f9b102483991e555b5976d5763c76a3db2e3c"
+    },
+    {
+      "path": "starters/backend-node/package-lock.json",
+      "length": 23470,
+      "sha256": "21a35fbaf7f14c96da66f439ff4e32ec8cf0d47199ef431818fca668460f8c49"
+    },
+    {
+      "path": "starters/backend-node/package.json",
+      "length": 698,
+      "sha256": "682a6e1e7ef61de6365a5b8d34be9dfa4b305507744da4f06dc091d49d399fa7"
+    },
+    {
+      "path": "starters/backend-node/README.en-US.md",
+      "length": 2632,
+      "sha256": "e7b94e25caccb71fa78b541d9368357832ef7d5f83a191bfb93abdbc3229a0ff"
+    },
+    {
+      "path": "starters/backend-node/README.es-419.md",
+      "length": 2763,
+      "sha256": "610b60a502d9a95c3bd66dcf25e9c9a1f51a825e7d7f2d25044f6f614c1ff0b5"
+    },
+    {
+      "path": "starters/backend-node/src/application.ts",
+      "length": 3830,
+      "sha256": "c863f19005ed3acfcd460df3921f143b69f4d922a8e0d8b3e77702d558696aab"
+    },
+    {
+      "path": "starters/backend-node/src/contracts.ts",
+      "length": 1271,
+      "sha256": "40cc00b74afad6774933a6fe6b641e08218a3bfe7e53de61cab861ecf63221e7"
+    },
+    {
+      "path": "starters/backend-node/src/server.ts",
+      "length": 11979,
+      "sha256": "79e28b13a8d856e2f869df8f01dcb628416fdd141a296b78ad79d3d5f2a5a0ee"
+    },
+    {
+      "path": "starters/backend-node/src/sql-store.ts",
+      "length": 7809,
+      "sha256": "93b36673e77d9a6d53e348c335beff043b4a23973a8a8f67727f18181b530d0d"
+    },
+    {
+      "path": "starters/backend-node/src/sqlite.ts",
+      "length": 5512,
+      "sha256": "f96122ca26ec607769e4620f79caa6af107b985aeb297177914f544d42dc7010"
+    },
+    {
+      "path": "starters/backend-node/src/store.ts",
+      "length": 712,
+      "sha256": "22065cfcb8285628c560dcfac21756109f69d3babf323cd8ad62564f2c23594a"
+    },
+    {
+      "path": "starters/backend-node/src/token-cli.ts",
+      "length": 896,
+      "sha256": "5c550843fe318b1d33a8b13ac9d768d61ee2115e53711226b9760ecb3e1bca86"
+    },
+    {
+      "path": "starters/backend-node/tests/api.test.ts",
+      "length": 7873,
+      "sha256": "fbf3b01ad4b986055023f2b353722351135e2e3dc35bab339de7118bc776afdf"
+    },
+    {
+      "path": "starters/backend-node/tests/application.test.ts",
+      "length": 2398,
+      "sha256": "297b38d4b82161e8d99b0917182c24051a738606dcdb5996a2d375bb1d79361d"
+    },
+    {
+      "path": "starters/backend-node/tests/lab.ts",
+      "length": 7670,
+      "sha256": "e1590f5a3cb67b3f257620a9689acc175abd94610d69470513284f4deec8e76d"
+    },
+    {
+      "path": "starters/backend-node/tests/operations.test.ts",
+      "length": 7442,
+      "sha256": "bbd815904c8c43f5e6ffdcf8560c0823b3d65d6f4782a17f5bec03439051c2c8"
+    },
+    {
+      "path": "starters/backend-node/tests/sqlite.test.ts",
+      "length": 1682,
+      "sha256": "e7be05baa6871339051b31ae98713ea2b4cc7a5de684e26a58f99c2affc327e7"
+    },
+    {
+      "path": "starters/backend-node/tsconfig.json",
+      "length": 381,
+      "sha256": "0dff472d220bbd9c089e5f6e6d4d96a5c3ec94c09b4330c42f1b85e566aa7ad3"
+    },
+    {
+      "path": "starters/backend-php/.dockerignore",
+      "length": 256,
+      "sha256": "fe99e49c7980f7aea38b5a2bb8469b5fede9824b35b4d3f9236d037db9f75a83"
+    },
+    {
+      "path": "starters/backend-php/.env.example",
+      "length": 381,
+      "sha256": "79c9f5149278b49cea2d7d12fbea274de881216f8403200a2f8f693249830fb0"
+    },
+    {
+      "path": "starters/backend-php/.gitignore",
+      "length": 534,
+      "sha256": "809e4c20e4700e682e7d46fff20ea9b101ecd1577f3f260f74383e4c92a7ce9e"
+    },
+    {
+      "path": "starters/backend-php/api-integration.en-US.md",
+      "length": 3337,
+      "sha256": "d3e4a12287e108a54e3630c145186eaa33745256e400be7db3f826470791843c"
+    },
+    {
+      "path": "starters/backend-php/api-integration.es-419.md",
+      "length": 3615,
+      "sha256": "fb01345ee5d686afb758886ee6ded9c640dbc40fa0a8063394be17dbe8d029e1"
+    },
+    {
+      "path": "starters/backend-php/app/Application/AccessDenied.php",
+      "length": 318,
+      "sha256": "4861b22acc5d7174b50cadc9844b013c8b6772a2f0be9e1ccf3af92ec15822fb"
+    },
+    {
+      "path": "starters/backend-php/app/Application/IdentityContext.php",
+      "length": 732,
+      "sha256": "dc12f32179e45ace61f0d80180c0e60624e4a987ff46e99d171a3aef04615b2a"
+    },
+    {
+      "path": "starters/backend-php/app/Application/PersistenceUnavailable.php",
+      "length": 382,
+      "sha256": "1cc56a6c6d812d5c1db2a23733e305af653572be32fbb500472be25563548824"
+    },
+    {
+      "path": "starters/backend-php/app/Application/Principal.php",
+      "length": 518,
+      "sha256": "f83076659f2abbd4f62d8619f69c513692d63359905441c88fcb53a3c3171248"
+    },
+    {
+      "path": "starters/backend-php/app/Application/ProductionPolicy.php",
+      "length": 1799,
+      "sha256": "8e0f342bc2ebde60683319cf7d729f2be7eddbeb5fe1cb74d07f12b872227247"
+    },
+    {
+      "path": "starters/backend-php/app/Application/TaskRepository.php",
+      "length": 529,
+      "sha256": "503946d4d21a97c9d33495a5d1e62e98b27e159631d296f22bedf5a7daaed1cc"
+    },
+    {
+      "path": "starters/backend-php/app/Application/TaskService.php",
+      "length": 1720,
+      "sha256": "28ac47a460316d1bcd27988f5cdabdac8d1692793c22cd0c9a8d0d4915223a9d"
+    },
+    {
+      "path": "starters/backend-php/app/Application/TokenAuthenticator.php",
+      "length": 286,
+      "sha256": "70c644c081a6a3f67c856db152f590673cadb732177bca010c8fb3aff2ea6ea1"
+    },
+    {
+      "path": "starters/backend-php/app/Domain/Task.php",
+      "length": 1485,
+      "sha256": "ff25d65a3d278124abf413e5f00a162344ccb33a2ee120a1c9868df5db976f7f"
+    },
+    {
+      "path": "starters/backend-php/app/Domain/TaskConflict.php",
+      "length": 188,
+      "sha256": "6c1448998dd05d4da3e01f07edf914bcac5c09ac2aa0a71e5d26479f9ab6c2d2"
+    },
+    {
+      "path": "starters/backend-php/app/Domain/TaskNotFound.php",
+      "length": 188,
+      "sha256": "783428e9c3466481e143ac081f1d895ae271f10df7c3287866667d8f86b9172d"
+    },
+    {
+      "path": "starters/backend-php/app/Domain/TaskValidationFailed.php",
+      "length": 204,
+      "sha256": "9d3eada3fcdf25f408e055e7434add8b62a6213fb9275e5a6885ee2c415288a9"
+    },
+    {
+      "path": "starters/backend-php/app/Http/ApiBoundary.php",
+      "length": 2164,
+      "sha256": "aa87bfe89fb598f7a771931945e172551138d6bfb28119bc899ef53844739f15"
+    },
+    {
+      "path": "starters/backend-php/app/Http/ApiErrors.php",
+      "length": 2607,
+      "sha256": "5358e9ef82adb0d99dc9172b60f9e70d0ec52798137d2e4367fcf32f9912ec87"
+    },
+    {
+      "path": "starters/backend-php/app/Http/AuthenticateApi.php",
+      "length": 1544,
+      "sha256": "0f2305d0ee3cf481e1347cee7aa66a2f780ee7696f421ecc569a5e40edf0c24b"
+    },
+    {
+      "path": "starters/backend-php/app/Http/TaskController.php",
+      "length": 2856,
+      "sha256": "fc8dcbd07b8efdf04ed3f1366d0cfb87082a306c3d7381430e8b00970e494891"
+    },
+    {
+      "path": "starters/backend-php/app/Infrastructure/BackupEnvelope.php",
+      "length": 9196,
+      "sha256": "c53d9352d954bdf4c9519603127eb282403be94169d512c7f8ae06f6aae0660c"
+    },
+    {
+      "path": "starters/backend-php/app/Infrastructure/ProductionSettings.php",
+      "length": 569,
+      "sha256": "3a82f45ea9476e9f12ef99145ee5a899d48d9281bae975c2239e776b884ea0dd"
+    },
+    {
+      "path": "starters/backend-php/app/Infrastructure/SqliteRecovery.php",
+      "length": 6599,
+      "sha256": "e654b70a7984e92511d4eef602c26c896214f3aef96531e2b52d658f3bcf1830"
+    },
+    {
+      "path": "starters/backend-php/app/Infrastructure/SqlTaskRepository.php",
+      "length": 2582,
+      "sha256": "f7e3242abe2b9c74a4de0e3a6af0ab4a500bd22741712978321547bc9473f693"
+    },
+    {
+      "path": "starters/backend-php/app/Infrastructure/SqlTokenAuthenticator.php",
+      "length": 1644,
+      "sha256": "d74c57960be862637b849bfbbf0718873d241d3640b72070bdbdd661ec48b264"
+    },
+    {
+      "path": "starters/backend-php/app/Providers/AppServiceProvider.php",
+      "length": 2037,
+      "sha256": "f6b95dc638526b40c01bf96343a207a20116d8d5832535438a6be1a85858a9bf"
+    },
+    {
+      "path": "starters/backend-php/architecture.en-US.md",
+      "length": 5608,
+      "sha256": "754323d7fe3c866f5147b8f38d4ae9b3d4efaab946edc89b9d69d9f0c7b19dde"
+    },
+    {
+      "path": "starters/backend-php/architecture.es-419.md",
+      "length": 5830,
+      "sha256": "6b5a67d638dd44a3be3f16d1cea90fa43a1075bcf0f745364247f503e2d6b754"
+    },
+    {
+      "path": "starters/backend-php/artisan",
+      "length": 298,
+      "sha256": "1e54e87477563bf3ae8a0d9ce9c334866d41822d47ee5d4ee3d921aa6c38b84e"
+    },
+    {
+      "path": "starters/backend-php/backup-operations.en-US.md",
+      "length": 4366,
+      "sha256": "31aab330e2724020a2dd71b2046becc6fd9985c2b868107620e060c6743a9f4e"
+    },
+    {
+      "path": "starters/backend-php/backup-operations.es-419.md",
+      "length": 4699,
+      "sha256": "3b5f78f5ce46348f814a846e63a5c67088bf3e46e80edcfb15a8b7657740834a"
+    },
+    {
+      "path": "starters/backend-php/bootstrap/app.php",
+      "length": 1461,
+      "sha256": "961c75f229a9c88f1448c6aa770d22098779d9d71a8f8e28bc3aadaf4bfa7aa4"
+    },
+    {
+      "path": "starters/backend-php/bootstrap/cache/.gitignore",
+      "length": 14,
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+    },
+    {
+      "path": "starters/backend-php/bootstrap/providers.php",
+      "length": 163,
+      "sha256": "fbf1ac51cda0f5e836aa78ffb141a70761ce440f2d0678fb3c9c4100944382a4"
+    },
+    {
+      "path": "starters/backend-php/CHANGELOG.en-US.md",
+      "length": 432,
+      "sha256": "fd8cfc101ef001174119c67cf0b77e8b141637659fd9265a590b00cd6d31c0b7"
+    },
+    {
+      "path": "starters/backend-php/CHANGELOG.es-419.md",
+      "length": 474,
+      "sha256": "4683dbee17614238e41f73438e9aa2be170a97e1072259795d01c996e7ea42a1"
+    },
+    {
+      "path": "starters/backend-php/composer.json",
+      "length": 923,
+      "sha256": "9a3265afc3ddc670eaff25e7d9d44d40c90828a419a91c0a12ba527e4cd27a33"
+    },
+    {
+      "path": "starters/backend-php/composer.lock",
+      "length": 283119,
+      "sha256": "476e72fea77215fd3b62503009c8e9600e90112541448b16bf2f8f1c04c750d1"
+    },
+    {
+      "path": "starters/backend-php/config/app.php",
+      "length": 484,
+      "sha256": "e71628f9cf751aa0b8d5d0404f8a9e21b79f7e55f4e4df4b682dea7d6da4a0ca"
+    },
+    {
+      "path": "starters/backend-php/config/cache.php",
+      "length": 346,
+      "sha256": "8b9075aa46fe349f14ee3b29e170e102b2c5bcbef2abe4411a382edd183440be"
+    },
+    {
+      "path": "starters/backend-php/config/cors.php",
+      "length": 578,
+      "sha256": "3734288040a382b50fc016d1367a095e151a5b2f81b30ebd8083ebcda26a770a"
+    },
+    {
+      "path": "starters/backend-php/config/database.php",
+      "length": 1489,
+      "sha256": "b335463989fb677957f9534b2dc4cdbd0e1d2f94e4aff2bbbcb529a2948c451c"
+    },
+    {
+      "path": "starters/backend-php/config/logging.php",
+      "length": 479,
+      "sha256": "2ba4783f57366892ed30fe8b97d909cc79d81e14d14c24128828a0699fbb847a"
+    },
+    {
+      "path": "starters/backend-php/config/view.php",
+      "length": 184,
+      "sha256": "267c742845f2fb63d029403e5559b05b9a177226b32ae32fe604bb0be11e8475"
+    },
+    {
+      "path": "starters/backend-php/contracts/task-api-v1.openapi.json",
+      "length": 32886,
+      "sha256": "a17914b5fc029610b12a71a89296859811533d1f628eca9e1ad96a506ddc8fc7"
+    },
+    {
+      "path": "starters/backend-php/database/migrations/2026_09_02_000001_create_tasks.php",
+      "length": 562,
+      "sha256": "f330c4071e8fad9948490598647a3318750920e970426785beca1cff060dfdec"
+    },
+    {
+      "path": "starters/backend-php/database/migrations/2026_09_02_000002_add_task_state.php",
+      "length": 670,
+      "sha256": "1ec28ee8cc17fade5adf6b11fd4bb9c369b18b141a447c6dc833c3e3d7f87c55"
+    },
+    {
+      "path": "starters/backend-php/database/migrations/2026_09_03_000003_add_identity_boundary.php",
+      "length": 1196,
+      "sha256": "ab0120ea62e8578ba0b4ab56debdd4d17f1d029adeb0f8bc9c9c023f35356b5a"
+    },
+    {
+      "path": "starters/backend-php/database/migrations/2026_09_03_000004_create_rate_limit_cache.php",
+      "length": 803,
+      "sha256": "e6fa85858429daef435f711f99bf5ec33d4ab653d04b209b7b68dacad054582d"
+    },
+    {
+      "path": "starters/backend-php/docker-local.en-US.md",
+      "length": 5982,
+      "sha256": "4cb2a8ff123055ce995c3bb230b19155ccc9deb109388c16e959a3ba27e77209"
+    },
+    {
+      "path": "starters/backend-php/docker-local.es-419.md",
+      "length": 6571,
+      "sha256": "04d1ba6b708dd0273e6140435d335ec89085d7b43bcb042a71bf7a23e91e3c4c"
+    },
+    {
+      "path": "starters/backend-php/docker/apache.conf",
+      "length": 933,
+      "sha256": "64e80a8e4da5683815856e7eba945e650accc439e7bbb581e3e3f1b904db91b5"
+    },
+    {
+      "path": "starters/backend-php/docker/Dockerfile",
+      "length": 1995,
+      "sha256": "b4205ea8100e0e31914d3686b49675330035d07d3855a49aa680b3b119db309b"
+    },
+    {
+      "path": "starters/backend-php/docker/initialize.php",
+      "length": 1375,
+      "sha256": "a8d3dd00403cc29f9dbfe30b03efd3ed56c5095ce9951478969cdf75b9f0ddb0"
+    },
+    {
+      "path": "starters/backend-php/docker/install-certificate.php",
+      "length": 706,
+      "sha256": "ea4a5b452e2823a6da0c16c1c41304b9c46952b047109abd40ecdcf53cfd6946"
+    },
+    {
+      "path": "starters/backend-php/docker/php.ini",
+      "length": 128,
+      "sha256": "43d21edf0766c7faec72e33d13db8fb6177a511490c9eec83a3fd640a1e224fe"
+    },
+    {
+      "path": "starters/backend-php/docker/recovery-probe.php",
+      "length": 2526,
+      "sha256": "09c3bb821c87a0382ef6f59a40efb1a556b870bacb4489ab0d0839131d6f9653"
+    },
+    {
+      "path": "starters/backend-php/docker/start.sh",
+      "length": 183,
+      "sha256": "2f75b1460651b3a6d4f757b03044fb24b8739075f2b0051b2cadac4af81d19a8"
+    },
+    {
+      "path": "starters/backend-php/lang/en-US/api.php",
+      "length": 994,
+      "sha256": "8c1d3b8ab528739dc263c1acbcfef1b7a6886e906a56b887e12085192f9f1bec"
+    },
+    {
+      "path": "starters/backend-php/lang/es-419/api.php",
+      "length": 1056,
+      "sha256": "5cae71b88162ba038a42fe025ff0763a6930ee4cfdf3f11470447e0046a906ba"
+    },
+    {
+      "path": "starters/backend-php/LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "starters/backend-php/phpunit.xml",
+      "length": 395,
+      "sha256": "bff5c2e530331bba657934fd1dddfab4fa3ac0dba7003eefe94ae7f4cd16147e"
+    },
+    {
+      "path": "starters/backend-php/public/index.php",
+      "length": 306,
+      "sha256": "ec7331649f10d3b37a0da55511d0b5059af5deabffdf8da70b44a46b489ff3d8"
+    },
+    {
+      "path": "starters/backend-php/README.en-US.md",
+      "length": 9312,
+      "sha256": "7a690199a0ad56da8fbbb72fc208aeb5fd495196a6284a8ac3192cbafb211b47"
+    },
+    {
+      "path": "starters/backend-php/README.es-419.md",
+      "length": 9922,
+      "sha256": "28df1ed5d46f500c384ed86f82f233f0737ab87d79a01830465ab1a7fc281a1c"
+    },
+    {
+      "path": "starters/backend-php/recovery.en-US.md",
+      "length": 5288,
+      "sha256": "6c393afcb73536b76a11757527a31e31bebaf04ac94c1a55eea290afc799ca23"
+    },
+    {
+      "path": "starters/backend-php/recovery.es-419.md",
+      "length": 5754,
+      "sha256": "910a3f83bdb5adfa6bc58675371962861f92d9910c98aa8d7957380851eb972c"
+    },
+    {
+      "path": "starters/backend-php/routes/api.php",
+      "length": 1215,
+      "sha256": "d71c4debff8f5d7ea83a187fbb78b70bcb47c3fae102e8c433eef3448eab4558"
+    },
+    {
+      "path": "starters/backend-php/scripts/backup-envelope.php",
+      "length": 1061,
+      "sha256": "48c0530077a55cd01a26783ebf747d6e63413ecebd4756bfcb297e5d4fed48cd"
+    },
+    {
+      "path": "starters/backend-php/scripts/check-production.php",
+      "length": 2143,
+      "sha256": "aec86512d13eb101f99b47a87a5f8f03d662de23ab13e8e95aa6c4f966130c06"
+    },
+    {
+      "path": "starters/backend-php/scripts/docker-local.mjs",
+      "length": 9497,
+      "sha256": "dbe340c0813966d9752988f481c1ae5be80cce8b1864e2d4fa100e75a51184ab"
+    },
+    {
+      "path": "starters/backend-php/scripts/lint.php",
+      "length": 1139,
+      "sha256": "6106a1166d5f3872be09b029c725cdc0df2d2203a24ebda04b41e70973006fb8"
+    },
+    {
+      "path": "starters/backend-php/scripts/qa-databases.php",
+      "length": 9253,
+      "sha256": "298da6d5f0374b5582a1c57672e0afe8ed0693f3a624385e4e5ec4e2226aea4f"
+    },
+    {
+      "path": "starters/backend-php/scripts/qa-support.php",
+      "length": 1454,
+      "sha256": "c7e3108830929bcc83389c2a6a7074f0d0671f07cd33ac36c92098cbcb382af5"
+    },
+    {
+      "path": "starters/backend-php/scripts/server-recovery-probe.php",
+      "length": 6654,
+      "sha256": "c1ddf009d2b80f3fafa4a131b86c6ba42cbc6779a0f136b3507d27711a11e6f4"
+    },
+    {
+      "path": "starters/backend-php/scripts/server-recovery-support.php",
+      "length": 3308,
+      "sha256": "a13dee43bc85572ac87dfb2144fd52e8bb764f166cd07ea0ae4f5a5739cce4c9"
+    },
+    {
+      "path": "starters/backend-php/scripts/setup-local.php",
+      "length": 1478,
+      "sha256": "def9626b19685333e9683ff5bc08d275fb4d91319974063a353fd94c6d008ea7"
+    },
+    {
+      "path": "starters/backend-php/scripts/sqlite-recovery.php",
+      "length": 944,
+      "sha256": "6753512f5cf4cc4aa42844fc25e6464ff705e36a5d162ccfd24519321a6456d7"
+    },
+    {
+      "path": "starters/backend-php/scripts/token.php",
+      "length": 1806,
+      "sha256": "a788a6d5de10cec1fdcb047a5e099907b0faab44cef8ee0fd91f039df97f4e07"
+    },
+    {
+      "path": "starters/backend-php/scripts/trust-local-windows.ps1",
+      "length": 6038,
+      "sha256": "472d8cf13c0daf9dfab3ea86255739703b459f9f2b8d25cab25383e8a071bc27"
+    },
+    {
+      "path": "starters/backend-php/scripts/verify-server-recovery.php",
+      "length": 10996,
+      "sha256": "cdebbb486f0cb7773947ebb5c54a9735d07f65d0e11ad4b9cb1189d842282b82"
+    },
+    {
+      "path": "starters/backend-php/security-production.en-US.md",
+      "length": 3583,
+      "sha256": "9bb28b7ea1f5158de498f4c8c4e1ce082748ed684c8e0b3828c7c6a6c8490d1e"
+    },
+    {
+      "path": "starters/backend-php/security-production.es-419.md",
+      "length": 3924,
+      "sha256": "117155cee5e99782bfe474ac64fa4909dd692798490051fd5a33a21befaec87f"
+    },
+    {
+      "path": "starters/backend-php/server-recovery.en-US.md",
+      "length": 4945,
+      "sha256": "11a22e845914adde61f0e20fd64befe61ef2ecc1843490e6384ac7b1035ac605"
+    },
+    {
+      "path": "starters/backend-php/server-recovery.es-419.md",
+      "length": 5242,
+      "sha256": "e9628bb33942a4ac7b6919c862aa0d086fbede81a04bec23b78ca1b1f6057f26"
+    },
+    {
+      "path": "starters/backend-php/storage/app/private/.gitignore",
+      "length": 14,
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+    },
+    {
+      "path": "starters/backend-php/storage/framework/cache/.gitignore",
+      "length": 14,
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+    },
+    {
+      "path": "starters/backend-php/storage/framework/sessions/.gitignore",
+      "length": 14,
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+    },
+    {
+      "path": "starters/backend-php/storage/framework/views/.gitignore",
+      "length": 14,
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+    },
+    {
+      "path": "starters/backend-php/storage/logs/.gitignore",
+      "length": 14,
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+    },
+    {
+      "path": "starters/backend-php/tests/bootstrap.php",
+      "length": 3154,
+      "sha256": "4262fea4922279e43bc3c056bcbe14d4a6619c5d4c479c3b5f5c27d2a4b15c4f"
+    },
+    {
+      "path": "starters/backend-php/tests/Feature/ApiTest.php",
+      "length": 9221,
+      "sha256": "fa7089750e4f282e20d2b4986bb79557d497ddaad53c0de798807987b91b0004"
+    },
+    {
+      "path": "starters/backend-php/tests/Feature/ConfigurationTest.php",
+      "length": 1161,
+      "sha256": "7432908dd3265b811bef3c4e12e57105aedc6fe1bab3be9b12a264e4f4cc4d35"
+    },
+    {
+      "path": "starters/backend-php/tests/Feature/ContractTest.php",
+      "length": 1733,
+      "sha256": "8d79668c2323dbc9a5f9aeb1e18f47488682384062c86c19ae35b8034fe3f353"
+    },
+    {
+      "path": "starters/backend-php/tests/Feature/PersistenceTest.php",
+      "length": 3970,
+      "sha256": "1305aa296df42849a0f3b4ee50fe2d82bc73b738f7f1d2f30ee5f044b3d74a0d"
+    },
+    {
+      "path": "starters/backend-php/tests/Feature/SecurityTest.php",
+      "length": 4409,
+      "sha256": "a202b31ab645906c69ef26ccc67987010c6b6a8a471c63fed93bfc6b594c6db3"
+    },
+    {
+      "path": "starters/backend-php/tests/TestCase.php",
+      "length": 1634,
+      "sha256": "b89997a428e8882b098c7bc377b8d968e7474db0d30e01ff6fce1dd5a04c06ff"
+    },
+    {
+      "path": "starters/backend-php/tests/Unit/BackupEnvelopeTest.php",
+      "length": 4705,
+      "sha256": "dfb1e863c8745e81456d6f6b3a8246cd094b28b84a17777db46d48b08256da43"
+    },
+    {
+      "path": "starters/backend-php/tests/Unit/ProductionPolicyTest.php",
+      "length": 1620,
+      "sha256": "9db667fb521469017ba706ecec903dcea1cb1cf629bd796920c01942aef80713"
+    },
+    {
+      "path": "starters/backend-php/tests/Unit/QaSupportTest.php",
+      "length": 2536,
+      "sha256": "c5797e72bad31b92d9acf028d6ea33daf71f86f2d87e046e1c0b2ff0f900d3b8"
+    },
+    {
+      "path": "starters/backend-php/tests/Unit/ServerRecoverySupportTest.php",
+      "length": 3763,
+      "sha256": "cba208ae0b3d6fe85dfa7591317370200af0268c806be7987f900fe2f29b8f97"
+    },
+    {
+      "path": "starters/backend-php/tests/Unit/SetupTest.php",
+      "length": 3194,
+      "sha256": "c2c1e0199435e2c1dc88334d16211d284cc26cf10990f0f6364b90a4b9dc2135"
+    },
+    {
+      "path": "starters/backend-php/tests/Unit/SqliteRecoveryTest.php",
+      "length": 6874,
+      "sha256": "82264aaebca9d5dc01ca6fe37c0b16f26eb15a71adf5d4968cb74ffd054a6dc3"
+    },
+    {
+      "path": "starters/backend-php/tests/Unit/TaskTest.php",
+      "length": 1773,
+      "sha256": "0ec0a1bd5f9de062b6154cfa15db89570fcc3cfb01afe1cff5345395c27ceaec"
+    },
+    {
+      "path": "starters/backend-php/verification.en-US.md",
+      "length": 6210,
+      "sha256": "f07ea2f1b8dc52a687e1721a9b1f655319b3f222563bceb154ec601c9b3ea884"
+    },
+    {
+      "path": "starters/backend-php/verification.es-419.md",
+      "length": 6774,
+      "sha256": "477f6082338cbf05d7c7d8978a3c1406c6389a14f69438c35115b8ac900cee5f"
+    },
+    {
+      "path": "starters/backend-python/.env.example",
+      "length": 122,
+      "sha256": "a3e43ef1611d2184c57e70e7db0e68c38c54d92a1956ccd59142bc4c8ddba00a"
+    },
+    {
+      "path": "starters/backend-python/.python-version",
+      "length": 8,
+      "sha256": "861b3dd8083d28f336ef70f6755bc399538ddad627b1d095820ca34cb953cf14"
+    },
+    {
+      "path": "starters/backend-python/CHANGELOG.en-US.md",
+      "length": 281,
+      "sha256": "278c1e01aa98dc3ac7c0bfbe2d9eaebcef9bc9608016d5aa32b30d252db23fc6"
+    },
+    {
+      "path": "starters/backend-python/CHANGELOG.es-419.md",
+      "length": 306,
+      "sha256": "d54d2ca2621f67854dac2f3dc1d5f8badca3a6e62e9635799ba23e8906fdbc54"
+    },
+    {
+      "path": "starters/backend-python/contracts/task-api-v1.openapi.json",
+      "length": 32886,
+      "sha256": "a17914b5fc029610b12a71a89296859811533d1f628eca9e1ad96a506ddc8fc7"
+    },
+    {
+      "path": "starters/backend-python/LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "starters/backend-python/operations-lab.en-US.md",
+      "length": 9326,
+      "sha256": "080abbfd133eb667f27a9d1e2c0e7c3ca11b047bb2ad770109d9f6ec1ee0a4e7"
+    },
+    {
+      "path": "starters/backend-python/operations-lab.es-419.md",
+      "length": 10155,
+      "sha256": "ec24e1d4b95938ee80201da540a525336210d5716ef65b27d141c36b26381cc6"
+    },
+    {
+      "path": "starters/backend-python/pyproject.toml",
+      "length": 1122,
+      "sha256": "d9aac6c8e9e8b39cdf66e7dac302531f72b80d393ed072c5066e121968bee6b7"
+    },
+    {
+      "path": "starters/backend-python/README.en-US.md",
+      "length": 4043,
+      "sha256": "b1ef95047a7fecd4db073bac125a8fc43eb6a658a89352c9c821671add7ee0b4"
+    },
+    {
+      "path": "starters/backend-python/README.es-419.md",
+      "length": 4278,
+      "sha256": "e088ae3155678d511c0570818cca84a400a235d642eed3a448492a19a5540585"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/__init__.py",
+      "length": 121,
+      "sha256": "19d448495bac00b76e71b5daf9e2d2e8f950f8146a6453b091280160227c567e"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/application/__init__.py",
+      "length": 108,
+      "sha256": "a7d3cf767c3812a0209ca41c55d47540d7cd623db4e38904c00d8e49665ce206"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/application/errors.py",
+      "length": 264,
+      "sha256": "eaf6952e643bb6aee204a099b6be9cbeb2da432312ebab788371906d5784cbca"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/application/tasks.py",
+      "length": 5092,
+      "sha256": "22fa17b3453f65a6c86727cc1daf2ad2807bf9231927f8e269251bf3d5295fcd"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/domain/__init__.py",
+      "length": 116,
+      "sha256": "2454d1d6b262e8f28c7413f838e4cacf601d0ec20d593ce65a3ffa2f24eb77aa"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/domain/models.py",
+      "length": 365,
+      "sha256": "d2ce1826ba865f3f9e7e48f7ea96d348c8592eed7b9c420112ec97929457f1e0"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/domain/repositories.py",
+      "length": 1379,
+      "sha256": "29021f92e0c59c4363676d1bbe54e8ec462d56130bc79e540484cb132f99842d"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/infrastructure/__init__.py",
+      "length": 124,
+      "sha256": "9d9221a3365f1dd2fe911bb3e0f5f676d01a76f9cdf3d43b52f86f9115d7e438"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/infrastructure/database.py",
+      "length": 8896,
+      "sha256": "0b6660d9139443249ae43941c44cd0e2562dc6c52035a934d481f1017ffd672f"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/infrastructure/migrations.py",
+      "length": 1732,
+      "sha256": "83975370d9caba8f0a50211c4468c63f38b469f49b7a6bc572f72bf58437fbf2"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/main.py",
+      "length": 614,
+      "sha256": "b3388c3c4f712c92c7277b61b6139c0eb85e101bab4006a61329f339fa4f9f3f"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/migrate_cli.py",
+      "length": 803,
+      "sha256": "aeb66e91828f15c1f9971cfb6b288a17f117a04816d223728eb06af2686ae96b"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/presentation/__init__.py",
+      "length": 112,
+      "sha256": "d5d15fe332704d03dc595d1f344f8129b4bc4f13ce5e0a99d70974bd116f0454"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/presentation/http.py",
+      "length": 9309,
+      "sha256": "152e2adaae7b4fcd53532e93eecd52cb9fbe6de154d20726b5a86005efd1ffef"
+    },
+    {
+      "path": "starters/backend-python/src/project_base_api/token_cli.py",
+      "length": 1546,
+      "sha256": "7ce6d55a00355cefd071c9da9aae6db420d3b6e77d061c82309494856f48dda0"
+    },
+    {
+      "path": "starters/backend-python/tests/__init__.py",
+      "length": 79,
+      "sha256": "6a930622b43ea4e6bb8c46359aed3d3a299a76ccabe8b3152821a909affe0b9c"
+    },
+    {
+      "path": "starters/backend-python/tests/conftest.py",
+      "length": 3668,
+      "sha256": "530e92bc5b2f900e223ef3e47b89986d2260030c27ce18e0c1970f8b3f3fa1aa"
+    },
+    {
+      "path": "starters/backend-python/tests/database_lab.py",
+      "length": 6157,
+      "sha256": "492ca1c31c2d30e6e6a910d3747130f598cd6cd158fc6ece2d52f88617423ec6"
+    },
+    {
+      "path": "starters/backend-python/tests/http_lab.py",
+      "length": 4502,
+      "sha256": "d095c71b98c327ba45f63b8e12d6fc9a11c8508b14b55f3a4f87c5a6e92adfac"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_api.py",
+      "length": 6155,
+      "sha256": "d15a9e8d618f98b28464444740510fb6170acc1f70c7aff41b313b08847cad6a"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_concurrency.py",
+      "length": 2864,
+      "sha256": "daa86267e30ee4203c87b08548970fcd226227677a50539dda14e9731a857001"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_migrations.py",
+      "length": 598,
+      "sha256": "73f92b672f478b5f1ced517797417d248d37f8bfd6e0cca25aa9469df9a0df05"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_recovery_diagnostics.py",
+      "length": 1729,
+      "sha256": "a262067c1bf03fc58d8f24d90eacc864117c5535a8181f4951b8af1f58618d6c"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_recovery.py",
+      "length": 6675,
+      "sha256": "949fd51a092f286407fe8a5d8c1f3a1b12222688a62d68338c4fb0025a8ad1f5"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_server_responsiveness.py",
+      "length": 2234,
+      "sha256": "0c1bd541063528a08ecbfea4231fc50e09df598b7039f11691f10e85d30ef6a7"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_sqlite_commit.py",
+      "length": 1854,
+      "sha256": "82d15a121c1fee93ff3d4f17c0c552c618615673d18dc1a67e8cc463eb2946c2"
+    },
+    {
+      "path": "starters/backend-python/tests/integration/test_tls.py",
+      "length": 1720,
+      "sha256": "1834301999bfe6051eda08f84bc8d8bf63b498447486ff8eb6f661cc2d59a258"
+    },
+    {
+      "path": "starters/backend-python/tests/recovery_diagnostics.py",
+      "length": 4849,
+      "sha256": "484ef31e09d086f0596ed7c936ee7d53e45b2c23841fb3c6fc99da69e01a3be6"
+    },
+    {
+      "path": "starters/backend-python/tests/unit/test_tasks.py",
+      "length": 572,
+      "sha256": "753c05852906888264b31e3c92d30d45319c0fe2963d600be1628fb9257f3256"
+    },
+    {
+      "path": "starters/backend-python/uv.lock",
+      "length": 91338,
+      "sha256": "57f099afa6cfd0165889a0ab98f2a51347b4e657bd5b072cf96a936df328938d"
+    },
+    {
+      "path": "starters/flutter/.fvmrc",
+      "length": 26,
+      "sha256": "926bd12612bef74855c3f1db95d600bf5ebcaeec1fc0cd9997ae100d0428594e"
+    },
+    {
+      "path": "starters/flutter/.gitignore",
+      "length": 868,
+      "sha256": "cca94d7d976a095791b633468ffae738cfb1870308b4e71c9c81df676025f6ed"
+    },
+    {
+      "path": "starters/flutter/.metadata",
+      "length": 1560,
+      "sha256": "241858d64f4a5576d053eec4e818a9dfd83335892e786470a1f4bec9100458c7"
+    },
+    {
+      "path": "starters/flutter/analysis_options.yaml",
+      "length": 1448,
+      "sha256": "b63207cf529949ec4727b68c23dbb38ce255b6f6f4ae1effcb5c1dcf2852d238"
+    },
+    {
+      "path": "starters/flutter/android/.gitignore",
+      "length": 267,
+      "sha256": "c9af75dbc2c8aa867476a09426c80b178c4aeed8b9393ae48503eedfa3273d71"
+    },
+    {
+      "path": "starters/flutter/android/app/build.gradle.kts",
+      "length": 1807,
+      "sha256": "4ff537025c1a40cfdb651850d9c6dac6ec2d678c3aa139026277e69352fbd4bd"
+    },
+    {
+      "path": "starters/flutter/android/app/gradle.lockfile",
+      "length": 66763,
+      "sha256": "8cbc0ebbcfbf73c41f7f385df56df04f0f461a8dfb00662df0a349d73676649a"
+    },
+    {
+      "path": "starters/flutter/android/app/src/debug/AndroidManifest.xml",
+      "length": 462,
+      "sha256": "dd04c08b2d85dbf22c57a53c4a14eac80a4ed30adae4ae0463890501ab59cc1b"
+    },
+    {
+      "path": "starters/flutter/android/app/src/debug/res/xml/api_network_security.xml",
+      "length": 402,
+      "sha256": "83e1b37035cbd8ec0e13a02a6b25179f1f7232657a3422f36ea885d36fb36b61"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/AndroidManifest.xml",
+      "length": 2317,
+      "sha256": "8c7d604847b8daddcc9475e2abfff32d92acaabf7b2511219ea8f0b3ce1bfd00"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/kotlin/org/example/foundation_starter/MainActivity.kt",
+      "length": 137,
+      "sha256": "3b2c6dcbf690ac16eb5ac039d4c078d8d57746972a806be9e854ee7cd3326210"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/drawable-v21/launch_background.xml",
+      "length": 450,
+      "sha256": "dca312ec77de83e43ef70a825c299b51451247286c29167d62f19165750b8793"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/drawable/launch_background.xml",
+      "length": 446,
+      "sha256": "2df60e2cfbee873ce2858088cf003e6b93498f2f568476da437610467ea1a9d7"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "length": 544,
+      "sha256": "6a7c8f0d703e3682108f9662f813302236240d3f8f638bb391e32bfb96055fef"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "length": 442,
+      "sha256": "c7c0c0189145e4e32a401c61c9bdc615754b0264e7afae24e834bb81049eaf81"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "length": 721,
+      "sha256": "e14aa40904929bf313fded22cf7e7ffcbf1d1aac4263b5ef1be8bfce650397aa"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "length": 1031,
+      "sha256": "4d470bf22d5c17d84edc5f82516d1ba8a1c09559cd761cefb792f86d9f52b540"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "length": 1443,
+      "sha256": "3c34e1f298d0c9ea3455d46db6b7759c8211a49e9ec6e44b635fc5c87dfb4180"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/values-night/styles.xml",
+      "length": 1013,
+      "sha256": "ea763597dc1a84c8034251caee98d7753e0fbf57340ffc94677427de4b537516"
+    },
+    {
+      "path": "starters/flutter/android/app/src/main/res/values/styles.xml",
+      "length": 1014,
+      "sha256": "cca15a99b59380a548bf6a890f7ca5380ee509b1f9bbb2f5f9ec3589fa25c2f7"
+    },
+    {
+      "path": "starters/flutter/android/app/src/profile/AndroidManifest.xml",
+      "length": 385,
+      "sha256": "b01a4541a8144c15bc617bab7eb267c99fa1476368fbbda5a12cdbf4e316a34c"
+    },
+    {
+      "path": "starters/flutter/android/build.gradle.kts",
+      "length": 561,
+      "sha256": "218f400e3fff31c9c986a2535dfb974560e1b4d33cc27b7c1fee96a2b7e44454"
+    },
+    {
+      "path": "starters/flutter/android/gradle.properties",
+      "length": 280,
+      "sha256": "e20bc579fc6e28f880ae022da98434f9bf1c9e7bb870dde20b058757f3e3c0e8"
+    },
+    {
+      "path": "starters/flutter/android/gradle/wrapper/gradle-wrapper.properties",
+      "length": 206,
+      "sha256": "a23faf39f936281e98c22c568a812ded3684a61fcf683bbd1aac2e85691622ac"
+    },
+    {
+      "path": "starters/flutter/android/settings.gradle.kts",
+      "length": 796,
+      "sha256": "6a70d36636414dd796a46ca0250c27fbe5da38564bdfbfbad64ea6e25e468c75"
+    },
+    {
+      "path": "starters/flutter/api-integration.en-US.md",
+      "length": 3471,
+      "sha256": "62f6168cf0d36c35d0b84865cf91dbfec0c5f2e617e7807bad7a91693b2694a7"
+    },
+    {
+      "path": "starters/flutter/api-integration.es-419.md",
+      "length": 3819,
+      "sha256": "6f114ef56a5196d92807fb9a36348ecab6189223100e8d5dda57ebb6c0d2795e"
+    },
+    {
+      "path": "starters/flutter/CHANGELOG.en-US.md",
+      "length": 362,
+      "sha256": "e9bad691b9d7a7ec33ef5b5d3ed4879c8edeb5b629d8a220252ca1a92c50162e"
+    },
+    {
+      "path": "starters/flutter/CHANGELOG.es-419.md",
+      "length": 430,
+      "sha256": "f248c1e7127090e45b10e34a9c41d836746d4dbf6827f11e8646b6e08f38aa02"
+    },
+    {
+      "path": "starters/flutter/contracts/task-api-v1.openapi.json",
+      "length": 32886,
+      "sha256": "a17914b5fc029610b12a71a89296859811533d1f628eca9e1ad96a506ddc8fc7"
+    },
+    {
+      "path": "starters/flutter/docs/architecture.en-US.md",
+      "length": 5714,
+      "sha256": "c9386e1caba82b84b6572a1c133e825cea5c22360a80fdd89c72db0df944ac69"
+    },
+    {
+      "path": "starters/flutter/docs/architecture.es-419.md",
+      "length": 6152,
+      "sha256": "dc0e5204d768aab3e5d039a34ebb742d8dc45c8f6b80cdd8d3183e85ba88ecbe"
+    },
+    {
+      "path": "starters/flutter/docs/verification.en-US.md",
+      "length": 10769,
+      "sha256": "54ac933c0fe32cac347065f4c6a83b60acc5f90bcd4a596753e00098cc01fce8"
+    },
+    {
+      "path": "starters/flutter/docs/verification.es-419.md",
+      "length": 11393,
+      "sha256": "5bcca01d32acfbf399a406bbbdec34b7fe30ce188c53fda6e37d8de9d87daf8e"
+    },
+    {
+      "path": "starters/flutter/integration_test/api_flow_test.dart",
+      "length": 1541,
+      "sha256": "7fe64e841987513ac41390450bce5e18e63f6a377f8c0915da1128c307f86eb1"
+    },
+    {
+      "path": "starters/flutter/integration_test/app_test.dart",
+      "length": 2039,
+      "sha256": "c52c35eae0b3c649b43085934940255a9d802323493d561f2c8c9b38ec579e55"
+    },
+    {
+      "path": "starters/flutter/ios/.gitignore",
+      "length": 603,
+      "sha256": "e85b4db8ba6ed14708e5f7d3c60336e5a3067ce11329b84aa8ba5d98603ee253"
+    },
+    {
+      "path": "starters/flutter/ios/Flutter/AppFrameworkInfo.plist",
+      "length": 800,
+      "sha256": "88e403d33087654522431733ad261741f836f92c94a50ee792820b4f1ed89716"
+    },
+    {
+      "path": "starters/flutter/ios/Flutter/Debug.xcconfig",
+      "length": 31,
+      "sha256": "c0d1da54718e75f2028962b689258ecc741abf7cdaed50483aa5225264d0a7d7"
+    },
+    {
+      "path": "starters/flutter/ios/Flutter/Release.xcconfig",
+      "length": 31,
+      "sha256": "c0d1da54718e75f2028962b689258ecc741abf7cdaed50483aa5225264d0a7d7"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcodeproj/project.pbxproj",
+      "length": 24324,
+      "sha256": "3c36e9aa4d8714bfb70240c33ad5e98a6e0330c56d565b60d281c8290083f43f"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "length": 142,
+      "sha256": "ac28b35c2b940210bec0fff8e424b07fd0efe9112ab178a10533583f251a386c"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+      "length": 246,
+      "sha256": "d557c2c32fc6258ec28981fa45dc847b76c9968beb90a2e26d13ef9c4ea45c30"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings",
+      "length": 234,
+      "sha256": "dd64c0308ab2971c456871b990b24a008bdc3ece09833e8dbe9675e33a496e74"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme",
+      "length": 3934,
+      "sha256": "570c49fd61c67330efb75097018d1b0df0c68d03667631105a5acf5621112b1b"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcworkspace/contents.xcworkspacedata",
+      "length": 159,
+      "sha256": "706a4c812f2a1e220e6785c27580020d58048e2ae4d30d1280f3c43344ce6b38"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+      "length": 246,
+      "sha256": "d557c2c32fc6258ec28981fa45dc847b76c9968beb90a2e26d13ef9c4ea45c30"
+    },
+    {
+      "path": "starters/flutter/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings",
+      "length": 234,
+      "sha256": "dd64c0308ab2971c456871b990b24a008bdc3ece09833e8dbe9675e33a496e74"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/AppDelegate.swift",
+      "length": 404,
+      "sha256": "13e99dab5435148efc15d9177ba505da3d24859a6ba663767510622fdf7a97fa"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "length": 2641,
+      "sha256": "5f8b941b774bde4496d73347c1f79cbdd786bb76fbdab9ed1f3f0cb78a0fb0d3"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png",
+      "length": 10932,
+      "sha256": "7770183009e914112de7d8ef1d235a6a30c5834424858e0d2f8253f6b8d31926"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png",
+      "length": 295,
+      "sha256": "cab10a0d391ec5bc09ef50ce49e8ad401cee7ef03707ec0923a222c5c2b3d212"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png",
+      "length": 406,
+      "sha256": "b9ad02cf6576a04d1b6806ac02a2431481b448dd0c2e505ce25842d1f7c4730b"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png",
+      "length": 450,
+      "sha256": "c6e6d3b215ae744a9c391f4c4d44157eff5e739d6ad6c39f9bfa5df66dddd267"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png",
+      "length": 282,
+      "sha256": "5dee24dc104ac76dc162e42ae0beb163d426bf365562ee28ba7b3ad368559a60"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png",
+      "length": 462,
+      "sha256": "a9b21eb6f4271385655a8771f76e29eef8c1107d7879cbcfc567e6619d1f716a"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png",
+      "length": 704,
+      "sha256": "e677d701ffe4af7bc2935098d6b3984cc9ab7ace573e6900955a5535b12410cf"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png",
+      "length": 406,
+      "sha256": "b9ad02cf6576a04d1b6806ac02a2431481b448dd0c2e505ce25842d1f7c4730b"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png",
+      "length": 586,
+      "sha256": "7c61c42fc7b657d9cf314d32a4ec458f0647c3aaf360be1b9377857266ec2499"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png",
+      "length": 862,
+      "sha256": "19be171481dc71a0b2803ebcd01dd8b0c5fd5778dee34c0a3cabc948c225f24e"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png",
+      "length": 862,
+      "sha256": "19be171481dc71a0b2803ebcd01dd8b0c5fd5778dee34c0a3cabc948c225f24e"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png",
+      "length": 1674,
+      "sha256": "4209a49e44a92ec40a327d3455eb1b1c153ee83d75de1c2be0a12ab18b2ff9de"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png",
+      "length": 762,
+      "sha256": "836c918cb613249eba0483a6b02fa3df3c1c0a89a315ee4d3b88509b83c7ab73"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png",
+      "length": 1226,
+      "sha256": "41c7d42f6e61f8fe7f30b1ffa2256aecbc9682be06d18c4a3062043e1a2e547c"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png",
+      "length": 1418,
+      "sha256": "5d7e5bdf01b93802bc973345b3a78c038907147625035952a08a115a563b7f81"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json",
+      "length": 414,
+      "sha256": "fbd112a9f3b541a1d811f71ac8e4fe68b6176687d973a5f4d99b7aa4a722e94e"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png",
+      "length": 68,
+      "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png",
+      "length": 68,
+      "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png",
+      "length": 68,
+      "sha256": "93ae7d494fad0fb30cbf3ae746a39c4bc7a0f8bbf87fbb587a3f3c01f3c5ce20"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Base.lproj/LaunchScreen.storyboard",
+      "length": 2414,
+      "sha256": "bc3644fbb251ff1e18de25a4932c927850ae1a025be3dd1447940429633fe4b2"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Base.lproj/Main.storyboard",
+      "length": 1631,
+      "sha256": "dcea4686c02065e56217fd19fcfb73d7509b41872e7486126149d47a18559363"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Info.plist",
+      "length": 1712,
+      "sha256": "640934f4b586de03f4b173fcce9dfeeafc28fcfac9b8643513b60e5ae5ac0533"
+    },
+    {
+      "path": "starters/flutter/ios/Runner/Runner-Bridging-Header.h",
+      "length": 39,
+      "sha256": "efe657d8b27f7f8595a0d416bffb33fe7d93bd2869d81f7353b556c439d7a1a7"
+    },
+    {
+      "path": "starters/flutter/ios/RunnerTests/RunnerTests.swift",
+      "length": 297,
+      "sha256": "c0e04141287eb7f9c9f3d31cf5be8cb626a9ea71351206c9121578e8b8f480c3"
+    },
+    {
+      "path": "starters/flutter/lib/application/task_controller.dart",
+      "length": 2257,
+      "sha256": "9f4fd4a6567880d2ff1bb11af413e3f53149bad16b91e2a7f7684aa9cc13bfe8"
+    },
+    {
+      "path": "starters/flutter/lib/application/task_repository.dart",
+      "length": 616,
+      "sha256": "744383069a622ccc5f3a3689200efb9192c710ede4cc85adaa79793d868b5b32"
+    },
+    {
+      "path": "starters/flutter/lib/domain/task.dart",
+      "length": 1093,
+      "sha256": "3ceca55e93a76c71989311d489bec8269b0f1576e20e43b3be4f617d88ad68ce"
+    },
+    {
+      "path": "starters/flutter/lib/infrastructure/http_task_repository.dart",
+      "length": 6431,
+      "sha256": "86c8acd709eaafe2b88c67c37c832474b3db490e3b30035dd28a5fcc11168666"
+    },
+    {
+      "path": "starters/flutter/lib/infrastructure/memory_task_repository.dart",
+      "length": 914,
+      "sha256": "76a03e9ee7fe3da95549ff4832f9d65bbecd0c37dbdb9299cf7bf77b5d9481f9"
+    },
+    {
+      "path": "starters/flutter/lib/l10n/strings_en_us.dart",
+      "length": 1428,
+      "sha256": "ebb5b5811e6b6c5f576e04e6028317bcef85174b933148d36f7e873cd4124bc4"
+    },
+    {
+      "path": "starters/flutter/lib/l10n/strings_es_419.dart",
+      "length": 1482,
+      "sha256": "c742555ab8dacc27c2857c760fac317580ee476d5ef25d6f7755efca56cc0e12"
+    },
+    {
+      "path": "starters/flutter/lib/l10n/strings.dart",
+      "length": 601,
+      "sha256": "547a0ba3ab909088b9b612aac597869d506709f28643929a2bb6e6985b89c620"
+    },
+    {
+      "path": "starters/flutter/lib/main.dart",
+      "length": 414,
+      "sha256": "36940353e302c1c077740fb5263d374f3a66e0b2d7961701f245c6472336694c"
+    },
+    {
+      "path": "starters/flutter/lib/presentation/task_app.dart",
+      "length": 8647,
+      "sha256": "f67105c6cfe24bb5dde730961354cce4dd32e3d9b8cdbef1b144553f978de9b0"
+    },
+    {
+      "path": "starters/flutter/LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "starters/flutter/linux/.gitignore",
+      "length": 19,
+      "sha256": "d7bbeac6ba86e2d94d8ccc63a1a2fbbac5ee7467f52f75c168165412d6ac3b60"
+    },
+    {
+      "path": "starters/flutter/linux/CMakeLists.txt",
+      "length": 4903,
+      "sha256": "04f1e31e94a9d9cc1340962f2ce7173652336cf7b9bf90e4e9cfab71a2031fb6"
+    },
+    {
+      "path": "starters/flutter/linux/flutter/CMakeLists.txt",
+      "length": 2903,
+      "sha256": "4eb17836308c1cd53f6b2bb8edb3b7b30610bff3b1d9df7fecc9317f9109700c"
+    },
+    {
+      "path": "starters/flutter/linux/flutter/generated_plugin_registrant.cc",
+      "length": 161,
+      "sha256": "7861b227b10a10cc1d7643f82a246b7db35b503f2d9ff1d3c906136e6c260dce"
+    },
+    {
+      "path": "starters/flutter/linux/flutter/generated_plugin_registrant.h",
+      "length": 303,
+      "sha256": "00f93bb5b1faefdede8f6065df327522900fb0b8efee86bacf424fd947ed14bb"
+    },
+    {
+      "path": "starters/flutter/linux/flutter/generated_plugins.cmake",
+      "length": 739,
+      "sha256": "d5aaa52ef8594d3128b35b6619c6a353e1be5f3c5a63a9c29c0a32b424e91952"
+    },
+    {
+      "path": "starters/flutter/linux/runner/CMakeLists.txt",
+      "length": 1000,
+      "sha256": "81ecf2604c50f480c23d460b2ddf653ecd39df29cc5b2fe4913f1a59f008a5a7"
+    },
+    {
+      "path": "starters/flutter/linux/runner/main.cc",
+      "length": 186,
+      "sha256": "905b4dfa4eab584c1eb6244899b7d5ef56d0bceaf3bffb5ea335ed7e0ba3c549"
+    },
+    {
+      "path": "starters/flutter/linux/runner/my_application.cc",
+      "length": 5512,
+      "sha256": "a2e651db23bdcfc09ae9d8e88e8392b1c73273b38adeb7ef1cd4bfed7ca1c5d0"
+    },
+    {
+      "path": "starters/flutter/linux/runner/my_application.h",
+      "length": 406,
+      "sha256": "b9be2b58ead9fa2fa3422636120e85ea8ee2a600aa0b42e268cb8ff0ae4b9b5d"
+    },
+    {
+      "path": "starters/flutter/macos/.gitignore",
+      "length": 96,
+      "sha256": "236a523a43625a2d63af3cd0f2ce8600a3668846f8cb278c1c7c5cbfd4aa4088"
+    },
+    {
+      "path": "starters/flutter/macos/Flutter/Flutter-Debug.xcconfig",
+      "length": 49,
+      "sha256": "7e9b3ee3961b7d7718b418ceaed812a5f06a4e4cec894aae712a78e159c32ab0"
+    },
+    {
+      "path": "starters/flutter/macos/Flutter/Flutter-Release.xcconfig",
+      "length": 49,
+      "sha256": "7e9b3ee3961b7d7718b418ceaed812a5f06a4e4cec894aae712a78e159c32ab0"
+    },
+    {
+      "path": "starters/flutter/macos/Flutter/GeneratedPluginRegistrant.swift",
+      "length": 147,
+      "sha256": "9ebc54b4d21464b875d1289b3dd5e44cd7e68930dbd6e8c7f954e438eb6ad499"
+    },
+    {
+      "path": "starters/flutter/macos/Runner.xcodeproj/project.pbxproj",
+      "length": 27191,
+      "sha256": "0aa47f1ddd8a79c482a0160855cb235b1d63e89567ca464754622ba27d73fc4a"
+    },
+    {
+      "path": "starters/flutter/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+      "length": 246,
+      "sha256": "d557c2c32fc6258ec28981fa45dc847b76c9968beb90a2e26d13ef9c4ea45c30"
+    },
+    {
+      "path": "starters/flutter/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme",
+      "length": 3830,
+      "sha256": "f32cd22fa9614a89b385cf5f9c87f91444512be79683f010be7e63d112c3a925"
+    },
+    {
+      "path": "starters/flutter/macos/Runner.xcworkspace/contents.xcworkspacedata",
+      "length": 159,
+      "sha256": "706a4c812f2a1e220e6785c27580020d58048e2ae4d30d1280f3c43344ce6b38"
+    },
+    {
+      "path": "starters/flutter/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+      "length": 246,
+      "sha256": "d557c2c32fc6258ec28981fa45dc847b76c9968beb90a2e26d13ef9c4ea45c30"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/AppDelegate.swift",
+      "length": 324,
+      "sha256": "5b9cbdcb563ad8578a99b7c283958490e4af537322e9092fe1efbb3c29ab3e1b"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png",
+      "length": 102994,
+      "sha256": "6232e5815af17e25e0268b2fec7aea9e068cc92ec709e9605c2b31df4ff2a313"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png",
+      "length": 5680,
+      "sha256": "15591f03f31313af6fd644ed0512106cc04365130b8b73244f1cfa6dddfb4400"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png",
+      "length": 520,
+      "sha256": "cc6928b5adfc00dbf526192e2705dd9af641cdf20ab4c6c7ca7cd4936dca59f0"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png",
+      "length": 14142,
+      "sha256": "416efd77cde932d42ef34168da24dd428a495b1f4f34bbbd125a18d2add186a2"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png",
+      "length": 1066,
+      "sha256": "ae8c4458e41f1e28b1e851ed87d3268d4a0351ceea427fa2a84cc94ddfb6d4c5"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png",
+      "length": 36406,
+      "sha256": "0a91c6c1bf242e54ee179e34629e9ef3e8a6d286c0fce01e302280a8be9277e6"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png",
+      "length": 2218,
+      "sha256": "6ad229623498e5f1277800db3ab7cb11faf85eb2569e1213f7d8e55003c07b42"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "length": 1359,
+      "sha256": "992ba63d183dfb8f8e3af38ac203d834d23c004da1417c438b4c5a3d7d1d7103"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Base.lproj/MainMenu.xib",
+      "length": 24072,
+      "sha256": "776c35481f6581f14148b90071558b25f6ce6262e771988985e9fe8d3e70a472"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Configs/AppInfo.xcconfig",
+      "length": 636,
+      "sha256": "6bc14fca21c234474f9a617b05a882229be2cdf41cb923fcf00a5a88f3176889"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Configs/Debug.xcconfig",
+      "length": 79,
+      "sha256": "86be603022e2a385dd7884fce4cc29255676c3dda579d3d4a56c958bf1e57de0"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Configs/Release.xcconfig",
+      "length": 81,
+      "sha256": "d1bf3f0349aadd5c58ee9d46c0ce4ce45467127c438936e9bb481d861d296565"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Configs/Warnings.xcconfig",
+      "length": 593,
+      "sha256": "aa8ded4c14068cb05f51f5446509fe56805cf1e29961ad6d5a97233bb0632bc1"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/DebugProfile.entitlements",
+      "length": 420,
+      "sha256": "cb834fd88897603878283769bd55e2add8ea9e029272af40ad9c5da42e25942f"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Info.plist",
+      "length": 1092,
+      "sha256": "047f9cb0f1122c04589483beaedbbe23492fdc8946b94e09bb13080736af4f93"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/MainFlutterWindow.swift",
+      "length": 403,
+      "sha256": "8178ad756f958f986f794a8bb06e321a6630ceaaf8f235b3b4ae3936e415dc7c"
+    },
+    {
+      "path": "starters/flutter/macos/Runner/Release.entitlements",
+      "length": 308,
+      "sha256": "2d97720d4003752e90b303bf2cdbcd71f7b6cc6a9ff532202726a6d6e8a58276"
+    },
+    {
+      "path": "starters/flutter/macos/RunnerTests/RunnerTests.swift",
+      "length": 302,
+      "sha256": "8a0ff977c64ceac0750fffa48087988b7b4125d1b1c49019221e7fffb574423e"
+    },
+    {
+      "path": "starters/flutter/pubspec.lock",
+      "length": 7613,
+      "sha256": "50589f954cfff50a0337ded633e89c5f2e94218235f13c47bb99459dde3ddf00"
+    },
+    {
+      "path": "starters/flutter/pubspec.yaml",
+      "length": 437,
+      "sha256": "63db34ec488dd7d8bc29ce563fec4297f2208e300f41750d75fd48fda7b1ba79"
+    },
+    {
+      "path": "starters/flutter/README.en-US.md",
+      "length": 7179,
+      "sha256": "bee30fb27d107babcc40f8d92f49aa42bcd5b0c06841a2f4724b3964afffcb5c"
+    },
+    {
+      "path": "starters/flutter/README.es-419.md",
+      "length": 7694,
+      "sha256": "bff283c886dac084d20da783a55737bfdf2f1c3c34d8160d7a907918726375e6"
+    },
+    {
+      "path": "starters/flutter/security-production.en-US.md",
+      "length": 2980,
+      "sha256": "ec730a1aa1db3c931a872222f90557c099bbfc594b5ea090ab17d3715784ba8d"
+    },
+    {
+      "path": "starters/flutter/security-production.es-419.md",
+      "length": 3345,
+      "sha256": "ff1ecd17e8aef630deb93bcf1cfbfc49d06b38dd31f6e997ee9f409dbe39cd25"
+    },
+    {
+      "path": "starters/flutter/test/controller_test.dart",
+      "length": 5841,
+      "sha256": "1d562c89206502caa7b7bafb74692cb66f7dac2b0494cc2bd1e59b729fe11f9d"
+    },
+    {
+      "path": "starters/flutter/test/domain_test.dart",
+      "length": 1852,
+      "sha256": "325357188d690fb83bee555c9534e43ed16ed28fd014e0c1dd4d1c377f05c2d8"
+    },
+    {
+      "path": "starters/flutter/test/http_repository_test.dart",
+      "length": 3526,
+      "sha256": "e7d5c5bd5d23983fa9b56a4a248a7f644b12bf0f9f3c7bb8d4deff0adbef8659"
+    },
+    {
+      "path": "starters/flutter/test/repository_test.dart",
+      "length": 2269,
+      "sha256": "1b874d1ae8fb1863a890b935db23120e7eb3ba75daa738515df3f1c4191c4044"
+    },
+    {
+      "path": "starters/flutter/test/toolchain_test.dart",
+      "length": 1176,
+      "sha256": "70a505e130edc42055dba9083c6cb7fc495821e962fc3bc9fe0ea37a01a8802d"
+    },
+    {
+      "path": "starters/flutter/test/widget_test.dart",
+      "length": 4496,
+      "sha256": "b7118814556ae973143d63bbdd10c324ce34014a5a51e32ab23a738fbcc94954"
+    },
+    {
+      "path": "starters/flutter/tool/check_toolchain.dart",
+      "length": 1482,
+      "sha256": "aeb7c2c2dae67282f602af32e2612a45b382b3a93c197ff403bee7c96bc9f8f7"
+    },
+    {
+      "path": "starters/flutter/windows/.gitignore",
+      "length": 308,
+      "sha256": "955e3110cb16494ee76e1cd5df47e2c212309eb94a49a123fe87f718de413cb8"
+    },
+    {
+      "path": "starters/flutter/windows/CMakeLists.txt",
+      "length": 4280,
+      "sha256": "fad3fb8312bcb0ea25f0fd18f1313d6559296cd25877ad8e085721a539d44ca9"
+    },
+    {
+      "path": "starters/flutter/windows/flutter/CMakeLists.txt",
+      "length": 3851,
+      "sha256": "bd05e3268b2f246bcbafdb778165fe67a7bafdba04eb73599502563a67b8ae7e"
+    },
+    {
+      "path": "starters/flutter/windows/flutter/generated_plugin_registrant.cc",
+      "length": 164,
+      "sha256": "82e02567f2faf5e732dc92a2fb0d01104f7ba8c48973f8cfd41a860b4fac3f3b"
+    },
+    {
+      "path": "starters/flutter/windows/flutter/generated_plugin_registrant.h",
+      "length": 302,
+      "sha256": "dbc11635d7b1ba1887adf40df5b83d634e9c3ab0bee34510c71528bb4d73602a"
+    },
+    {
+      "path": "starters/flutter/windows/flutter/generated_plugins.cmake",
+      "length": 743,
+      "sha256": "286346b0d5303dc6b41072f9582d4c52bca35255b85b27b310f858e264dfdc56"
+    },
+    {
+      "path": "starters/flutter/windows/runner/CMakeLists.txt",
+      "length": 1836,
+      "sha256": "d765fdd05f63ad099e585a2cced0cbff13ec3229b7de68c8681b2107db850089"
+    },
+    {
+      "path": "starters/flutter/windows/runner/flutter_window.cpp",
+      "length": 2193,
+      "sha256": "d615eedc06ae37321e59c2c00c7687d1887dcd97904eb7225fafd8dcb5b83da6"
+    },
+    {
+      "path": "starters/flutter/windows/runner/flutter_window.h",
+      "length": 961,
+      "sha256": "0252b804f5da380c7709cbe1daff2b8d18daf6c49d7e6dd43e5af3c99c19f56c"
+    },
+    {
+      "path": "starters/flutter/windows/runner/main.cpp",
+      "length": 1314,
+      "sha256": "7335786ddde93f01a330b6a62f4c753c0d281425938afd67e8bb422983f7f6ad"
+    },
+    {
+      "path": "starters/flutter/windows/runner/resource.h",
+      "length": 448,
+      "sha256": "d0e8bf7835468b4b6b1f8f0747f2e8f25c19841f2df2ac60aaa584ddae3aa7c6"
+    },
+    {
+      "path": "starters/flutter/windows/runner/resources/app_icon.ico",
+      "length": 33772,
+      "sha256": "c098d3fc85cacff98b8e69811b48e9f0d852fcee278132d794411d978869cbf8"
+    },
+    {
+      "path": "starters/flutter/windows/runner/runner.exe.manifest",
+      "length": 616,
+      "sha256": "639a56233fcd8cbcb8bbefcd93e4680ec2664f32d9acfb3d2ec1d8726a96e090"
+    },
+    {
+      "path": "starters/flutter/windows/runner/Runner.rc",
+      "length": 3190,
+      "sha256": "25d1a16b5409d534af37d81a0e8117255a170a266bf888e50b3de0a3ed0f280a"
+    },
+    {
+      "path": "starters/flutter/windows/runner/utils.cpp",
+      "length": 1862,
+      "sha256": "fbb18524c22593d0ce7869b0733e237be38e668fe045e3023bcf2d0b31784fa3"
+    },
+    {
+      "path": "starters/flutter/windows/runner/utils.h",
+      "length": 691,
+      "sha256": "832e246b6758253f89016fb0374b30791242e97ad950d27fc678b3d9feacfdc4"
+    },
+    {
+      "path": "starters/flutter/windows/runner/win32_window.cpp",
+      "length": 8822,
+      "sha256": "4e4f4dcf8e86ea6e097562cb3476039e693449bd8045367538afee579c017511"
+    },
+    {
+      "path": "starters/flutter/windows/runner/win32_window.h",
+      "length": 3624,
+      "sha256": "d154cf89ba85f820631a9b5bedacbe64fc5815e428fe6bc5da579ce649f69841"
+    },
+    {
+      "path": "starters/kotlin-android/.gitignore",
+      "length": 116,
+      "sha256": "f847518af05873c0dcdad19c584cc46d17331c672ed729cf63c28ed12105ef1d"
+    },
+    {
+      "path": "starters/kotlin-android/api-integration.en-US.md",
+      "length": 3474,
+      "sha256": "3fb848f4f25c8feb63ec2a6e29b75a6b1ad9a2ba522b232666b7c7cabb84c16c"
+    },
+    {
+      "path": "starters/kotlin-android/api-integration.es-419.md",
+      "length": 3817,
+      "sha256": "2e50bad99504b407cfedcba048dddaef8ca94cc8a8f8d7c88acdfd9b8e13ee31"
+    },
+    {
+      "path": "starters/kotlin-android/app/build.gradle.kts",
+      "length": 3015,
+      "sha256": "29db7bb0b25759bbe0ca2da33a5acfe2210ea8a217473e364e8e660e267b5d78"
+    },
+    {
+      "path": "starters/kotlin-android/app/gradle.lockfile",
+      "length": 70311,
+      "sha256": "c67b7f8a28c27ce3b96330c99f7ce096e74f311429745a1d0bc13c463f4cca3e"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/androidTest/java/org/example/foundation/kotlin/HttpApiIntegrationTest.kt",
+      "length": 3565,
+      "sha256": "48cb10b9f7b92c120ee427b6ec9924617d555b033467ca4b09743049305239f4"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/androidTest/java/org/example/foundation/kotlin/TaskErrorFlowTest.kt",
+      "length": 1466,
+      "sha256": "4428e0efccba3853831e3f739b063f9170bb3c4c0a62a5c8c6d0b2de053b7a85"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/androidTest/java/org/example/foundation/kotlin/TaskFlowTest.kt",
+      "length": 2800,
+      "sha256": "e793b6afc1fee8523dfd5426db02672b1cb37399726b2106f8798b21d3d4c5e0"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/debug/AndroidManifest.xml",
+      "length": 160,
+      "sha256": "806d0cb4c95bd67ec342e5ccdfb26177380728b187e7c826a06701f6e8041661"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/debug/res/xml/api_network_security.xml",
+      "length": 402,
+      "sha256": "83e1b37035cbd8ec0e13a02a6b25179f1f7232657a3422f36ea885d36fb36b61"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/AndroidManifest.xml",
+      "length": 1091,
+      "sha256": "18ddced888846c060a4927a900017c80d2e0a96335cc070cc87aa1f1934ece79"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/java/org/example/foundation/kotlin/HttpTaskRepository.kt",
+      "length": 6066,
+      "sha256": "d13b0c9f842e18a14bb5355e59c69bf7f7db243d1a6a46409920db19cce415b6"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/java/org/example/foundation/kotlin/MainActivity.kt",
+      "length": 1413,
+      "sha256": "8b6a610385c43907f6efca9836d31bf0b5e49d847e1ac03332e53413f48eae67"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/java/org/example/foundation/kotlin/TaskScreen.kt",
+      "length": 9297,
+      "sha256": "da4b0b11730af30c3d5df9bfbeddf2e29e0fa23b3b632d88ea7b0abbcbed2495"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/java/org/example/foundation/kotlin/TaskViewModel.kt",
+      "length": 4401,
+      "sha256": "ed5215acdf3cdb71ade95555f139037c241f2a3d864ddff0f06bd175740e0f31"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/res/drawable/ic_foundation.xml",
+      "length": 381,
+      "sha256": "cc7d17520bd75f62de7ff61702084a658ae19e55eff84913d8e939f6094df084"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/res/values-b+es+419/strings.xml",
+      "length": 2350,
+      "sha256": "71ac32d087eb0a661f7c99412f872a99954e918e765db2004df1d1827cac9948"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/res/values/strings.xml",
+      "length": 2288,
+      "sha256": "04103164c291c6865e9d905c02b7644f75afbbc72a5449edea6482459a6b3594"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/res/values/styles.xml",
+      "length": 348,
+      "sha256": "41f0f2b10dcd97f089b80147430bee9f15169ead64db1acdc652bdbb53a0cbb1"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/res/xml/data_extraction_rules.xml",
+      "length": 1050,
+      "sha256": "cb029b35db0e976c087100424e16e14a6256b46962398887520e51508c3b5842"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/main/res/xml/locales_config.xml",
+      "length": 204,
+      "sha256": "5cbcdaa237fbf23d798fc8bad6ed1b39d16f8b7070ce1c4b38f15b4aa46854a9"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/test/java/org/example/foundation/kotlin/TaskThemeTest.kt",
+      "length": 664,
+      "sha256": "dfd529b6836bcdf1e26c8fd30aa0d649b2c1c7882d848162574275123606a1fc"
+    },
+    {
+      "path": "starters/kotlin-android/app/src/test/java/org/example/foundation/kotlin/TaskViewModelTest.kt",
+      "length": 4789,
+      "sha256": "214b0a1fd33db5663600e549b78606e33ae93a66e7199ba128580e52f354788c"
+    },
+    {
+      "path": "starters/kotlin-android/build.gradle.kts",
+      "length": 442,
+      "sha256": "10be64c79c6f32718aa317a4357d323cec9f0b33bfa9caac3adfb5e8610eeebf"
+    },
+    {
+      "path": "starters/kotlin-android/CHANGELOG.en-US.md",
+      "length": 376,
+      "sha256": "019d3fa20f75d6fcafbfd6741950bfa8a52a70842e3f1029d16e37d31e3414c1"
+    },
+    {
+      "path": "starters/kotlin-android/CHANGELOG.es-419.md",
+      "length": 434,
+      "sha256": "22665dd5aaa5306c2586c3e16065cf4d9e2d18b3538df23ae560cad20061bf83"
+    },
+    {
+      "path": "starters/kotlin-android/contracts/task-api-v1.openapi.json",
+      "length": 32886,
+      "sha256": "a17914b5fc029610b12a71a89296859811533d1f628eca9e1ad96a506ddc8fc7"
+    },
+    {
+      "path": "starters/kotlin-android/core/build.gradle.kts",
+      "length": 519,
+      "sha256": "a258b085076be2b5b4adab9e108107f627baeaac8a4f0da8fbb92c774242aa11"
+    },
+    {
+      "path": "starters/kotlin-android/core/gradle.lockfile",
+      "length": 3345,
+      "sha256": "b0f3cd3a4233e12cf0dccdc031815bf205e2262caa4bbdbb512f90c5bd274d25"
+    },
+    {
+      "path": "starters/kotlin-android/core/src/main/kotlin/org/example/foundation/core/adapters/MemoryTaskRepository.kt",
+      "length": 1171,
+      "sha256": "3c2b50f042f4cdbcd3e8ed62630e5cc2d7f2830f2eeca8f2944266329bceb792"
+    },
+    {
+      "path": "starters/kotlin-android/core/src/main/kotlin/org/example/foundation/core/application/TaskService.kt",
+      "length": 1882,
+      "sha256": "addc3afb43b90ba7560e45ff9d3a6566a2c96215f556969f10158a65501c4ef0"
+    },
+    {
+      "path": "starters/kotlin-android/core/src/main/kotlin/org/example/foundation/core/domain/Task.kt",
+      "length": 2508,
+      "sha256": "d9bea5ce0862fdd60fbf159d893f43d5ab16221c09dc23b49d1d4a6fc19f855a"
+    },
+    {
+      "path": "starters/kotlin-android/core/src/test/kotlin/org/example/foundation/core/TaskContractTest.kt",
+      "length": 7795,
+      "sha256": "cca25de3c94ac2b0c49f8c74d6e0327dd08bbf47826198a7ad7eba7ab341cabd"
+    },
+    {
+      "path": "starters/kotlin-android/docs/architecture.en-US.md",
+      "length": 6502,
+      "sha256": "a4f655151dbbe420798fec96c06dd262fd069f3f87bf5cda8a7d90cab63eff39"
+    },
+    {
+      "path": "starters/kotlin-android/docs/architecture.es-419.md",
+      "length": 6826,
+      "sha256": "827efcc4db9a54a6d7f65a1e3fdf15cd402f194af667dd03a6ef9242090b712d"
+    },
+    {
+      "path": "starters/kotlin-android/docs/verification.en-US.md",
+      "length": 10500,
+      "sha256": "f306263f53064386347ea389320564a0ed99343e1be49895565f98c11c19ab7d"
+    },
+    {
+      "path": "starters/kotlin-android/docs/verification.es-419.md",
+      "length": 11199,
+      "sha256": "e28b9d2b1ba7ae68af34de396d39c46455094bd0f61cf212fe5d1e156cdba25c"
+    },
+    {
+      "path": "starters/kotlin-android/GRADLE-LICENSE.txt",
+      "length": 23622,
+      "sha256": "9536d88ea948603d18e232a13f5958d67807cd80828036b082bff171d2cf0703"
+    },
+    {
+      "path": "starters/kotlin-android/gradle.properties",
+      "length": 188,
+      "sha256": "d0a443423934093c0b8d9d9152c800d37b909e52a34c049fbbeed1cf415aad29"
+    },
+    {
+      "path": "starters/kotlin-android/gradle/verification-metadata.xml",
+      "length": 215536,
+      "sha256": "7324c48df6fd7c311f8c29cb135a58807c3a84ff8b3573d5ea78336dd577dd9e"
+    },
+    {
+      "path": "starters/kotlin-android/gradle/wrapper/gradle-wrapper.jar",
+      "length": 43705,
+      "sha256": "81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f"
+    },
+    {
+      "path": "starters/kotlin-android/gradle/wrapper/gradle-wrapper.properties",
+      "length": 338,
+      "sha256": "3b6b8df392b92f86332d907707f3d952a32c8d6e1fedabafe2b5ec3d933a78c4"
+    },
+    {
+      "path": "starters/kotlin-android/gradlew",
+      "length": 8774,
+      "sha256": "c76f16038b4e70b84ed0b3b9e08e82a8ecaf66ec0efdfdecdece92520fa3cecb"
+    },
+    {
+      "path": "starters/kotlin-android/gradlew.bat",
+      "length": 2894,
+      "sha256": "0f3ed8f03b50934cb8c48b15a470d5c20a30a5385825e48b55bcc8ea3d8f8e18"
+    },
+    {
+      "path": "starters/kotlin-android/LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "starters/kotlin-android/README.en-US.md",
+      "length": 6114,
+      "sha256": "0a38c1e175257cb8f318061bd3b6520365a63a1143893adb2a5f2e513fac8f88"
+    },
+    {
+      "path": "starters/kotlin-android/README.es-419.md",
+      "length": 6608,
+      "sha256": "33a4bb400700cab9cd0ca8fb991fc8fe63f8df64ef18018a460d742209d5f887"
+    },
+    {
+      "path": "starters/kotlin-android/security-production.en-US.md",
+      "length": 2925,
+      "sha256": "1c1a03871a78248964d0727bcad0adf25f3331d0d09d79b7b0ba61f71cbaa01e"
+    },
+    {
+      "path": "starters/kotlin-android/security-production.es-419.md",
+      "length": 3287,
+      "sha256": "cc17d3c332556482bf8071724527235f7688412f102d2278f5ec103de64d4951"
+    },
+    {
+      "path": "starters/kotlin-android/settings.gradle.kts",
+      "length": 435,
+      "sha256": "c1c9b40eb59b4aaccbf0e4d436e7ebc3e2f84c04aa6519173911703928d1cc93"
+    },
+    {
+      "path": "starters/web-vanilla/.gitignore",
+      "length": 108,
+      "sha256": "18ca27b221e2bed4188acd4d3f008aaf9a45eed6bfd8146f560c6ce53e292232"
+    },
+    {
+      "path": "starters/web-vanilla/.npmrc",
+      "length": 35,
+      "sha256": "3b88d1057add6f92ec23dc22dd017e312ded13a042deb0ba6f08bad85d936456"
+    },
+    {
+      "path": "starters/web-vanilla/.nvmrc",
+      "length": 8,
+      "sha256": "2722b61f414f07f08be7f1f1316012813818f26f1c40d6a24a748686cec7d2ff"
+    },
+    {
+      "path": "starters/web-vanilla/api-integration.en-US.md",
+      "length": 3062,
+      "sha256": "c58b30ff3b584b492e1dcfd73c5a71d04944fdd76a0a64457a056f364b28d724"
+    },
+    {
+      "path": "starters/web-vanilla/api-integration.es-419.md",
+      "length": 3399,
+      "sha256": "e21ec5014577a12cde320bf2e05851979710d1e65bc066996d214b70b22d4b8f"
+    },
+    {
+      "path": "starters/web-vanilla/CHANGELOG.en-US.md",
+      "length": 378,
+      "sha256": "157340b79f4ecbb65522c06c180d6a5af90c3695797d281989ae570c9d01b330"
+    },
+    {
+      "path": "starters/web-vanilla/CHANGELOG.es-419.md",
+      "length": 423,
+      "sha256": "ea3de92168053369789a916c23fea9906a08bc3eedd8282e76030ae5532188dd"
+    },
+    {
+      "path": "starters/web-vanilla/contracts/task-api-v1.openapi.json",
+      "length": 32886,
+      "sha256": "a17914b5fc029610b12a71a89296859811533d1f628eca9e1ad96a506ddc8fc7"
+    },
+    {
+      "path": "starters/web-vanilla/docs/architecture.en-US.md",
+      "length": 5543,
+      "sha256": "49a12a9f138f1805194b9f9c1a2267921cb5d0bffaa8a51097e5932777e34e40"
+    },
+    {
+      "path": "starters/web-vanilla/docs/architecture.es-419.md",
+      "length": 6050,
+      "sha256": "d4f48b3e8d45a1c59f2a6a802abec6afc2a9bd7e203e5b1cc6d3a44b0f4493e0"
+    },
+    {
+      "path": "starters/web-vanilla/docs/verification.en-US.md",
+      "length": 5733,
+      "sha256": "1ddca5b1c882ef272e2997dee5f86f4e3bf2e77626db573935abeb3cec3b20bc"
+    },
+    {
+      "path": "starters/web-vanilla/docs/verification.es-419.md",
+      "length": 6262,
+      "sha256": "2458efd31d14215f176e1a042a3eeefe82c1dfc5cf9f8e3407d74019fff25aa6"
+    },
+    {
+      "path": "starters/web-vanilla/favicon.svg",
+      "length": 367,
+      "sha256": "465ecdab5f33d39100331fc4a7e277d0249e0d8b0e07e2707a246b67dc6cb36b"
+    },
+    {
+      "path": "starters/web-vanilla/index.html",
+      "length": 5469,
+      "sha256": "b30eec96aae7fa458014204cddea8ab01fa7c82403a7d6d747839bfde9c77bfa"
+    },
+    {
+      "path": "starters/web-vanilla/LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "starters/web-vanilla/package-lock.json",
+      "length": 315,
+      "sha256": "2f0cc478308c09649ab9ddfe53ed049da810c22b6ded780313d244ac6d108042"
+    },
+    {
+      "path": "starters/web-vanilla/package.json",
+      "length": 467,
+      "sha256": "77ed7b6d76d5b7bd04f16e3d0e149f09e5b6829212268d91c316f31206e7bc81"
+    },
+    {
+      "path": "starters/web-vanilla/README.en-US.md",
+      "length": 7664,
+      "sha256": "11d64f1737e18b6fc322540860df3c4346cbbe292ea51e02e31c93346e7c873e"
+    },
+    {
+      "path": "starters/web-vanilla/README.es-419.md",
+      "length": 8416,
+      "sha256": "732370fac0f5fcf0c1184c0a8222946f45d43453a29e5b9f9e8ef73d0da48824"
+    },
+    {
+      "path": "starters/web-vanilla/scripts/check.mjs",
+      "length": 6828,
+      "sha256": "d5f03c12e51522d0435a8718bb10aaad91150a9ef2ed34425a68d4ac5924402e"
+    },
+    {
+      "path": "starters/web-vanilla/scripts/serve.mjs",
+      "length": 1568,
+      "sha256": "6bba6fcd91f8eae66ed21f89368d3c172add408380e2c9a5ac435a1d2cf8f0d7"
+    },
+    {
+      "path": "starters/web-vanilla/scripts/server.mjs",
+      "length": 11311,
+      "sha256": "b56224c3e9e8c75e4615f4e6c4d06567a9d77b15562a75572a220ac16d56e665"
+    },
+    {
+      "path": "starters/web-vanilla/security-production.en-US.md",
+      "length": 2678,
+      "sha256": "f621cc60f0b062334c2d67298fff54fa01a4566e8adfe70cc805eb67b375ce08"
+    },
+    {
+      "path": "starters/web-vanilla/security-production.es-419.md",
+      "length": 3025,
+      "sha256": "2fb795f0591fc7caa4885c3ed47562fad704b48db2ef64881a82d58c9545ebb7"
+    },
+    {
+      "path": "starters/web-vanilla/src/adapters/http-task-repository.js",
+      "length": 1604,
+      "sha256": "a4be0c4eb70cf1d3aa56ca03e851a9945e29c1cbfd71160d49c8d60157be1f34"
+    },
+    {
+      "path": "starters/web-vanilla/src/adapters/memory-task-repository.js",
+      "length": 1007,
+      "sha256": "7dbd6eae54007f80c61ab05ef7022b7503de4d47874f0eed61508750d37d331e"
+    },
+    {
+      "path": "starters/web-vanilla/src/adapters/task-api.js",
+      "length": 5748,
+      "sha256": "e449082b100a41581194fa27d218d11f19d5967b641c77a87e93a77627d46719"
+    },
+    {
+      "path": "starters/web-vanilla/src/application/task-service.js",
+      "length": 1861,
+      "sha256": "e911d5dc99ecef7cf6092fd95015809a1d4902aa0865b3b6c604494b301e7450"
+    },
+    {
+      "path": "starters/web-vanilla/src/config.js",
+      "length": 198,
+      "sha256": "36d64c7cdf1d3f5675f31f0097662f817bb02f85f0c05cb9fbccc80dc6b5f176"
+    },
+    {
+      "path": "starters/web-vanilla/src/domain/task.js",
+      "length": 3035,
+      "sha256": "54ffe5ce57f68dbc56d460bb1432f5b0c502c21c6b27eafba6bb111f549086d4"
+    },
+    {
+      "path": "starters/web-vanilla/src/i18n/en-US.js",
+      "length": 3010,
+      "sha256": "5a4372a742029b3fcf8f93909fcf032279255dd66f986fb79ed2b94d9fc1f968"
+    },
+    {
+      "path": "starters/web-vanilla/src/i18n/es-419.js",
+      "length": 3218,
+      "sha256": "7b782e61732fdc60a8872a2bb1d26af2ceea6fdac98e6d1480044d67d902d5f2"
+    },
+    {
+      "path": "starters/web-vanilla/src/main.js",
+      "length": 967,
+      "sha256": "272e7a91241745b98842b55f27ea3c80f04b0578fd6e62c283595aea92a510e9"
+    },
+    {
+      "path": "starters/web-vanilla/src/ui/dom-view.js",
+      "length": 6055,
+      "sha256": "216245be43b1f7463c19a32f1d35d9eb45daa77e021d4b3de4ce94ede0e1cc67"
+    },
+    {
+      "path": "starters/web-vanilla/src/ui/task-controller.js",
+      "length": 3653,
+      "sha256": "373df5b3c7a478ccaf468d91ca16194d955174f52b0060b4c92cef6336d617ed"
+    },
+    {
+      "path": "starters/web-vanilla/styles.css",
+      "length": 9888,
+      "sha256": "47a7fc4b99316adaf668782970282555ae32f0c7a1eccdac8e51aef19bfcd159"
+    },
+    {
+      "path": "starters/web-vanilla/tests/check.test.js",
+      "length": 5900,
+      "sha256": "a2e870b81e2b6fccaa03bf89b328ba41aab224d4d47a41dac00f81d6fe4c1db9"
+    },
+    {
+      "path": "starters/web-vanilla/tests/controller.test.js",
+      "length": 9686,
+      "sha256": "9f5ff47b309771ce3cce36d3ca6db8475aa567f881394b3407aa0e622d05695a"
+    },
+    {
+      "path": "starters/web-vanilla/tests/domain.test.js",
+      "length": 9613,
+      "sha256": "9f7e5dd38bf2bfa3b11ca7ef8443790fa29c37c4c01989e9e78abd12cf0bae3b"
+    },
+    {
+      "path": "starters/web-vanilla/tests/http.test.js",
+      "length": 4532,
+      "sha256": "cc263459ee8d0de01e733baf513538102d3bd7eadce0fe3818bab9164b83a6a0"
+    },
+    {
+      "path": "starters/web-vanilla/tests/server.test.js",
+      "length": 14938,
+      "sha256": "6d23b236d9b3289cf62c9c3003d2df1ce8b07cd5b1f6876c43f3c641c347f558"
+    },
+    {
+      "path": "starters/web/.env.example",
+      "length": 315,
+      "sha256": "ec7ea3a43e871fce213461d781a29b302705a20e2e5427788643c24bea378a27"
+    },
+    {
+      "path": "starters/web/.gitignore",
+      "length": 78,
+      "sha256": "876f6e08156a6aa193ebe513d9b68d1f893e9edaf9fba6ba2b67b281d0669fec"
+    },
+    {
+      "path": "starters/web/.npmrc",
+      "length": 35,
+      "sha256": "cde76ca04e048c3eba070a2c0dfcf5b723cf6014eab177157096b924f24ec4ca"
+    },
+    {
+      "path": "starters/web/api-integration.en-US.md",
+      "length": 3014,
+      "sha256": "32ebe97ec533b20a0abc9bd2d025ea89c68a31e0a74bed6a4e0f045e261941e4"
+    },
+    {
+      "path": "starters/web/api-integration.es-419.md",
+      "length": 3323,
+      "sha256": "c550c73dce55b92c8861e2843d34a6a6d883c2e730550a8d0656fb7789b6e972"
+    },
+    {
+      "path": "starters/web/CHANGELOG.en-US.md",
+      "length": 365,
+      "sha256": "24d23c66418792d1c184adb20521cba1b05d1353a7839f8269acefe3e9eb7fc8"
+    },
+    {
+      "path": "starters/web/CHANGELOG.es-419.md",
+      "length": 400,
+      "sha256": "53fe30a8ce752e7815580fba885effe33a857baf9f2519e8edcda0f5d2056851"
+    },
+    {
+      "path": "starters/web/contracts/task-api-v1.openapi.json",
+      "length": 32886,
+      "sha256": "a17914b5fc029610b12a71a89296859811533d1f628eca9e1ad96a506ddc8fc7"
+    },
+    {
+      "path": "starters/web/docs/architecture.en-US.md",
+      "length": 4393,
+      "sha256": "b507e7b110caa5647eb32bea097e225d4d0917361f7762fd028355017b682fe7"
+    },
+    {
+      "path": "starters/web/docs/architecture.es-419.md",
+      "length": 4623,
+      "sha256": "caab6537e102cf11ae8d7943dbb39abc5ccc7d54d77b094d0f0c8d1d40c3f23d"
+    },
+    {
+      "path": "starters/web/docs/verification.en-US.md",
+      "length": 6376,
+      "sha256": "9670723db59f1fcfa61c05e2d62c16a59862708373f99d9659fa003150d9c2f2"
+    },
+    {
+      "path": "starters/web/docs/verification.es-419.md",
+      "length": 6749,
+      "sha256": "f5664cc8c776ded823e4087d5b87561add608a92f7d68dc7847462e90977ecba"
+    },
+    {
+      "path": "starters/web/index.html",
+      "length": 579,
+      "sha256": "909244fae3ecf566bb42b009d514af5f4eeac74aa71c110c66423e55581e991d"
+    },
+    {
+      "path": "starters/web/LICENSE",
+      "length": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    {
+      "path": "starters/web/package-lock.json",
+      "length": 73248,
+      "sha256": "6893f053b11069c4a170220648e1beb51c092d5b66da3e9082855da783a69be0"
+    },
+    {
+      "path": "starters/web/package.json",
+      "length": 1068,
+      "sha256": "e0adadac1595a22a1ee4cbf51e96ad42ee672ffa6cf3eef187b24e43a0b074af"
+    },
+    {
+      "path": "starters/web/public/favicon.svg",
+      "length": 199,
+      "sha256": "d96bafd90cebd658308a851235e0c3920b82e8c80435b9329e4dce3ad9c46531"
+    },
+    {
+      "path": "starters/web/README.en-US.md",
+      "length": 5709,
+      "sha256": "24d497fcbc4d267f8e3b4db5313d8585a2cfe3336038214f631c54590e71e463"
+    },
+    {
+      "path": "starters/web/README.es-419.md",
+      "length": 6111,
+      "sha256": "34073e35c47a5d74213a7b32bc2198ccefca039d587fa29b9ff5cedfd9dba17e"
+    },
+    {
+      "path": "starters/web/security-production.en-US.md",
+      "length": 2678,
+      "sha256": "f621cc60f0b062334c2d67298fff54fa01a4566e8adfe70cc805eb67b375ce08"
+    },
+    {
+      "path": "starters/web/security-production.es-419.md",
+      "length": 3025,
+      "sha256": "2fb795f0591fc7caa4885c3ed47562fad704b48db2ef64881a82d58c9545ebb7"
+    },
+    {
+      "path": "starters/web/src/adapters/http-task-repository.test.ts",
+      "length": 1881,
+      "sha256": "14a0e78e10aad1e5ad44a09902a781d44b352016355c939dc75de91bb3532d8c"
+    },
+    {
+      "path": "starters/web/src/adapters/http-task-repository.ts",
+      "length": 1856,
+      "sha256": "3c0389ab68f70a726aa16e54f0c9eaff8e93c750b294fd3d3947ee6d6fa6d1db"
+    },
+    {
+      "path": "starters/web/src/adapters/memory-task-repository.ts",
+      "length": 1139,
+      "sha256": "c783f651a28d3fb5bc6c190b234ce00ccc55436ea4cc65e3935854d7d4e9f11a"
+    },
+    {
+      "path": "starters/web/src/adapters/task-api.d.ts",
+      "length": 599,
+      "sha256": "18042b04c724e4e0a4caba579aacd47442a30bbd4c71bd36431a08bb3eca8cbc"
+    },
+    {
+      "path": "starters/web/src/adapters/task-api.js",
+      "length": 5748,
+      "sha256": "e449082b100a41581194fa27d218d11f19d5967b641c77a87e93a77627d46719"
+    },
+    {
+      "path": "starters/web/src/application/task-service.test.ts",
+      "length": 4926,
+      "sha256": "2c3c0f08d1dd16e916e8b7b6d9a44baa2b43e8846626673ec072010609fd25ec"
+    },
+    {
+      "path": "starters/web/src/application/task-service.ts",
+      "length": 1774,
+      "sha256": "2cdf0fa203f83ff3f6c4228cae50fbb01dc344ce41da98115ae620d5421d9c22"
+    },
+    {
+      "path": "starters/web/src/domain/task.test.ts",
+      "length": 2269,
+      "sha256": "4c552b02b06493ebd9a90d8c02b3795dee9ad78a98fbc23fff7e898dc231c855"
+    },
+    {
+      "path": "starters/web/src/domain/task.ts",
+      "length": 1935,
+      "sha256": "91b2807a2f17e78d88f723e922b15d15d02d941ff17d5c5a8b4d2f385c70f550"
+    },
+    {
+      "path": "starters/web/src/main.tsx",
+      "length": 1034,
+      "sha256": "0303e420e78d01971255dac951f53eea628ac0635e97e9e3a6c008f3c32c3005"
+    },
+    {
+      "path": "starters/web/src/ui/App.test.tsx",
+      "length": 7022,
+      "sha256": "d7a0954dc3bdb10796bdbbae9adf8c600aada9673ace44441cbfb8b2f3089c83"
+    },
+    {
+      "path": "starters/web/src/ui/App.tsx",
+      "length": 6444,
+      "sha256": "259766a1de598850d5f6cbdad574d2f3fd7721867b1dc5cec7f0a52783673a28"
+    },
+    {
+      "path": "starters/web/src/ui/locales/en-US.ts",
+      "length": 1924,
+      "sha256": "c2218066795df6c5f2015e4cc3fec263e4ae968a4829d544a68dbdae60b14881"
+    },
+    {
+      "path": "starters/web/src/ui/locales/es-419.ts",
+      "length": 2068,
+      "sha256": "032d9ddcfc9db769cf2bcb90b7e5a0daaedd7c04292e9238aff88e74ed0d2bc6"
+    },
+    {
+      "path": "starters/web/src/ui/locales/types.ts",
+      "length": 1001,
+      "sha256": "510f9a186550ba354cfbfde716439f47f2911acaf5559b540667e62e26f400f8"
+    },
+    {
+      "path": "starters/web/src/ui/styles.css",
+      "length": 6627,
+      "sha256": "43c9637e652f29cb97ed150e1feea1c76966169a1c47fbabd2a96f57f5fc251f"
+    },
+    {
+      "path": "starters/web/src/ui/styles.test.ts",
+      "length": 521,
+      "sha256": "fb5241eb819858650533c56ea2f075beb4d24999b0e17e42dfa96ce01b95a950"
+    },
+    {
+      "path": "starters/web/tsconfig.json",
+      "length": 569,
+      "sha256": "4ebcd10ce2f52e629d1372b1bc40ce528dd4af750eb86bd8dea9b851af1a9cc0"
+    },
+    {
+      "path": "starters/web/vite.config.ts",
+      "length": 382,
+      "sha256": "f59abcc1e2c6c0a63c55c711c55da0206df932849b059956e8b724e2f1788f58"
+    },
+    {
+      "path": "templates/capability-profile.en-US.md",
+      "length": 5319,
+      "sha256": "b36fd845169b71e7eddb1a946b054148234c4ef0af2d1171951616e09328af08"
+    },
+    {
+      "path": "templates/capability-profile.es-419.md",
+      "length": 6024,
+      "sha256": "ee3b05d40f81aa316877f8985397f0b2979fb787164f876e464425087a8190f6"
+    },
+    {
+      "path": "templates/project-brief.en-US.md",
+      "length": 5722,
+      "sha256": "9e03b18a5634dca62ed64268664a3c81e0e88876c8f7b9fc15c9828e6e2b26be"
+    },
+    {
+      "path": "templates/project-brief.es-419.md",
+      "length": 6301,
+      "sha256": "bdbc4a144828c49e1dd3d03bb89fe41f92780b60c328af9a916ec2db08953728"
+    },
+    {
+      "path": "tools/create-app.mjs",
+      "length": 5775,
+      "sha256": "1419f1b545f0bebb1c534103e3a0de99a0cef58353c0f89a18b1bb590f830880"
+    },
+    {
+      "path": "tools/create-app.test.mjs",
+      "length": 5918,
+      "sha256": "54309849e15cb62f2ea486e72cea79bdee1755bf752a1736e7ab3ccc338b7f6f"
+    },
+    {
+      "path": "tools/create-project.mjs",
+      "length": 1971,
+      "sha256": "dac3d16ff5fdc37ad7f5a105b72f65d12352bf4b5de06fad7f6ce4157fa11427"
+    },
+    {
+      "path": "tools/create-project.test.mjs",
+      "length": 42058,
+      "sha256": "a4c559c99fc1d6c32497f1b3b90b765d03ca27ecb4c046030170d861864d7e4c"
+    },
+    {
+      "path": "tools/lib/project-export.mjs",
+      "length": 33393,
+      "sha256": "3028dfd2c28426412af0321a2176887749c07720daa2292b27f27d20514b0338"
+    },
+    {
+      "path": "tools/mcp-server.mjs",
+      "length": 8435,
+      "sha256": "89cb6ea3f18cc2791e14f1788bf5c3fe001e87910270b528f75a5e45d53d6c6c"
+    },
+    {
+      "path": "tools/mcp-server.test.mjs",
+      "length": 4553,
+      "sha256": "a3253518fa997d6d3fda75b88950b95b9e0e3424f019cd2d6dbfdfae7086fb64"
+    },
+    {
+      "path": "tools/README.en-US.md",
+      "length": 14496,
+      "sha256": "ad8ed04ced30206d2a94a61f77967f9623c4113431558776f8a0db9e06870661"
+    },
+    {
+      "path": "tools/README.es-419.md",
+      "length": 15298,
+      "sha256": "207d2c7dfe86ba8f743c596b5d02f6971b2a91c902f39f3db40a960ed51be5e7"
+    },
+    {
+      "path": "tools/solution-runner.mjs",
+      "length": 13864,
+      "sha256": "9c30b3a4313644818c54f372f517844ebbf9a9e5bd7b8fc4e28d69772943d871"
+    },
+    {
+      "path": "tools/solution-runner.test.mjs",
+      "length": 4031,
+      "sha256": "3017781abda448399f18413901225e76d79ba2a96f0275783cfd2706b946b939"
+    },
+    {
+      "path": "TRADEMARKS.en-US.md",
+      "length": 1276,
+      "sha256": "c97b405f1784b457916a1e581e6d682204cfe59be81997c8565a00b9c63e9b8d"
+    },
+    {
+      "path": "TRADEMARKS.es-419.md",
+      "length": 1368,
+      "sha256": "d044a321eb082170ef419793d98390ddf82c6e3e80c9928ab879fd1ad9d7e313"
+    }
+  ]
+}
