@@ -116,6 +116,12 @@ Los recorridos HTTP usan Uvicorn en puertos efímeros y verifican respuestas y e
 
 ## Integridad documental y límites
 
+### Ampliación Node para 1.2.0
+
+El laboratorio Node ejecuta HTTPS con confianza y nombre verificados, rechazo de certificados vencidos/no confiables, matriz negativa API, escritura concurrente y límites compartidos entre dos servidores. En Windows con Node 24.16.0, SQLite 3.53.0 y Docker/WSL, SQLite, PostgreSQL 18.6 y MySQL 8.4.11 aprobaron respaldo/restauración nativos y uso HTTPS del destino; se verificaron esquema, Unicode, versiones y revocación de todos los tokens restaurados. El [laboratorio Node](../../starters/backend-node/operations-lab.es-419.md) conserva comandos, aislamiento y límites.
+
+Pasaron nueve pruebas rápidas Node, 73 pruebas de mantenimiento, controles documentales/arquitectónicos e integración cruzada con React y web nativa. Una solución api-only exportada fuera del repositorio aprobó doctor/setup/check y el arranque del servidor. Sus archivos temporales son sintéticos; no se utilizaron configuraciones ni bases del usuario. Los contenedores del laboratorio se retiraron; las imágenes y dependencias descargadas permanecen en caché. La publicación propuesta 1.2.0 requiere aún conservación, recuperación y aprobación exacta; la evidencia no aprueba producción ni plataformas Apple.
+
 ### Ensayos operativos Python posteriores a PR #27
 
 Actualización posterior a `bf225bf`: el laboratorio reprodujo un timeout dentro de `commit` y dos bloqueos controlados. Se aplicaron WAL con `FULL`, un mínimo SQLite corregido y ejecución de persistencia fuera del bucle HTTP. Python administrado 3.13.15/SQLite 3.53.1, 31 pruebas por motor y 100 recuperaciones fragmentadas aprobaron. La evidencia y distinción entre los bloqueos corregidos y el episodio histórico sin traza constan en la sección «Corrección de bloqueos reproducidos» del laboratorio; los párrafos siguientes conservan el estado histórico anterior.

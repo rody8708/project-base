@@ -1,6 +1,6 @@
 # Using Project Base Through Agents and MCP
 
-Working revision: `1.1.0-draft.2`  
+Working revision: `1.2.0-rc.1`  
 Language: US English (`en-US`)  
 [Español (Latinoamérica)](agent-guide.es-419.md) · [Home](../README.en-US.md)
 

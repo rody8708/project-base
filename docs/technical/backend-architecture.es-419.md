@@ -20,4 +20,4 @@ La API pública OpenAPI es el límite con clientes. Los puertos internos no se c
 
 Una suite común debe ejecutar ejemplos positivos y negativos contra un proceso HTTP real. Las pruebas internas del lenguaje complementan esa suite; no la sustituyen. Una referencia con menos controles se conserva como candidata y no se declara equivalente.
 
-Actualmente PHP/Laravel es la referencia de cobertura amplia. TypeScript/Node demuestra una arquitectura sin framework de aplicación, pero conserva pendientes enumerados en su README. Los perfiles Python, .NET, Go y JVM se seleccionarán cuando un consumidor los requiera; documentar una posibilidad no equivale a mantener cinco implementaciones completas.
+PHP/Laravel, TypeScript/Node sin framework de aplicación y Python/FastAPI son implementaciones ejecutables. Cada una conserva evidencia propia; .NET, Go y JVM siguen como alternativas documentadas. El [estado actual](stability-status.es-419.md) distingue catálogo, publicación y límites.

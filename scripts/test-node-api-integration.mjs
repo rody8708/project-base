@@ -12,7 +12,7 @@ import { createTaskApi as vanillaApi } from '../starters/web-vanilla/src/adapter
 
 const root=path.resolve(import.meta.dirname,'..'), backend=path.join(root,'starters/backend-node');
 const temporary=await mkdtemp(path.join(tmpdir(),'foundation-node-api-')), database=path.join(temporary,'data.sqlite');
-const environment={...process.env,APP_ENV:'testing',DB_DATABASE:database,API_ALLOWED_ORIGINS:'http://127.0.0.1:5173'};
+const environment={...process.env,APP_ENV:'testing',DATABASE_URL:'',DB_DATABASE:database,API_ALLOWED_ORIGINS:'http://127.0.0.1:5173'};
 let server;
 const run=(args,capture=false)=>new Promise((resolve,reject)=>{let output='';const child=spawn(args[0],args.slice(1),{cwd:backend,env:environment,windowsHide:true,stdio:['ignore',capture?'pipe':'ignore','pipe']});child.stdout?.on('data',data=>output+=data);child.on('error',reject);child.on('exit',code=>code===0?resolve(output):reject(new Error('Owned Node command failed.')));});
 try {

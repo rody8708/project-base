@@ -20,4 +20,4 @@ The public OpenAPI API is the client boundary. Internal ports do not share sourc
 
 A shared suite must run positive and negative examples against a real HTTP process. Language-internal tests complement that suite; they do not replace it. A reference with fewer controls remains a candidate and is not declared equivalent.
 
-PHP/Laravel is currently the broad-coverage reference. TypeScript/Node demonstrates an application-framework-free architecture but retains the pending items listed in its README. Python, .NET, Go, and JVM profiles will be selected when a consumer needs them; documenting an option is not the same as maintaining five complete implementations.
+PHP/Laravel, application-framework-free TypeScript/Node, and Python/FastAPI are executable implementations. Each retains its own evidence; .NET, Go, and JVM remain documented alternatives. The [current status](stability-status.en-US.md) distinguishes catalog, release, and limits.

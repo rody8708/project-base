@@ -4,6 +4,20 @@
 
 Este archivo registra cambios posteriores a la publicación técnica congelada `1.1.0`. No reescribe ni amplía la aprobación de esa publicación.
 
+## 1.2.0-rc.1 — 2026-09-04
+
+### Agregado
+
+- Python/FastAPI con matriz SQL, HTTPS, concurrencia y recuperación nativa; correcciones reproducidas de bloqueo SQLite y del servidor.
+- Adaptadores PostgreSQL/MySQL de Node, limitación atómica compartida, respaldo/restauración nativos y laboratorio HTTPS con fallos de certificados.
+- Pruebas de aplicación Node en memoria y migración inicial identificada; adopción de SQLite previo sin pérdida de datos.
+
+### Cambiado
+
+- Catálogo de siete plantillas y estado actual unificados en ambos idiomas; registros históricos identificados.
+- Helpers de aplicación Node asíncronos: los consumidores directos deben usar await. El contrato HTTP no cambia.
+- Preparación de la publicación 1.2.0, sin modificar 1.1.0 ni conceder aprobación automática.
+
 ## 1.1.0-draft.2 — 2026-09-04
 
 ### Agregado

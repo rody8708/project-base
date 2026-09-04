@@ -1,14 +1,16 @@
 // SPDX-FileCopyrightText: 2026 Zendrhax LLC
 // SPDX-License-Identifier: MPL-2.0
-import { DatabaseSync } from 'node:sqlite';
+import { DatabaseSync, backup } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
 import type { Page, Permission, Principal, RateLimitRepository, Task, TaskRepository, TokenRepository } from './contracts.js';
 
 export class SqliteStore implements TaskRepository, TokenRepository, RateLimitRepository {
   readonly #db: DatabaseSync;
   constructor(path: string) {
+    const [major=0, minor=0, patch=0]=(process.versions.sqlite??'0').split('.').map(Number);
+    if(path!==':memory:' && (major<3 || major===3 && (minor<51 || minor===51 && patch<3))) throw new Error('File SQLite requires SQLite 3.51.3+; use Node 24.16.0 or a verified newer runtime.');
     this.#db = new DatabaseSync(path, { enableForeignKeyConstraints: true, timeout: 5000 });
-    this.#db.exec(`PRAGMA journal_mode=WAL; CREATE TABLE IF NOT EXISTS tasks(id TEXT PRIMARY KEY, owner TEXT NOT NULL, title TEXT NOT NULL, completed INTEGER NOT NULL, version INTEGER NOT NULL); CREATE INDEX IF NOT EXISTS tasks_owner_id ON tasks(owner,id); CREATE TABLE IF NOT EXISTS api_tokens(id TEXT PRIMARY KEY, token_hash TEXT UNIQUE NOT NULL, subject TEXT NOT NULL, permissions TEXT NOT NULL, expires_at INTEGER NOT NULL, revoked_at INTEGER); CREATE TABLE IF NOT EXISTS rate_limits(key_hash TEXT NOT NULL, window INTEGER NOT NULL, count INTEGER NOT NULL, PRIMARY KEY(key_hash,window));`);
+    this.#db.exec(`PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; CREATE TABLE IF NOT EXISTS schema_migrations(version INTEGER PRIMARY KEY); INSERT OR IGNORE INTO schema_migrations(version) VALUES(1); CREATE TABLE IF NOT EXISTS tasks(id TEXT PRIMARY KEY, owner TEXT NOT NULL, title TEXT NOT NULL, completed INTEGER NOT NULL, version INTEGER NOT NULL); CREATE INDEX IF NOT EXISTS tasks_owner_id ON tasks(owner,id); CREATE TABLE IF NOT EXISTS api_tokens(id TEXT PRIMARY KEY, token_hash TEXT UNIQUE NOT NULL, subject TEXT NOT NULL, permissions TEXT NOT NULL, expires_at INTEGER NOT NULL, revoked_at INTEGER); CREATE TABLE IF NOT EXISTS rate_limits(key_hash TEXT NOT NULL, window INTEGER NOT NULL, count INTEGER NOT NULL, PRIMARY KEY(key_hash,window));`);
   }
   list(owner: string, limit: number, after?: string): Page {
     const rows = (after
@@ -34,6 +36,9 @@ export class SqliteStore implements TaskRepository, TokenRepository, RateLimitRe
       this.#db.prepare('DELETE FROM rate_limits WHERE window<?').run(window-2); this.#db.exec('COMMIT'); return true;
     } catch(error) { this.#db.exec('ROLLBACK'); throw error; }
   }
+  async backupTo(path: string): Promise<void> { await backup(this.#db, path); }
+  revokeAll(): void { this.#db.prepare('UPDATE api_tokens SET revoked_at=? WHERE revoked_at IS NULL').run(Math.floor(Date.now()/1000)); }
+  schemaVersion(): number { return Number((this.#db.prepare('SELECT MAX(version) AS version FROM schema_migrations').get() as {version:number}).version); }
   close(): void { this.#db.close(); }
 }
 function taskFromRow(row: Record<string,unknown>): Task { return { id:String(row.id), title:String(row.title), completed:Number(row.completed)===1, version:Number(row.version) }; }

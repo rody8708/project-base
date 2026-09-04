@@ -13,7 +13,7 @@ export const TEMPLATE_REVISIONS = Object.freeze({
   flutter: '1.1.0-draft.2',
   'kotlin-android': '1.1.0-draft.2',
   'backend-php': '1.1.0-draft.2',
-  'backend-node': '1.1.0-draft.2',
+  'backend-node': '1.2.0-rc.1',
   'backend-python': '1.2.0-draft.1',
 });
 export const TEMPLATE_REVISION = TEMPLATE_REVISIONS.web;

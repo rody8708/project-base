@@ -4,6 +4,8 @@
 
 Fecha: `2026-09-03`. Revisión: `1.1.0-draft.1`. Resultado: `TECHNICAL_SCOPE_PASS_WITH_DECLARED_EXCEPTIONS`. MPL-2.0 se adoptó después de esta revisión; el resultado no asigna una versión estable ni aprobación productiva.
 
+> Registro histórico de 1.1.0. El [estado actual](stability-status.es-419.md) y los laboratorios posteriores sustituyen sus pendientes, no sus resultados históricos.
+
 ## Hallazgos corregidos
 
 La revisión agregó una arquitectura backend neutral y una API TypeScript/Node sin framework de aplicación. Las pruebas cruzadas detectaron y corrigieron formato de token incompatible, semántica incorrecta de `next_after`, ausencia de CORS, UTF-8 no estricto, sustitutos Unicode aislados, parámetros duplicados y prioridad de `Accept-Language`. El limitador local ahora persiste en SQLite. Node sigue como perfil candidato: no hereda la evidencia PostgreSQL/MySQL, recuperación, HTTPS o producción de PHP.

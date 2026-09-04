@@ -64,12 +64,14 @@ export async function checkArchitecture(root) {
 
   const nodeContracts = await load('starters/backend-node/src/contracts.ts');
   reject(violations, 'starters/backend-node/src/contracts.ts', nodeContracts, 'NODE_DOMAIN_DEPENDENCY', [
-    /from ['"]node:/u, /from ['"]\.\/(?:server|sqlite)\.js['"]/u,
+    /from ['"]node:/u, /from ['"]\.\/(?:server|sqlite|sql-store|store)\.js['"]/u,
+    /from ['"](?:pg|mysql2)(?:\/[^'"]*)?['"]/u,
   ]);
   const nodeApplication = await load('starters/backend-node/src/application.ts');
   reject(violations, 'starters/backend-node/src/application.ts', nodeApplication, 'NODE_APPLICATION_BOUNDARY', [
     /from ['"]node:(?:http|https|net|sqlite)/u,
-    /from ['"]\.\/(?:server|sqlite)\.js['"]/u,
+    /from ['"]\.\/(?:server|sqlite|sql-store|store)\.js['"]/u,
+    /from ['"](?:pg|mysql2)(?:\/[^'"]*)?['"]/u,
   ]);
 
   for (const [directory, rule, patterns] of [
