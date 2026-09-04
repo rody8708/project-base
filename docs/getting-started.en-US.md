@@ -19,6 +19,20 @@ backend ──persistence port + adapter──> SQLite, PostgreSQL, or MySQL
 
 Clients do not access the database or import internal backend code. The API contract is the only shared boundary. A framework can help, but it is not mandatory; preserving contracts, separation, tests, and evidence is mandatory.
 
+## If You Do Not Know How to Program Yet
+
+The foundation can guide you and prevent improvised decisions, but it does not replace learning, development, or human review. You will need a developer or coding assistant to run commands, adapt the code, and build your product's specific features.
+
+Before selecting technologies, write down in plain language:
+
+- What problem the application solves.
+- Who will use it.
+- The three essential features of its first version.
+- Which devices it must support.
+- What information it will store and who may see or modify it.
+
+With those answers, a developer or assistant can use the following sections to select components. If a decision is not understood yet, record it as pending; do not invent an answer or claim it is ready.
+
 ## 1. Select Components
 
 Choose only what the product needs:

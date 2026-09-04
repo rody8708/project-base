@@ -1,5 +1,32 @@
 # Master Software Project Foundation
 
+## I Want to Create an Application: How Does This Help Me?
+
+This foundation helps you start an application on a prepared technical structure instead of beginning with an empty folder and making every decision without a reference. It supports web, mobile, native Android, desktop, and backend projects.
+
+**It is not documentation alone.** It includes executable starter code, working examples, automated tests, a shared API contract, persistent backends, and a tool that copies the selected foundation into a new project.
+
+**It is not a finished application or a one-click generator.** It does not yet know your business, screens, or features. It provides the foundations; then you, a team, or a coding assistant build your product's specific capabilities on them.
+
+### What It Gives You
+
+- Avoids starting completely from scratch.
+- Lets you select only the pieces you need without forcing a particular language or framework.
+- Separates the interface, backend, and database so they can be replaced with less impact.
+- Prepares validation, tests, API communication, persistence, tokens, and basic permissions.
+- States what has been verified and what remains pending so an example is not mistaken for a production-ready product.
+
+### How to Begin Even If You Do Not Know How to Program
+
+1. Describe your application idea, who will use it, and what problem it will solve.
+2. Decide where it must run: web, mobile, Android, desktop, or multiple platforms.
+3. Use the guide to select and export the required foundations.
+4. Build one small feature at a time and verify every change.
+
+You can give this repository to a developer or coding assistant and ask: “I want to create an application for `[goal]`, aimed at `[users]`, and available on `[platforms]`. Help me define it and use this foundation to create the required projects without coupling clients to the backend.”
+
+**Next step:** read the [application creation guide](docs/getting-started.en-US.md), which explains the complete process and its limits.
+
 [Isolated Docker lab: PHP 8.5 and HTTPS](starters/backend-php/docker-local.en-US.md).
 
 **Updated status:** token, permission, and ownership boundaries are implemented; see [security and production readiness](docs/technical/security-production.en-US.md). Earlier tests and limitations are historical: the API no longer accepts anonymous access. The [stable release status](docs/technical/stability-status.en-US.md) records macOS/iOS as nonblocking pending work and MPL-2.0 as the adopted license.
@@ -12,8 +39,6 @@ Language: US English (`en-US`)
 License for original code and documentation: [Mozilla Public License 2.0](LICENSE). See the [license scope](LICENSE-SCOPE.en-US.md) and [trademark policy](TRADEMARKS.en-US.md).
 
 The project is maintained by **Zendrhax LLC** under the **Zendrhax** brand. To collaborate, read the [contribution guide](.github/CONTRIBUTING.en-US.md); to report a vulnerability, follow the [security policy](.github/SECURITY.en-US.md).
-
-**Start here:** [how to use this foundation to create an application](docs/getting-started.en-US.md). That guide brings together its utility, component selection, export, API integration, and final validation.
 
 Stable release: [technical approval 1.1.0](releases/approval-1.1.0.en-US.md), tied to the exact package and SHA-256 without rewriting its bytes.
 
