@@ -16,6 +16,7 @@
     "backend-node:verify": "npm --prefix starters/backend-node run check",
     "integration:php": "node scripts/test-api-integration.mjs",
     "integration:node": "node scripts/test-node-api-integration.mjs",
+    "create-app": "node tools/create-app.mjs",
     "create-project": "node tools/create-project.mjs"
   }
 }

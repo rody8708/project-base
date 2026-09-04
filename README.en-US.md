@@ -6,7 +6,7 @@ This foundation helps you start an application on a prepared technical structure
 
 **It is not documentation alone.** It includes executable starter code, working examples, automated tests, a shared API contract, persistent backends, and a tool that copies the selected foundation into a new project.
 
-**It is not a finished application or a one-click generator.** It does not yet know your business, screens, or features. It provides the foundations; then you, a team, or a coding assistant build your product's specific capabilities on them.
+**It is not a finished application.** The creation assistant can prepare a complete solution in a few steps, but it does not yet know your business, screens, or features. It provides the foundations; then you, a team, or a coding assistant build your product's specific capabilities on them.
 
 ### What It Gives You
 
@@ -21,12 +21,18 @@ This foundation helps you start an application on a prepared technical structure
 
 1. Describe your application idea, who will use it, and what problem it will solve.
 2. Decide where it must run: web, mobile, Android, desktop, or multiple platforms.
-3. Use the guide to select and export the required foundations.
+3. Run `npm run create-app` and answer the assistant's simple questions.
 4. Build one small feature at a time and verify every change.
 
 You can give this repository to a developer or coding assistant and ask: “I want to create an application for `[goal]`, aimed at `[users]`, and available on `[platforms]`. Help me define it and use this foundation to create the required projects without coupling clients to the backend.”
 
-**Next step:** read the [application creation guide](docs/getting-started.en-US.md), which explains the complete process and its limits.
+**Next step:** with Node.js 24 installed, open a terminal in this folder and run:
+
+```powershell
+npm run create-app
+```
+
+The assistant asks for language, application type, backend, name, and location. Press Enter to accept recommended choices and a default folder inside the user profile. It finishes by pointing to one `START-HERE` file containing the exact commands for the generated solution. The [application creation guide](docs/getting-started.en-US.md) then explains the complete process and its limits.
 
 [Isolated Docker lab: PHP 8.5 and HTTPS](starters/backend-php/docker-local.en-US.md).
 
@@ -62,6 +68,8 @@ Executable bases are replaceable starting points, not a commercial application o
 
 ## Start From a Base
 
+The recommended path for most people is `npm run create-app`. It offers a simple website, complete web application, mobile, desktop, native Android, or API-only project. When applicable, it creates one folder containing `app/` and `api/`; two manual exports are unnecessary.
+
 Web fundamentals are distinguished from tools: HTML for structure and semantics, CSS for presentation and responsive layout, and JavaScript for behavior when needed. `web` uses React, TypeScript, and Vite; `web-vanilla` implements its own interface with HTML/CSS/JavaScript and does not need those tools. They are independent templates, not two modes of the same application. Node supports tests and the native variant's local server, not the code running in the browser.
 
 Read the [technical scope](docs/technical/implementation.en-US.md), the [API boundary between clients and backend](docs/technical/api-boundary.en-US.md), and [technology and database selection](docs/technical/technology-choices.en-US.md), then the chosen starter's instructions and its [verification record](docs/technical/verification.en-US.md). The adopted direction requires every client with a remote backend to use the API as its sole communication boundary and never access the database or server implementation directly. The [executable integration](docs/technical/api-integration.en-US.md) has bounded local evidence; having a platform's files does not mean it has run there.
@@ -78,7 +86,7 @@ npm run check
 node tools/create-project.mjs --help
 ```
 
-To create an evaluation copy, provide a new absolute destination whose parent exists outside this repository. Windows example:
+To create one individual template in advanced mode, provide a new absolute destination whose parent exists outside this repository. Windows example:
 
 ```text
 node tools/create-project.mjs --template web --name mi-web --destination "D:\proyectos\mi-web"

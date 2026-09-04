@@ -13,6 +13,7 @@ This file records changes after the frozen technical release `1.1.0`. It does no
 - A bilingual consumer capability profile for identity, SaaS/privacy, payments/licensing, secure mobile, offline/sync, operations, and distribution.
 - Automatic export of the capability profile with SHA-256 inventory in the adoption receipt.
 - Safe request correlation and structured operational failure logs in both executable backend starters.
+- A bilingual `npm run create-app` assistant that generates complete solutions with `app/`, `api/`, and a specific `START-HERE` guide.
 
 ### Changed
 

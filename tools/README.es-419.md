@@ -17,6 +17,18 @@ Usar Node.js `24.x`; las pruebas aquí se ejecutaron con `24.16.0` en Windows. N
 
 ## Uso
 
+### Crear una solución completa fácilmente
+
+Desde la raíz del repositorio:
+
+```powershell
+npm run create-app
+```
+
+El asistente bilingüe permite escoger sitio web sencillo, aplicación web, móvil, escritorio, Android nativo o solo API sin conocer los nombres de las plantillas. Cuando una solución necesita cliente y backend, crea ambos dentro de una carpeta común y genera un `START-HERE` bilingüe con los comandos siguientes. No instala, compila, publica ni sobrescribe.
+
+### Exportar una plantilla individual: modo avanzado
+
 Desde la raíz del repositorio, elegir una ruta absoluta nueva y un nombre ASCII en minúsculas de 1 a 63 caracteres: debe empezar con una letra y puede contener dígitos y guiones simples entre grupos. No admite espacios, `_`, guiones consecutivos o guiones finales.
 
 ```powershell
@@ -74,7 +86,7 @@ El registro `adoption.json` distingue:
 }
 ```
 
-La revisión del ejemplo corresponde a los starters visuales actuales. Backend PHP y Node permanecen en `1.1.0-draft.1`; el recibo registra la revisión exacta de la plantilla seleccionada en vez de asignar una sola revisión a todas las plataformas. Los dos archivos de capacidades se copian byte a byte y sus valores SHA-256 quedan en `adoption.json`. Exigen que el consumidor seleccione `no aplica`, `planificado` o `habilitado` para identidad, multitenancy/privacidad, pagos/licencias, móvil seguro, offline/sincronización y distribución. Seleccionar no equivale a implementar ni aprobar.
+Todos los starters actuales están en `1.1.0-draft.2`; el recibo registra siempre la revisión exacta de la plantilla seleccionada en vez de asignar una sola revisión global. Los dos archivos de capacidades se copian byte a byte y sus valores SHA-256 quedan en `adoption.json`. Exigen que el consumidor seleccione `no aplica`, `planificado` o `habilitado` para identidad, multitenancy/privacidad, pagos/licencias, móvil seguro, offline/sincronización y distribución. Seleccionar no equivale a implementar ni aprobar.
 
 También incluye fecha UTC, hashes de fuente y copia, modificaciones de nombres y comprobaciones no ejecutadas. El hash del inventario identifica los archivos fuente incluidos en esa preparación; no es un identificador Git, una firma o evidencia de reproducibilidad binaria. No incluye rutas absolutas del equipo. La aprobación documental disponible no concede aprobación técnica, adopción del consumidor ni soporte de plataforma.
 
