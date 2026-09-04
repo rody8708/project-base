@@ -9,7 +9,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { parseArguments } from './create-project.mjs';
 import {
-  APPROVED_DOCUMENTARY_RELEASE, TEMPLATE_FILES, TEMPLATE_REVISION, assertNoPortableCollisions,
+  APPROVED_DOCUMENTARY_RELEASE, CAPABILITY_PROFILE_FILES, TEMPLATE_FILES, TEMPLATE_REVISION, TEMPLATE_REVISIONS, assertNoPortableCollisions,
   createProject, isWithin, sha256, shouldExclude, validateDestinationPath,
   validateProjectName, validateRelativePath,
 } from './lib/project-export.mjs';
@@ -70,7 +70,7 @@ async function fixture(t) {
   await put('starters/web-vanilla/scripts/server.mjs', 'export const localHost = "127.0.0.1"; // Synthetic source only\n');
   await put('starters/web-vanilla/scripts/check.mjs', 'import assert from "node:assert/strict"; // Synthetic source only\n');
   await put('starters/web-vanilla/assets/bytes.bin', Buffer.from([0, 128, 255, 13, 10]));
-  await put('starters/flutter/pubspec.yaml', 'name: foundation_starter\nversion: 1.1.0-draft.1\n');
+  await put('starters/flutter/pubspec.yaml', `name: foundation_starter\nversion: ${TEMPLATE_REVISIONS.flutter}\n`);
   await put('starters/flutter/pubspec.lock', '# Synthetic lock\npackages: {}\n');
   await put('starters/flutter/lib/main.dart', 'const example = 1;\n');
   await put('starters/flutter/android/app/build.gradle.kts', 'applicationId = "com.example.foundation_starter"\n');
@@ -90,6 +90,9 @@ async function fixture(t) {
   const release = {
     version: '1.0.0', editorialRevision: '0.1.0-draft.4', files: [],
   };
+  for (const name of CAPABILITY_PROFILE_FILES) {
+    await put(`templates/${name}`, `# SYNTHETIC CAPABILITY PROFILE: ${name}\n`);
+  }
   for (const spec of APPROVED_DOCUMENTARY_RELEASE.files) {
     const bytes = Buffer.from(`SYNTHETIC TEST ARTIFACT ONLY: ${spec.role}\n`);
     await put(`releases/${spec.name}`, bytes);
@@ -125,7 +128,7 @@ test('web export preserves source bytes, customizes both npm root names, and rec
   const lockBefore = await fs.readFile(f.source('starters/web/package-lock.json'));
   const result = await f.run();
   assert.equal(result.result, 'CREATED_FOR_EVALUATION');
-  assert.equal(result.filesCopied, 13);
+  assert.equal(result.filesCopied, 15);
   assert.equal(result.consumerAdoptionStatus, 'pending-consumer-confirmation');
   assert.equal(result.technicalTemplateStatus, 'not-approved');
   assert.equal(result.foundationReleaseApproved, true);
@@ -145,11 +148,20 @@ test('web export preserves source bytes, customizes both npm root names, and rec
   assert.equal(adoption.projectName, 'new-project');
   assert.equal(adoption.documentaryFoundation.releaseVersion, '1.0.0');
   assert.equal(adoption.documentaryFoundation.scope, 'documentary');
-  assert.equal(adoption.technicalTemplate.revision, '1.1.0-draft.1');
+  assert.equal(adoption.technicalTemplate.revision, TEMPLATE_REVISIONS.web);
   assert.equal(adoption.technicalTemplate.generationStatus, 'generated-for-evaluation');
   assert.equal(adoption.consumerAdoptionStatus, 'pending-consumer-confirmation');
   assert.equal(adoption.customization.packageNameChanged, true);
   assert.equal(adoption.customization.nativeIdentifiersChanged, false);
+  assert.equal(result.capabilityProfileStatus, 'pending-consumer-selection');
+  assert.equal(adoption.capabilityProfiles.enabledProfilesRequireConsumerImplementationAndEvidence, true);
+  assert.equal(adoption.capabilityProfiles.files.length, 2);
+  for (const profile of adoption.capabilityProfiles.files) {
+    const name = path.basename(profile.path);
+    const original = await fs.readFile(f.source(`templates/${name}`));
+    assert.deepEqual(await fs.readFile(path.join(f.destination(), profile.path)), original);
+    assert.equal(profile.sha256, sha256(original));
+  }
   assert.deepEqual(adoption.verification, {
     copiedFileBytes: 'verified', dependenciesInstalled: false,
     productBuildExecuted: false, productPlatformSupportVerified: false,
@@ -178,7 +190,7 @@ test('vanilla web export preserves plain source and zero dependencies while rena
   for (const relative of included) sourceBefore.set(relative, await fs.readFile(f.source(`starters/web-vanilla/${relative}`)));
   const result = await f.run({ template: 'web-vanilla', name: 'plain-site' });
   assert.equal(result.template, 'web-vanilla');
-  assert.equal(result.filesCopied, included.length + 5);
+  assert.equal(result.filesCopied, included.length + 7);
   const manifest = JSON.parse(await fs.readFile(path.join(f.destination(), 'package.json'), 'utf8'));
   const lock = JSON.parse(await fs.readFile(path.join(f.destination(), 'package-lock.json'), 'utf8'));
   assert.deepEqual(manifest, { ...JSON.parse(sourceBefore.get('package.json')), name: 'plain-site' });
@@ -310,7 +322,7 @@ test('Flutter export preserves lock, pubspec and native IDs without implying nat
   await f.put('starters/flutter/.fvmrc', '{"flutter":"synthetic-version"}\n');
   await f.put('starters/flutter/.fvm/flutter_sdk/bin/cache/fixture', 'SYNTHETIC CACHE');
   const result = await f.run({ template: 'flutter', name: 'my-flutter-project' });
-  assert.equal(result.filesCopied, 15);
+  assert.equal(result.filesCopied, 17);
   for (const relative of ['pubspec.yaml', 'pubspec.lock', '.fvmrc', 'android/app/build.gradle.kts', 'lib/main.dart', 'README.es-419.md', 'README.en-US.md']) {
     assert.deepEqual(await fs.readFile(path.join(f.destination(), relative)), await fs.readFile(f.source(`starters/flutter/${relative}`)));
   }
@@ -321,6 +333,7 @@ test('Flutter export preserves lock, pubspec and native IDs without implying nat
   assert.equal(adoption.customization.flutterProjectAndBundleIdentifiers, 'unchanged-from-template');
   assert.equal(adoption.customization.distributionIdentifiersStatus, 'pending-consumer-review');
   assert.equal(adoption.verification.productPlatformSupportVerified, false);
+  assert.equal(adoption.technicalTemplate.revision, TEMPLATE_REVISIONS.flutter);
 });
 
 test('Kotlin export preserves wrapper, dependency lock and native identifiers without claiming verification', async (t) => {
@@ -336,6 +349,7 @@ test('Kotlin export preserves wrapper, dependency lock and native identifiers wi
   assert.equal(record.customization.nativeIdentifiersChanged, false);
   assert.equal(record.verification.productPlatformSupportVerified, false);
   assert.equal(record.technicalTemplate.status, 'not-approved');
+  assert.equal(record.technicalTemplate.revision, TEMPLATE_REVISIONS['kotlin-android']);
 });
 
 test('PHP export preserves Composer identity, lock and migrations while excluding runtime state and databases', async (t) => {
@@ -360,6 +374,7 @@ test('PHP export preserves Composer identity, lock and migrations while excludin
   assert.equal(record.customization.packageNameChanged, false);
   assert.equal(record.consumerAdoptionStatus, 'pending-consumer-confirmation');
   assert.equal(record.verification.dependenciesInstalled, false);
+  assert.equal(record.technicalTemplate.revision, TEMPLATE_REVISIONS['backend-php']);
 });
 
 test('Node backend export preserves sources and lock while changing only npm root identity', async (t) => {
@@ -374,6 +389,7 @@ test('Node backend export preserves sources and lock while changing only npm roo
   const record = JSON.parse(await fs.readFile(path.join(f.destination(), result.adoptionRecord), 'utf8'));
   assert.equal(record.customization.packageNameChanged, true);
   assert.equal(record.technicalTemplate.id, 'backend-node');
+  assert.equal(record.technicalTemplate.revision, TEMPLATE_REVISIONS['backend-node']);
   assert.equal(record.verification.dependenciesInstalled, false);
 });
 
@@ -412,7 +428,7 @@ test('generated dependencies, outputs, environment files and named secrets are e
   ];
   for (const relative of omitted) await f.put(`starters/web/${relative}`, 'SYNTHETIC OMITTED DATA');
   const result = await f.run();
-  assert.equal(result.filesCopied, 13);
+  assert.equal(result.filesCopied, 15);
   assert.ok(result.excludedEntries > 0);
   for (const relative of omitted) await absent(path.join(f.destination(), relative));
   assert.equal(await fs.readFile(path.join(f.destination(), '.env.example'), 'utf8'), 'PUBLIC_EXAMPLE=placeholder\n');
@@ -532,6 +548,17 @@ test('all four approved artifact roles are verified before destination creation'
   }
 });
 
+test('both capability profiles are required and copied before project adoption', async (t) => {
+  const f = await fixture(t);
+  for (const name of CAPABILITY_PROFILE_FILES) {
+    const location = f.source(`templates/${name}`);
+    const parked = `${location}.fixture-parked`;
+    await fs.rename(location, parked);
+    await rejectBeforeCreating(f, 'INCOMPLETE_CAPABILITY_PROFILE');
+    await fs.rename(parked, location);
+  }
+});
+
 test('a starter cannot collide with the reserved foundation output', async (t) => {
   const f = await fixture(t);
   await f.put('starters/web/Foundation/adoption.json', '{}');
@@ -642,6 +669,7 @@ test('CLI accepts only the documented arguments and offers a non-mutating help c
   assert.equal(help.status, 0);
   assert.equal(help.stderr, '');
   assert.equal(JSON.parse(help.stdout).adoptionRequiresConsumerConfirmation, true);
+  assert.equal(JSON.parse(help.stdout).capabilityProfileIncluded, true);
   assert.equal(JSON.parse(help.stdout).usage.includes('web|web-vanilla|flutter|kotlin-android|backend-php|backend-node'), true);
   const invalid = spawnSync(process.execPath, [executable, '--force'], { encoding: 'utf8' });
   assert.equal(invalid.status, 1);

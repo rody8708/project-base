@@ -49,6 +49,7 @@ Copy the selected revision's template and its counterpart into the consumer proj
 
 ## BRIEF-005 — Data, Security, and Recovery
 
+- Selected capability profiles: [complete `capability-profile.en-US.md` and its Spanish counterpart; record not applicable, planned, or enabled for each profile].
 - Data used and sensitivity: [what data is needed and why].
 - Storage, retention, and deletion: [location, duration, and handling].
 - Trust boundaries and validation: [untrusted sources and controls].

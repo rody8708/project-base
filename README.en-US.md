@@ -14,6 +14,7 @@ This foundation helps you start an application on a prepared technical structure
 - Lets you select only the pieces you need without forcing a particular language or framework.
 - Separates the interface, backend, and database so they can be replaced with less impact.
 - Prepares validation, tests, API communication, persistence, tokens, and basic permissions.
+- Exports a bilingual capability profile so identity, SaaS privacy, payments, secure mobile, offline sync, and delivery are selected only when the product needs them.
 - States what has been verified and what remains pending so an example is not mistaken for a production-ready product.
 
 ### How to Begin Even If You Do Not Know How to Program
@@ -31,10 +32,10 @@ You can give this repository to a developer or coding assistant and ask: “I wa
 
 **Updated status:** token, permission, and ownership boundaries are implemented; see [security and production readiness](docs/technical/security-production.en-US.md). Earlier tests and limitations are historical: the API no longer accepts anonymous access. The [stable release status](docs/technical/stability-status.en-US.md) records macOS/iOS as nonblocking pending work and MPL-2.0 as the adopted license.
 
-Post-freeze working revision: `1.1.0-draft.1`  
+Post-freeze working revision: `1.1.0-draft.2`  
 Status: technical release `1.1.0` approved for its declared scope; the working tree may contain later external records.  
 Language: US English (`en-US`)  
-[Latin American Spanish version](README.es-419.md)
+[Latin American Spanish version](README.es-419.md) · [Changes](CHANGELOG.en-US.md)
 
 License for original code and documentation: [Mozilla Public License 2.0](LICENSE). See the [license scope](LICENSE-SCOPE.en-US.md) and [trademark policy](TRADEMARKS.en-US.md).
 
@@ -83,13 +84,13 @@ To create an evaluation copy, provide a new absolute destination whose parent ex
 node tools/create-project.mjs --template web --name mi-web --destination "D:\proyectos\mi-web"
 ```
 
-Use `--template web-vanilla` for framework-free HTML/CSS/JavaScript, `--template flutter` for desktop/mobile, `--template kotlin-android` for native Android, `--template backend-php` for Laravel, or `--template backend-node` for an application-framework-free TypeScript API. The exporter copies the starter's instructions and lockfiles and the approved documentary release; it does not install tools, configure accounts, or confirm consumer adoption. Continue inside the new folder using its README. Native distribution identifiers remain examples until the consumer configures them.
+Use `--template web-vanilla` for framework-free HTML/CSS/JavaScript, `--template flutter` for desktop/mobile, `--template kotlin-android` for native Android, `--template backend-php` for Laravel, or `--template backend-node` for an application-framework-free TypeScript API. The exporter copies the starter's instructions and lockfiles, the approved documentary release, and a bilingual [capability profile](templates/capability-profile.en-US.md); it does not install tools, configure accounts, or confirm consumer adoption. Continue inside the new folder using its README and the profile. Native distribution identifiers remain examples until the consumer configures them.
 
 ## Approved Documentary Core
 
 The [1.0.0 approval](releases/approval-1.0.0.en-US.md) ties the release to the [preserved package](releases/foundation-0.1.0-draft.4.zip) and its SHA-256. The ZIP filename retains its editorial revision; the external receipt establishes approval. That package was not modified to add executable bases.
 
-Core reading: [governance](docs/foundation-governance.en-US.md), [rules](docs/immutable-rules.en-US.md), [applicable standards](docs/engineering-standards.en-US.md), [fundamentals](docs/programming-fundamentals.en-US.md), [data and time](docs/data-and-time.en-US.md), [failures and resources](docs/failures-and-resources.en-US.md), [applicability](docs/applicability.en-US.md), [traceability](docs/traceability.en-US.md), [workflow](docs/development-workflow.en-US.md), and [project brief](templates/project-brief.en-US.md).
+Core reading: [governance](docs/foundation-governance.en-US.md), [rules](docs/immutable-rules.en-US.md), [applicable standards](docs/engineering-standards.en-US.md), [fundamentals](docs/programming-fundamentals.en-US.md), [data and time](docs/data-and-time.en-US.md), [failures and resources](docs/failures-and-resources.en-US.md), [applicability](docs/applicability.en-US.md), [traceability](docs/traceability.en-US.md), [workflow](docs/development-workflow.en-US.md), [project brief](templates/project-brief.en-US.md), and [capability profile](templates/capability-profile.en-US.md).
 
 Their draft headers are the preapproval snapshot. Historical fixed-inventory checks run against a recovery of that ZIP. Use `npm run check` for the extended working tree. A correction or new release requires a new identity; a starter does not become stable by inheriting documentary approval.
 

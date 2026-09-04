@@ -1,6 +1,6 @@
 # Cómo crear una aplicación con esta base
 
-Revisión de trabajo: `1.1.0-draft.1`  
+Revisión de trabajo: `1.1.0-draft.2`  
 Idioma: español latinoamericano (`es-419`)  
 [English (United States)](getting-started.en-US.md) · [Inicio](../README.es-419.md)
 
@@ -70,9 +70,10 @@ También se puede sustituir `backend-php` por `backend-node`, o el cliente por `
 Después de cada exportación:
 
 1. Revisar `foundation/adoption.json`, el recibo y los hashes; no cambiar su significado para aparentar aprobación.
-2. Inicializar el control de versiones del proyecto consumidor.
-3. Reemplazar nombres visibles, dominios, package names, bundle/application IDs, namespaces y configuración de ejemplo. Conservar los avisos exigidos por la licencia.
-4. Instalar dependencias y ejecutar las pruebas indicadas por el README exportado antes de agregar funciones.
+2. Completar los dos archivos de idioma `foundation/capability-profile`. Marcar cada perfil como no aplica, planificado o habilitado; nunca declararlo habilitado sin implementación y evidencia.
+3. Inicializar el control de versiones del proyecto consumidor.
+4. Reemplazar nombres visibles, dominios, package names, bundle/application IDs, namespaces y configuración de ejemplo. Conservar los avisos exigidos por la licencia.
+5. Instalar dependencias y ejecutar las pruebas indicadas por el README exportado antes de agregar funciones.
 
 ## 4. Fijar el contrato antes de conectar clientes
 

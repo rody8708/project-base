@@ -1,6 +1,6 @@
 # Exportador de bases técnicas
 
-Revisión de trabajo: `1.1.0-draft.1`, posterior a la publicación técnica estable `1.1.0`.
+Revisión de trabajo: `1.1.0-draft.2`, posterior a la publicación técnica estable `1.1.0`.
 Estado: el exportador prepara para evaluación el contenido del checkout actual. La publicación `1.1.0` está aprobada para su alcance congelado, pero `main` puede contener cambios posteriores; la adopción y validación del producto consumidor siempre quedan pendientes.
 
 [English (United States)](README.en-US.md) · [Inicio](../README.es-419.md)
@@ -9,7 +9,7 @@ Para elegir componentes y recorrer el proceso completo, consulta [cómo crear un
 
 ## Propósito y requisitos
 
-La herramienta prepara un proyecto nuevo fuera de este repositorio a partir de seis plantillas: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php` o `starters/backend-node`. No instala dependencias, ejecuta scripts de paquetes, compila, usa la red ni publica. Copia los cuatro artefactos documentales aprobados sin modificarlos; no extrae el ZIP, no copia `docs/technical` y no modifica los proyectos fuente.
+La herramienta prepara un proyecto nuevo fuera de este repositorio a partir de seis plantillas: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php` o `starters/backend-node`. No instala dependencias, ejecuta scripts de paquetes, compila, usa la red ni publica. Copia los cuatro artefactos documentales aprobados sin modificarlos y agrega un perfil bilingüe de selección de capacidades; no extrae el ZIP, no copia `docs/technical` y no modifica los proyectos fuente.
 
 `web` es la opción React/TypeScript/Vite. `web-vanilla` es la alternativa HTML/CSS/JavaScript sin esos frameworks o herramientas: su candidata no incluye dependencias npm y utiliza módulos integrados de Node.js para comprobar y servir archivos localmente. El exportador no agrega paquetes ni ejecuta esos scripts.
 
@@ -50,6 +50,8 @@ Además de los archivos permitidos de la plantilla, la carpeta `foundation/` con
 | `approval-1.0.0.es-419.md` | Recibo de aprobación en español latinoamericano. |
 | `approval-1.0.0.en-US.md` | Recibo de aprobación en inglés estadounidense. |
 | `foundation-0.1.0-draft.4.verification.json` | Registro histórico enlazado por los recibos; no se reescribe su estado previo a la aprobación. |
+| `capability-profile.es-419.md` | Registro de selección y aceptación del consumidor en español latinoamericano. |
+| `capability-profile.en-US.md` | Registro equivalente en inglés estadounidense. |
 | `adoption.json` | Inventario y resultado de esta preparación, no aprobación del consumidor. |
 
 Los cuatro artefactos históricos se comparan con SHA-256 fijados en el código antes de crear el destino. Cada archivo escrito se vuelve a leer y se compara byte a byte con el contenido preparado. Los recibos históricos conservan sus enlaces entre esos archivos. Estos hashes detectan una diferencia respecto de los valores fijados; no son una firma digital ni autentican por sí solos un repositorio o herramienta comprometidos.
@@ -60,14 +62,19 @@ El registro `adoption.json` distingue:
 {
   "foundationReleaseApproved": true,
   "consumerAdoptionStatus": "pending-consumer-confirmation",
+  "capabilityProfiles": {
+    "selectionStatus": "pending-consumer-selection"
+  },
   "technicalTemplate": {
-    "revision": "1.1.0-draft.1",
+    "revision": "1.1.0-draft.2",
     "stage": "draft",
     "status": "not-approved",
     "generationStatus": "generated-for-evaluation"
   }
 }
 ```
+
+La revisión del ejemplo corresponde a los starters visuales actuales. Backend PHP y Node permanecen en `1.1.0-draft.1`; el recibo registra la revisión exacta de la plantilla seleccionada en vez de asignar una sola revisión a todas las plataformas. Los dos archivos de capacidades se copian byte a byte y sus valores SHA-256 quedan en `adoption.json`. Exigen que el consumidor seleccione `no aplica`, `planificado` o `habilitado` para identidad, multitenancy/privacidad, pagos/licencias, móvil seguro, offline/sincronización y distribución. Seleccionar no equivale a implementar ni aprobar.
 
 También incluye fecha UTC, hashes de fuente y copia, modificaciones de nombres y comprobaciones no ejecutadas. El hash del inventario identifica los archivos fuente incluidos en esa preparación; no es un identificador Git, una firma o evidencia de reproducibilidad binaria. No incluye rutas absolutas del equipo. La aprobación documental disponible no concede aprobación técnica, adopción del consumidor ni soporte de plataforma.
 
@@ -108,6 +115,6 @@ Si falla después de crear el destino, devuelve `partialDestinationRetained` y c
 node --test tools/create-project.test.mjs
 ```
 
-Resultado local registrado: `38` pruebas aprobadas, `0` fallidas y `0` omitidas en Windows con Node.js `24.16.0`, el 2026-09-03. Se mantienen las 31 pruebas previas y se agregan siete para `web-vanilla`: conservación de fuente sin dependencias, renombrado npm/recibo, exclusiones, `.npmrc`, archivos requeridos, manifiestos/locks y protecciones de destino/enlaces. La suite también cubre copias sintéticas web/Flutter/Kotlin/PHP, bytes/hashes, exclusiones de datos y cachés, tipos de archivos estructurales, adopción pendiente, nombres portables y competencia de dos creadores por un destino.
+Resultado local registrado: `40` pruebas aprobadas, `0` fallidas y `0` omitidas en Windows con Node.js `24.16.0`, el 2026-09-04. La suite cubre presencia de perfiles de capacidad, recibos de bytes/hashes, revisiones exactas por plantilla, copias sintéticas web/Flutter/Kotlin/PHP, exclusiones de datos y cachés, tipos de archivos estructurales, adopción pendiente, nombres portables y competencia de dos creadores por un destino. Se conserva la cobertura anterior de web sin framework: fuente sin dependencias, renombrado npm/recibo, exclusiones, `.npmrc`, archivos requeridos, manifiestos/locks y protecciones de destino/enlaces.
 
 Las pruebas crean fixtures sintéticos aislados en directorios temporales propios y retiran únicamente esos directorios tras verificar su ubicación. Sus supuestos artefactos de aprobación son datos de prueba, no nuevos recibos; el reemplazo de pins solo existe en la interfaz importable para pruebas, no en la CLI. La suite usa [el ejecutor integrado de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.html). Los casos léxicos POSIX se ejecutan como funciones de cadenas en Windows: no prueban un filesystem POSIX. Esta suite no instala ni prueba React, Flutter, navegadores, dispositivos, compilaciones nativas o proyectos consumidores reales.
