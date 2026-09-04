@@ -2,10 +2,17 @@
 // SPDX-License-Identifier: MPL-2.0
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { mkdtemp, mkdir, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { assertPairedDocuments, assertPairedLinks, headingIds, visibleMarkdown, checkRepository } from './check-repository.mjs';
+import { assertPairedDocuments, assertPairedLinks, headingIds, visibleMarkdown, checkRepository, verifyApproved120Archive } from './check-repository.mjs';
+
+test('approved 1.2.0 archive identity rejects altered bytes without modifying the package', async () => {
+  const bytes = await readFile(new URL('../releases/project-foundation-1.2.0-candidate.zip', import.meta.url));
+  assert.doesNotThrow(() => verifyApproved120Archive(bytes));
+  const changed = Buffer.from(bytes); changed[changed.length - 1] ^= 1;
+  assert.throws(() => verifyApproved120Archive(changed), /1.2.0 archive changed/u);
+});
 
 test('requires counterparts in both directions, including an extra English file', () => {
   assert.throws(() => assertPairedDocuments(new Map([['a.en-US.md', '# A']])));

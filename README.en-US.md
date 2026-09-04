@@ -39,7 +39,7 @@ The assistant asks for language, application type, backend, name, and location. 
 **Updated status:** token, permission, and ownership boundaries are implemented; see [security and production readiness](docs/technical/security-production.en-US.md). Earlier tests and limitations are historical: the API no longer accepts anonymous access. The [stable release status](docs/technical/stability-status.en-US.md) records macOS/iOS as nonblocking pending work and MPL-2.0 as the adopted license.
 
 Post-freeze working revision: `1.2.0-rc.1`  
-Status: technical release `1.1.0` approved for its declared scope; the working tree may contain later external records.  
+Status: technical release `1.2.0` approved for its declared scope; the working tree may contain later external records.  
 Language: US English (`en-US`)  
 [Latin American Spanish version](README.es-419.md) · [Changes](CHANGELOG.en-US.md)
 
@@ -47,7 +47,7 @@ License for original code and documentation: [Mozilla Public License 2.0](LICENS
 
 The project is maintained by **Zendrhax LLC** under the **Zendrhax** brand. To collaborate, read the [contribution guide](.github/CONTRIBUTING.en-US.md); to report a vulnerability, follow the [security policy](.github/SECURITY.en-US.md). Coding assistants can follow [`AGENTS.md`](AGENTS.md) or use the [local MCP interface](docs/agent-guide.en-US.md).
 
-Stable release: [technical approval 1.1.0](releases/approval-1.1.0.en-US.md), tied to the exact package and SHA-256 without rewriting its bytes.
+Stable release: [technical approval 1.2.0](releases/approval-1.2.0.en-US.md), tied to the exact package and SHA-256 without rewriting its bytes.
 
 ## Contents
 

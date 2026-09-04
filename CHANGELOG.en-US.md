@@ -4,6 +4,12 @@
 
 This file records changes after the frozen technical release `1.1.0`. It does not rewrite or extend that release's approval.
 
+## 1.2.0 — 2026-09-04
+
+- Stable release explicitly approved by the owner; [receipt and exact identity](releases/approval-1.2.0.en-US.md).
+- Candidate package preserved unchanged; its preapproval internal status is interpreted together with the external receipt.
+- Automatic approved SHA-256 verification with an alteration-rejection test. No application code or contracts change.
+
 ## 1.2.0-rc.1 — 2026-09-04
 
 ### Added

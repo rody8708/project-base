@@ -4,7 +4,7 @@
 
 ## Release and Working Tree
 
-Approved release `1.1.0` retains its original bytes and receipts. The current tree includes the guided assistant, local MCP, Python, and Node SQL/operations expansion. These improvements do not automatically appear in the historical ZIP. The next proposed release is `1.2.0`; it is not approved until the owner's decision is tied to its exact package.
+Approved release `1.1.0` retains its original bytes and receipts. The current tree includes the guided assistant, local MCP, Python, and Node SQL/operations expansion. These improvements do not automatically appear in the historical ZIP. The current stable release is `1.2.0`, approved by the owner and tied to the exact package through its [receipt](../../releases/approval-1.2.0.en-US.md).
 
 ## Current Catalog
 
@@ -20,7 +20,7 @@ PHP, Node, and Python have executable implementations. Node and Python have thei
 | Desktop Linux and physical devices | No complete native verification. |
 | License | MPL-2.0 adopted; not pending. |
 | GitHub | Published repository and protected main branch; PRs execute CI. |
-| New release | Preparing 1.2.0; requires identity, recovery, evidence, and explicit approval. |
+| New release | 1.2.0 approved; identity, recovery, and approval preserved outside the ZIP. |
 | Human accounts | Provisioned tokens; no password login, recovery, or MFA. |
 | Each application's operations | Real domain/TLS, secrets, monitoring, capacity, external backup, and approval belong to the consumer. |
 

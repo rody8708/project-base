@@ -39,7 +39,7 @@ El asistente pregunta idioma, tipo de aplicación, backend, nombre y ubicación.
 **Estado actualizado:** se implementó el perfil de tokens, permisos y propiedad; consulta [seguridad y preparación para producción](docs/technical/security-production.es-419.md). Las pruebas y limitaciones anteriores a esta revisión son históricas: la API ya no admite acceso anónimo. El [estado para publicación estable](docs/technical/stability-status.es-419.md) registra macOS/iOS como pendiente no bloqueante y MPL-2.0 como licencia adoptada.
 
 Revisión de trabajo posterior a la congelación: `1.2.0-rc.1`  
-Estado: publicación técnica `1.1.0` aprobada para su alcance declarado; el árbol de trabajo puede contener registros externos posteriores.  
+Estado: publicación técnica `1.2.0` aprobada para su alcance declarado; el árbol de trabajo puede contener registros externos posteriores.  
 Idioma: español latinoamericano (`es-419`)  
 [Versión en inglés de Estados Unidos](README.en-US.md) · [Cambios](CHANGELOG.es-419.md)
 
@@ -47,7 +47,7 @@ Licencia del código y la documentación original: [Mozilla Public License 2.0](
 
 El proyecto es mantenido por **Zendrhax LLC** bajo la marca **Zendrhax**. Para colaborar, consulta la [guía de contribución](.github/CONTRIBUTING.es-419.md); para informar una vulnerabilidad, sigue la [política de seguridad](.github/SECURITY.es-419.md). Los asistentes de programación pueden seguir [`AGENTS.md`](AGENTS.md) o utilizar la [interfaz MCP local](docs/agent-guide.es-419.md).
 
-Publicación estable: [aprobación técnica 1.1.0](releases/approval-1.1.0.es-419.md), vinculada al paquete y SHA-256 exactos sin reescribir sus bytes.
+Publicación estable: [aprobación técnica 1.2.0](releases/approval-1.2.0.es-419.md), vinculada al paquete y SHA-256 exactos sin reescribir sus bytes.
 
 ## Qué contiene
 

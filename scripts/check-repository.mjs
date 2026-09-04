@@ -7,6 +7,10 @@ import { fileURLToPath } from 'node:url';
 
 export const approvedDigest = '9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a';
 export const approvedTechnicalDigest = '85fbb1ccaaad6a987b68e09c0767bf3d3ff25cc0ec6635d2f4fd1ea5c53ea848';
+export const approved120Digest = 'fa353b14d2c7101d21074778513c7a15fbb13e0c81dbab29d582cd9c6c8fb5a6';
+export function verifyApproved120Archive(bytes) {
+  if (createHash('sha256').update(bytes).digest('hex') !== approved120Digest) throw new Error('Approved technical 1.2.0 archive changed');
+}
 const approvedTechnicalRecordDigests = Object.freeze({
   'approval-1.1.0.es-419.md': 'cb5c8a830fa599dd0128b1e290ac58a7125f0acc17ce635a97b79e54dea3e1a1',
   'approval-1.1.0.en-US.md': 'cb804779e1d4e87d94af6142d440957971b861aa44d15878f5770b530dd8c1e9',
@@ -102,6 +106,7 @@ export async function checkRepository(root, { verifyRelease = true } = {}) {
     }
   }
   if (verifyRelease) {
+    verifyApproved120Archive(await readFile(path.join(root, 'releases/project-foundation-1.2.0-candidate.zip')));
     const archive = await readFile(path.join(root, 'releases/foundation-0.1.0-draft.4.zip'));
     if (createHash('sha256').update(archive).digest('hex') !== approvedDigest) throw new Error('Approved 1.0.0 archive changed');
     const technicalArchive = await readFile(path.join(root, 'releases/project-foundation-1.1.0-candidate.zip'));
