@@ -13,6 +13,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 final class ApiErrors
 {
@@ -32,10 +34,18 @@ final class ApiErrors
         };
         $body = ['error' => ['code' => $code, 'message' => __('api.'.$code)]];
         if ($error instanceof ValidationException) $body['error']['fields'] = array_keys($error->errors());
+        $requestId = request()->attributes->get('request_id');
+        if (!is_string($requestId) || $requestId === '') $requestId = (string) Str::uuid();
+        if ($status >= 500) {
+            Log::error('api.request.failed', ['request_id' => $requestId, 'method' => request()->method(),
+                'route' => request()->route()?->uri() ?? 'unmatched', 'status' => $status,
+                'error_type' => $error::class]);
+        }
         return response()->json($body, $status, [
             ...($error instanceof HttpExceptionInterface ? $error->getHeaders() : []),
             ...($status === 401 ? ['WWW-Authenticate' => 'Bearer'] : []),
             'Cache-Control' => 'no-store',
+            'X-Request-Id' => $requestId,
             'Content-Language' => app()->getLocale(), 'X-Content-Type-Options' => 'nosniff',
             'Vary' => 'Accept-Language',
         ]);

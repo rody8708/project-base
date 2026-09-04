@@ -8,13 +8,26 @@ namespace Tests\Feature;
 use App\Application\TaskRepository;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 final class ApiTest extends TestCase
 {
     public function test_liveness_does_not_claim_database_readiness(): void
     {
-        $this->getJson('/api/health')->assertOk()->assertExactJson(['status' => 'ok', 'scope' => 'liveness']);
+        $response = $this->getJson('/api/health')->assertOk()->assertExactJson(['status' => 'ok', 'scope' => 'liveness']);
+        self::assertMatchesRegularExpression('/^[0-9a-f-]{36}$/', (string) $response->headers->get('X-Request-Id'));
+    }
+
+    public function test_request_ids_are_validated_and_correlate_error_responses(): void
+    {
+        $supplied = '123e4567-e89b-42d3-a456-426614174000';
+        $this->withHeaders(['X-Request-Id' => $supplied])->getJson('/unknown')->assertNotFound()
+            ->assertHeader('X-Request-Id', $supplied);
+        $replacement = $this->withHeaders(['X-Request-Id' => 'untrusted value'])->getJson('/unknown')->assertNotFound()
+            ->headers->get('X-Request-Id');
+        self::assertMatchesRegularExpression('/^[0-9a-f-]{36}$/', (string) $replacement);
+        self::assertNotSame('untrusted value', $replacement);
     }
 
     public function test_crud_and_optimistic_concurrency(): void
@@ -123,11 +136,16 @@ final class ApiTest extends TestCase
 
     public function test_unexpected_errors_do_not_expose_sql_paths_or_traces(): void
     {
+        Log::spy();
         Route::get('/test-only-fault', fn () => throw new \RuntimeException('SYNTHETIC_PRIVATE_DETAIL'));
         $response = $this->getJson('/test-only-fault')->assertStatus(500)->assertJsonPath('error.code', 'INTERNAL_ERROR');
         self::assertStringNotContainsString('SYNTHETIC_PRIVATE_DETAIL', $response->getContent());
         self::assertSame(['error'], array_keys($response->json()));
         self::assertSame(['code', 'message'], array_keys($response->json('error')));
+        $requestId = (string) $response->headers->get('X-Request-Id');
+        Log::shouldHaveReceived('error')->withArgs(fn (string $event, array $context) => $event === 'api.request.failed'
+            && $context['request_id'] === $requestId && $context['route'] === 'test-only-fault'
+            && $context['status'] === 500 && !str_contains(json_encode($context, JSON_THROW_ON_ERROR), 'SYNTHETIC_PRIVATE_DETAIL'));
     }
 
     public function test_persistence_error_is_reported_without_a_successful_response(): void

@@ -10,7 +10,7 @@
 
 **Security update:** HTTP now requires authentication; a URL alone is insufficient. Read [authentication and production](security-production.en-US.md) before following earlier examples.
 
-Technical version: `1.1.0-draft.1`. Status: unapproved technical proposal for evaluation; not a finished product.
+Technical version: `1.1.0-draft.2`. Status: unapproved technical proposal for evaluation; not a finished product.
 
 [Español (Latinoamérica)](README.es-419.md) · [Architecture and decisions](architecture.en-US.md) · [Verification](verification.en-US.md)
 
@@ -63,7 +63,9 @@ A task serializes only `id`, `title`, `completed`, and `version`. The title is t
 
 Noncanonical identifiers reaching the service are rejected before querying SQL. Valid versions extend through `2147483646`; an update requires at most `2147483645`. There is no automatic counter reset. `PUT` replaces the complete editable fields; it is not `PATCH`. The cursor is the last returned ID, not a guarantee that another page exists. Pagination is stable for an unchanged dataset, not a snapshot during concurrent insertions.
 
-Successful responses use `data`; errors use `error.code` and `error.message`, with invalid field names when applicable. Relevant statuses: `400` invalid JSON, `404` not found, `405` method not allowed with `Allow`, `409` version conflict, `413` large body, `415` incorrect content type, `422` invalid contract, `503` SQL error, and `500` unexpected error. Errors do not return SQL, private values, traces, or internal paths. Operational logging must be reviewed for the consumer product.
+Successful responses use `data`; errors use `error.code` and `error.message`, with invalid field names when applicable. Relevant statuses: `400` invalid JSON, `404` not found, `405` method not allowed with `Allow`, `409` version conflict, `413` large body, `415` incorrect content type, `422` invalid contract, `503` SQL error, and `500` unexpected error. Errors do not return SQL, private values, traces, or internal paths.
+
+Every response carries `X-Request-Id`. A caller-supplied canonical UUID is preserved; any absent or malformed value is replaced. Server failures produce a structured operational entry with that identifier, method, route template, status, and exception type, without request bodies, tokens, exception messages, or traces. Configure retention and access in the consumer product. These operational records are not a business audit trail.
 
 Translations are separate in [es-419](lang/es-419/api.php) and [en-US](lang/en-US/api.php). Selection uses `Accept-Language` (`es-419`/`es` or `en-US`/`en`, considering positive quality); other preferences use `en-US`. Responses include `Content-Language` and `Vary: Accept-Language`. Machine codes are not translated.
 

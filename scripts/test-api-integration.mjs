@@ -77,7 +77,9 @@ try {
   const url = 'http://127.0.0.1:' + port + '/api/v1';
   const tokenProvider = () => credential.token;
   const first = reactApi(url, undefined, undefined, tokenProvider), second = vanillaApi(url, undefined, undefined, tokenProvider);
-  assert.equal((await fetch(url + '/tasks')).status, 401);
+  const correlation = await fetch(url + '/tasks', { headers: { 'X-Request-Id': '123e4567-e89b-42d3-a456-426614174000' } });
+  assert.equal(correlation.status, 401);
+  assert.equal(correlation.headers.get('x-request-id'), '123e4567-e89b-42d3-a456-426614174000');
   assert.deepEqual(await first.list(), []);
   const created = await first.create('Integration Café 🙂');
   const stale = (await second.list())[0];
@@ -94,8 +96,9 @@ try {
   const another = await repository.add({ title: 'From vanilla', id: 'ignored-local-id', completed: false, createdAtMs: 123 });
   assert.notEqual(another.id, 'ignored-local-id');
   assert.equal(another.createdAtMs, null);
-  const preflight = await fetch(url + '/tasks', { method: 'OPTIONS', headers: { Origin: 'http://127.0.0.1:5180', 'Access-Control-Request-Method': 'POST', 'Access-Control-Request-Headers': 'Content-Type' } });
+  const preflight = await fetch(url + '/tasks', { method: 'OPTIONS', headers: { Origin: 'http://127.0.0.1:5180', 'Access-Control-Request-Method': 'POST', 'Access-Control-Request-Headers': 'Content-Type, X-Request-Id' } });
   assert.equal(preflight.headers.get('access-control-allow-origin'), 'http://127.0.0.1:5180');
+  assert.match(preflight.headers.get('access-control-allow-headers') ?? '', /X-Request-Id/iu);
   for (const row of await first.list()) {
     const deleted = await fetch(url + '/tasks/' + row.id, { method: 'DELETE', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + credential.token }, body: JSON.stringify({ version: row.version }) });
     assert.equal(deleted.status, 204);
@@ -103,7 +106,7 @@ try {
   assert.equal(changed.version, 2);
   await command(['scripts/token.php', 'revoke', other.token_id]);
   await assert.rejects(reactApi(url, undefined, undefined, () => other.token).list(), { code: 'UNAUTHENTICATED' });
-  console.log('PASS: authenticated HTTP CRUD, permissions, owner isolation, revocation, production-profile gate, contract copies, conflict, unknown time, server IDs, CORS.');
+  console.log('PASS: authenticated HTTP CRUD, permissions, owner isolation, revocation, production-profile gate, contract copies, conflict, unknown time, server IDs, CORS and request correlation.');
   if (process.argv.includes('--serve')) {
     console.log('READY ' + url);
     // This private fixture file is removed with the database; never log its contents.

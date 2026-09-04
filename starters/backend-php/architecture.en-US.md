@@ -1,6 +1,6 @@
 # Architecture and backend selection
 
-Technical version: `1.1.0-draft.1`. Status: unapproved technical proposal.
+Technical version: `1.1.0-draft.2`. Status: unapproved technical proposal.
 
 [Español (Latinoamérica)](architecture.es-419.md) · [Starter home](README.en-US.md) · [Verification](verification.en-US.md)
 

@@ -26,8 +26,9 @@ try {
   const created=await first.create('Node integration 🙂'); const stale=(await second.list())[0];
   assert.equal(stale.id,created.id); const updated=await first.replace(created,true); assert.equal(updated.version,2);
   await assert.rejects(second.replace(stale,false),{code:'VERSION_CONFLICT'});
-  const cors=await fetch(url+'/tasks',{headers:{Authorization:'Bearer '+credential.token,Origin:'http://127.0.0.1:5173'}}); assert.equal(cors.headers.get('access-control-allow-origin'),'http://127.0.0.1:5173');
-  console.log('PASS: React and native-web adapters use the framework-free Node backend with auth, CRUD, conflict and CORS.');
+  const requestId='123e4567-e89b-42d3-a456-426614174000';
+  const cors=await fetch(url+'/tasks',{headers:{Authorization:'Bearer '+credential.token,Origin:'http://127.0.0.1:5173','X-Request-Id':requestId}}); assert.equal(cors.headers.get('access-control-allow-origin'),'http://127.0.0.1:5173'); assert.equal(cors.headers.get('x-request-id'),requestId); assert.match(cors.headers.get('access-control-expose-headers')??'',/X-Request-Id/u);
+  console.log('PASS: React and native-web adapters use the framework-free Node backend with auth, CRUD, conflict, CORS and request correlation.');
 } finally {
   if(server&&server.exitCode===null){const exited=new Promise(resolve=>server.once('exit',resolve));server.kill();await exited;}
   assert.equal(path.dirname(temporary),path.resolve(tmpdir())); assert.ok(path.basename(temporary).startsWith('foundation-node-api-')); await rm(temporary,{recursive:true});
