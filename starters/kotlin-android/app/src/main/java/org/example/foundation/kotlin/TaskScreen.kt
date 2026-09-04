@@ -4,6 +4,7 @@ package org.example.foundation.kotlin
 
 import android.content.res.Configuration
 import androidx.annotation.StringRes
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,12 +23,14 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -61,6 +64,12 @@ internal fun errorResource(error: TaskError): Int = when (error) {
     TaskError.DEPENDENCY_FAILURE -> R.string.error_dependency
 }
 
+internal fun foundationColorScheme(dark: Boolean): ColorScheme = if (dark) {
+    darkColorScheme(primary = Color(0xFF63B39C), background = Color(0xFF101714))
+} else {
+    lightColorScheme(primary = Color(0xFF235F53), background = Color(0xFFF4F6F5))
+}
+
 @Composable
 fun TaskScreen(model: TaskViewModel) {
     val state = model.state
@@ -73,7 +82,7 @@ fun TaskScreen(model: TaskViewModel) {
     }
     val keyboard = LocalSoftwareKeyboardController.current
     val invalidTitle = state.error == TaskError.INVALID_TITLE || state.error == TaskError.TITLE_TOO_LONG
-    val colors = lightColorScheme(primary = Color(0xFF235F53), background = Color(0xFFF4F6F5))
+    val colors = foundationColorScheme(isSystemInDarkTheme())
 
     MaterialTheme(colorScheme = colors) {
         Scaffold { insets ->

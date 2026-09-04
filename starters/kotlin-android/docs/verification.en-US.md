@@ -1,8 +1,12 @@
 # Verification and technical selection
 
-Technical revision: `1.1.0-draft.1`. Status: candidate; local development evidence, not product approval.
+Technical revision: `1.1.0-draft.2`. Status: candidate; local development evidence, not product approval.
 
 [Español (Latinoamérica)](verification.es-419.md) · [Home](../README.en-US.md) · [Architecture](architecture.en-US.md)
+
+## Focused follow-up — 2026-09-04
+
+Revision 2 passed `:core:test`, `:app:testDebugUnitTest`, `:app:lintDebug`, and `:app:assembleDebug` with the existing Android Studio JDK 21 and local SDK. The added regression verifies distinct light/dark surfaces and foreground direction. Instrumented UI and device screenshots were not repeated; the broader revision 1 evidence below remains historical and is not relabeled.
 
 ## Reproducible checks
 

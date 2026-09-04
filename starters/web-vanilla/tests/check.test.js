@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import os from 'node:os';
 import * as fs from 'node:fs/promises';
-import { checkHtml, checkMessages, collectJavaScript, inspectProject } from '../scripts/check.mjs';
+import { checkHtml, checkMessages, checkTheme, collectJavaScript, inspectProject } from '../scripts/check.mjs';
 
 const html = '<!doctype html><html lang="es-419"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="./styles.css"><link rel="icon" href="./favicon.svg"></head><body><script type="module" src="./src/main.js"></script></body></html>';
 
@@ -15,7 +15,7 @@ async function fixture(t) {
   await Promise.all([
     fs.writeFile(path.join(root, 'package.json'), '{"type":"module"}'),
     fs.writeFile(path.join(root, 'index.html'), html),
-    fs.writeFile(path.join(root, 'styles.css'), 'body { color: black; }'),
+    fs.writeFile(path.join(root, 'styles.css'), ':root { color-scheme: light dark; } @media (prefers-color-scheme: dark) { body { color: white; } }'),
     fs.writeFile(path.join(root, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg"/>'),
     fs.writeFile(path.join(root, 'src', 'main.js'), 'export const value = 1;'),
     fs.writeFile(path.join(root, 'src', 'i18n', 'es-419.js'), 'export const messages = Object.freeze({ title: "Tareas", count: "{total} tareas" });'),
@@ -58,6 +58,12 @@ test('locale checks compare keys and interpolation names, not translated text', 
   assert.throws(() => checkMessages({ title: '{total} tareas' }, { title: '{count} tasks' }));
   assert.throws(() => checkMessages({ title: '' }, { title: 'Tasks' }));
   assert.throws(() => checkMessages({ title: () => 'Tareas' }, { title: 'Tasks' }));
+});
+
+test('theme checks require native light and dark appearance support', () => {
+  assert.doesNotThrow(() => checkTheme(':root { color-scheme: light dark; } @media (prefers-color-scheme: dark) {}'));
+  assert.throws(() => checkTheme(':root { color-scheme: light; }'));
+  assert.throws(() => checkTheme(':root { color-scheme: light dark; }'));
 });
 
 test('source inspection checks every JS file and both locale modules', async (t) => {

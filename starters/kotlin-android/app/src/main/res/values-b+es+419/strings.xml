@@ -17,7 +17,7 @@
     <string name="pending">Pendiente</string>
     <string name="reload">Volver a cargar</string>
     <string name="memory_notice">Solo en memoria. Los datos sobreviven a la rotación, pero se descartan al cerrar esta pantalla o terminar el proceso.</string>
-    <string name="candidate">Ejemplo reemplazable · 1.1.0-draft.1 · No aprobado para producción</string>
+    <string name="candidate">Ejemplo reemplazable · 1.1.0-draft.2 · No aprobado para producción</string>
     <string name="error_invalid_title">Escribe un título no vacío, en una sola línea y sin caracteres de control.</string>
     <string name="error_title_long">El título supera los 80 puntos de código Unicode.</string>
     <string name="error_invalid_id">El generador devolvió un identificador inválido.</string>

@@ -2,12 +2,12 @@
 
 **Security update:** HTTP now requires authentication; a URL alone is insufficient. Read [authentication and production](security-production.en-US.md) before following earlier examples.
 
-Technical revision: `1.1.0-draft.1`  
+Technical revision: `1.1.0-draft.2`  
 Status: local technical candidate; not a new approval of the documentation foundation.  
 Language: US English (`en-US`)  
-[Español latinoamericano](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Sources and verification](docs/verification.en-US.md)
+[Español latinoamericano](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Changes](CHANGELOG.en-US.md) · [Sources and verification](docs/verification.en-US.md)
 
-This folder is an independent Flutter template for creating another project outside the original repository. The task list is a replaceable example showing empty state, validation, creation, completion, errors, and language switching. It is not a finished application. It requires no original-repository files, accounts, backend, or credentials.
+This folder is an independent Flutter template for creating another project outside the original repository. The task list is a replaceable example showing empty state, validation, creation, completion, errors, language switching, and automatic light/dark appearance. It is not a finished application. It requires no original-repository files, accounts, backend, or credentials.
 
 Original code is distributed under [MPL-2.0](LICENSE). Flutter, SDKs, and dependencies retain their own terms and notices.
 

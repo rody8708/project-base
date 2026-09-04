@@ -1,8 +1,12 @@
 # Framework-free web foundation verification
 
-Technical version: `1.1.0-draft.1`. Status: unapproved technical proposal; an execution result does not constitute consumer approval.
+Technical version: `1.1.0-draft.2`. Status: unapproved technical proposal; an execution result does not constitute consumer approval.
 
 [Español (Latinoamérica)](verification.es-419.md) · [Home](../README.en-US.md) · [Architecture](architecture.en-US.md)
+
+## Focused follow-up — 2026-09-04
+
+Revision 2 passed the source checker and all 86 tests. Microsoft Edge was driven at 390×844 with an explicit dark preference; computed root/workspace colors were `rgb(16, 23, 20)` and `rgb(23, 33, 29)`, with no console errors. The broader baseline below belongs to revision 1 and remains historical evidence.
 
 ## Execution record
 

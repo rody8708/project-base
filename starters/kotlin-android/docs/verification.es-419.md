@@ -1,8 +1,12 @@
 # Verificación y selección técnica
 
-Revisión técnica: `1.1.0-draft.1`. Estado: candidata; evidencia de desarrollo local, no aprobación de producto.
+Revisión técnica: `1.1.0-draft.2`. Estado: candidata; evidencia de desarrollo local, no aprobación de producto.
 
 [English (US)](verification.en-US.md) · [Inicio](../README.es-419.md) · [Arquitectura](architecture.es-419.md)
+
+## Seguimiento enfocado — 2026-09-04
+
+La revisión 2 pasó `:core:test`, `:app:testDebugUnitTest`, `:app:lintDebug` y `:app:assembleDebug` con el JDK 21 existente de Android Studio y el SDK local. La regresión agregada verifica superficies clara/oscura distintas y la dirección del contraste con el primer plano. No se repitieron la interfaz instrumentada ni las capturas en dispositivo; la evidencia más amplia de la revisión 1 que aparece debajo sigue siendo histórica y no se reetiqueta.
 
 ## Controles reproducibles
 

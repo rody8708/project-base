@@ -5,7 +5,7 @@ export const messages = Object.freeze({
   skipLink: 'Saltar a la lista de tareas',
   brand: 'Project Base',
   brandDetail: 'BASE WEB NATIVA',
-  revision: 'Candidata 1.1.0-draft.1',
+  revision: 'Candidata 1.1.0-draft.2',
   eyebrow: 'HTML + CSS + JAVASCRIPT',
   headline: 'Un punto de partida claro.',
   introduction: 'Una base pequeña, con decisiones visibles. Esta lista de tareas es un ejemplo que puedes reemplazar al construir tu proyecto.',

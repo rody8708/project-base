@@ -55,9 +55,20 @@ class _TaskAppState extends State<TaskApp> {
       supportedLocales: const [Locale('es', '419'), Locale('en', 'US')],
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo,
+          brightness: Brightness.light,
+        ),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo,
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+      ),
+      themeMode: ThemeMode.system,
       home: Scaffold(
         appBar: AppBar(title: Text(strings.appTitle)),
         body: SafeArea(

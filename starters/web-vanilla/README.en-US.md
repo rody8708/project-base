@@ -2,11 +2,11 @@
 
 **Security update:** HTTP now requires authentication; a URL alone is insufficient. Read [authentication and production](security-production.en-US.md) before following earlier examples.
 
-Technical version: `1.1.0-draft.1`. Status: unapproved technical proposal for evaluation; not a finished product.
+Technical version: `1.1.0-draft.2`. Status: unapproved technical proposal for evaluation; not a finished product.
 
-[Español (Latinoamérica)](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Verification](docs/verification.en-US.md)
+[Español (Latinoamérica)](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Changes](CHANGELOG.en-US.md) · [Verification](docs/verification.en-US.md)
 
-A standalone foundation using HTML, CSS, and native JavaScript modules. It uses no React, TypeScript, Vite, bundler, or third-party npm packages. The task list is a replaceable example: add tasks, complete them, reopen them, and reload the in-memory list. It includes no backend server or local persistence; HTTP mode delegates persistence to the server. Authentication, offline synchronization, deployment, and certified browser support are not included.
+A standalone foundation using HTML, CSS, and native JavaScript modules. It uses no React, TypeScript, Vite, bundler, or third-party npm packages. The task list is a replaceable example: add tasks, complete them, reopen them, reload the in-memory list, and follow the system's light/dark appearance. It includes no backend server or local persistence; HTTP mode delegates persistence to the server. Authentication, offline synchronization, deployment, and certified browser support are not included.
 
 Original code is distributed under [MPL-2.0](LICENSE). External dependencies or materials retain their own licenses.
 

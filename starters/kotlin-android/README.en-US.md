@@ -2,9 +2,9 @@
 
 **Security update:** HTTP now requires authentication; a URL alone is insufficient. Read [authentication and production](security-production.en-US.md) before following earlier examples.
 
-Technical revision: `1.1.0-draft.1`. Status: candidate, not approved for production.
+Technical revision: `1.1.0-draft.2`. Status: candidate, not approved for production.
 
-[Español (Latinoamérica)](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Verification and sources](docs/verification.en-US.md)
+[Español (Latinoamérica)](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Changes](CHANGELOG.en-US.md) · [Verification and sources](docs/verification.en-US.md)
 
 This directory is a runnable, copyable foundation, not a finished product. It includes a replaceable in-memory task list, an Android-free Kotlin/JVM domain, an application service, a memory adapter, native Jetpack Compose UI, and tests. It imports no files from its containing repository. Running it requires no Flutter, Node, server, account, or external service; the first build does download tools and dependencies.
 
@@ -57,7 +57,7 @@ To install only on your chosen device, first inspect `adb devices -l`, then use 
 
 ## Use and adapt
 
-The example adds titles, completes and reopens tasks, and switches between Latin American Spanish and US English. Validation distinguishes errors; user text is displayed literally. Data and the selected language survive activity recreation while the ViewModel lives, but not permanently closing the activity or process death. Do not put data you need to recover in this adapter.
+The example adds titles, completes and reopens tasks, switches between Latin American Spanish and US English, and follows Android's light/dark appearance. Validation distinguishes errors; user text is displayed literally. Data and the selected language survive activity recreation while the ViewModel lives, but not permanently closing the activity or process death. Do not put data you need to recover in this adapter.
 
 Complete English text lives in `app/src/main/res/values/strings.xml` as fallback; Spanish text is in `app/src/main/res/values-b+es+419/strings.xml`. They are separate files with matching keys. Do not silently translate or normalize user-entered titles.
 

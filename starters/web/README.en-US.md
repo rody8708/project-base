@@ -2,10 +2,10 @@
 
 **Security update:** HTTP now requires authentication; a URL alone is insufficient. Read [authentication and production](security-production.en-US.md) before following earlier examples.
 
-Technical revision: `1.1.0-draft.1`  
+Technical revision: `1.1.0-draft.2`  
 Status: local technical candidate; not a new approval of the documentary foundation.  
 Language: US English (`en-US`)  
-[Español latinoamericano](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Sources and verification](docs/verification.en-US.md)
+[Español latinoamericano](README.es-419.md) · [Architecture](docs/architecture.en-US.md) · [Changes](CHANGELOG.en-US.md) · [Sources and verification](docs/verification.en-US.md)
 
 This folder is a standalone executable template: copy it in full to your new project's location. It needs no files, packages, paths, or services from the original repository. The task list is a replaceable example, not a finished application or a promise that every future product has already been validated.
 
@@ -60,6 +60,7 @@ The `dist/` preview uses [local port 4173](http://127.0.0.1:4173). It is not a p
 - Validating empty titles, input type, controls, and boundaries in the domain, not only in the interface.
 - Displaying loading, empty, result, and explicit error states; retaining the draft when adding fails.
 - Switching interface text between `es-419` and `en-US` without translating or losing user tasks.
+- Following the operating system's light or dark appearance with an explicit high-contrast palette.
 - Testing rules, use cases, the memory adapter, and components with deterministic dependencies.
 
 Titles are limited to 80 Unicode code points after trimming surrounding whitespace; this does not count visible graphemes. Data lives only in memory and disappears when the page is reloaded or closed. There is no authentication, remote authorization, persistence, synchronization, router, telemetry, or file deletion. Client validation would not serve as a future backend's security control.

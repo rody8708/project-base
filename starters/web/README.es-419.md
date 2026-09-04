@@ -2,10 +2,10 @@
 
 **Actualización de seguridad:** HTTP ahora exige autenticación; una URL por sí sola no basta. Consulta [autenticación y producción](security-production.es-419.md) antes de seguir los ejemplos anteriores.
 
-Revisión técnica: `1.1.0-draft.1`  
+Revisión técnica: `1.1.0-draft.2`  
 Estado: candidato técnico local; no es una nueva aprobación de la base documental.  
 Idioma: español latinoamericano (`es-419`)  
-[US English](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Fuentes y verificación](docs/verification.es-419.md)
+[US English](README.en-US.md) · [Arquitectura](docs/architecture.es-419.md) · [Cambios](CHANGELOG.es-419.md) · [Fuentes y verificación](docs/verification.es-419.md)
 
 Esta carpeta es una plantilla ejecutable independiente: cópiala completa a la ubicación de tu nuevo proyecto. No necesita archivos, paquetes, rutas ni servicios del repositorio de origen. La lista de tareas es un ejemplo reemplazable, no una aplicación final ni una promesa de que cualquier producto futuro ya esté validado.
 
@@ -60,6 +60,7 @@ La previsualización de `dist/` usa [el puerto local 4173](http://127.0.0.1:4173
 - Validar títulos vacíos, tipo de entrada, controles y límites en el dominio, no solamente en la interfaz.
 - Mostrar carga, lista vacía, resultados y errores explícitos; conservar el texto si agregar falla.
 - Cambiar textos de interfaz entre `es-419` y `en-US`, sin traducir ni perder las tareas del usuario.
+- Seguir la apariencia clara u oscura del sistema operativo con una paleta explícita de alto contraste.
 - Probar reglas, casos de uso, adaptador en memoria y componentes con dependencias deterministas.
 
 El límite del título es de 80 puntos de código Unicode después de quitar espacios exteriores; no mide grafemas visibles. Los datos viven solamente en memoria y desaparecen al recargar o cerrar la página. No hay autenticación, autorización remota, persistencia local, sincronización offline, router, telemetría ni eliminación de archivos. La validación del cliente no serviría como control de seguridad de un backend futuro.

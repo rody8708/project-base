@@ -5,7 +5,7 @@ export const messages = Object.freeze({
   skipLink: 'Skip to the task list',
   brand: 'Project Base',
   brandDetail: 'NATIVE WEB FOUNDATION',
-  revision: 'Candidate 1.1.0-draft.1',
+  revision: 'Candidate 1.1.0-draft.2',
   eyebrow: 'HTML + CSS + JAVASCRIPT',
   headline: 'A clear starting point.',
   introduction: 'A small foundation with visible decisions. This task list is an example you can replace when building your project.',

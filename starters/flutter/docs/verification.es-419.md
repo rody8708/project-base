@@ -1,9 +1,13 @@
 # Evidencia y límites de la base Flutter
 
-Revisión técnica: `1.1.0-draft.1`  
+Revisión técnica: `1.1.0-draft.2`  
 Estado: candidato técnico local; no es una nueva aprobación de la base documental.  
 Idioma: español latinoamericano (`es-419`)  
 [US English](verification.en-US.md) · [Inicio](../README.es-419.md) · [Arquitectura](architecture.es-419.md)
+
+## Seguimiento enfocado — 2026-09-04
+
+La revisión 2 pasó formato, análisis y 31 pruebas locales; una prueba contra backend real que requiere activación se omitió según su diseño. La prueba de widget agregada demuestra que `ThemeMode.system` selecciona el tema Material oscuro cuando la plataforma informa apariencia oscura. Los ejecutores visuales nativos no se repitieron para este cambio enfocado; la evidencia más amplia de la revisión 1 que aparece debajo sigue siendo histórica y no se reetiqueta.
 
 ## Entorno observado
 

@@ -1,9 +1,13 @@
 # Web Foundation Sources and Verification
 
-Technical revision: `1.1.0-draft.1`  
+Technical revision: `1.1.0-draft.2`  
 Status: local technical candidate.  
 Language: US English (`en-US`)  
 [Español latinoamericano](verification.es-419.md) · [Home](../README.en-US.md)
+
+## Focused follow-up — 2026-09-04
+
+The revision 2 theme change passed type checking, 45 automated tests, and a production build. Microsoft Edge was driven at 390×844 with explicit light and dark preferences: computed root/panel colors changed from `rgb(244, 246, 245)` / `rgb(255, 255, 255)` to `rgb(16, 23, 21)` / `rgb(23, 33, 30)`, with no console errors. The broader baseline below belongs to revision 1 and was not relabeled as a new full audit.
 
 ## Tool Selection
 
