@@ -24,7 +24,7 @@ export const es419: Messages = {
   remoteNotice: 'Modo API: los datos se guardan en el backend.',
   architecture: 'Una estructura, responsabilidades claras',
   architectureBody: 'Reglas de dominio puras · Casos de uso · Adaptadores de memoria e interfaz',
-  candidate: 'Ejemplo reemplazable · 1.1.0-draft.2 · Candidato técnico',
+  candidate: 'Ejemplo reemplazable',
   summary: (total, completed) => `${total} en total · ${completed} completadas`,
   errors: {
     INVALID_TITLE: 'Escribe una tarea válida, sin saltos de línea ni caracteres de control.',

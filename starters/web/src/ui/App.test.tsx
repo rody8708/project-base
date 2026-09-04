@@ -19,6 +19,14 @@ function serviceForTest() {
 }
 
 describe('task interface', () => {
+  it('does not present foundation release metadata as the consumer app version', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<App service={serviceForTest()} />);
+    await screen.findByText('Tu lista comienza aquí');
+    expect(container.textContent).not.toMatch(/\b\d+\.\d+\.\d+(?:-[\w.]+)?\b|\bcandidat[eo]\b/i);
+    await user.selectOptions(screen.getByLabelText('Idioma'), 'en-US');
+    expect(container.textContent).not.toMatch(/\b\d+\.\d+\.\d+(?:-[\w.]+)?\b|\bcandidat[eo]\b/i);
+  });
   it('retains a confirmed write when the following refresh fails', async () => {
     const user = userEvent.setup();
     const service = serviceForTest();

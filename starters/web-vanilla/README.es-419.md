@@ -77,3 +77,7 @@ No exponer este servidor a una red pública, usarlo como alojamiento de producci
 `npm run check` revisa sintaxis, recursos HTML acordados, paridad de claves/interpolaciones de idiomas y ejecuta las pruebas locales. Es un comprobador acotado del ejemplo, no un parser completo de HTML, compilador, auditor de accesibilidad o prueba de todos los navegadores. Las pruebas pueden crear y retirar fixtures temporales propios y abrir puertos efímeros de loopback.
 
 Los resultados efectivamente observados, sus versiones y sus límites están en [verificación](docs/verification.es-419.md). Al exportar desde el repositorio base, `foundation/adoption.json` mantiene la adopción del consumidor pendiente y la plantilla técnica no aprobada. La documentación aprobada `1.0.0`, cuando se adjunta, conserva un alcance documental independiente. Esta base funciona sin importar documentos desde fuera de su carpeta.
+
+## Versión de la aplicación y origen
+
+La interfaz de ejemplo no muestra la versión de Project Base. Al exportar, `foundation/adoption.json` registra el origen técnico; no es una conexión activa con este repositorio. Define la versión de tu producto de forma independiente. Los cambios de la plantilla no actualizan las aplicaciones ya creadas: aplica la corrección en tu copia o genera una nueva en otra carpeta, sin sobrescribir tu trabajo.

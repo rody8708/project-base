@@ -77,3 +77,7 @@ Do not expose this server to a public network, use it for production hosting, or
 `npm run check` checks syntax, agreed HTML resources, locale-key/placeholder parity, and runs local tests. It is a bounded example checker, not a complete HTML parser, compiler, accessibility audit, or test of every browser. Tests may create and remove their own temporary fixtures and open ephemeral loopback ports.
 
 Actually observed results, versions, and limits are in [verification](docs/verification.en-US.md). When exported from the foundation repository, `foundation/adoption.json` keeps consumer adoption pending and the technical template unapproved. Approved documentation `1.0.0`, when attached, retains an independent documentary scope. This foundation works without importing documents from outside its directory.
+
+## Application version and provenance
+
+The example interface does not display the Project Base version. On export, `foundation/adoption.json` records technical provenance; it is not a live connection to this repository. Define your product version independently. Template changes do not update previously generated applications: apply the correction to your copy or generate a new one in another directory without overwriting your work.

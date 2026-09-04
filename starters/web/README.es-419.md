@@ -74,3 +74,7 @@ La aplicación funciona sin `.env`. Opcionalmente copia `.env.example` a `.env` 
 Las versiones directas son exactas y la resolución transitiva queda en el archivo de bloqueo. Modificar dependencias exige revisar sus requisitos y licencias, actualizar el bloqueo intencionalmente y repetir `npm ci`, `check` y la auditoría en una copia limpia. No uses actualizaciones forzadas como sustituto de revisar una incompatibilidad. TypeScript `5.9.3` es una elección conservadora explícita, no una afirmación de que sea la versión más reciente.
 
 Los Markdown de esta plantilla tienen contraparte por idioma. Mantén ambos al cambiar alcance, instrucciones o limitaciones. No hay integración continua instalada en esta carpeta; los controles se ejecutan localmente. Antes de entregar un producto real, define y verifica sus navegadores, accesibilidad, seguridad, rendimiento, datos e integraciones según su alcance. Copiar la plantilla no aprueba automáticamente ese producto.
+
+## Versión de la aplicación y origen
+
+La interfaz de ejemplo no muestra la versión de Project Base. Al exportar, `foundation/adoption.json` registra el origen técnico; no es una conexión activa con este repositorio. Define la versión de tu producto de forma independiente. Los cambios de la plantilla no actualizan las aplicaciones ya creadas: aplica la corrección en tu copia o genera una nueva en otra carpeta, sin sobrescribir tu trabajo.

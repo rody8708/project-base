@@ -30,7 +30,6 @@ button, input, select { border-radius: 9px; }
 .brand p { margin: 0; }
 .brand-name { font-size: 1.05rem; font-weight: 740; letter-spacing: -.03em; }
 .brand-detail { font-size: .59rem; letter-spacing: .15em; margin-top: 4px !important; color: var(--muted); }
-.revision { padding: 7px 12px; border: 1px solid var(--line); border-radius: 30px; font-size: .72rem; color: var(--muted); white-space: nowrap; }
 .hero { padding-block: 64px 43px; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; }
 .hero-copy { max-width: 670px; }
 .eyebrow { color: var(--green); font-size: .66rem; font-weight: 760; letter-spacing: .15em; margin: 0 0 17px; }
@@ -129,7 +128,6 @@ input[aria-invalid="true"] { border-color: #ae3b36; }
 @media (max-width: 480px) {
   .page-width { width: calc(100% - 32px); }
   .site-header { padding-block: 22px; gap: 12px; flex-wrap: wrap; }
-  .revision { font-size: .64rem; padding: 5px 9px; }
   .brand-detail { font-size: .55rem; }
   .hero { padding-block: 36px 30px; }
   h1 { font-size: 2.35rem; }

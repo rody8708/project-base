@@ -74,3 +74,7 @@ The application works without `.env`. Optionally copy `.env.example` to `.env` t
 Direct versions are exact, and the lockfile records transitive resolution. Dependency changes require checking requirements and licenses, intentionally updating the lockfile, and repeating `npm ci`, `check`, and the audit in a clean copy. Do not use forced upgrades instead of reviewing incompatibility. TypeScript `5.9.3` is an explicit conservative choice, not a claim that it is the latest release.
 
 This template's Markdown files have language counterparts. Update both when scope, instructions, or limitations change. No continuous integration is installed in this folder; checks run locally. Before delivering a real product, define and verify its browsers, accessibility, security, performance, data, and integrations for its scope. Copying the template does not automatically approve that product.
+
+## Application version and provenance
+
+The example interface does not display the Project Base version. On export, `foundation/adoption.json` records technical provenance; it is not a live connection to this repository. Define your product version independently. Template changes do not update previously generated applications: apply the correction to your copy or generate a new one in another directory without overwriting your work.

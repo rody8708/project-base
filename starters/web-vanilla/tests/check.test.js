@@ -6,6 +6,15 @@ import path from 'node:path';
 import os from 'node:os';
 import * as fs from 'node:fs/promises';
 import { checkHtml, checkMessages, checkTheme, collectJavaScript, inspectProject } from '../scripts/check.mjs';
+import { messages as spanish } from '../src/i18n/es-419.js';
+import { messages as english } from '../src/i18n/en-US.js';
+
+test('consumer UI does not display foundation release metadata', async () => {
+  const page = await fs.readFile(new URL('../index.html', import.meta.url), 'utf8');
+  for (const copy of [page, ...Object.values(spanish), ...Object.values(english)]) {
+    assert.doesNotMatch(copy, /\b\d+\.\d+\.\d+(?:-[\w.]+)?\b|\bcandidat[ae]\b/i);
+  }
+});
 
 const html = '<!doctype html><html lang="es-419"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="./styles.css"><link rel="icon" href="./favicon.svg"></head><body><script type="module" src="./src/main.js"></script></body></html>';
 
