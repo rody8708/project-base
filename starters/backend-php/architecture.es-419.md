@@ -1,6 +1,6 @@
 # Arquitectura y selección de backend
 
-Versión técnica: `1.1.0-draft.1`. Estado: propuesta técnica no aprobada.
+Versión técnica: `1.1.0-draft.2`. Estado: propuesta técnica no aprobada.
 
 [English (United States)](architecture.en-US.md) · [Inicio del starter](README.es-419.md) · [Verificación](verification.es-419.md)
 

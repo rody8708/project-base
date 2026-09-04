@@ -25,7 +25,7 @@
     "preferred-install": "dist",
     "allow-plugins": false
   },
-  "extra": { "foundation-template-revision": "1.1.0-draft.1", "foundation-template-status": "not-approved" },
+  "extra": { "foundation-template-revision": "1.1.0-draft.2", "foundation-template-status": "not-approved" },
   "minimum-stability": "stable",
   "prefer-stable": true
 }

@@ -10,11 +10,16 @@ use Illuminate\Http\Request;
 use JsonException;
 use Symfony\Component\HttpFoundation\AcceptHeader;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Str;
 
 final class ApiBoundary
 {
     public function handle(Request $request, Closure $next): mixed
     {
+        $suppliedRequestId = $request->headers->get('X-Request-Id', '');
+        $requestId = preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/D', $suppliedRequestId)
+            ? $suppliedRequestId : (string) Str::uuid();
+        $request->attributes->set('request_id', $requestId);
         $locale = 'en-US';
         $supported = ['en-us' => 'en-US', 'en' => 'en-US', 'es-419' => 'es-419', 'es' => 'es-419'];
         foreach (AcceptHeader::fromString($request->headers->get('Accept-Language', ''))->all() as $language) {
@@ -35,6 +40,7 @@ final class ApiBoundary
             }
         }
         $response = $next($request);
+        $response->headers->set('X-Request-Id', $requestId);
         $response->headers->set('Content-Language', $locale);
         $response->headers->set('Cache-Control', 'no-store');
         $response->headers->set('X-Content-Type-Options', 'nosniff');

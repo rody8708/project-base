@@ -36,7 +36,7 @@ $summary = static function (string $output): string {
     }
     return trim($match[0]);
 };
-$report = ['kind' => 'isolated-backend-verification', 'templateRevision' => '1.1.0-draft.1',
+$report = ['kind' => 'isolated-backend-verification', 'templateRevision' => '1.1.0-draft.2',
     'approved' => false, 'startedAt' => gmdate(DATE_ATOM), 'php' => PHP_VERSION, 'platform' => PHP_OS_FAMILY,
     'scope' => $scope, 'databases' => [], 'containersRemoved' => [], 'success' => false];
 $specs = [

@@ -10,7 +10,7 @@
 
 **Actualización de seguridad:** HTTP ahora exige autenticación; una URL por sí sola no basta. Consulta [autenticación y producción](security-production.es-419.md) antes de seguir los ejemplos anteriores.
 
-Versión técnica: `1.1.0-draft.1`. Estado: propuesta técnica no aprobada, para evaluación; no es un producto terminado.
+Versión técnica: `1.1.0-draft.2`. Estado: propuesta técnica no aprobada, para evaluación; no es un producto terminado.
 
 [English (United States)](README.en-US.md) · [Arquitectura y decisiones](architecture.es-419.md) · [Verificación](verification.es-419.md)
 
@@ -63,7 +63,9 @@ Una tarea serializa exclusivamente `id`, `title`, `completed` y `version`. El t�
 
 Los identificadores no canónicos que llegan al servicio se rechazan antes de consultar SQL. Las versiones válidas llegan hasta `2147483646`; una actualización requiere como máximo `2147483645`. No hay reinicio automático del contador. `PUT` reemplaza los campos editables completos; no es `PATCH`. El cursor es el último ID entregado, no una garantía de que exista una página siguiente. La paginación es estable para un conjunto sin cambios, no una instantánea durante inserciones concurrentes.
 
-Las respuestas correctas usan `data`; los errores usan `error.code` y `error.message`, con nombres de campos inválidos cuando corresponde. Códigos relevantes: `400` JSON inválido, `404` no encontrado, `405` método no permitido con `Allow`, `409` conflicto de versión, `413` cuerpo grande, `415` tipo de contenido incorrecto, `422` contrato inválido, `503` error SQL y `500` error inesperado. Los errores no devuelven SQL, valores privados, trazas o rutas internas. Los registros operativos deben revisarse para el producto consumidor.
+Las respuestas correctas usan `data`; los errores usan `error.code` y `error.message`, con nombres de campos inválidos cuando corresponde. Códigos relevantes: `400` JSON inválido, `404` no encontrado, `405` método no permitido con `Allow`, `409` conflicto de versión, `413` cuerpo grande, `415` tipo de contenido incorrecto, `422` contrato inválido, `503` error SQL y `500` error inesperado. Los errores no devuelven SQL, valores privados, trazas o rutas internas.
+
+Cada respuesta incluye `X-Request-Id`. Se conserva un UUID canónico enviado por el llamador; un valor ausente o inválido se reemplaza. Los fallos del servidor producen una entrada operacional estructurada con ese identificador, método, plantilla de ruta, estado y tipo de excepción, sin cuerpos, tokens, mensajes de excepción ni trazas. El producto consumidor debe configurar retención y acceso. Estos registros operacionales no son una bitácora de auditoría de negocio.
 
 Las traducciones están separadas en [es-419](lang/es-419/api.php) y [en-US](lang/en-US/api.php). Se seleccionan mediante `Accept-Language` (`es-419`/`es` o `en-US`/`en`, considerando calidad positiva); otras preferencias usan `en-US`. Se devuelve `Content-Language` y `Vary: Accept-Language`. Los códigos de máquina no se traducen.
 

@@ -12,8 +12,8 @@ export const TEMPLATE_REVISIONS = Object.freeze({
   'web-vanilla': '1.1.0-draft.2',
   flutter: '1.1.0-draft.2',
   'kotlin-android': '1.1.0-draft.2',
-  'backend-php': '1.1.0-draft.1',
-  'backend-node': '1.1.0-draft.1',
+  'backend-php': '1.1.0-draft.2',
+  'backend-node': '1.1.0-draft.2',
 });
 export const TEMPLATE_REVISION = TEMPLATE_REVISIONS.web;
 export const CAPABILITY_PROFILE_FILES = Object.freeze([
