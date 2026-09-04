@@ -106,7 +106,17 @@ También se exportó una solución `api-only` nueva mediante el asistente. Sus c
 
 La primera ejecución de CI detectó una opción `cache: false` no admitida por `setup-python`; se eliminó en vez de omitir el fallo. La misma ejecución advirtió que el pin histórico Composer `2.9.5` era vulnerable a divulgación de tokens en registros de GitHub Actions; el perfil CI se elevó a la versión corregida `2.9.8`. Esta actualización no reescribe la evidencia histórica generada anteriormente con `2.9.5`.
 
+## Ampliación de la matriz Python — 4 de septiembre de 2026
+
+Cambio sobre `0192d46` (PR #25), rama `test/python-database-matrix`. Windows, Python `3.13.6`, uv `0.12.4`, Docker en WSL `Ubuntu-24.04`; PostgreSQL `18.6-bookworm` y MySQL `8.4.11`. Desde `starters/backend-python` se ejecutó `uv run pytest -W error --tb=short --live-http` y se repitió agregando `--database-engine=postgresql --docker-wsl=Ubuntu-24.04` y `--database-engine=mysql --docker-wsl=Ubuntu-24.04`: **18 pruebas aprobadas por motor**. Ruff y mypy estricto también aprobaron.
+
+La primera prueba MySQL falló por falta de soporte RSA del driver; se agregó el extra bloqueado `pymysql[rsa]`. Después, la regresión `test_owner_isolation[USER-1]` demostró acceso indebido al listado de `user-1` por la comparación de texto sin distinguir mayúsculas de MySQL. La comparación binaria dentro del adaptador corrigió la causa sin cambiar el contrato ni el esquema. La misma regresión ahora verifica listado vacío, GET/PUT/DELETE ajenos con 404 y conservación del registro original. Se verificaron además permisos de solo lectura (403), tokens expirados (401), CRUD, conflictos, revocación y migración/reversión/reaplicación. La cobertura explícita de permisos y expiración se agrega en esta ampliación; no estaba demostrada por las 15 pruebas del registro anterior.
+
+Los recorridos HTTP usan Uvicorn en puertos efímeros y verifican respuestas y estado persistido con datos sintéticos. No leen `.env` ni aceptan bases existentes. Se confirmó que no quedaron contenedores con la etiqueta `project-base=python-test`; se retiraron sus datos efímeros y se conservaron imágenes en caché. La CI incorpora la misma matriz de tres motores. TLS, carga concurrente, respaldo/restauración y aprobación de producción **siguen pendientes para Python**; la evidencia PHP no sustituye esos ensayos.
+
 ## Integridad documental y límites
+
+Antes de integrar esta ampliación, la alerta `GHSA-6w46-j5rx-g56g` de GitHub identificó manejo vulnerable de temporales en pytest. Se actualizó el pin y lockfile de `8.4.1` a la versión corregida `9.0.3` y se repitieron las 18 pruebas en cada motor, Ruff y mypy. No se intentó explotar la vulnerabilidad ni se afirma haberla reproducido localmente; la actualización responde al aviso del proveedor. La revisión final de este cambio y sus resultados CI quedan asociados al PR #27.
 
 El ZIP histórico aprobado conserva SHA-256 `9ecfbba67604bf27dcfd4812a592f7b5066aba7b1ac58bcb58dbe6c20685fd1a`. También se verificaron sus dos recibos y su JSON histórico contra los cuatro pins del exportador. Ninguno de esos artefactos fue reescrito.
 
@@ -114,4 +124,4 @@ Para el árbol anterior a la integración HTTP se ejecutaron `npm ci --ignore-sc
 
 macOS, iOS y Linux tienen runners Flutter generados, pero siguen sin compilación/ejecución nativa verificada. En WSL se confirmó que faltan Flutter, clang, CMake, Ninja y GTK de desarrollo; no se instaló una toolchain global para aparentar esa cobertura. iOS/macOS requieren un entorno Apple adecuado. Tampoco se afirman pruebas en dispositivos físicos, firma de producción, publicación, seguridad exhaustiva ni operación de producción de clientes conectados a la API.
 
-Este párrafo registra la inspección anterior a publicar el repositorio: la CI era exclusivamente manual, no existía remoto y todavía no se habían disparado trabajos. Desde la publicación, el YAML ejecuta automáticamente en pull requests web/mantenimiento, Flutter portátil, Kotlin Android, PHP/SQLite y Python/SQLite; la matriz Flutter ampliada sigue siendo manual. Los resultados actuales pertenecen a cada ejecución de GitHub y no reescriben la evidencia histórica de esta sección.
+Este párrafo registra la inspección anterior a publicar el repositorio: la CI era exclusivamente manual, no existía remoto y todavía no se habían disparado trabajos. Desde la publicación, el YAML ejecuta automáticamente en pull requests web/mantenimiento, Flutter portátil, Kotlin Android, PHP/SQLite y Python con SQLite/PostgreSQL/MySQL; la matriz Flutter ampliada sigue siendo manual. Los resultados actuales pertenecen a cada ejecución de GitHub y no reescriben la evidencia histórica de esta sección.

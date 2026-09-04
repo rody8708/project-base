@@ -115,8 +115,8 @@ La base reduce decisiones improvisadas, pero no sustituye el desarrollo, el apre
 - Publicación técnica estable / Stable technical release: [`v1.1.0`](releases/approval-1.1.0.en-US.md).
 - Licencia de código abierto / Open-source license: [MPL-2.0](LICENSE).
 - Política operativa / Operational policy: [estándares en español](docs/engineering-standards.es-419.md) · [standards in English](docs/engineering-standards.en-US.md).
-- CI automática para pull requests / Automatic pull-request CI: web, mantenimiento, Flutter core, Kotlin Android, PHP/SQLite y Python/SQLite.
-- Probado localmente / Locally tested: integración API; PHP con SQLite, PostgreSQL y MySQL aislados; Python con SQLite temporal. / API integration; PHP with isolated SQLite, PostgreSQL, and MySQL; Python with temporary SQLite.
+- CI automática para pull requests / Automatic pull-request CI: web, mantenimiento, Flutter core, Kotlin Android, PHP/SQLite y Python con SQLite/PostgreSQL/MySQL.
+- Probado localmente / Locally tested: integración API; PHP y Python con SQLite, PostgreSQL y MySQL aislados. / API integration; PHP and Python with isolated SQLite, PostgreSQL, and MySQL.
 - Pendiente / Pending: compilación y ejecución verificadas en macOS/iOS hasta disponer de una Mac adecuada.
 - No incluido / Not included: cuentas humanas completas, credenciales reales, firma de distribución y un producto desplegado.
 

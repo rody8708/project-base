@@ -79,9 +79,13 @@ jobs:
       - run: composer validate --strict --no-check-all
       - run: composer check
 
-  backend-python-sqlite:
+  backend-python:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        database: [sqlite, postgresql, mysql]
     defaults:
       run:
         working-directory: starters/backend-python
@@ -101,7 +105,7 @@ jobs:
       - run: uv sync --locked --all-extras
       - run: uv run ruff check .
       - run: uv run mypy
-      - run: uv run pytest -W error
+      - run: uv run pytest -W error --tb=short --database-engine=${{ matrix.database }} --live-http
 
   flutter-core:
     runs-on: ubuntu-24.04

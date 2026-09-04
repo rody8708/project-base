@@ -13,13 +13,13 @@ dependencies = [
 
 [project.optional-dependencies]
 postgresql = ["psycopg[binary]==3.2.9"]
-mysql = ["pymysql==1.1.2"]
+mysql = ["pymysql[rsa]==1.1.2"]
 
 [dependency-groups]
 dev = [
   "httpx==0.28.1",
   "mypy==1.17.1",
-  "pytest==8.4.1",
+  "pytest==9.0.3",
   "ruff==0.12.11",
 ]
 
