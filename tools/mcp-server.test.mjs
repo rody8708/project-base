@@ -77,7 +77,7 @@ test('the stdio MCP server exposes bounded resources, diagnosis, and creation', 
   } });
   assert.equal(nativeCreation.isError, undefined);
   const nativeManifest = JSON.parse(await fs.readFile(path.join(nativeDestination, 'project-base.json')));
-  assert.deepEqual(nativeManifest.components, [{ directory: 'api', template: 'backend-php-native', revision: '1.3.0-draft.1' }]);
+  assert.deepEqual(nativeManifest.components, [{ directory: 'api', template: 'backend-php-native', revision: '1.3.0-draft.2' }]);
   await assert.rejects(fs.lstat(path.join(nativeDestination, 'api/.runtime')), { code: 'ENOENT' });
 
   const refused = await client.callTool({ name: 'project_base_create_solution', arguments: {

@@ -34,7 +34,7 @@ try {
   const certificate = await readFile(path.join(folder, 'server.crt'));
   const database = path.join(folder, 'synthetic.sqlite');
   const tokens = Object.fromEntries(['OWNER', 'OTHER', 'READER', 'EXPIRED', 'REVOKED'].map(key => [`TEST_TOKEN_${key}`, randomBytes(32).toString('hex')]));
-  const environment = { ...process.env, ...tokens, NATIVE_PHP_DATABASE: database, API_ALLOWED_ORIGINS: '' };
+  const environment = { ...process.env, ...tokens, NATIVE_PHP_ENGINE: 'sqlite', NATIVE_PHP_DATABASE: database, API_ALLOWED_ORIGINS: '' };
   php(['tests/http-fixture.php'], environment);
   const ports = [];
   for (let i = 0; i < 8; i++) {

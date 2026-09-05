@@ -30,7 +30,7 @@ La referencia PHP ya tiene `TaskRepository`, `TaskService`, `SqlTaskRepository` 
 
 Se conserva un adaptador SQL compartido mientras las operaciones requeridas mantengan el mismo comportamiento en los tres motores. No se crean tres copias idénticas solo por sus nombres. Si aparecen capacidades o semánticas específicas, se implementan adaptadores especializados detrás del mismo contrato, o se revisa explícitamente el contrato si la capacidad no puede conservarse. Un ORM por sí solo no demuestra portabilidad.
 
-La matriz local ejecuta la misma suite de API y persistencia sobre los tres motores. Eso verifica el ejemplo cubierto, no todas las consultas futuras. No existe todavía una segunda implementación ejecutable de backend sin framework; no se presenta el principio como evidencia de una implementación inexistente.
+La matriz local ejecuta la misma suite de API y persistencia sobre los tres motores. Eso verifica el ejemplo cubierto, no todas las consultas futuras. El starter PHP propio también implementa adaptadores de repositorio y tokens con PDO preparado y perfiles locales SQLite/PostgreSQL/MySQL, mientras los esquemas y límites específicos permanecen en Infraestructura. Su [evidencia SQL](../../starters/backend-php-native/sql-engines.es-419.md) es independiente de la referencia Laravel.
 
 ## Cambiar de motor no es trasladar datos automáticamente
 

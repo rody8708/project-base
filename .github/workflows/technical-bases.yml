@@ -100,6 +100,9 @@ jobs:
       - name: Native PHP independent export acceptance
         working-directory: .
         run: node scripts/test-native-export.mjs
+      - name: Native PHP isolated PostgreSQL and MySQL acceptance
+        working-directory: starters/backend-php-native
+        run: node tests/server-check.mjs
 
   backend-node:
     runs-on: ubuntu-24.04

@@ -15,7 +15,7 @@ export const TEMPLATE_REVISIONS = Object.freeze({
   'backend-php': '1.1.0-draft.2',
   'backend-node': '1.2.0-rc.1',
   'backend-python': '1.2.0-draft.1',
-  'backend-php-native': '1.3.0-draft.1',
+  'backend-php-native': '1.3.0-draft.2',
 });
 export const TEMPLATE_REVISION = TEMPLATE_REVISIONS.web;
 export const SOLUTION_PRESETS = Object.freeze({
@@ -38,7 +38,7 @@ export const TEMPLATE_FILES = Object.freeze({
   'backend-php': Object.freeze(['composer.json', 'composer.lock', 'artisan', 'bootstrap/app.php']),
   'backend-node': Object.freeze(['package.json', 'package-lock.json', 'tsconfig.json', 'src/server.ts']),
   'backend-python': Object.freeze(['.python-version', 'pyproject.toml', 'uv.lock', 'src/project_base_api/main.py']),
-  'backend-php-native': Object.freeze(['LICENSE', 'bootstrap.php', 'scripts/local.mjs', 'scripts/path-policy.php', 'scripts/database.php', 'scripts/token.php', 'scripts/recovery.php', 'public/router.php', 'contracts/task-api-v1.openapi.json']),
+  'backend-php-native': Object.freeze(['LICENSE', 'bootstrap.php', 'scripts/local.mjs', 'scripts/path-policy.php', 'scripts/database.php', 'scripts/token.php', 'scripts/recovery.php', 'public/router.php', 'contracts/task-api-v1.openapi.json', 'app/Infrastructure/SqlConnection.php', 'app/Infrastructure/PdoTaskRepository.php', 'app/Infrastructure/PdoTokenAuthenticator.php', 'app/Infrastructure/ServerRateLimiter.php', 'app/Infrastructure/ServerMigrations.php', 'database/pgsql/001_schema.sql', 'database/mysql/001_schema.sql', 'sql-engines.en-US.md', 'sql-engines.es-419.md']),
 });
 export const APPROVED_DOCUMENTARY_RELEASE = Object.freeze({
   version: '1.0.0',

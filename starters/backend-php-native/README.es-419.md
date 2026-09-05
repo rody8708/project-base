@@ -2,11 +2,11 @@
 
 [English (United States)](README.en-US.md)
 
-Una API reutilizable en PHP 8.5 sin Laravel, paquetes Composer ni framework de aplicación. Incluye CRUD de tareas, autenticación/autorización explícitas, contratos JSON versionados, puertos de repositorio, adaptador SQLite, migraciones y pruebas aisladas. Revisión de plantilla: `1.3.0-draft.1`; evaluación local verificada, no aprobada para producción.
+Una API reutilizable en PHP 8.5 sin Laravel, paquetes Composer ni framework de aplicación. Incluye CRUD de tareas, autenticación/autorización explícitas, contratos JSON versionados, puertos de repositorio, adaptadores SQLite/PostgreSQL/MySQL, migraciones y pruebas aisladas. Revisión de plantilla: `1.3.0-draft.2`; evaluación local verificada, no aprobada para producción.
 
 ## Comenzar tu aplicación
 
-En Project Base, ejecuta `npm run create-app` y selecciona **PHP propio — sin framework, SQLite** cuando solicite el backend. El proyecto generado es independiente: después no necesita conectarse a Project Base. El repositorio original no forma parte de la ejecución de tu producto.
+En Project Base, ejecuta `npm run create-app` y selecciona **PHP propio — sin framework; SQLite, PostgreSQL o MySQL** cuando solicite el backend. El proyecto generado es independiente: después no necesita conectarse a Project Base. El repositorio original no forma parte de la ejecución de tu producto.
 
 Desde la raíz de la solución generada:
 
@@ -43,7 +43,7 @@ Revoca con `php scripts/token.php revoke ABSOLUTE_DATABASE HASH_ID`, usando el I
 - Presentación HTTP: solicitudes tipadas/acotadas, errores bilingües seguros, CORS de origen exacto e IDs de solicitud.
 - Contrato: [API de tareas v1](contracts/task-api-v1.openapi.json).
 
-Los clientes usan solo la API; nunca los conectes directamente a SQLite. Las lecturas/escrituras se limitan al propietario, los permisos son explícitos y actualizar/eliminar requiere la versión actual. Agrega el comportamiento del negocio en Aplicación/Dominio y conserva los detalles del motor en adaptadores. PostgreSQL y MySQL no están implementados en este perfil propio; cambiar de motor requiere implementar y verificar sus adaptadores/migraciones y migrar los datos existentes.
+Los clientes usan solo la API; nunca los conectes directamente a SQLite. Las lecturas/escrituras se limitan al propietario, los permisos son explícitos y actualizar/eliminar requiere la versión actual. Agrega el comportamiento del negocio en Aplicación/Dominio y conserva los detalles del motor en adaptadores. También están disponibles adaptadores de servidor local PostgreSQL y MySQL. Sigue la [guía de perfiles SQL](sql-engines.es-419.md) para configurarlos. Cambiar de motor no migra los datos existentes.
 
 ## Configuración y protecciones
 
@@ -85,4 +85,4 @@ Evidencia en Windows/PHP 8.5.1/Node 24.16.0 del 2026-09-04:
 - Se leyeron y actualizaron datos restaurados por HTTPS usando un token nuevo; el anterior devolvió 401.
 - La exportación independiente por el asistente pasó diagnóstico, preparación/repetición, pruebas aisladas, inicio y creación/lectura autenticada de tareas. Se generaron todas las combinaciones de clientes admitidas; no equivale a verificar nuevamente dispositivos nativos.
 
-El laboratorio usa un certificado autofirmado efímero confiado explícitamente por su cliente y un terminador TLS local exclusivo de pruebas. No implementa un proxy de producción ni renovación de certificados. Son pruebas de aceptación acotadas, no capacidad de carga sostenida, garantía RPO/RTO, validación exhaustiva del contrato ni aprobación de producción. TLS real del despliegue, renovación, monitoreo, alertas, cifrado/retención/almacenamiento externo de respaldos e identidad del producto siguen siendo responsabilidad de cada aplicación. CI está configurada; no se afirma un resultado remoto para esta revisión sin confirmar.
+El laboratorio usa un certificado autofirmado efímero confiado explícitamente por su cliente y un terminador TLS local exclusivo de pruebas. No implementa un proxy de producción ni renovación de certificados. Son pruebas de aceptación acotadas, no capacidad de carga sostenida, garantía RPO/RTO, validación exhaustiva del contrato ni aprobación de producción. TLS real del despliegue, renovación, monitoreo, alertas, cifrado/retención/almacenamiento externo de respaldos e identidad del producto siguen siendo responsabilidad de cada aplicación. La base SQLite pasó CI en el PR #35. Los perfiles SQL adicionales tienen evidencia local y configuración CI propias; aquí no se implica un resultado remoto de esa ampliación.
