@@ -40,7 +40,9 @@ export async function checkArchitecture(root) {
   const decoder = new TextDecoder('utf-8', { fatal: true });
   const load = async (file) => decoder.decode(await readFile(path.join(root, file)));
 
-  for (const file of await sourceFiles(root, 'starters/backend-php', ['.php'])) {
+  const phpFiles = [...await sourceFiles(root, 'starters/backend-php', ['.php']),
+    ...await sourceFiles(root, 'starters/backend-php-native', ['.php'])];
+  for (const file of phpFiles) {
     const text = await load(file);
     if (!/declare\(strict_types=1\);/u.test(text)) violations.push(`PHP_STRICT_TYPES: ${file}`);
     if (file.includes('/app/Domain/')) reject(violations, file, text, 'PHP_DOMAIN_DEPENDENCY', [

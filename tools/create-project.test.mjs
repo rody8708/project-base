@@ -91,6 +91,7 @@ async function fixture(t) {
   await put('starters/backend-python/.python-version', '3.13.15\n');
   await put('starters/backend-python/uv.lock', 'version = 1\n');
   await put('starters/backend-python/src/project_base_api/main.py', 'app = object()\n');
+  for (const relative of TEMPLATE_FILES['backend-php-native']) await put(`starters/backend-php-native/${relative}`, `SYNTHETIC NATIVE SOURCE: ${relative}\n`);
   const release = {
     version: '1.0.0', editorialRevision: '0.1.0-draft.4', files: [],
   };
@@ -420,6 +421,27 @@ test('runtime filters retain scaffold directories but reject unrecognized storag
     assert.equal(shouldExclude(relative, 'backend-php'), true, relative);
   }
   assert.equal(shouldExclude('storage/domain-adapter.ts', 'web'), false);
+});
+
+test('native PHP export preserves source and rejects runtime material and incomplete entry points', async (t) => {
+  const f = await fixture(t);
+  for (const relative of ['.runtime/state.json', '.runtime/local.sqlite', 'backups/manifest.json', '.env', 'private.key']) {
+    await f.put(`starters/backend-php-native/${relative}`, 'synthetic-private-data');
+  }
+  const result = await f.run({ template: 'backend-php-native' });
+  for (const relative of TEMPLATE_FILES['backend-php-native']) {
+    assert.deepEqual(await fs.readFile(path.join(f.destination(), relative)), await fs.readFile(f.source(`starters/backend-php-native/${relative}`)));
+  }
+  for (const relative of ['.runtime', 'backups', '.env', 'private.key', 'composer.json', 'vendor']) {
+    await assert.rejects(fs.lstat(path.join(f.destination(), relative)), { code: 'ENOENT' });
+  }
+  const record = JSON.parse(await fs.readFile(path.join(f.destination(), result.adoptionRecord)));
+  assert.equal(record.technicalTemplate.id, 'backend-php-native');
+  assert.equal(record.customization.packageNameChanged, false);
+  await fs.unlink(f.source('starters/backend-php-native/bootstrap.php'));
+  const missing = f.destination('missing-native');
+  await assert.rejects(f.run({ template: 'backend-php-native', destination: missing }), { code: 'INCOMPLETE_TEMPLATE' });
+  await assert.rejects(fs.lstat(missing), { code: 'ENOENT' });
 });
 
 test('runtime scaffold names cannot disguise state files or directory-shaped gitignore entries', async (t) => {

@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 const root = new URL('../', import.meta.url);
 test('all independently exportable starters carry the identical API contract', async () => {
-  const texts = await Promise.all(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node', 'backend-python'].map(name =>
+  const texts = await Promise.all(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node', 'backend-python', 'backend-php-native'].map(name =>
     readFile(new URL(`starters/${name}/contracts/task-api-v1.openapi.json`, root), 'utf8')));
   for (const text of texts) assert.equal(text, texts[0]);
   const contract = JSON.parse(texts[0]);

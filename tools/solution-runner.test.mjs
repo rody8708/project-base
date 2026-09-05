@@ -27,6 +27,23 @@ test('PHP setup is explicit, locked, and avoids package plugins and scripts', ()
   assert.deepEqual(plan[2], { directory: 'api', tool: 'php', args: ['artisan', 'migrate', '--force', '--no-interaction'] });
 });
 
+test('native PHP is independent of Composer and exposes bounded setup/check/start', () => {
+  const value = manifest({ directory: 'api', template: 'backend-php-native' });
+  for (const platform of ['win32', 'linux']) {
+    assert.deepEqual(planFor('setup', value, platform)[0].args, ['scripts/local.mjs', 'setup']);
+    assert.deepEqual(planFor('check', value, platform)[0].args, ['scripts/local.mjs', 'check']);
+    assert.equal(planFor('start', value, platform)[0].tool, 'php');
+    assert.equal(planFor('start', value, platform)[0].nativeDatabase, true);
+  }
+  const calls = [];
+  const results = diagnose(value, 'linux', (tool, args) => {
+    calls.push(tool);
+    return { ok: true, output: args[0] === '--version' ? 'PHP 8.5.1' : '' };
+  });
+  assert.ok(results.every(item => item.ok));
+  assert.deepEqual(calls, ['php', 'php']);
+});
+
 test('Python setup is locked, migrates explicitly, and checks every quality gate', () => {
   const value = manifest({ directory: 'api', template: 'backend-python' });
   assert.deepEqual(planFor('setup', value, 'linux'), [

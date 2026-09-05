@@ -78,6 +78,28 @@ jobs:
       - run: composer install --no-interaction --no-progress --prefer-dist --no-plugins --no-scripts
       - run: composer validate --strict --no-check-all
       - run: composer check
+      - name: Native PHP candidate syntax and isolated checks
+        working-directory: starters/backend-php-native
+        run: |
+          find app tests public lang scripts -name '*.php' -print0 | xargs -0 -n 1 php -l
+          php -l bootstrap.php
+          php tests/operations-check.php
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.16.0'
+          package-manager-cache: false
+      - name: Native PHP candidate real HTTP checks
+        working-directory: starters/backend-php-native
+        run: node tests/http-check.mjs
+      - name: Native PHP candidate recovery checks
+        working-directory: starters/backend-php-native
+        run: node tests/recovery-check.mjs
+      - name: Native PHP TLS and multi-process acceptance
+        working-directory: starters/backend-php-native
+        run: node tests/transport-check.mjs
+      - name: Native PHP independent export acceptance
+        working-directory: .
+        run: node scripts/test-native-export.mjs
 
   backend-node:
     runs-on: ubuntu-24.04

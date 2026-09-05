@@ -89,7 +89,7 @@ node tools/create-project.mjs --template backend-php --name example-api --destin
 node tools/create-project.mjs --template web --name example-web --destination "D:\products\example-web"
 ```
 
-You can replace `backend-php` with `backend-node` or `backend-python`, or the client with `web-vanilla`, `flutter`, or `kotlin-android`. The complete option, restriction, and excluded-file reference is in the [exporter instructions](../tools/README.en-US.md).
+You can replace `backend-php` with `backend-node`, `backend-python` or `backend-php-native`, or the client with `web-vanilla`, `flutter`, or `kotlin-android`. The complete option, restriction, and excluded-file reference is in the [exporter instructions](../tools/README.en-US.md).
 
 After each export:
 
@@ -149,7 +149,7 @@ The foundation is correctly adopted when the consumer project identifies an exac
 
 ## Guided technology selection
 
-Run `npm run create-app` from Project Base. First choose web, mobile, desktop, or API only; the wizard then shows existing technologies for that category, including their languages and frameworks. When the template requires a backend, choose TypeScript with framework-free Node.js, PHP with Laravel, or Python with FastAPI. The technology and destination directory appear before confirmation.
+Run `npm run create-app` from Project Base. First choose web, mobile, desktop, or API only; the wizard then shows existing technologies for that category, including their languages and frameworks. When the template requires a backend, choose TypeScript with framework-free Node.js, PHP with Laravel, Python with FastAPI, or native PHP without a framework (SQLite). The technology and destination directory appear before confirmation.
 
 Console and MCP use the same catalog. It describes the six existing combinations; it does not add new templates or platform approval. Database configuration still follows the backend documentation: this change does not include an engine selector. Creation does not install dependencies or run tests; cancel with `n` before creating files.
 

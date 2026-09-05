@@ -30,6 +30,6 @@ test('catalog rejects unknown locales and callers cannot change future results',
   const first = getCreationCatalog();
   first.presets[0].languages.push('invented');
   first.backends.pop();
-  assert.equal(getCreationCatalog().backends.length, 3);
+  assert.equal(getCreationCatalog().backends.length, 4);
   assert.deepEqual(getCreationCatalog().presets[0].languages, ['HTML', 'CSS', 'JavaScript']);
 });

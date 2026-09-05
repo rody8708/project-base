@@ -1,0 +1,14 @@
+.runtime/
+.env
+.env.*
+!.env.example
+*.sqlite
+*-wal
+*-shm
+*-journal
+*.key
+*.pem
+*.crt
+*.log
+backups/
+node_modules/
