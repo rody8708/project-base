@@ -12,6 +12,33 @@ import { interactiveCreate } from './create-app.mjs';
 
 const repositoryRoot = fileURLToPath(new URL('../', import.meta.url));
 
+test('every guided technology reaches a localized summary without side effects on cancel', async (t) => {
+  const parent = await temporaryParent(t);
+  const routes = [
+    ['1', '1', null, 'HTML + CSS + JavaScript'],
+    ['1', '2', '2', 'React + TypeScript'],
+    ['2', '1', '3', 'Flutter + Dart'],
+    ['2', '2', '1', 'Kotlin + Jetpack Compose'],
+    ['3', '1', '1', 'Flutter + Dart'],
+    ['4', '1', '3', 'FastAPI'],
+  ];
+  for (const locale of ['1', '2']) for (const [type, technology, backend, expected] of routes) {
+    const answers = [locale, 'invalid', type, technology, ...(backend ? [backend] : []), 'catalog-demo', parent, 'n'];
+    let closed = false;
+    let transcript = '';
+    const result = await interactiveCreate({
+      question: async () => { assert.ok(answers.length > 0, 'Unexpected prompt'); return answers.shift(); },
+      close: () => { closed = true; },
+    }, { write: value => { transcript += value; } });
+    assert.equal(result.result, 'CANCELLED');
+    assert.ok(transcript.includes(expected));
+    assert.ok(transcript.includes(locale === '1' ? 'Proyecto independiente' : 'Independent project'));
+    assert.equal(answers.length, 0);
+    assert.equal(closed, true);
+    await assert.rejects(fs.lstat(path.join(parent, 'catalog-demo')), { code: 'ENOENT' });
+  }
+});
+
 async function temporaryParent(t) {
   const systemTemporary = await fs.realpath(os.tmpdir());
   const parent = await fs.mkdtemp(path.join(systemTemporary, 'foundation-app-test-'));
@@ -27,7 +54,7 @@ async function temporaryParent(t) {
 
 test('the interactive default creates a simple website with one start document', async (t) => {
   const parent = await temporaryParent(t);
-  const answers = ['1', '1', 'quick-site', parent, ''];
+  const answers = ['1', '1', '1', 'quick-site', parent, ''];
   const reader = { question: async () => answers.shift() ?? '', close() {} };
   let transcript = '';
   const result = await interactiveCreate(reader, { write(value) { transcript += value; } });
@@ -69,7 +96,7 @@ test('a complete web preset creates client and API without installing dependenci
 test('the English flow can be cancelled without creating anything', async (t) => {
   const parent = await temporaryParent(t);
   const defaultParent = path.join(parent, 'Default Apps');
-  const answers = ['2', '6', '', 'english-app', '', 'n'];
+  const answers = ['2', '4', '', '', 'english-app', '', 'n'];
   const reader = { question: async () => answers.shift() ?? '', close() {} };
   let transcript = '';
   const result = await interactiveCreate(reader, { write(value) { transcript += value; } }, { defaultParent });

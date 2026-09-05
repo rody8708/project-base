@@ -8,24 +8,24 @@ import { createInterface } from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 import { pathToFileURL } from 'node:url';
 import { createSolution, ExportError, validateProjectName } from './lib/project-export.mjs';
+import { getCreationCatalog } from './lib/creation-catalog.mjs';
 
 const COPY = {
   'es-419': {
     title: '\nProject Base — crear una aplicación\nResponde unas preguntas sencillas. No necesitas elegir una arquitectura manualmente.\n',
-    type: '¿Qué quieres crear?', types: ['Sitio web sencillo (sin backend)', 'Aplicación web completa', 'Aplicación móvil Flutter', 'Aplicación de escritorio Flutter', 'Aplicación Android nativa Kotlin', 'Solo una API/backend'],
-    backend: 'Backend: presiona Enter para la opción recomendada; elige otra tecnología si tu equipo ya la conoce.', backends: ['Node.js sin framework de aplicación', 'PHP con Laravel', 'Python con FastAPI'], recommended: 'recomendado', select: 'Selecciona', invalidChoice: 'Escribe el número de una opción.',
+    type: '¿Qué quieres crear?',
+    backend: 'Backend: presiona Enter para la opción recomendada; elige otra tecnología si tu equipo ya la conoce.', recommended: 'recomendado', select: 'Selecciona', invalidChoice: 'Escribe el número de una opción.',
     name: '\nNombre corto (ejemplo: mi-inventario): ', invalidName: 'Usa hasta 59 letras minúsculas, números y guiones; debe comenzar con una letra.',
     parent: '\nCarpeta donde guardarlo', create: '\nSe creará:', confirm: '¿Continuar? [S/n]: ', ready: '\nListo. Abre:',
   },
   'en-US': {
     title: '\nProject Base — create an application\nAnswer a few simple questions. You do not need to choose an architecture manually.\n',
-    type: 'What do you want to create?', types: ['Simple website (no backend)', 'Complete web application', 'Flutter mobile application', 'Flutter desktop application', 'Native Kotlin Android application', 'API/backend only'],
-    backend: 'Backend: press Enter for the recommended option; choose another technology when your team already knows it.', backends: ['Node.js without an application framework', 'PHP with Laravel', 'Python with FastAPI'], recommended: 'recommended', select: 'Select', invalidChoice: 'Enter an option number.',
+    type: 'What do you want to create?',
+    backend: 'Backend: press Enter for the recommended option; choose another technology when your team already knows it.', recommended: 'recommended', select: 'Select', invalidChoice: 'Enter an option number.',
     name: '\nShort name (example: my-inventory): ', invalidName: 'Use up to 59 lowercase letters, numbers, and hyphens; it must start with a letter.',
     parent: '\nFolder where it should be saved', create: '\nThis will be created:', confirm: 'Continue? [Y/n]: ', ready: '\nReady. Open:',
   },
 };
-const PRESETS = ['simple-website', 'web-app', 'mobile-app', 'desktop-app', 'android-app', 'api-only'];
 
 async function choose(reader, writer, copy, question, options, defaultIndex = 0) {
   writer.write(`\n${question}\n`);
@@ -55,10 +55,14 @@ export async function interactiveCreate(reader = createInterface({ input, output
     const language = (await reader.question('Selecciona / Select [1]: ')).trim() === '2' ? 'en-US' : 'es-419';
     const copy = COPY[language];
     writer.write(copy.title);
-    const preset = await choose(reader, writer, copy, copy.type, PRESETS.map((value, index) => [value, copy.types[index]]), 1);
-    const needsBackend = preset !== 'simple-website';
+    const catalog = getCreationCatalog(language);
+    const type = await choose(reader, writer, copy, copy.type, catalog.types.map(item => [item.id, item.description]));
+    const available = catalog.presets.filter(item => item.type === type);
+    const preset = await choose(reader, writer, copy, language === 'es-419' ? 'Tecnología disponible (plantillas existentes):' : 'Available technology (existing templates):', available.map(item => [item.id, item.description]));
+    const selection = available.find(item => item.id === preset);
+    const needsBackend = selection.requiresBackend;
     const backend = needsBackend ? await choose(reader, writer, copy, copy.backend, [
-      ['backend-node', copy.backends[0]], ['backend-php', copy.backends[1]], ['backend-python', copy.backends[2]],
+      ...catalog.backends.map(item => [item.id, item.description]),
     ]) : 'backend-node';
     const name = await askName(reader, writer, copy);
     const defaultParent = settings.defaultParent ?? path.join(os.homedir(), 'Project Base Apps');
@@ -66,6 +70,11 @@ export async function interactiveCreate(reader = createInterface({ input, output
     const parent = selectedParent === '' ? defaultParent : path.resolve(selectedParent);
     const destination = path.join(parent, name);
     writer.write(`${copy.create} ${destination}\n`);
+    writer.write(`${selection.description}\n`);
+    if (needsBackend) writer.write(`${catalog.backends.find(item => item.id === backend).description}\n`);
+    writer.write(language === 'es-419'
+      ? 'Proyecto independiente. No se instalarán dependencias ni se ejecutarán pruebas automáticamente. La creación no equivale a aprobación de producción.\n'
+      : 'Independent project. Dependencies will not be installed and tests will not run automatically. Creation is not production approval.\n');
     const confirmed = (await reader.question(copy.confirm)).trim().toLowerCase();
     if (confirmed === 'n' || confirmed === 'no') return { result: 'CANCELLED' };
     if (selectedParent === '') await mkdir(parent, { recursive: true });
