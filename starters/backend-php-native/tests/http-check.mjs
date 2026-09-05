@@ -20,7 +20,7 @@ if (process.argv.includes('--browser') && !process.stdin.isTTY) throw new Error(
 const temporary = await realpath(tmpdir());
 const folder = await mkdtemp(path.join(temporary, 'native-php-http-'));
 const tokens = Object.fromEntries(['OWNER', 'OTHER', 'READER', 'EXPIRED', 'REVOKED'].map(key => [key, randomBytes(32).toString('hex')]));
-const environment = { ...process.env, NATIVE_PHP_DATABASE: path.join(folder, 'synthetic.sqlite'),
+const environment = { ...process.env, NATIVE_PHP_ENGINE: 'sqlite', NATIVE_PHP_DATABASE: path.join(folder, 'synthetic.sqlite'),
   API_ALLOWED_ORIGINS: 'http://127.0.0.1:5180',
   ...Object.fromEntries(Object.entries(tokens).map(([key, value]) => [`TEST_TOKEN_${key}`, value])) };
 let child;

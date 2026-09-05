@@ -30,7 +30,7 @@ The PHP reference already has `TaskRepository`, `TaskService`, `SqlTaskRepositor
 
 A shared SQL adapter is retained while required operations preserve the same behavior across all three engines. Three identical copies are not created just for their names. If engine-specific capabilities or semantics appear, specialized adapters implement the same contract, or the contract is explicitly reconsidered if a capability cannot be preserved. An ORM alone does not demonstrate portability.
 
-The local matrix runs the same API and persistence suite against all three engines. This verifies the covered example, not every future query. There is no second executable framework-free backend implementation yet; the principle is not presented as evidence of a nonexistent implementation.
+The local matrix runs the same API and persistence suite against all three engines. This verifies the covered example, not every future query. The native PHP starter also implements prepared-PDO repository and token adapters with local SQLite/PostgreSQL/MySQL profiles, while engine-specific schemas and rate limiting stay in Infrastructure. Its [SQL evidence](../../starters/backend-php-native/sql-engines.en-US.md) is separate from the Laravel reference.
 
 ## Switching Engines Does Not Transfer Data Automatically
 

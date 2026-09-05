@@ -15,6 +15,7 @@ function run(tool, args) {
 }
 if (action === 'doctor') {
   run('php', ['-r', 'exit(PHP_MAJOR_VERSION === 8 && PHP_MINOR_VERSION === 5 && extension_loaded("pdo_sqlite") && extension_loaded("mbstring") && extension_loaded("openssl") ? 0 : 1);']);
+  run('php', ['-r', '$engine = getenv("NATIVE_PHP_ENGINE") ?: "sqlite"; exit(in_array($engine, ["sqlite", "pgsql", "mysql"], true) && extension_loaded("pdo_".$engine) ? 0 : 1);']);
   console.log('PASS PHP 8.5, pdo_sqlite, mbstring, openssl');
 } else if (action === 'check') {
   async function lint(directory) {
@@ -31,14 +32,20 @@ if (action === 'doctor') {
   run(process.execPath, ['tests/recovery-check.mjs']);
 } else if (action === 'setup' || action === 'start') {
   if (existsSync(new URL('../../../tools/lib/project-export.mjs', import.meta.url))) throw new Error('Create an independent solution first; local setup never writes into Project Base.');
+  const engine = process.env.NATIVE_PHP_ENGINE || 'sqlite';
+  if (!['sqlite', 'pgsql', 'mysql'].includes(engine)) throw new Error('Unsupported database engine.');
+  if (engine !== 'sqlite' && action === 'setup') {
+    run('php', ['scripts/database.php', 'server-up']);
+    process.exit(0);
+  }
   const directory = path.join(root, '.runtime');
   if (action === 'setup') await mkdir(directory, { mode: 0o700 }).catch(error => { if (error.code !== 'EEXIST') throw error; });
   // Repeat setup is handled below without following a replaced directory or file.
-  if ((await lstat(directory)).isSymbolicLink() || path.resolve(await realpath(directory)) !== path.resolve(directory)) throw new Error('Plain local runtime directory required.');
+  if (engine === 'sqlite' && ((await lstat(directory)).isSymbolicLink() || path.resolve(await realpath(directory)) !== path.resolve(directory))) throw new Error('Plain local runtime directory required.');
   const database = path.join(directory, 'local.sqlite');
   if (action === 'setup') run('php', ['scripts/database.php', existsSync(database) ? 'up' : 'init', database]);
   else {
-    if (!existsSync(database)) throw new Error('Run setup first.');
+    if (engine === 'sqlite' && !existsSync(database)) throw new Error('Run setup first.');
     const child = spawn('php', ['-S', '127.0.0.1:8080', '-t', 'public', 'public/router.php'], { cwd: root, env: { ...process.env, NATIVE_PHP_DATABASE: database }, stdio: 'inherit', windowsHide: true });
     const stop = () => child.kill(); process.once('SIGINT', stop); process.once('SIGTERM', stop);
     try { const [code] = await once(child, 'exit'); process.exitCode = code ?? 0; }

@@ -6,6 +6,11 @@ require dirname(__DIR__).'/bootstrap.php';
 require __DIR__.'/path-policy.php';
 
 try {
+    if (PHP_SAPI === 'cli' && count($argv) === 2 && $argv[1] === 'server-up') {
+        (new App\Infrastructure\ServerMigrations(App\Infrastructure\SqlConnection::open()))->up();
+        echo "PASS server migrations\n";
+        exit;
+    }
     if (PHP_SAPI !== 'cli' || count($argv) !== 3 || !in_array($argv[1], ['init', 'up'], true)) throw new RuntimeException('Invalid arguments.');
     $requested = $argv[2];
     if (!preg_match('#\A(?:[A-Za-z]:[\\\\/]|/)#', $requested) || str_contains($requested, "\0")) throw new RuntimeException('Absolute path required.');

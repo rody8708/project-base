@@ -2,11 +2,11 @@
 
 [Español (Latinoamérica)](README.es-419.md)
 
-A reusable PHP 8.5 API with no Laravel, Composer packages or application framework. It includes task CRUD, explicit authentication/authorization, versioned JSON contracts, repository ports, a SQLite adapter, migrations and isolated tests. Template revision: `1.3.0-draft.1`; local evaluation is verified, not production approved.
+A reusable PHP 8.5 API with no Laravel, Composer packages or application framework. It includes task CRUD, explicit authentication/authorization, versioned JSON contracts, repository ports, SQLite/PostgreSQL/MySQL adapters, migrations and isolated tests. Template revision: `1.3.0-draft.2`; local evaluation is verified, not production approved.
 
 ## Start your own application
 
-In Project Base, run `npm run create-app` and select **Native PHP — no framework, SQLite** when asked for a backend. The generated project is independent: no connection to Project Base is needed afterward. Keep the original repository out of your product's runtime.
+In Project Base, run `npm run create-app` and select **Native PHP — no framework; SQLite, PostgreSQL or MySQL** when asked for a backend. The generated project is independent: no connection to Project Base is needed afterward. Keep the original repository out of your product's runtime.
 
 From the generated solution root:
 
@@ -43,7 +43,7 @@ Revoke with `php scripts/token.php revoke ABSOLUTE_DATABASE HASH_ID`, using the 
 - HTTP presentation: typed/limited requests, safe bilingual errors, exact-origin CORS and request IDs.
 - Contract: [task API v1](contracts/task-api-v1.openapi.json).
 
-Clients use the API only; never connect them directly to SQLite. Reads/writes are owner-scoped, permissions are explicit and updates/deletes require the current version. Add your business behavior in Application/Domain and keep engine details in adapters. PostgreSQL and MySQL are not implemented in this native profile; changing engines requires implementing and verifying their adapters/migrations and migrating existing data.
+Clients use the API only; never connect them directly to SQLite. Reads/writes are owner-scoped, permissions are explicit and updates/deletes require the current version. Add your business behavior in Application/Domain and keep engine details in adapters. PostgreSQL and MySQL local-server adapters are also available. Follow the [SQL profiles guide](sql-engines.en-US.md) to configure them. Switching engines does not migrate existing data.
 
 ## Configuration and safeguards
 
@@ -85,4 +85,4 @@ Windows/PHP 8.5.1/Node 24.16.0 evidence on 2026-09-04:
 - Restored data was read and updated over HTTPS using a new token; the old token returned 401.
 - Independent wizard export passed diagnosis, setup/replay, isolated checks, start and authenticated task creation/read. All supported client compositions generated successfully; this is not a fresh native-device verification.
 
-The lab uses an ephemeral self-signed certificate explicitly trusted by its client and a test-only loopback TLS terminator. It is not a production proxy or certificate-renewal implementation. Results are bounded acceptance trials, not sustained-load capacity, an RPO/RTO guarantee, exhaustive contract validation or production approval. Real deployment TLS, renewal, monitoring, alerts, backup encryption/retention/offsite storage and product-specific identity remain each application's responsibility. CI is configured; no remote result is claimed for this uncommitted revision.
+The lab uses an ephemeral self-signed certificate explicitly trusted by its client and a test-only loopback TLS terminator. It is not a production proxy or certificate-renewal implementation. Results are bounded acceptance trials, not sustained-load capacity, an RPO/RTO guarantee, exhaustive contract validation or production approval. Real deployment TLS, renewal, monitoring, alerts, backup encryption/retention/offsite storage and product-specific identity remain each application's responsibility. The SQLite foundation passed CI in PR #35. The additional SQL profiles have their own local evidence and CI configuration; no remote result for that extension is implied here.

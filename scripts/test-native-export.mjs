@@ -14,7 +14,7 @@ const temporary = await realpath(tmpdir());
 const folder = await mkdtemp(path.join(temporary, 'native-php-export-'));
 let server;
 function run(cwd, tool, args) {
-  const result = spawnSync(tool, args, { cwd, windowsHide: true, encoding: 'utf8', timeout: 60000 });
+  const result = spawnSync(tool, args, { cwd, env: { ...process.env, NATIVE_PHP_ENGINE: 'sqlite' }, windowsHide: true, encoding: 'utf8', timeout: 60000 });
   assert.equal(result.status, 0, `${tool} ${args[0]} failed: ${result.stderr?.slice(-600)}`);
   return result.stdout;
 }
@@ -22,7 +22,7 @@ try {
   const answers = ['2', '4', '1', '4', 'synthetic-native', folder, 'y'];
   let transcript = '';
   const receipt = await interactiveCreate({ question: async () => { assert.ok(answers.length); return answers.shift(); }, close() {} }, { write: value => { transcript += value; } });
-  assert.ok(transcript.includes('Native PHP — no framework, SQLite'));
+  assert.ok(transcript.includes('Native PHP — no framework; SQLite, PostgreSQL or MySQL'));
   const solution = receipt.destination;
   assert.equal(JSON.parse(await readFile(path.join(solution, 'project-base.json'))).components[0].template, 'backend-php-native');
   await assert.rejects(lstat(path.join(solution, 'api/.runtime')), { code: 'ENOENT' });
@@ -34,7 +34,7 @@ try {
   const token = JSON.parse(run(path.join(solution, 'api'), 'php', ['scripts/token.php', 'issue', database, 'synthetic-user', 'read-write', '3600', '--show-token'])).token;
   const reserve = net.createServer(); reserve.listen(0, '127.0.0.1'); await once(reserve, 'listening');
   const port = reserve.address().port; await new Promise(resolve => reserve.close(resolve));
-  server = spawn(process.execPath, ['project-base.mjs', 'start'], { cwd: solution, env: { ...process.env, NATIVE_PHP_PORT: String(port) }, stdio: 'ignore', windowsHide: true });
+  server = spawn(process.execPath, ['project-base.mjs', 'start'], { cwd: solution, env: { ...process.env, NATIVE_PHP_ENGINE: 'sqlite', NATIVE_PHP_PORT: String(port) }, stdio: 'ignore', windowsHide: true });
   let failure; server.on('error', error => { failure = error; });
   let ready = false;
   for (let attempt = 0; attempt < 70; attempt++) {

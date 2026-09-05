@@ -11,13 +11,18 @@ try {
     if (($issue && (count($argv) !== 7 || $argv[6] !== '--show-token'))
         || (!$issue && ($argv[1] !== 'revoke' || count($argv) !== 4))) throw new RuntimeException('Invalid arguments.');
     $requested = $argv[2];
-    if (!preg_match('#\A(?:[A-Za-z]:[\\\\/]|/)#', $requested) || str_contains($requested, "\0")) throw new RuntimeException('Absolute path required.');
-    $file = realpath($requested);
-    if ($file === false || !is_file($file) || is_link($requested) || (stat($file)['nlink'] ?? 0) !== 1) throw new RuntimeException('Plain external database required.');
-    $normalized = strtolower(str_replace('\\', '/', $file));
-    $boundary = protectedBoundary();
-    if (str_starts_with($normalized, $boundary.'/')) throw new RuntimeException('External database required.');
-    $store = new App\Infrastructure\SqliteTokenAuthenticator(new PDO('sqlite:'.$file), static fn (): int => time());
+    if ($requested === 'configured' && App\Infrastructure\SqlConnection::engine() !== 'sqlite') {
+        $connection = App\Infrastructure\SqlConnection::open();
+    } else {
+        if (!preg_match('#\A(?:[A-Za-z]:[\\\\/]|/)#', $requested) || str_contains($requested, "\0")) throw new RuntimeException('Absolute path required.');
+        $file = realpath($requested);
+        if ($file === false || !is_file($file) || is_link($requested) || (stat($file)['nlink'] ?? 0) !== 1) throw new RuntimeException('Plain external database required.');
+        $normalized = strtolower(str_replace('\\', '/', $file));
+        $boundary = protectedBoundary();
+        if (str_starts_with($normalized, $boundary.'/')) throw new RuntimeException('External database required.');
+        $connection = new PDO('sqlite:'.$file);
+    }
+    $store = new App\Infrastructure\PdoTokenAuthenticator($connection, static fn (): int => time());
     if ($issue) {
         $permissions = match ($argv[4]) {
             'read' => ['tasks:read'], 'read-write' => ['tasks:read', 'tasks:write'],

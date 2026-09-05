@@ -149,7 +149,7 @@ The foundation is correctly adopted when the consumer project identifies an exac
 
 ## Guided technology selection
 
-Run `npm run create-app` from Project Base. First choose web, mobile, desktop, or API only; the wizard then shows existing technologies for that category, including their languages and frameworks. When the template requires a backend, choose TypeScript with framework-free Node.js, PHP with Laravel, Python with FastAPI, or native PHP without a framework (SQLite). The technology and destination directory appear before confirmation.
+Run `npm run create-app` from Project Base. First choose web, mobile, desktop, or API only; the wizard then shows existing technologies for that category, including their languages and frameworks. When the template requires a backend, choose TypeScript with framework-free Node.js, PHP with Laravel, Python with FastAPI, or native PHP without a framework (SQLite/PostgreSQL/MySQL local profiles). The technology and destination directory appear before confirmation.
 
 Console and MCP use the same catalog. It describes the six existing combinations; it does not add new templates or platform approval. Database configuration still follows the backend documentation: this change does not include an engine selector. Creation does not install dependencies or run tests; cancel with `n` before creating files.
 

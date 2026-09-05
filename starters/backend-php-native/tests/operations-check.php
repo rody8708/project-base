@@ -65,3 +65,17 @@ rejects(App\Domain\TaskValidationFailed::class, static fn () => App\Http\Request
 rejects(App\Http\HttpFailure::class, static fn () => App\Http\RequestMetadata::payload('{"title":"one","ti\\u0074le":"two"}'));
 check(App\Http\RequestMetadata::payload('{"title":"a \\"quoted\\" value"}')['title'] === 'a "quoted" value', 'Escaped strings remain values');
 echo "PASS native PHP request metadata and duplicate input boundaries\n";
+
+$previousEngine = getenv('NATIVE_PHP_ENGINE');
+$previousHost = getenv('NATIVE_PHP_DB_HOST');
+try {
+    putenv('NATIVE_PHP_ENGINE=unsupported');
+    rejects(RuntimeException::class, static fn () => App\Infrastructure\SqlConnection::open());
+    putenv('NATIVE_PHP_ENGINE=pgsql');
+    putenv('NATIVE_PHP_DB_HOST=remote.invalid');
+    rejects(RuntimeException::class, static fn () => App\Infrastructure\SqlConnection::open());
+} finally {
+    putenv($previousEngine === false ? 'NATIVE_PHP_ENGINE' : 'NATIVE_PHP_ENGINE='.$previousEngine);
+    putenv($previousHost === false ? 'NATIVE_PHP_DB_HOST' : 'NATIVE_PHP_DB_HOST='.$previousHost);
+}
+echo "PASS native SQL configuration rejects unknown engines and remote hosts before connecting\n";

@@ -41,7 +41,7 @@ test('native PHP is independent of Composer and exposes bounded setup/check/star
     return { ok: true, output: args[0] === '--version' ? 'PHP 8.5.1' : '' };
   });
   assert.ok(results.every(item => item.ok));
-  assert.deepEqual(calls, ['php', 'php']);
+  assert.deepEqual(calls, ['php', 'php', 'php']);
 });
 
 test('Python setup is locked, migrates explicitly, and checks every quality gate', () => {

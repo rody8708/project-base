@@ -125,6 +125,7 @@ export function diagnose(manifest, platform = process.platform, inspect = versio
   if (templates.has('backend-php-native')) checks.push(
     { name: 'PHP 8.5', result: inspect(executable('php', platform), ['--version']), accepts: /^PHP 8\.5\./u },
     { name: 'PHP pdo_sqlite, mbstring, openssl', result: inspect(executable('php', platform), ['-r', 'exit(extension_loaded("pdo_sqlite") && extension_loaded("mbstring") && extension_loaded("openssl") ? 0 : 1);']) },
+    { name: 'Native SQL engine driver', result: inspect(executable('php', platform), ['-r', '$engine = getenv("NATIVE_PHP_ENGINE") ?: "sqlite"; exit(in_array($engine, ["sqlite", "pgsql", "mysql"], true) && extension_loaded("pdo_".$engine) ? 0 : 1);']) },
   );
   if (templates.has('backend-python')) checks.push(
     { name: 'Managed Python 3.13.15 (uv python install 3.13.15)', result: inspect(executable('uv', platform), ['python', 'find', '--managed-python', '--no-python-downloads', '3.13.15']) },
@@ -189,7 +190,7 @@ async function runStart(manifest) {
       const environment = { ...process.env };
       if (item.nativeDatabase) {
         environment.NATIVE_PHP_DATABASE = path.join(ROOT, item.directory, '.runtime', 'local.sqlite');
-        if (!existsSync(environment.NATIVE_PHP_DATABASE)) throw new Error('Run setup first.');
+        if ((!environment.NATIVE_PHP_ENGINE || environment.NATIVE_PHP_ENGINE === 'sqlite') && !existsSync(environment.NATIVE_PHP_DATABASE)) throw new Error('Run setup first.');
         if (environment.NATIVE_PHP_PORT) {
           if (!/^[1-9][0-9]{0,4}$/u.test(environment.NATIVE_PHP_PORT) || Number(environment.NATIVE_PHP_PORT) > 65535) throw new Error('Invalid native PHP loopback port.');
           item.args[1] = `127.0.0.1:${environment.NATIVE_PHP_PORT}`;
