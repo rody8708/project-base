@@ -9,7 +9,7 @@ To select components and follow the complete process, read [how to create an app
 
 ## Purpose and requirements
 
-The tool prepares a new project outside this repository from seven templates: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, `starters/backend-node`, or `starters/backend-python`. It does not install dependencies, execute package scripts, build, use the network, or publish. It copies the four approved documentary artifacts unchanged and adds a bilingual capability-selection profile; it does not extract the ZIP, copy `docs/technical`, or modify source projects.
+The tool prepares a new project outside this repository from eight templates: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, `starters/backend-node`, `starters/backend-python`, or `starters/backend-php-native`. It does not install dependencies, execute package scripts, build, use the network, or publish. It copies the four approved documentary artifacts unchanged and adds a bilingual capability-selection profile; it does not extract the ZIP, copy `docs/technical`, or modify source projects.
 
 `web` is the React/TypeScript/Vite option. `web-vanilla` is the HTML/CSS/JavaScript alternative without those frameworks or tools: its candidate has no npm dependencies and uses built-in Node.js modules for checks and local file serving. The exporter does not add packages or execute those scripts.
 
@@ -43,6 +43,7 @@ node tools/create-project.mjs --template kotlin-android --name my-native-project
 node tools/create-project.mjs --template backend-php --name my-api-project --destination "D:\projects\my-api-project"
 node tools/create-project.mjs --template backend-node --name my-node-api --destination "D:\projects\my-node-api"
 node tools/create-project.mjs --template backend-python --name my-python-api --destination "D:\projects\my-python-api"
+node tools/create-project.mjs --template backend-php-native --name my-native-api --destination "D:\projects\my-native-api"
 ```
 
 These paths are examples; choose your own directories whose parent already exists. On a POSIX system use its local absolute path, such as `/projects/my-web-project`; this does not represent an execution test on that system.

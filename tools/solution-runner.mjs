@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const ACTIONS = new Set(['doctor', 'setup', 'check', 'start']);
-const TEMPLATES = new Set(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node', 'backend-python']);
+const TEMPLATES = new Set(['web', 'web-vanilla', 'flutter', 'kotlin-android', 'backend-php', 'backend-node', 'backend-python', 'backend-php-native']);
 const COPY = {
   'es-419': {
     doctor: 'Diagnóstico de herramientas', ready: 'La solución está preparada para este paso.',
@@ -46,7 +46,7 @@ function validateManifest(value) {
   const directories = new Set();
   for (const item of value.components) {
     if (!item || !['app', 'api'].includes(item.directory) || directories.has(item.directory) || !TEMPLATES.has(item.template)) throw new Error('INVALID_SOLUTION_MANIFEST');
-    if ((item.directory === 'api') !== ['backend-php', 'backend-node', 'backend-python'].includes(item.template)) throw new Error('INVALID_SOLUTION_MANIFEST');
+    if ((item.directory === 'api') !== ['backend-php', 'backend-node', 'backend-python', 'backend-php-native'].includes(item.template)) throw new Error('INVALID_SOLUTION_MANIFEST');
     directories.add(item.directory);
   }
   return value;
@@ -63,6 +63,11 @@ export function planFor(action, manifest, platform = process.platform) {
   const plan = [];
   for (const item of validateManifest(manifest).components) {
     const { directory, template } = item;
+    if (template === 'backend-php-native') {
+      if (action === 'start') plan.push(command(directory, 'php', ['-S', '127.0.0.1:8080', '-t', 'public', 'public/router.php'], { role: 'api', nativeDatabase: true }));
+      else plan.push(command(directory, process.execPath, ['scripts/local.mjs', action]));
+      continue;
+    }
     if (action === 'setup') {
       if (['web', 'backend-node'].includes(template)) plan.push(command(directory, executable('npm', platform), ['ci', '--ignore-scripts', '--no-audit', '--no-fund']));
       if (template === 'backend-php') plan.push(
@@ -117,6 +122,10 @@ export function diagnose(manifest, platform = process.platform, inspect = versio
   const checks = [{ name: 'Node.js 24', result: { ok: /^v24\./u.test(process.version), output: process.version } }];
   if ([...templates].some((item) => ['web', 'web-vanilla', 'backend-node'].includes(item))) checks.push({ name: 'npm', result: inspect(executable('npm', platform)) });
   if (templates.has('backend-php')) checks.push({ name: 'PHP 8.5', result: inspect(executable('php', platform), ['--version']), accepts: /^PHP 8\.5\./u }, { name: 'Composer 2', result: inspect(executable('composer', platform)), accepts: /^Composer version 2\./u });
+  if (templates.has('backend-php-native')) checks.push(
+    { name: 'PHP 8.5', result: inspect(executable('php', platform), ['--version']), accepts: /^PHP 8\.5\./u },
+    { name: 'PHP pdo_sqlite, mbstring, openssl', result: inspect(executable('php', platform), ['-r', 'exit(extension_loaded("pdo_sqlite") && extension_loaded("mbstring") && extension_loaded("openssl") ? 0 : 1);']) },
+  );
   if (templates.has('backend-python')) checks.push(
     { name: 'Managed Python 3.13.15 (uv python install 3.13.15)', result: inspect(executable('uv', platform), ['python', 'find', '--managed-python', '--no-python-downloads', '3.13.15']) },
     { name: 'uv', result: inspect(executable('uv', platform), ['--version']), accepts: /^uv \d+\./u },
@@ -178,6 +187,14 @@ async function runStart(manifest) {
   try {
     const exits = plan.map((item) => new Promise((resolve, reject) => {
       const environment = { ...process.env };
+      if (item.nativeDatabase) {
+        environment.NATIVE_PHP_DATABASE = path.join(ROOT, item.directory, '.runtime', 'local.sqlite');
+        if (!existsSync(environment.NATIVE_PHP_DATABASE)) throw new Error('Run setup first.');
+        if (environment.NATIVE_PHP_PORT) {
+          if (!/^[1-9][0-9]{0,4}$/u.test(environment.NATIVE_PHP_PORT) || Number(environment.NATIVE_PHP_PORT) > 65535) throw new Error('Invalid native PHP loopback port.');
+          item.args[1] = `127.0.0.1:${environment.NATIVE_PHP_PORT}`;
+        }
+      }
       if (item.role === 'api' && !environment.API_ALLOWED_ORIGINS) environment.API_ALLOWED_ORIGINS = manifest.components.some((part) => part.template === 'web') ? 'http://127.0.0.1:5173' : manifest.components.some((part) => part.template === 'web-vanilla') ? 'http://127.0.0.1:5180' : '';
       const invocation = childInvocation(item.tool, item.args);
       const child = spawn(invocation.tool, invocation.args, { cwd: path.join(ROOT, item.directory), env: environment,

@@ -53,7 +53,8 @@ test('the stdio MCP server exposes bounded resources, diagnosis, and creation', 
   assert.equal(catalog.isError, undefined);
   assert.deepEqual(catalog.structuredContent, getCreationCatalog('en-US'));
   assert.equal(catalog.structuredContent.presets.length, 6);
-  assert.equal(catalog.structuredContent.backends.length, 3);
+  assert.equal(catalog.structuredContent.backends.length, 4);
+  assert.equal(catalog.structuredContent.backends[3].id, 'backend-php-native');
   assert.equal(catalog.structuredContent.backends[2].id, 'backend-python');
 
   const diagnosis = await client.callTool({ name: 'project_base_doctor', arguments: { preset: 'simple-website', language: 'es-419' } });
@@ -69,6 +70,15 @@ test('the stdio MCP server exposes bounded resources, diagnosis, and creation', 
   assert.equal(creation.structuredContent.destination, destination);
   assert.equal(JSON.parse(await fs.readFile(path.join(destination, 'project-base.json'), 'utf8')).language, 'en-US');
   assert.equal((await fs.lstat(path.join(destination, 'project-base.mjs'))).isFile(), true);
+
+  const nativeDestination = path.join(parent, 'native-through-mcp');
+  const nativeCreation = await client.callTool({ name: 'project_base_create_solution', arguments: {
+    preset: 'api-only', backend: 'backend-php-native', language: 'es-419', name: 'native-through-mcp', destination: nativeDestination,
+  } });
+  assert.equal(nativeCreation.isError, undefined);
+  const nativeManifest = JSON.parse(await fs.readFile(path.join(nativeDestination, 'project-base.json')));
+  assert.deepEqual(nativeManifest.components, [{ directory: 'api', template: 'backend-php-native', revision: '1.3.0-draft.1' }]);
+  await assert.rejects(fs.lstat(path.join(nativeDestination, 'api/.runtime')), { code: 'ENOENT' });
 
   const refused = await client.callTool({ name: 'project_base_create_solution', arguments: {
     preset: 'simple-website', name: 'relative-refused', destination: 'relative/path',

@@ -89,7 +89,7 @@ node tools/create-project.mjs --template backend-php --name ejemplo-api --destin
 node tools/create-project.mjs --template web --name ejemplo-web --destination "D:\products\ejemplo-web"
 ```
 
-También se puede sustituir `backend-php` por `backend-node` o `backend-python`, o el cliente por `web-vanilla`, `flutter` o `kotlin-android`. La referencia completa de opciones, restricciones y archivos excluidos está en las [instrucciones del exportador](../tools/README.es-419.md).
+También se puede sustituir `backend-php` por `backend-node`, `backend-python` o `backend-php-native`, o el cliente por `web-vanilla`, `flutter` o `kotlin-android`. La referencia completa de opciones, restricciones y archivos excluidos está en las [instrucciones del exportador](../tools/README.es-419.md).
 
 Después de cada exportación:
 
@@ -149,7 +149,7 @@ La base está correctamente adoptada cuando el proyecto consumidor identifica un
 
 ## Selección guiada por tecnologías
 
-Ejecuta `npm run create-app` desde Project Base. Primero elige web, móvil, escritorio o solo API; después el asistente muestra las tecnologías existentes para esa categoría, con sus lenguajes y frameworks. Si la plantilla requiere backend, elige TypeScript con Node.js sin framework de aplicación, PHP con Laravel o Python con FastAPI. Antes de confirmar verás la tecnología y la carpeta de destino.
+Ejecuta `npm run create-app` desde Project Base. Primero elige web, móvil, escritorio o solo API; después el asistente muestra las tecnologías existentes para esa categoría, con sus lenguajes y frameworks. Si la plantilla requiere backend, elige TypeScript con Node.js sin framework de aplicación, PHP con Laravel, Python con FastAPI o PHP propio sin framework (SQLite). Antes de confirmar verás la tecnología y la carpeta de destino.
 
 Consola y MCP consultan el mismo catálogo. El catálogo describe las seis combinaciones existentes, no añade nuevas plantillas ni aprobación de plataformas. La base de datos todavía se configura siguiendo la documentación del backend: este cambio no incluye un selector de motor. La creación no instala dependencias ni ejecuta pruebas; cancela con `n` antes de crear archivos.
 

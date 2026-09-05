@@ -60,6 +60,7 @@ This project maintains reusable bases. Final applications are created in separat
 | Framework-free web base | Native HTML, CSS, and JavaScript, ES modules, and tests without third-party dependencies; no build step. | [web-vanilla starter](starters/web-vanilla/README.en-US.md); independent of React, TypeScript, and Vite. |
 | Desktop/mobile base | Flutter with shared code and Windows, macOS, Linux, Android, and iOS host projects. | Reference code in the [Flutter starter](starters/flutter/README.en-US.md); each target retains its verification status. |
 | Native Android base | Kotlin and Jetpack Compose, independent of Flutter. | [Kotlin starter](starters/kotlin-android/README.en-US.md); its scope is Android. |
+| Native PHP backend | Framework-free PHP API with SQLite, isolated tests, TLS/concurrency and recovery lab. | [Native PHP starter](starters/backend-php-native/README.en-US.md); available in CLI/MCP, not production approved. |
 | Backend base | PHP/Laravel API with migrations and SQLite, PostgreSQL, and MySQL profiles. | [PHP starter](starters/backend-php/README.en-US.md); engine-specific results in its record. |
 | Custom backend base | Application-framework-free TypeScript/Node API with ports and SQLite/PostgreSQL/MySQL. | [Node starter](starters/backend-node/README.en-US.md); exportable with its own HTTPS and recovery lab. |
 | Python backend base | FastAPI API with ports and SQLite/PostgreSQL/MySQL. | [Python starter](starters/backend-python/README.en-US.md); dedicated HTTPS and recovery lab. |

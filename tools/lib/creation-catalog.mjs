@@ -20,6 +20,7 @@ const BACKENDS = [
   ['backend-node', 'TypeScript', null, 'TypeScript + Node.js — sin framework de aplicación', 'TypeScript + Node.js — no application framework'],
   ['backend-php', 'PHP', 'Laravel', 'PHP + Laravel', 'PHP + Laravel'],
   ['backend-python', 'Python', 'FastAPI', 'Python + FastAPI', 'Python + FastAPI'],
+  ['backend-php-native', 'PHP', null, 'PHP propio — sin framework, SQLite', 'Native PHP — no framework, SQLite'],
 ];
 
 // Each caller receives an independent, serializable view; UI code cannot mutate

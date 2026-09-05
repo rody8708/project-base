@@ -17,6 +17,7 @@ async function fixture(t) {
     await rm(root, { recursive: true });
   });
   const directories = [
+    'starters/backend-php-native/app/Application',
     'starters/backend-php/app/Domain', 'starters/backend-php/app/Application', 'starters/backend-php/app/Http',
     'starters/backend-node/src', 'starters/web/src/domain', 'starters/web/src/application',
     'starters/backend-python/src/project_base_api/domain',
@@ -53,6 +54,12 @@ test('raw persistence in a PHP application service is rejected', async (t) => {
   const root = await fixture(t);
   const file = path.join(root, 'starters/backend-php/app/Application/TaskService.php');
   await writeFile(file, `${await readFile(file, 'utf8')}\n<?php PDO::prepare('SELECT 1');\n`);
+  await assert.rejects(checkArchitecture(root), /PHP_APPLICATION_BOUNDARY/u);
+});
+
+test('native PHP application cannot depend on PDO', async (t) => {
+  const root = await fixture(t);
+  await writeFile(path.join(root, 'starters/backend-php-native/app/Application/Invalid.php'), '<?php declare(strict_types=1); use PDO;');
   await assert.rejects(checkArchitecture(root), /PHP_APPLICATION_BOUNDARY/u);
 });
 

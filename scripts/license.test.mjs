@@ -10,6 +10,7 @@ const generatedDirectories = new Set([
   "node_modules", "vendor", "dist", "build", ".dart_tool", ".gradle",
 ]);
 const maintainedSourceRules = [
+  { root: "starters/backend-php-native", extensions: new Set([".php", ".mjs"]) },
   { root: "scripts", extensions: new Set([".mjs"]) },
   { root: "tools", extensions: new Set([".mjs"]) },
   { root: "starters/web", extensions: new Set([".js", ".mjs", ".ts", ".tsx", ".html", ".css"]) },
@@ -43,6 +44,7 @@ async function maintainedSourcePaths() {
 const expectedLicenseSha256 =
   "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04";
 const licensePaths = [
+  "starters/backend-php-native/LICENSE",
   "LICENSE",
   "starters/web/LICENSE",
   "starters/web-vanilla/LICENSE",

@@ -9,7 +9,7 @@ Para elegir componentes y recorrer el proceso completo, consulta [cómo crear un
 
 ## Propósito y requisitos
 
-La herramienta prepara un proyecto nuevo fuera de este repositorio a partir de siete plantillas: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, `starters/backend-node` o `starters/backend-python`. No instala dependencias, ejecuta scripts de paquetes, compila, usa la red ni publica. Copia los cuatro artefactos documentales aprobados sin modificarlos y agrega un perfil bilingüe de selección de capacidades; no extrae el ZIP, no copia `docs/technical` y no modifica los proyectos fuente.
+La herramienta prepara un proyecto nuevo fuera de este repositorio a partir de ocho plantillas: `starters/web`, `starters/web-vanilla`, `starters/flutter`, `starters/kotlin-android`, `starters/backend-php`, `starters/backend-node`, `starters/backend-python` o `starters/backend-php-native`. No instala dependencias, ejecuta scripts de paquetes, compila, usa la red ni publica. Copia los cuatro artefactos documentales aprobados sin modificarlos y agrega un perfil bilingüe de selección de capacidades; no extrae el ZIP, no copia `docs/technical` y no modifica los proyectos fuente.
 
 `web` es la opción React/TypeScript/Vite. `web-vanilla` es la alternativa HTML/CSS/JavaScript sin esos frameworks o herramientas: su candidata no incluye dependencias npm y utiliza módulos integrados de Node.js para comprobar y servir archivos localmente. El exportador no agrega paquetes ni ejecuta esos scripts.
 
@@ -43,6 +43,7 @@ node tools/create-project.mjs --template kotlin-android --name my-native-project
 node tools/create-project.mjs --template backend-php --name my-api-project --destination "D:\projects\my-api-project"
 node tools/create-project.mjs --template backend-node --name my-node-api --destination "D:\projects\my-node-api"
 node tools/create-project.mjs --template backend-python --name my-python-api --destination "D:\projects\my-python-api"
+node tools/create-project.mjs --template backend-php-native --name my-native-api --destination "D:\projects\my-native-api"
 ```
 
 Estas rutas son ejemplos; elegir carpetas propias cuyo padre ya exista. En un sistema POSIX usar su ruta absoluta local, por ejemplo `/projects/my-web-project`; esto no representa una prueba de ejecución en ese sistema.
