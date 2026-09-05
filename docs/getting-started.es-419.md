@@ -146,3 +146,13 @@ La simulación local puede preparar TLS, secretos, servicios, bases, fallos, car
 ## Cuándo está lista la adopción
 
 La base está correctamente adoptada cuando el proyecto consumidor identifica una revisión exacta, conserva sus recibos, tiene identidad propia, usa la API como único enlace cliente-servidor, aísla persistencia con adaptadores, implementa su modelo real de seguridad, pasa las pruebas de las plataformas y motores declarados, y documenta responsables y pendientes. A partir de ahí se construye el producto; no se modifica esta base para guardar el código de la aplicación.
+
+## Selección guiada por tecnologías
+
+Ejecuta `npm run create-app` desde Project Base. Primero elige web, móvil, escritorio o solo API; después el asistente muestra las tecnologías existentes para esa categoría, con sus lenguajes y frameworks. Si la plantilla requiere backend, elige TypeScript con Node.js sin framework de aplicación, PHP con Laravel o Python con FastAPI. Antes de confirmar verás la tecnología y la carpeta de destino.
+
+Consola y MCP consultan el mismo catálogo. El catálogo describe las seis combinaciones existentes, no añade nuevas plantillas ni aprobación de plataformas. La base de datos todavía se configura siguiendo la documentación del backend: este cambio no incluye un selector de motor. La creación no instala dependencias ni ejecuta pruebas; cancela con `n` antes de crear archivos.
+
+La aplicación gráfica de escritorio, el registro de proyectos y los indicadores de verificación siguen pendientes. Se prevé que reutilicen este catálogo y el motor de creación; no hay un instalador de escritorio en esta entrega.
+
+Verificación de mantenimiento (2026-09-04, rama `codex/shared-creation-catalog`, basada en `697610c`): pasaron 77 pruebas del repositorio y las comprobaciones documentales/de arquitectura en Windows. Se recorrió la entrada real de consola en español: Web → React + TypeScript → Python + FastAPI → resumen del destino → cancelación; terminó correctamente sin crear la carpeta sintética propuesta. Las pruebas automatizadas cubren todas las categorías en ambos idiomas, cancelación sin escrituras, creación de un sitio independiente y paridad del catálogo mediante la entrada MCP stdio. No cambiaron interfaces de aplicaciones, flujos de base de datos ni despliegues de producción.

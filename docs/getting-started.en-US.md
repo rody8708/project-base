@@ -146,3 +146,13 @@ Local simulation can prepare TLS, secrets, services, databases, failures, load, 
 ## When Adoption Is Ready
 
 The foundation is correctly adopted when the consumer project identifies an exact revision, retains its receipts, has its own identity, uses the API as the only client-server link, isolates persistence through adapters, implements its real security model, passes tests for its declared platforms and engines, and documents owners and pending work. Product construction starts from there; application code is not stored by modifying this foundation.
+
+## Guided technology selection
+
+Run `npm run create-app` from Project Base. First choose web, mobile, desktop, or API only; the wizard then shows existing technologies for that category, including their languages and frameworks. When the template requires a backend, choose TypeScript with framework-free Node.js, PHP with Laravel, or Python with FastAPI. The technology and destination directory appear before confirmation.
+
+Console and MCP use the same catalog. It describes the six existing combinations; it does not add new templates or platform approval. Database configuration still follows the backend documentation: this change does not include an engine selector. Creation does not install dependencies or run tests; cancel with `n` before creating files.
+
+The desktop graphical application, project registry, and verification indicators remain pending. They are intended to reuse this catalog and creation engine; this delivery does not include a desktop installer.
+
+Maintenance verification (2026-09-04, branch `codex/shared-creation-catalog`, based on `697610c`): 77 repository tests and documentation/architecture checks passed on Windows. The real console entry point was exercised in Spanish: Web → React + TypeScript → Python + FastAPI → destination summary → cancellation; it exited successfully without creating the proposed synthetic directory. Automated tests cover every category in both languages, cancellation without writes, independent website creation, and catalog parity through the MCP stdio entry point. No application UI, database flow, or production deployment changed.

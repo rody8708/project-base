@@ -9,33 +9,12 @@ import { McpServer } from '@modelcontextprotocol/server';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
 import * as z from 'zod/v4';
 import { createSolution, ExportError, SOLUTION_PRESETS, TEMPLATE_REVISIONS } from './lib/project-export.mjs';
+import { getCreationCatalog } from './lib/creation-catalog.mjs';
 import { diagnose } from './solution-runner.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const LANGUAGES = ['es-419', 'en-US'];
-const BACKENDS = ['backend-node', 'backend-php', 'backend-python'];
-const PRESET_COPY = {
-  'es-419': {
-    'simple-website': 'Sitio web HTML, CSS y JavaScript sin backend.',
-    'web-app': 'Aplicación web React con una API separada.',
-    'mobile-app': 'Aplicación móvil Flutter con una API separada.',
-    'desktop-app': 'Aplicación de escritorio Flutter con una API separada.',
-    'android-app': 'Aplicación Android nativa Kotlin con una API separada.',
-    'api-only': 'API independiente sin interfaz incluida.',
-  },
-  'en-US': {
-    'simple-website': 'HTML, CSS, and JavaScript website without a backend.',
-    'web-app': 'React web application with a separate API.',
-    'mobile-app': 'Flutter mobile application with a separate API.',
-    'desktop-app': 'Flutter desktop application with a separate API.',
-    'android-app': 'Native Kotlin Android application with a separate API.',
-    'api-only': 'Standalone API without an included client.',
-  },
-};
-const BACKEND_COPY = {
-  'es-419': { 'backend-node': 'TypeScript y Node.js sin framework de aplicación.', 'backend-php': 'PHP y Laravel.', 'backend-python': 'Python, FastAPI y adaptadores SQLAlchemy.' },
-  'en-US': { 'backend-node': 'TypeScript and Node.js without an application framework.', 'backend-php': 'PHP and Laravel.', 'backend-python': 'Python, FastAPI, and SQLAlchemy adapters.' },
-};
+const BACKENDS = getCreationCatalog().backends.map(item => item.id);
 const RESOURCES = [
   ['getting-started-es-419', 'project-base://getting-started/es-419', 'Cómo comenzar', 'docs/getting-started.es-419.md'],
   ['getting-started-en-US', 'project-base://getting-started/en-US', 'Getting started', 'docs/getting-started.en-US.md'],
@@ -80,19 +59,15 @@ export function createProjectBaseServer() {
     }));
   }
 
-  const catalogEntrySchema = z.object({ id: z.string(), description: z.string(), client: z.string().nullable(), requiresBackend: z.boolean() });
-  const backendEntrySchema = z.object({ id: backendSchema, description: z.string() });
+  const catalogEntrySchema = z.object({ id: z.string(), type: z.string(), languages: z.array(z.string()), framework: z.string().nullable(), description: z.string(), client: z.string().nullable(), requiresBackend: z.boolean() });
+  const backendEntrySchema = z.object({ id: backendSchema, languages: z.array(z.string()), framework: z.string().nullable(), description: z.string() });
   server.registerTool('project_base_list_templates', {
     title: 'List Project Base templates',
     description: 'List the supported guided application presets and backend choices without changing files.',
     inputSchema: z.object({ language: languageSchema.default('es-419') }),
-    outputSchema: z.object({ language: languageSchema, presets: z.array(catalogEntrySchema), backends: z.array(backendEntrySchema) }),
+    outputSchema: z.object({ language: languageSchema, types: z.array(z.object({ id: z.string(), description: z.string() })), presets: z.array(catalogEntrySchema), backends: z.array(backendEntrySchema) }),
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-  }, async ({ language }) => toolResult({
-    language,
-    presets: Object.entries(SOLUTION_PRESETS).map(([id, value]) => ({ id, description: PRESET_COPY[language][id], client: value.client || null, requiresBackend: value.backend })),
-    backends: BACKENDS.map(id => ({ id, description: BACKEND_COPY[language][id] })),
-  }));
+  }, async ({ language }) => toolResult(getCreationCatalog(language)));
 
   const diagnosisSchema = z.object({ name: z.string(), ok: z.boolean(), detail: z.string() });
   server.registerTool('project_base_doctor', {

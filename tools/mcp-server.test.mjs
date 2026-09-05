@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Client } from '@modelcontextprotocol/client';
 import { StdioClientTransport } from '@modelcontextprotocol/client/stdio';
+import { getCreationCatalog } from './lib/creation-catalog.mjs';
 
 const repositoryRoot = fileURLToPath(new URL('../', import.meta.url));
 
@@ -50,6 +51,7 @@ test('the stdio MCP server exposes bounded resources, diagnosis, and creation', 
 
   const catalog = await client.callTool({ name: 'project_base_list_templates', arguments: { language: 'en-US' } });
   assert.equal(catalog.isError, undefined);
+  assert.deepEqual(catalog.structuredContent, getCreationCatalog('en-US'));
   assert.equal(catalog.structuredContent.presets.length, 6);
   assert.equal(catalog.structuredContent.backends.length, 3);
   assert.equal(catalog.structuredContent.backends[2].id, 'backend-python');
